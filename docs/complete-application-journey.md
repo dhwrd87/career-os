@@ -1,6 +1,6 @@
 # From career history to a prepared application
 
-The v0.4.3 candidate completes the application handoff. It reuses the existing career, discovery, qualification, resume, editorial, learning and tracking engines. The published v0.4.2 release is unchanged; install this candidate from its source checkout or reviewed wheel with the resume and DOCX extras.
+[Career OS v0.4.3](https://github.com/dhwrd87/career-os/releases/tag/v0.4.3) completes the application handoff. It reuses the existing career, discovery, qualification, resume, editorial, learning and tracking engines. Earlier releases remain unchanged. Install v0.4.3 with the resume and DOCX extras using the [setup guide](installation.md).
 
 Start with “Build my master resume and help me choose a career direction.” The assistant imports your history, shows what it found and asks about missing accomplishments or qualifications. You approve the facts before they are saved. The normal setup produces a master recruiter resume, evidence questions, role ideas and a practical job-search plan. Your complete approved history stays in the career record; resumes are presentations of that history.
 
@@ -54,7 +54,7 @@ After applying yourself, report the activity so Career OS can track the correct 
 Reproduce the fictional journey with `python scripts/build_application_example.py --output /tmp/career-journey-example`. No applications, messages or commitments are made. [Open the saved example](../examples/application-journey/README.md).
 
 
-## What was executed for this candidate
+## What was executed for this release
 
 Three fictional profiles produced three master resumes, four career-specific bases, four tailored application folders, three required letters, interview materials and separate stretch/dream plans. The career changer has two distinct directions and two different job-specific packages. The existing eight-person onboarding matrix also passed. The independent agent run completed the local journey and its copy recheck; that is not independent human evaluation.
 

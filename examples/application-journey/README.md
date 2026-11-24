@@ -1,5 +1,7 @@
 # A complete fictional application journey
 
+Included in [Career OS v0.4.3 — Complete Application Journey](https://github.com/dhwrd87/career-os/releases/tag/v0.4.3).
+
 Priya Calder and every employer, posting, question and career fact in this example are fictional. No application was submitted. The source uses example.org as a demonstration domain, not a job or application portal. The direct application link is deliberately **not verified**, and Start Here says so. Real-source retrieval and a working observed application form were verified separately; no live employer's full posting is republished here.
 
 Open [Start Here](application/Start%20Here.html), or [its Markdown version](application/Start%20Here.md) on GitHub. Download the folder to use the HTML page locally. All application document links work within that folder.

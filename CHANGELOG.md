@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.4.3 — Complete Application Journey (candidate)
+## 0.4.3 — Complete Application Journey
 
 - Connect approved onboarding, master resume, strategic plan and multiple selected career-family starting resumes.
 - Prepare complete batch application folders with PDF/DOCX resumes, conditional PDF/DOCX letters, original descriptions, assessments, actual screening drafts and Start Here.
