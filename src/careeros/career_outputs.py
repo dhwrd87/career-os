@@ -283,6 +283,7 @@ def generate_initial_outputs(workspace: Path, *, timestamp: str | None = None) -
     }
     development = development_intelligence(profile, readiness, timestamp=timestamp)
     master = build_master_resume(workspace, timestamp=timestamp)
+    strategy = write_search_strategy(workspace,timestamp=timestamp)
     output_root = roots.state_root / "onboarding-outputs"
     atomic_write_json(output_root / "profile-evidence-readiness.json", readiness)
     atomic_write_json(output_root / "career-lanes.json", lanes)
@@ -291,6 +292,7 @@ def generate_initial_outputs(workspace: Path, *, timestamp: str | None = None) -
     manifest = {
         "schema": "careeros.initial-career-outputs.v1", "created_at": utc_now(timestamp),
         "career_profile": "state/profile/career-profile.json", "profile_readiness": "state/onboarding-outputs/profile-evidence-readiness.json",
+        "strategic_job_search_plan": strategy["path"],
         "master_recruiter_resume": master["path"], "career_lane_analysis": "state/onboarding-outputs/career-lanes.json",
         "role_title_universe": "state/onboarding-outputs/role-title-universe.json",
         "career_gap_analysis": "state/onboarding-outputs/career-gaps-development.json",
@@ -299,3 +301,17 @@ def generate_initial_outputs(workspace: Path, *, timestamp: str | None = None) -
     }
     atomic_write_json(output_root / "manifest.json", manifest)
     return manifest
+
+
+def write_search_strategy(workspace:Path,*,timestamp=None):
+    """A practical search plan from recorded goals, preferences and proof gaps."""
+    from careeros.experience import context,_write,_report_pdf
+    roots=context(workspace);profile=read_json(roots.state_root/'profile/career-profile.json')
+    lanes=discover_lanes(profile,timestamp=timestamp);prefs=profile.get('preferences',{})
+    readiness=evaluate_profile_readiness(profile,timestamp=timestamp)
+    lines=['# Your job search plan','Start with roles supported by your work history. Choose the directions you want to pursue, then check complete current postings before deciding where to apply.','## Career directions and search titles']
+    for row in lanes['lanes']:lines+=['### '+row['display_name'],row['why'],'Search titles: '+', '.join(row['example_titles'])]
+    lines+=['## Make the search fit your life','Location: '+', '.join(prefs.get('location_preferences',[])),'Work arrangements: '+', '.join(prefs.get('work_modes',[])),'Pay: use your recorded compensation preference if present; otherwise confirm a target, currency and pay period before calling a role better paid.','## Strengthen your examples','Review the missing accomplishment and evidence questions before adding any claims. Existing work may already answer them.','Evidence records needing more detail: '+str(len(readiness.get('recommended_record_ids',[])))+'.','## A practical search routine','1. Approve your career profile and choose your career directions. Review the master resume and career-specific starting resumes.','2. Search current employer postings using these titles and your preferences. Save the full descriptions and distinguish the job page from its application form.','3. Compare required qualifications, prioritize Ready Now opportunities and prepare complete draft application packages.','4. Review each Start Here checklist, required questions and documents. Apply manually only when ready.','5. Record your applications, interviews and outcomes. Revisit the plan using what you learn.','6. Use Stretch Roles to choose focused development. Add Dream Roles only when they are goals you have chosen.']
+    path='career/job-search-plan.md';_write(roots,path,'\n\n'.join(lines)+'\n');_report_pdf('Your Job Search Plan',lines[1:],roots.assert_write_allowed(roots.output_root/'career/job-search-plan.pdf','output'))
+    result={'schema':'careeros.job-search-strategy.v1','path':path,'role_ideas':lanes['lanes'],'preferences':prefs,'requires_direction_review':True,'external_actions':0,'canonical_mutations':0}
+    atomic_write_json(roots.assert_write_allowed(roots.state_root/'job-search/strategy.json','state'),result);return result

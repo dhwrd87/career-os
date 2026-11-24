@@ -10,6 +10,8 @@ Career OS helps you turn your experience into a practical job search and career 
 [![Version](https://img.shields.io/badge/version-0.4.2-21618c)](https://github.com/dhwrd87/career-os/releases/tag/v0.4.2)
 [![MIT](https://img.shields.io/badge/license-MIT-167d63)](LICENSE)
 
+The **v0.4.3 candidate** on this development branch adds [complete application packages](docs/complete-application-journey.md), reusable screening answers and a connected master-to-application journey. The published v0.4.2 downloads below remain unchanged. To try the candidate, install this checkout with `python -m pip install ".[resume,docx]"`.
+
 ## Start with a conversation
 
 | Ask in your own words | What Career OS does |

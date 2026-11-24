@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.3 — Complete Application Journey (candidate)
+
+- Connect approved onboarding, master resume, strategic plan and multiple selected career-family starting resumes.
+- Prepare complete batch application folders with PDF/DOCX resumes, conditional PDF/DOCX letters, original descriptions, assessments, actual screening drafts and Start Here.
+- Capture public Greenhouse questions and preserve separately verified application links.
+- Reuse explicitly approved answers with source/context checks; preserve unanswered consequential questions.
+- Keep published release history, factual/ATS/editorial/visual gates and external-submission boundaries.
+
 ## 0.4.2 — Human Experience Update (review candidate)
 
 - Connect discovery, role ideas, ranked/selected resume batches and target-specific career plans through existing engines.

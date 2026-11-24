@@ -35,7 +35,7 @@ class PackageHygieneTests(unittest.TestCase):
         allowed = json.loads(manifest_path.read_text()) if manifest_path.exists() else {}
         unexpected = [name for name in findings if name not in allowed or hashlib.sha256((ROOT / name).read_bytes()).hexdigest() != allowed[name]]
         self.assertEqual(unexpected, [])
-        self.assertTrue(all(name.startswith(('docs/images/', 'examples/workspace/', 'examples/recruiter-copy-review/')) for name in allowed))
+        self.assertTrue(all(name.startswith(('docs/images/', 'examples/workspace/', 'examples/recruiter-copy-review/', 'examples/application-journey/')) for name in allowed))
 
     def test_config_defaults_contain_no_identity_values(self) -> None:
         source = (ROOT / "tests/fixtures/config/valid-minimal.json").read_text(encoding="utf-8")

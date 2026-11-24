@@ -40,7 +40,8 @@ def _normalized(text):
 def _preference_check(job,preferences):
     location=_normalized(job.get('location'));wanted=preferences.get('locations',[])
     if wanted and not location:return ['The posting does not give a location.'],False
-    if wanted and not any(set(_normalized(v).split()).issubset(set(location.split())) for v in wanted):return ['The location does not match your search.'],True
+    qualifiers={'area','metro','metropolitan','greater'}
+    if wanted and not any((set(_normalized(v).split())-qualifiers) and (set(_normalized(v).split())-qualifiers).issubset(set(location.split())) for v in wanted):return ['The location does not match your search.'],True
     modes=preferences.get('work_modes',[])
     if modes and len(modes)<3:
         mode=next((m for m in ('REMOTE','HYBRID','ONSITE') if m.casefold() in location.replace('on site','onsite')),None)
@@ -74,7 +75,11 @@ def overview(workspace:Path, *, request:dict|None=None,timestamp=None) -> dict:
         checks=list(preference_notes)
         if fresh['freshness_state']!='FRESH':checks.append('Check that this job is still open before preparing an application.')
         if not opp.get('requirements'):checks.append('Review the job requirements before we judge your fit.')
-        jobs.append({**rank,'qualification':q['decision'],'category':category,'dream_goal':dream,'eligible_for_preparation':ready,'location':opp.get('location'),'source_url':opp.get('source_url'),'last_verified_at':fresh['last_verified_at'],'freshness':fresh['freshness_state'],'matches':list(dict.fromkeys(matches)),'gaps':q['gaps'],'checks':checks,'requirements':opp['requirements'],'why':('Your recorded experience supports the requirements we checked.' if ready else ('You have useful starting points, but some requirements or details need work.' if matches else 'Let us check your background and the main requirements to find a realistic starting point.')),'qualification_id':q['qualification_id']})
+        from careeros.application import history_blocks_preparation
+        states=[v for v in experience.records(roots.state_root/'applications') if v['opportunity_id']==key]
+        history_hold=any(history_blocks_preparation(v) for v in states) or len(states)>1
+        if history_hold:checks.append('This posting already has application history. Review that record; we will not prepare a duplicate application.')
+        jobs.append({**rank,'qualification':q['decision'],'category':category,'dream_goal':dream,'eligible_for_preparation':ready and not history_hold,'location':opp.get('location'),'source_url':opp.get('source_url'),'last_verified_at':fresh['last_verified_at'],'freshness':fresh['freshness_state'],'matches':list(dict.fromkeys(matches)),'gaps':q['gaps'],'checks':checks,'requirements':opp['requirements'],'why':('Your recorded experience supports the requirements we checked.' if ready else ('You have useful starting points, but some requirements or details need work.' if matches else 'Let us check your background and the main requirements to find a realistic starting point.')),'qualification_id':q['qualification_id']})
     jobs.sort(key=lambda j:(CATEGORIES.index(j['category']),-j['supported_fit_percent'],j['opportunity_id']))
     result={'schema':'careeros.career-journey.v1','created_at':utc_now(timestamp),'profile_hash':sha256_value(profile),'role_family_id':family['role_family_id'],'preferences':preferences,'dream_roles':request.get('dream_roles',[]),'jobs':jobs,'excluded':excluded,'categories':{c:sum(j['category']==c for j in jobs) for c in CATEGORIES},'message':f"We compared {len(jobs)} saved openings with your career profile. Review the matches and any details still to check.",'canonical_mutations':0,'external_actions':0}
     previous=roots.state_root/'job-search/latest.json'
@@ -147,7 +152,7 @@ def suggest_roles(workspace:Path,*,timestamp=None) -> dict:
     result={**lanes,'message':'Here are career directions supported by your history and the openings we have checked. Choose any you would like to explore.','path':'career/other-roles.md','canonical_mutations':0};_save(roots,'role-ideas.json',result);return result
 
 
-def prepare(workspace:Path,*,top=3,selected_ids=None,timestamp=None) -> dict:
+def prepare(workspace:Path,*,top=3,selected_ids=None,resume_only=False,cover_letter_policy='AUTO',timestamp=None) -> dict:
     roots,_,_=_context(workspace)
     if isinstance(top,bool) or not isinstance(top,int) or not 0<=top<=10:raise ValueError('Choose between zero and ten resumes at a time.')
     current=overview(workspace,timestamp=timestamp);index={j['opportunity_id']:j for j in current['jobs']}
@@ -160,15 +165,57 @@ def prepare(workspace:Path,*,top=3,selected_ids=None,timestamp=None) -> dict:
         if not job['eligible_for_preparation']:
             results.append({**row,'status':'NEEDS_REVIEW','message':'We have held this resume while required qualifications or job details need checking.','gaps':job['gaps']});continue
         try:
+            _family_for_job(workspace,roots,job)
+            opportunity.qualify(workspace,job['opportunity_id'],timestamp=timestamp)
             build,content,artifact=resume.build(workspace,job['opportunity_id'],timestamp=timestamp)
             checked,_=resume.validate(workspace,build['build_id'])
             if checked['status']!='PASS':
                 results.append({**row,'status':'QA_FAILED','message':'This draft needs a layout or content fix before you use it.','validation':checked});continue
-            results.append({**row,'status':'REVIEW_REQUIRED','message':'Your tailored resume is ready to review. Nothing has been sent.','build_id':build['build_id'],'path':artifact['path'],'sha256':artifact['sha256'],'evidence_ids':build['selected_evidence_ids']})
+            prepared={**row,'status':'REVIEW_REQUIRED','message':'Your tailored resume is ready to review. Nothing has been sent.','build_id':build['build_id'],'path':artifact['path'],'sha256':artifact['sha256'],'evidence_ids':build['selected_evidence_ids']}
+            if not resume_only:
+                from careeros import application
+                try:
+                    packet=application.prepare(workspace,job['opportunity_id'],build['build_id'],cover_letter_policy=cover_letter_policy,timestamp=timestamp)
+                    prepared.update(packet_id=packet['packet_id'],application_id=packet['application_id'],start_here=packet['start_here'],document_manifest=packet['document_manifest'],completion_state=packet['completion_state'],unanswered_questions=packet['application_answers']['material_questions'],message='Your application documents are prepared. Open Start Here, review the drafts and complete any unanswered questions. Nothing has been sent.')
+                except (ValueError,PermissionError,OSError,ImportError) as exc:
+                    prepared.update(status='PARTIAL_DRAFT',message='The validated resume is available; application documents still need attention: '+str(exc))
+            results.append(prepared)
         except (ValueError,PermissionError,FileExistsError) as exc:results.append({**row,'status':'NEEDS_REVIEW','message':str(exc)})
     current['resumes']=results;_save(roots,'latest.json',current);render(workspace,current)
-    result={'schema':'careeros.resume-batch.v1','results':results,'prepared':sum(r['status']=='REVIEW_REQUIRED' for r in results),'message':('Review each draft for the right employer, job title, contact details and examples before applying.' if results else 'There are no suitable jobs to prepare yet. Review the gaps or add current postings.'),'canonical_mutations':0,'external_actions':0};_save(roots,'resume-batch.json',result);return result
+    result={'schema':'careeros.resume-batch.v1','results':results,'prepared':sum(r['status']=='REVIEW_REQUIRED' for r in results),'packages_prepared':sum(bool(r.get('start_here')) for r in results),'message':('Review each draft for the right employer, job title, contact details and examples before applying.' if results else 'There are no suitable jobs to prepare yet. Review the gaps or add current postings.'),'canonical_mutations':0,'external_actions':0};_save(roots,'resume-batch.json',result);return result
 
+
+
+def career_directions(workspace:Path,indices:list[int],*,approved=False,actor=None,timestamp=None):
+    from careeros import profile as profiles,lane_base
+    roots=experience.context(workspace);profile=read_json(roots.state_root/'profile/career-profile.json')
+    intents=profile.get('preferences',{}).get('target_role_intents',[])
+    if approved is not True or not actor:raise PermissionError('Choose and approve the career directions before building their starting resumes.')
+    if not indices or any(isinstance(i,bool) or not isinstance(i,int) or not 0<=i<len(intents) for i in indices):raise ValueError('Choose valid career-direction numbers from your recorded goals.')
+    families=[profiles.build_role_family(workspace,intent_index=i,approve=True,timestamp=timestamp) for i in dict.fromkeys(indices)]
+    results=[]
+    for family in families:
+        profiles.activate_role_family(workspace,family['role_family_id'])
+        try:
+            result=lane_base.build_lane_base(workspace,accept=False,timestamp=timestamp)
+            results.append({'career_direction':family['display_name'],'role_family_id':family['role_family_id'],'path':result['artifact']['path'],'validation':result['validation']['status'],'lane_base_id':result['lane_base']['lane_base_id'],'human_review_required':True})
+        except (ValueError,PermissionError) as exc:results.append({'career_direction':family['display_name'],'status':'NEEDS_REVIEW','message':str(exc)})
+    profiles.activate_role_family(workspace,families[0]['role_family_id'])
+    from careeros.career_outputs import build_master_resume,write_search_strategy
+    return {'master':build_master_resume(workspace,timestamp=timestamp),'bases':results,'strategy':write_search_strategy(workspace,timestamp=timestamp),'external_actions':0,'canonical_mutations':0}
+
+
+def _family_for_job(workspace,roots,job):
+    import re
+    from careeros.profile import activate_role_family
+    profile=read_json(roots.state_root/'profile/career-profile.json')
+    families=[f for f in profile.get('role_families',[]) if f['approval_state']=='APPROVED']
+    active=read_json(roots.state_root/'role-families/active.json')
+    title=set(re.findall(r'[a-z]+',job['role_title'].casefold()))
+    def score(family):
+        matches=max([len(title & set(re.findall(r'[a-z]+',name.casefold()))) for name in family['target_titles']] or [0])
+        return (matches,family['role_family_id']==active['role_family_id'])
+    if families:activate_role_family(workspace,max(families,key=score)['role_family_id'])
 
 def plan(workspace:Path,opportunity_id:str,*,catalog:Path|None=None,timestamp=None) -> dict:
     from careeros import learning_workflow
@@ -226,6 +273,7 @@ def render(workspace:Path,bundle:dict):
     parts.append('<section><h2>Your resume drafts</h2>');lines.append('## Your resume drafts')
     for row in bundle.get('resumes',[]):
         lines.append(row['role_title']+' at '+row['employer_name']+': '+row['message'])
+        if row.get('start_here'):parts.append('<p><a href="../'+html.escape(row['start_here'],quote=True)+'">'+html.escape(row['role_title']+' · '+row['employer_name'])+' — open application package</a></p>')
         if row.get('path'):parts.append('<p><a href="../'+html.escape(row['path'],quote=True)+'">'+html.escape(row['role_title']+' · '+row['employer_name'])+' — review resume</a></p>')
         else:parts.append('<p>'+html.escape(row['role_title']+': '+row['message'])+'</p>')
     parts.append('</section><p>Your profile has not been changed. Nothing has been sent.</p>')

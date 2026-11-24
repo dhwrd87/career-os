@@ -43,3 +43,7 @@ Career OS 0.4.2 writes Workspace Format 1.1.0 and accepts 1.0.0 only for explici
 ## Upgrade to 0.4.2
 
 Back up your workspace, then install the new package and matching skill. Workspace format 1.1.0, config 1.0.0 and schema bundle 1.24.0 stay the same. Run doctor and workspace verify, then regenerate your dashboard and reports to see the new wording and job groups. Your approved career facts and submitted application documents stay unchanged. No new data migration is needed.
+
+## 0.4.3 candidate
+
+Schema bundle 1.25.0 adds optional application-form provenance, captured questions, qualification/JD binding and complete packet document fields. Workspace format remains 1.1.0. Existing 0.4.2 workspaces and historical packets remain readable. New complete packets use a distinct content identity and leave old packets untouched. Saving reviewed answers or changing preparation options produces a new immutable packet revision; it never rewrites a submitted artifact.

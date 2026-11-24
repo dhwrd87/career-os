@@ -14,9 +14,9 @@ from careeros.workspace import init_workspace, schema_dir, verify_workspace
 class Phase3PackageTests(unittest.TestCase):
     def test_independent_version_authorities(self):
         report = version_report()
-        self.assertEqual(__version__, "0.4.2")
+        self.assertEqual(__version__, "0.4.3")
         self.assertEqual(report["supported_workspace_format"]["current"], "1.1.0")
-        self.assertEqual(report["schema_bundle_version"], "1.24.0")
+        self.assertEqual(report["schema_bundle_version"], "1.25.0")
         self.assertIsNone(report["skill_version"])
 
     def test_formal_registry_covers_persisted_contracts(self):
@@ -33,7 +33,7 @@ class Phase3PackageTests(unittest.TestCase):
             manifest = init_workspace(target, fixture_mode=True, workspace_id="workspace-phase3",
                                       timestamp="2026-10-02T12:00:00Z")
             self.assertEqual(manifest["workspace_format_version"], "1.1.0")
-            self.assertEqual(manifest["created_by_package_version"], "0.4.2")
+            self.assertEqual(manifest["created_by_package_version"], "0.4.3")
             self.assertEqual(manifest["migration_history"], [])
             self.assertIn("manifest_core_sha256", manifest["integrity"])
             ignores = (target / ".gitignore").read_text(encoding="utf-8")

@@ -88,6 +88,19 @@ def public_fact_text(value: Any) -> str:
     return text.strip(" .;:")
 
 
+
+def first_person_fact(text: str) -> str:
+    """Change grammatical person only, preserving each validated statement."""
+    verbs={'led','built','ran','wrote','made','taught','drove','grew','cut','won','kept','set','met','sent','held','read','saw'}
+    clauses=[]
+    for sentence in re.split(r'(?<=[.!?])\s+(?=[A-Z])',str(text).strip()):
+        first=re.match(r"[A-Za-z]+",sentence)
+        word=first.group().lower() if first else ''
+        if word in verbs or (word.endswith('ed') and word not in {'based','related'}):
+            sentence='I '+sentence[:1].lower()+sentence[1:]
+        clauses.append(sentence)
+    return ' '.join(clauses)
+
 def _useful_result(value: Any) -> str:
     text = public_fact_text(value)
     if text.casefold() in {"produced a documented, reviewable deliverable", "documented, reviewable deliverable", "inspectable artifact and separate human review"}:

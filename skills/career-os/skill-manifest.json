@@ -1,9 +1,9 @@
 {
   "schema": "careeros.codex-skill-manifest.v1",
   "skill_name": "career-os",
-  "skill_version": "0.4.2",
+  "skill_version": "0.4.3",
   "career_os_package": {
-    "minimum": "0.4.2",
+    "minimum": "0.4.3",
     "maximum_exclusive": "0.5.0"
   },
   "required_capabilities": [

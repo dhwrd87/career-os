@@ -29,3 +29,7 @@ Build a plan for a chosen stretch or dream role. Learning Path Intelligence comp
 Your workspace lives in a folder you choose. Changes to career facts require review. Earlier application records keep the resume you used. Backups, version checks and recovery tools help you move safely between supported versions.
 
 Career OS does not apply for jobs, send messages, buy training, enrol you in courses, change public profiles or make commitments. Live sources and environment limits are explained in the [README](../README.md). Developers can find exact command and data details in [architecture](architecture.md) and [contracts](contracts.md).
+
+## Complete application journey — v0.4.3 candidate
+
+The [connected journey](complete-application-journey.md) produces the master, selected-family bases and job-specific resumes, then self-contained application folders with PDF/DOCX, conditional letters, captured questions, approved answer reuse, Start Here, assessments and document manifests. Unanswered questions stay visible. It records local drafts and reported activity; no external submission is implemented.
