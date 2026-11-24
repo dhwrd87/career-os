@@ -109,7 +109,7 @@ class RecruiterConversionCopyEngineV2Tests(unittest.TestCase):
 
     def test_05_soc_lab_does_not_become_employment(self):
         summary = build_recruiter_summary_v2(profile(), {}, family(), opportunity={"role_title": "SOC Analyst I"}, selected_evidence_ids=self.selected)
-        self.assertIn("hands-on", summary["text"].casefold())
+        self.assertRegex(summary["text"].casefold(), r"project|simulat|synthetic|lab")
         self.assertNotIn("SOC analyst experience", summary["text"].casefold())
 
     def test_06_jd_language_mimicry_is_detected(self):

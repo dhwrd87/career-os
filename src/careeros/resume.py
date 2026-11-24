@@ -25,6 +25,7 @@ from careeros.config.loader import load_config
 from careeros.completeness import apply_actual_page_utilization, evaluate_resume_completeness
 from careeros.career_conversion import build_career_conversion_trace, build_employer_need_trace, build_role_fact_set
 from careeros.core.io import atomic_write_json, read_json, sha256_file, sha256_value
+from careeros.recruiter_conversion import public_fact_text
 from careeros.versions import RENDERER_VERSION
 from careeros.editorial import (
     build_bullet_candidates,
@@ -183,8 +184,8 @@ def _content_contract(
     projects = sorted(
         profile["projects"],
         key=lambda item: (
-            -max([float(bullets_by_evidence.get(eid, {}).get("selection_score", 0.0)) for eid in item.get("evidence_ids", [])] or [0.0]),
             min([project_rank.get(eid, 10_000) for eid in item.get("evidence_ids", [])] or [10_000]),
+            -max([float(bullets_by_evidence.get(eid, {}).get("selection_score", 0.0)) for eid in item.get("evidence_ids", [])] or [0.0]),
         ),
     )
     for project in projects:
@@ -197,12 +198,13 @@ def _content_contract(
                 used_bullet_evidence.update(bullets_by_evidence[evidence_id]["evidence_ids"])
         bullets.sort(key=lambda item: (-float(item.get("selection_score", 0.0)), item["bullet_id"]))
         if bullets:
-            if len(project_sections) < 4:
+            if len(project_sections) < 6:
                 project_sections.append({
                     "name": project["name"], "date_range": project.get("date_range"),
-                    "contribution": project["contribution"], "bullets": bullets,
+                    "contribution": public_fact_text(project["contribution"]), "bullets": bullets,
                     "record_id": project["record_id"],
                     "selection_tier": "PRIMARY" if len(project_sections) < 2 else "SECONDARY",
+                    **({"presentation_tier":"ADDITIONAL"} if len(project_sections)>=4 else {}),
                 })
             else:
                 omitted_bullets.extend({"bullet_id": bullet["bullet_id"], "reason": "SPACE", "evidence_ids": bullet["evidence_ids"]} for bullet in bullets)

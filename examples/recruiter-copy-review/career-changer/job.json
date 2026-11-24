@@ -1,0 +1,29 @@
+{
+  "schema": "careeros.synthetic-opportunity-input.v1",
+  "source_type": "SYNTHETIC",
+  "opportunity_id": "copy-review-career-changer",
+  "employer_name": "Example Career Services",
+  "role_title": "Implementation Coordinator",
+  "location": "United States",
+  "requirements": [
+    {
+      "capability": "Process Mapping",
+      "requirement_class": "REQUIRED",
+      "requirement_subtype": "SKILL",
+      "level": "CORE"
+    },
+    {
+      "capability": "Training",
+      "requirement_class": "REQUIRED",
+      "requirement_subtype": "SKILL",
+      "level": "CORE"
+    },
+    {
+      "capability": "Data Cleanup",
+      "requirement_class": "REQUIRED",
+      "requirement_subtype": "SKILL",
+      "level": "CORE"
+    }
+  ],
+  "job_description": "Example Career Services seeks a Implementation Coordinator. The role requires Process Mapping, Training, Data Cleanup. Work includes keeping records clear, resolving issues within the role and handing work to the right colleagues."
+}

@@ -1,0 +1,31 @@
+Casey Rowan
+ Operations Coordinator
+ Example City, US | casey.rowan@example.org
+ portfolio.example/casey-rowan
+SUMMARY
+Operations Support Coordinator with experience in customer support and documentation relevant to Operations Coordinator.
+Documented service requests, coordinated weekly handoffs, and escalated unresolved issues to accountable owners. Built a
+dashboard prototype that categorized recurring requests and documented weekly handoff patterns in a project.
+CORE SKILLS
+OPERATIONS: Customer Support | Documentation | Issue Escalation | Spreadsheet Analysis
+LANGUAGES: English | Spanish
+PROFESSIONAL EXPERIENCE
+Operations Support Coordinator
+Northwind Community Services | 2022 - Present
+ - Documented service requests, coordinated weekly handoffs, and escalated unresolved issues to accountable owners.
+ - Reviewed recurring queue patterns and delivered an updated intake guide for staff.
+ Customer Service Associate
+Blue Meadow Books | 2019 - 2021
+ - Resolved customer questions and maintained accurate order notes for time-sensitive requests.
+ 
+FEATURED PROJECTS
+Service Queue Dashboard
+Individual contributor
+ - Built a dashboard prototype that categorized recurring requests and documented weekly handoff patterns.
+ 
+EDUCATION
+Lakeside State College
+Bachelor of Applied Studies in Operations - 2025
+CERTIFICATIONS
+Service Operations Foundations - Example Learning Institute
+

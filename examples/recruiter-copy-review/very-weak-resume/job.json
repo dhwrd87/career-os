@@ -1,0 +1,23 @@
+{
+  "schema": "careeros.synthetic-opportunity-input.v1",
+  "source_type": "SYNTHETIC",
+  "opportunity_id": "copy-review-very-weak-resume",
+  "employer_name": "Example Career Services",
+  "role_title": "Customer Service Associate",
+  "location": "United States",
+  "requirements": [
+    {
+      "capability": "Customer Support",
+      "requirement_class": "REQUIRED",
+      "requirement_subtype": "SKILL",
+      "level": "CORE"
+    },
+    {
+      "capability": "Documentation",
+      "requirement_class": "REQUIRED",
+      "requirement_subtype": "SKILL",
+      "level": "CORE"
+    }
+  ],
+  "job_description": "Example Career Services seeks a Customer Service Associate. The role requires Customer Support, Documentation. Work includes keeping records clear, resolving issues within the role and handing work to the right colleagues."
+}

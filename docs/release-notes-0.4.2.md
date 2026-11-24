@@ -17,3 +17,5 @@ The README, user guides, onboarding questions, assistant instructions, dashboard
 Package, compiler and skill advance to 0.4.2. Workspace format 1.1.0 and schema bundle 1.24.0 stay compatible. Existing application artifacts remain historical; no migration of career facts or automatic profile change is introduced. Install from the candidate source/wheel with the matching skill. No v0.4.2 release or merge has been performed.
 
 Discovery is still source-bounded, not a search of every job board. Authenticated course-provider search, external sending/submission and purchases remain unsupported. Format and environment limits remain in the README.
+
+The focused [recruiter-copy review](recruiter-copy-review-0.4.2.md) adds actual eight-person master, career-specific, tailored and cover-letter outputs; complete source actions, clearer proof selection, more natural letters and accepted-document preservation. Competitive preference and independent human validation remain unverified.

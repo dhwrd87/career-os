@@ -1,0 +1,29 @@
+{
+  "schema": "careeros.synthetic-opportunity-input.v1",
+  "source_type": "SYNTHETIC",
+  "opportunity_id": "copy-review-experienced-professional",
+  "employer_name": "Example Career Services",
+  "role_title": "Operations Manager",
+  "location": "United States",
+  "requirements": [
+    {
+      "capability": "Operations Leadership",
+      "requirement_class": "REQUIRED",
+      "requirement_subtype": "SKILL",
+      "level": "CORE"
+    },
+    {
+      "capability": "Vendor Coordination",
+      "requirement_class": "REQUIRED",
+      "requirement_subtype": "SKILL",
+      "level": "CORE"
+    },
+    {
+      "capability": "Risk Documentation",
+      "requirement_class": "REQUIRED",
+      "requirement_subtype": "SKILL",
+      "level": "CORE"
+    }
+  ],
+  "job_description": "Example Career Services seeks a Operations Manager. The role requires Operations Leadership, Vendor Coordination, Risk Documentation. Work includes keeping records clear, resolving issues within the role and handing work to the right colleagues."
+}

@@ -55,6 +55,7 @@ from careeros.recruiter_conversion import (
 )
 from careeros.schemas.validation import SchemaRegistry
 from careeros.updates import mark_derivative_current, require_derivative_current
+from careeros.recruiter_conversion import public_fact_text
 from careeros.versions import COMPILER_VERSION, FONT_PROFILE_VERSION, TEMPLATE_VERSION, TRUTH_POLICY_VERSION
 from careeros.workspace import require_current_workspace, schema_dir, utc_now
 
@@ -177,7 +178,7 @@ def _lane_content(profile: dict[str, Any], family: dict[str, Any], storyline: di
             )
             project_sections.append({
                 "name": project["name"], "date_range": project.get("date_range"),
-                "contribution": project.get("contribution") or "Project contributor",
+                "contribution": public_fact_text(project.get("contribution")) or "Project contributor",
                 "record_id": project["record_id"], "bullets": rendered_bullets,
                 "selection_tier": "PRIMARY" if len(project_sections) < 2 else "SECONDARY",
             })
@@ -397,7 +398,7 @@ def build_lane_base(workspace: Path, *, accept: bool = False, actor: str | None 
     content, omitted = _lane_content(profile, family, storyline)
     selected_ids = sorted({evidence_id for section in [*content["employment"], *content["projects"]] for bullet in section.get("bullets", []) for evidence_id in bullet.get("evidence_ids", [])})
     role_hash = sha256_value(family)
-    key = f"{profile_hash}:{role_hash}:{EDITORIAL_POLICY_VERSION}:{TEMPLATE_VERSION}"
+    key = f"{profile_hash}:{role_hash}:{EDITORIAL_POLICY_VERSION}:{TEMPLATE_VERSION}:{COMPILER_VERSION}:{sha256_value(content)}"
     lane_base_id = f"lane-base:{uuid.uuid5(uuid.NAMESPACE_URL, key)}"
     build_id = f"lane-base-build:{uuid.uuid5(uuid.NAMESPACE_URL, key + ':build')}"
     artifact_id = f"artifact:{uuid.uuid5(uuid.NAMESPACE_URL, key + ':pdf')}"
@@ -408,6 +409,9 @@ def build_lane_base(workspace: Path, *, accept: bool = False, actor: str | None 
     if lane_dir.exists():
         existing = read_json(lane_dir / "lane-base.json")
         return {"lane_base": existing, "validation": read_json(lane_dir / "validation.json"), "artifact": read_json(lane_dir / "artifact.json"), "idempotency_status": "EXISTING_BUILD"}
+    if pdf_path.exists():
+        pdf_path=pdf_path.with_name(f"{pdf_path.stem} - {build_id[-8:]}{pdf_path.suffix}")
+        if pdf_path.exists():raise FileExistsError("Refusing to overwrite an existing career-specific resume")
     render_pdf(content, roots.assert_write_allowed(pdf_path, "output"))
     reader = PdfReader(str(pdf_path))
     artifact = {
@@ -522,9 +526,11 @@ def build_lane_base(workspace: Path, *, accept: bool = False, actor: str | None 
     mark_derivative_current(roots, "LANE_BASE_RESUME", lane_base_id, timestamp=created_at, lineage_hash=artifact["sha256"])
     active_path = roots.state_root / "lane-bases/active.json"
     active = read_json(active_path) if active_path.is_file() else {"schema": "careeros.lane-base-index.v1", "entries": []}
-    active["entries"] = [item for item in active["entries"] if item["role_family_id"] != family["role_family_id"]]
-    active["entries"].append({"role_family_id": family["role_family_id"], "lane_base_id": lane_base_id, "path": str((lane_dir / "lane-base.json").relative_to(roots.state_root)), "status": base["status"]})
-    atomic_write_json(active_path, active)
+    accepted_current=any(item['role_family_id']==family['role_family_id'] and item['status']=='ACCEPTED' for item in active['entries'])
+    if accept or not accepted_current:
+        active["entries"] = [item for item in active["entries"] if item["role_family_id"] != family["role_family_id"]]
+        active["entries"].append({"role_family_id": family["role_family_id"], "lane_base_id": lane_base_id, "path": str((lane_dir / "lane-base.json").relative_to(roots.state_root)), "status": base["status"]})
+        atomic_write_json(active_path, active)
     if accept:
         return accept_lane_base(workspace, lane_base_id, actor=actor or "human", timestamp=created_at)
     return {"lane_base": base, "validation": validation, "artifact": artifact, "build_manifest": manifest}
@@ -550,9 +556,8 @@ def accept_lane_base(workspace: Path, lane_base_id: str, *, actor: str, timestam
     atomic_write_json(lane_dir / "lane-base.json", base)
     atomic_write_json(lane_dir / "artifact.json", artifact)
     active = read_json(roots.state_root / "lane-bases/active.json")
-    for item in active["entries"]:
-        if item["lane_base_id"] == lane_base_id:
-            item["status"] = "ACCEPTED"
+    active['entries']=[item for item in active['entries'] if item['role_family_id']!=base['role_family_id']]
+    active['entries'].append({'role_family_id':base['role_family_id'],'lane_base_id':lane_base_id,'path':str((lane_dir/'lane-base.json').relative_to(roots.state_root)),'status':'ACCEPTED'})
     atomic_write_json(roots.state_root / "lane-bases/active.json", active)
     append_jsonl(roots.state_root / "audit-events.jsonl", {
         "schema": "careeros.audit-event.v1", "event": "LANE_BASE_ACCEPTED", "actor": actor,

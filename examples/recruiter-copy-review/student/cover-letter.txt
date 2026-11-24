@@ -1,0 +1,10 @@
+Avery Solis Cover Letter
+Dear Example Career Services hiring team,
+Your IT Support Assistant opening at Example Career Services calls for technical support. As Student Support
+Assistant at Campus Technology Desk, I documented student support requests and escalated account-access
+issues to campus technicians. In the Campus Inventory Tracker project, I built and tested a small Python and SQL
+inventory tracker with setup documentation.
+I can discuss this work and the results in more detail.
+Sincerely,
+Avery Solis
+

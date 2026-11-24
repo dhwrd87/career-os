@@ -18,10 +18,10 @@ Career OS workspace
 
 ## Documents
 
-- [Follow Up · Text](applications/60d43849128c8184/follow-up.md)
+- [Cover Letter · Text](applications/44c05a4bcd4a428a/cover-letter.md)
+- [Cover Letter · PDF](applications/44c05a4bcd4a428a/cover-letter.pdf)
+- [Follow Up · Text](applications/7573cadc9757272f/follow-up.md)
 - [Your applications · Text](applications/application-tracker.md)
-- [Cover Letter · Text](applications/d2707f3d2f8fe0c1/cover-letter.md)
-- [Cover Letter · PDF](applications/d2707f3d2f8fe0c1/cover-letter.pdf)
 - [Your follow-ups · Text](applications/follow-ups.md)
 - [Other roles to explore · Text](career/other-roles.md)
 - [Other roles to explore · PDF](career/other-roles.pdf)
@@ -47,8 +47,8 @@ Career OS workspace
 - [Implementation Coordinator · Hearthline Civic Tools · PDF](opportunities/a1667f25c5d23277/opportunity-report.pdf)
 - [Training Coordinator · Example Learning Services · Text](opportunities/eee0937dec31da8d/opportunity-report.md)
 - [Training Coordinator · Example Learning Services · PDF](opportunities/eee0937dec31da8d/opportunity-report.pdf)
-- [Application documents · Resume · PDF](packets/6aed38db-15c6-5c8f-94cf-e959f6567f91/Priya%20Calder%20-%20Implementation%20Coordinator%20Resume.pdf)
-- [Application documents · Review checklist · Text](packets/6aed38db-15c6-5c8f-94cf-e959f6567f91/README.md)
+- [Application documents · Resume · PDF](packets/79998f4d-acfd-5bd2-bc5d-f4a210d93a12/Priya%20Calder%20-%20Implementation%20Coordinator%20Resume.pdf)
+- [Application documents · Review checklist · Text](packets/79998f4d-acfd-5bd2-bc5d-f4a210d93a12/README.md)
 - [Your career profile · Text](profile/career-profile.md)
 - [Your career profile · PDF](profile/career-profile.pdf)
 - [Your career progress · Text](reports/career-progress.md)

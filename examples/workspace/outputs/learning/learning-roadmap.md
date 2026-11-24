@@ -6,6 +6,8 @@ Fictional example: these courses, subscriptions and prices are for demonstration
 
 Plan checked on: 2026-10-02T12:00:00Z
 
+Update this plan before you start. Some profile or course details have changed or are out of date. Check the sources and make a new plan.
+
 ## What fits your life
 
 Budget: 40 USD. Time each week: 4 hours. Planning ahead: 4 weeks.

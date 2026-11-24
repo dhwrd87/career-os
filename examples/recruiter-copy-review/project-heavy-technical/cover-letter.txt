@@ -1,0 +1,10 @@
+Jules Navarro Cover Letter
+Dear Example Career Services hiring team,
+Your Junior Systems Technician opening at Example Career Services calls for Python. As Technical Workshop
+Assistant at Example Makerspace, I documented workshop setups and escalated equipment issues to the technical
+lead. In the Network Status Monitor project, I built and tested a Python monitor that recorded synthetic host-status
+events.
+I can discuss this work and the results in more detail.
+Sincerely,
+Jules Navarro
+

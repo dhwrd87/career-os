@@ -130,15 +130,33 @@ def cover_letter(workspace: Path, opportunity_id: str, build_id: str) -> dict:
     evidence = [b for s in [*content.get('employment', []), *content.get('projects', [])] for b in s['bullets'] if b.get('evidence_ids')][:3]
     if not evidence:
         raise ValueError('No supported evidence available for a cover letter')
-    paragraphs = [f"Dear {opp['employer_name']} hiring team,", f"I am applying for the {opp['role_title']} role. The examples below show how my background relates to your requirements."]
-    # Preserve the exact approved evidence wording and its employment/project context.
-    for section in [*content.get('employment', []), *content.get('projects', [])]:
-        chosen = [b for b in section['bullets'] if b in evidence]
-        if chosen:
-            label = f"As a {section['actual_title']} at {section['employer']}, my work included:" if section.get('employer') else f"My work on the {section['name']} project included:"
-            paragraphs.append(label)
-            paragraphs.extend('- ' + b['text'] for b in chosen)
-    paragraphs += ['I would welcome a conversation about how this experience could support your team.', 'Sincerely,\n' + content['candidate']['public_name']]
+    # Explain two relevant connections rather than turn the whole resume into
+    # prose. Employer needs guide selection; all claims still come from the
+    # validated resume's evidence-bearing bullets.
+    need_ids={key for need in content.get('employer_need_trace',{}).get('needs',[])[:3] for key in need.get('candidate_evidence_ids',[])}
+    examples=[(section,b) for section in [*content.get('employment',[]),*content.get('projects',[])] for b in section['bullets'] if b.get('evidence_ids')]
+    examples.sort(key=lambda row:(not bool(set(row[1]['evidence_ids']) & need_ids),not bool(row[0].get('employer'))))
+    chosen=[];seen=set()
+    for section,bullet in examples:
+        if set(bullet['evidence_ids']) & seen:continue
+        chosen.append((section,bullet));seen.update(bullet['evidence_ids'])
+        if len(chosen)==2:break
+    evidence=[b for _,b in chosen]
+    requirement=next((v['capability'] for v in opp.get('requirements',[]) if v.get('requirement_class')=='REQUIRED'),None)
+    need_text=requirement if requirement and (requirement.isupper() or requirement in {'Python','Linux','JavaScript','Splunk','Wireshark','Salesforce'}) else (requirement.lower() if requirement else None)
+    opening=(f"Your {opp['role_title']} opening at {opp['employer_name']} calls for {need_text}." if requirement else f"I am applying for the {opp['role_title']} role at {opp['employer_name']}.")
+    paragraphs=[f"Dear {opp['employer_name']} hiring team,",opening]
+    previous_section=None
+    for section,bullet in chosen:
+        text=bullet['text'];claim=text[:1].lower()+text[1:]
+        if section.get('employer'):
+            letter_context=f"As {section['actual_title']} at {section['employer']}"
+        else:letter_context=f"In the {section['name']} project"
+        if section is previous_section:paragraphs[-1]+=' I also '+claim
+        elif len(paragraphs)==2:paragraphs[-1]+=' '+letter_context+', I '+claim
+        else:paragraphs.append(letter_context+', I '+claim)
+        previous_section=section
+    paragraphs+=['I can discuss this work and the results in more detail.','Sincerely,\n'+content['candidate']['public_name']]
     key = sha256_value([opportunity_id, build_id])[:16]
     path = _write(roots, f'applications/{key}/cover-letter.md', '# Cover letter\n\n' + '\n\n'.join(paragraphs) + '\n')
     pdf = roots.assert_write_allowed(path.with_suffix('.pdf'), 'output')

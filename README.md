@@ -41,7 +41,7 @@ Each resume starts with the career facts and examples you have approved. The che
 
 Learning Path Intelligence compares courses and other resources, checks what you already know and helps you create work you can show. It keeps courses, certifications, projects and employment separate. Completing a course never becomes professional experience.
 
-See the [examples](examples/workspace/README.md), [before and after](docs/human-experience-update.md) and [visual gallery](docs/visual-gallery.md).
+See the [examples](examples/workspace/README.md), [before and after](docs/human-experience-update.md) and [visual gallery](docs/visual-gallery.md). See the [recruiter-copy review](docs/recruiter-copy-review-0.4.2.md) for actual eight-person resume and cover-letter comparisons.
 
 ## Install this candidate
 

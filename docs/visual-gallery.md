@@ -71,3 +71,7 @@ All 4 pages of the generated learning PDF were rendered and visually inspected. 
 ![Learning module at desktop width](images/learning-desktop.png)
 
 ![Learning module at mobile width](images/learning-mobile.png)
+
+## Recruiter-copy review
+
+See the [eight-person copy gallery and assessment](recruiter-copy-review-0.4.2.md). It includes actual master, career-specific, tailored and cover-letter outputs, with the limits of competitor and human evaluation clearly stated.

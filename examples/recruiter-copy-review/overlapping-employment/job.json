@@ -1,0 +1,29 @@
+{
+  "schema": "careeros.synthetic-opportunity-input.v1",
+  "source_type": "SYNTHETIC",
+  "opportunity_id": "copy-review-overlapping-employment",
+  "employer_name": "Example Career Services",
+  "role_title": "Service Dispatcher",
+  "location": "United States",
+  "requirements": [
+    {
+      "capability": "Dispatch Coordination",
+      "requirement_class": "REQUIRED",
+      "requirement_subtype": "SKILL",
+      "level": "CORE"
+    },
+    {
+      "capability": "Documentation",
+      "requirement_class": "REQUIRED",
+      "requirement_subtype": "SKILL",
+      "level": "CORE"
+    },
+    {
+      "capability": "Shift Handoff",
+      "requirement_class": "REQUIRED",
+      "requirement_subtype": "SKILL",
+      "level": "CORE"
+    }
+  ],
+  "job_description": "Example Career Services seeks a Service Dispatcher. The role requires Dispatch Coordination, Documentation, Shift Handoff. Work includes keeping records clear, resolving issues within the role and handing work to the right colleagues."
+}

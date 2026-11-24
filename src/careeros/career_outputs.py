@@ -22,7 +22,7 @@ from careeros.resume_ats import (
     validate_recruiter_summary,
 )
 from careeros.recruiter_conversion import (
-    build_recruiter_conversion_strategy,
+    build_recruiter_conversion_strategy, _evidence_phrase, public_fact_text,
     public_copy_boundary,
     recruiter_copy_quality_v2,
 )
@@ -47,14 +47,7 @@ def _clean_sentence(value: str) -> str:
 
 
 def _evidence_text(item: dict[str, Any]) -> str:
-    actions = list(item.get("actions", []))
-    outcomes = list(item.get("outcomes", []))
-    deliverables = list(item.get("deliverables", []))
-    if actions and outcomes:
-        return _clean_sentence(f"{actions[0]}; {outcomes[0][0].lower() + outcomes[0][1:] if outcomes[0] else ''}")
-    if actions and deliverables:
-        return _clean_sentence(f"{actions[0]} to produce {deliverables[0]}")
-    return _clean_sentence(item.get("summary") or (actions[0] if actions else ""))
+    return _clean_sentence(_evidence_phrase(item))
 
 
 def _skill_groups(profile: dict[str, Any]) -> list[dict[str, Any]]:
@@ -98,7 +91,7 @@ def master_resume_content(profile: dict[str, Any]) -> dict[str, Any]:
         if bullets:
             projects.append({
                 "name": project["name"], "date_range": project.get("date_range"),
-                "contribution": project.get("contribution") or "Project contributor",
+                "contribution": public_fact_text(project.get("contribution")) or "Project contributor",
                 "record_id": project["record_id"], "bullets": bullets[:3], "selection_tier": "PRIMARY",
             })
     groups = _skill_groups(profile)
@@ -106,7 +99,7 @@ def master_resume_content(profile: dict[str, Any]) -> dict[str, Any]:
     role_names = list(dict.fromkeys(item["actual_title"] for item in employment))[:3]
     foundation = ", ".join(role_names) if role_names else "documented professional and project experience"
     preparation = ", ".join(skill_names) if skill_names else "documented career capabilities"
-    target = public_artifact_title("MASTER_RECRUITER")
+    target = role_names[0] if role_names else "Career Profile"
     content = {
         "schema": "careeros.resume-content.v1", "candidate": profile["candidate"],
         "target_role": target, "role_family_id": "role-family:master-recruiter",

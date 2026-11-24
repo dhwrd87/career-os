@@ -1,0 +1,29 @@
+{
+  "schema": "careeros.synthetic-opportunity-input.v1",
+  "source_type": "SYNTHETIC",
+  "opportunity_id": "copy-review-project-heavy-technical",
+  "employer_name": "Example Career Services",
+  "role_title": "Junior Systems Technician",
+  "location": "United States",
+  "requirements": [
+    {
+      "capability": "Python",
+      "requirement_class": "REQUIRED",
+      "requirement_subtype": "SKILL",
+      "level": "CORE"
+    },
+    {
+      "capability": "Linux",
+      "requirement_class": "REQUIRED",
+      "requirement_subtype": "SKILL",
+      "level": "CORE"
+    },
+    {
+      "capability": "Networking",
+      "requirement_class": "REQUIRED",
+      "requirement_subtype": "SKILL",
+      "level": "CORE"
+    }
+  ],
+  "job_description": "Example Career Services seeks a Junior Systems Technician. The role requires Python, Linux, Networking. Work includes keeping records clear, resolving issues within the role and handing work to the right colleagues."
+}

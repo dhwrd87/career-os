@@ -23,7 +23,7 @@ PUBLIC_SYSTEM_PHRASES = (
 )
 INTERNAL_STATE_PHRASES = (
     "hard gap", "unknown state", "unsupported evidence", "professional-equivalence warning",
-    "claim boundary", "verification status", "needs verification", "review required",
+    "claim boundary", "verification status", "needs verification", "review required", "does not establish", "without claiming", "did not configure the production system",
 )
 WEAK_FUTURE_PHRASES = (
     "ready to", "prepared to", "hoping to", "seeking to learn", "building toward",
@@ -31,7 +31,7 @@ WEAK_FUTURE_PHRASES = (
 )
 AI_SLOP_PHRASES = (
     "leveraging", "dynamic professional", "results-driven", "passionate", "proven track record",
-    "professional foundation", "practical preparation", "disciplined operations",
+    "professional foundation", "practical preparation", "disciplined operations", "documented, reviewable deliverable",
 )
 GENERIC_ABSTRACTIONS = (
     "technical preparation", "security exposure", "practical experience",
@@ -79,33 +79,45 @@ def _public_evidence(profile: dict[str, Any], selected_evidence_ids: set[str] | 
     ]
 
 
-def _evidence_phrase(evidence: dict[str, Any]) -> str:
-    actions = [_plain(item) for item in evidence.get("actions", []) if _plain(item)]
-    methods = [_plain(item) for item in evidence.get("tools_methods", []) if _plain(item)]
-    outcomes = [_plain(item) for item in evidence.get("outcomes", []) if _plain(item)]
-    deliverables = [_plain(item) for item in evidence.get("deliverables", []) if _plain(item)]
+def public_fact_text(value: Any) -> str:
+    """Remove drafting cautions, retaining factual project/lab context."""
+    text = _plain(value).strip(" .;:")
+    text = re.sub(r"(?:[;,]\s*|\s+)(?:without (?:claiming|implying|overstating)\b|does not establish\b|did not configure the production system\b).*$", "", text, flags=re.I)
+    text=re.sub(r"\s+with source tickets retained\b", "", text, flags=re.I)
+    text=re.sub(r"\s+in the documented comparison period\b", "", text, flags=re.I)
+    return text.strip(" .;:")
+
+
+def _useful_result(value: Any) -> str:
+    text = public_fact_text(value)
+    if text.casefold() in {"produced a documented, reviewable deliverable", "documented, reviewable deliverable", "inspectable artifact and separate human review"}:
+        return ""
+    return text
+
+
+def evidence_action(evidence: dict[str, Any]) -> str:
+    actions = [public_fact_text(item) for item in evidence.get("actions", []) if _plain(item)]
     action = actions[0] if actions else ""
-    # Intake can split a verb from its object. Prefer the retained source
-    # sentence over emitting an orphan verb such as "Supported".
-    source_summary = _plain(evidence.get("summary")).rstrip(".")
-    if action and len(action.split()) <= 2 and source_summary.casefold().startswith(action.casefold() + " "):
-        action = source_summary
-    if action and methods and methods[0].casefold() not in action.casefold():
-        action = f"{action} using {methods[0]}"
-    if action and outcomes:
-        outcome = re.sub(r"^(?:candidate|portfolio) reports?\s+", "", outcomes[0], flags=re.IGNORECASE)
-        stop = {'a', 'an', 'the', 'and', 'with'}
-        outcome_words = set(re.findall(r'[a-z0-9]+', outcome.casefold())) - stop
-        action_words = set(re.findall(r'[a-z0-9]+', action.casefold())) - stop
-        if outcome_words and outcome_words <= action_words:
-            return action
-        return f"{action}; {_lower_first(outcome)}"
-    if action and deliverables:
-        return f"{action} to produce {_lower_first(deliverables[0])}"
-    if action:
-        return action
-    summary = re.sub(r"^(?:candidate|portfolio) reports?\s+", "", _plain(evidence.get("summary")), flags=re.IGNORECASE)
-    return summary
+    source = public_fact_text(evidence.get("summary"))
+    # Resume intake may split the verb from its object. Restore its own source,
+    # never a job-description phrase or a guessed responsibility.
+    if not action or (len(action.split()) <= 2 and len(source.split()) > 2):
+        action = source or action
+    from careeros.editorial import _metric_refs
+    _, blocked = _metric_refs(evidence)
+    if any(re.search(r"(?<![\w])"+re.escape(token)+r"(?![\w])", action) for token in blocked):
+        action = next((v for v in actions if len(v.split()) > 2 and not any(token in v for token in blocked)), "")
+    return action
+
+
+def _evidence_phrase(evidence: dict[str, Any]) -> str:
+    action=evidence_action(evidence)
+    from careeros.editorial import _metric_refs
+    _,blocked=_metric_refs(evidence)
+    results=[_useful_result(v) for v in [*evidence.get('outcomes',[]),*evidence.get('deliverables',[])] if _useful_result(v)]
+    result=next((v for v in results if not any(token in v for token in blocked)), '')
+    methods=[public_fact_text(v) for v in evidence.get('tools_methods',[]) if public_fact_text(v)]
+    return render_recruiter_bullet_v2({'action':action,'outcome':result,'tool_or_method':methods[0] if methods else ''})['text'].rstrip('.')
 
 
 def _top_need_rows(trace: dict[str, Any] | None) -> list[dict[str, Any]]:
@@ -153,11 +165,20 @@ def build_recruiter_conversion_strategy(
     selected = set(selected_evidence_ids)
     evidence = _public_evidence(profile, selected)
     professional = [item for item in evidence if item.get("employment_ids")]
-    technical = [item for item in evidence if item.get("project_ids") or item.get("tools_methods")]
+    technical = [item for item in evidence if item.get("project_ids") and not item.get("employment_ids")]
     needs = _top_need_rows(employer_need_trace)
     need_ids = {evidence_id for item in needs for evidence_id in item.get("candidate_evidence_ids", [])}
-    technical.sort(key=lambda item: (0 if item.get("record_id") in need_ids else 1, item.get("record_id", "")))
-    proof = [item for item in technical if _evidence_phrase(item)][:3]
+    terms = set(re.findall(r'[a-z0-9]+', ' '.join([str((opportunity or {}).get('role_title','')), *role_family.get('core_capabilities',[])]).casefold())) - {'and','the','with'}
+    roles = {v['record_id']:v for v in profile.get('employment',[])}
+    def proof_order(item):
+        source_terms=set(re.findall(r'[a-z0-9]+',' '.join([str(item.get('summary','')),*map(str,item.get('actions',[]))]).casefold()))
+        overlap=sum(1 for term in terms if any(word.startswith(term[:6]) or term.startswith(word[:6]) for word in source_terms if len(word)>=5))
+        role_overlap=max([len(set(re.findall(r'[a-z]+',roles.get(key,{}).get('actual_title','').casefold())) & set(re.findall(r'[a-z]+',str((opportunity or {}).get('role_title','')).casefold()))) for key in item.get('employment_ids',[])] or [0])
+        recency=max([int(roles.get(key,{}).get('start_year') or 0) for key in item.get('employment_ids',[])] or [0])
+        return (-role_overlap,0 if item.get('record_id') in need_ids else 1,-overlap,-recency,item.get('record_id',''))
+    professional.sort(key=proof_order);technical.sort(key=proof_order)
+    evidence.sort(key=proof_order)
+    proof = [item for item in evidence if _evidence_phrase(item)][:3]
     credibility = [item for item in professional if _evidence_phrase(item)][:3]
     differentiator, differentiator_sources = _differentiator(profile, evidence)
     target = _plain((opportunity or {}).get("role_title") or role_family.get("display_name") or role_family.get("label") or "target role")
@@ -260,33 +281,53 @@ def build_recruiter_summary_v2(
     relevance = "JOB" if opportunity else "LANE"
     clauses: list[dict[str, Any]] = []
 
-    has_projects = any(item.get('project_ids') for item in evidence.values())
-    work_context = 'project work' if has_projects else 'work'
-    if differentiator and differentiator.casefold().startswith('bilingual '):
-        intro = f"Offers {differentiator} and hands-on {skill_phrase} {work_context} for {target} roles"
-    elif archetype == 'PROFESSIONAL_TRANSITION':
-        intro = f"Moving into {target} roles with hands-on {skill_phrase} {work_context}"
+    role_index = {v['record_id']:v for v in profile.get('employment',[])}
+    ordered_ids = [row['evidence_id'] for row in strategy['top_candidate_proof_points']]
+    ordered = [evidence[key] for key in ordered_ids if key in evidence]
+    ordered += [v for v in evidence.values() if v not in ordered]
+    professional = [v for v in ordered if v.get('employment_ids') and _evidence_phrase(v)]
+    projects = [v for v in ordered if v.get('project_ids') and not v.get('employment_ids') and _evidence_phrase(v)]
+    # Establish identity through actual employment. A selected job title is a
+    # direction, never a promotion of project work to professional experience.
+    roles = [role_index[key] for item in professional for key in item['employment_ids'] if key in role_index and role_index[key].get('actual_title')]
+    target_words=set(re.findall(r'[a-z]+',target.casefold()))
+    roles.sort(key=lambda v:(len(target_words & set(re.findall(r'[a-z]+',v.get('actual_title','').casefold()))) if role_family.get('role_family_id')!='role-family:master-recruiter' else 0,v.get('employment_type')!='PART_TIME',int(v.get('start_year') or 0)),reverse=True)
+    role = roles[0] if roles else None
+    master = role_family.get('role_family_id')=='role-family:master-recruiter'
+    professional_sources = {v['record_id'] for v in professional}
+    skills = [v for v in _supported_skills(profile,selected) if set(v.get('evidence_ids',[])) & professional_sources and str(v.get('category','')).casefold() not in {'language','languages'}]
+    core=role_family.get('core_capabilities',[])
+    skills.sort(key=lambda v: (0 if v['name'] in core else 1, v['name']))
+    names=[v['name'] if str(v.get('category','')).casefold() in {'programming','tool','tools','platform'} or v['name'] in {'Python','SQL','Linux','Splunk','Wireshark','Nessus'} else v['name'].lower() for v in skills[:2]]
+    phrase=' and '.join(names)
+    bilingual = differentiator if differentiator and differentiator.casefold().startswith('bilingual ') else None
+    if role:
+        intro=role['actual_title']
+        if len(professional)+len(projects)==1 and role.get('employer'):intro+=' at '+role['employer']
+        if bilingual:intro='Bilingual '+intro[0].lower()+intro[1:]
+        if phrase:intro+=' with experience in '+phrase
+        else:intro+=' with professional experience at '+role.get('employer','')
+        if not master and target.casefold()!=role['actual_title'].casefold():intro+=' relevant to '+target
+        clauses.append(_summary_clause(intro,professional_sources,config_source='RoleFamilyV1',job_relevance=relevance))
+    elif professional:
+        intro='Professional experience'
+        if not master:intro+=' relevant to '+target
+        clauses.append(_summary_clause(intro,[v['record_id'] for v in professional],config_source='RoleFamilyV1',job_relevance=relevance))
     else:
-        intro = f"Brings hands-on {skill_phrase} {work_context} to {target} roles"
-    clauses.append(_summary_clause(intro, skill_ids, config_source='RoleFamilyV1', job_relevance=relevance))
-
-    # Keep a concrete professional bridge and a distinct project example.
-    # Action predicates are sentences, never noun phrases after "adds" or
-    # "strengthens". Each remains bound to its original evidence record.
-    if professional_ids:
-        item = evidence[professional_ids[0]]
-        role = next((r for r in profile.get('employment', []) if r.get('record_id') in item.get('employment_ids', []) and r.get('actual_title') and r.get('employer')), None)
-        if role:
-            clauses.append(_summary_clause(f"Professional experience includes {role['actual_title']} work at {role['employer']}", [item['record_id']], job_relevance=relevance))
-            clauses.append(_summary_clause(_evidence_phrase(item), [item['record_id']], job_relevance=relevance))
-        else:
-            clauses.append(_summary_clause('Professional experience includes the following: ' + _evidence_phrase(item), [item['record_id']], job_relevance=relevance))
-    for row in proof_rows:
-        if row['evidence_id'] in professional_ids or not row.get('proof'):
-            continue
-        clauses.append(_summary_clause(row['proof'], [row['evidence_id']], job_relevance=relevance))
-        if len(clauses) >= 5:
-            break
+        intro=('Project work in '+skill_phrase) if master else (target+' candidate with hands-on '+skill_phrase+' project work')
+        clauses.append(_summary_clause(intro,skill_ids,config_source='RoleFamilyV1',job_relevance=relevance))
+    # Two distinct proof anchors, selected for this role. Keep context in the
+    # sentence and avoid a second list of tools or a duty copied from the JD.
+    proof = professional[:1] + projects[:1]
+    if len(proof)<2:proof += [v for v in ordered if v not in proof and _evidence_phrase(v)][:2-len(proof)]
+    for item in proof:
+        text=_evidence_phrase(item)
+        if role and item in professional and role['record_id'] not in item['employment_ids']:
+            source_role=next((role_index[key] for key in item['employment_ids'] if key in role_index and role_index[key].get('employer')),None)
+            if source_role:text='At '+source_role['employer']+', '+_lower_first(text)
+        if item in projects and not any(v in text.casefold() for v in ('project','lab','simulat','fictional','synthetic','coursework','volunteer')):
+            text+=' in a project'
+        clauses.append(_summary_clause(text,[item['record_id']],job_relevance=relevance))
     schedules = profile.get('preferences', {}).get('schedule_preferences', [])
     shift = _plain((opportunity or {}).get('shift_schedule'))
     if shift and any(_plain(item).casefold().replace('_', ' ') in shift.casefold().replace('_', ' ') for item in schedules):
@@ -319,22 +360,31 @@ def build_recruiter_summary_v2(
 def render_recruiter_bullet_v2(candidate: dict[str, Any]) -> dict[str, Any]:
     """Improve rhythm while preserving the candidate's evidence and metrics."""
     output = dict(candidate)
-    action = _plain(candidate.get("action")).strip(" .;:")
-    method = _plain(candidate.get("tool_or_method")).strip(" .;:")
-    outcome = _plain(candidate.get("outcome") or candidate.get("deliverable")).strip(" .;:")
-    context = _plain(candidate.get("role_context")).strip(" .;:")
-    if not action:
-        return output
-    text = action
-    if method and method.casefold() not in text.casefold():
-        text += f" using {method}"
-    if context and len(context.split()) <= 8 and context.casefold() not in text.casefold():
-        text += f" in {context[0].lower() + context[1:]}"
-    if outcome and outcome.casefold() not in text.casefold():
-        connector = ", producing " if not re.match(r"^(?:produced|created|delivered|supported|validated|completed)\b", outcome, re.I) else "; "
-        text += connector + _lower_first(outcome)
-    output["text"] = _sentence(text)
-    output["copy_engine"] = "RECRUITER_CONVERSION_V2"
+    actions = [public_fact_text(v) for v in candidate.get('supported_actions',[]) if public_fact_text(v)]
+    action = public_fact_text(candidate.get('action'))
+    if not actions and action:actions=[action]
+    # If intake restored a full source sentence, its later action fragments
+    # must not be pasted onto the same sentence a second time.
+    chosen=[]
+    for value in actions[:3]:
+        if not any(set(value.casefold().split()) <= set(v.casefold().split()) for v in chosen):chosen.append(value)
+    text=chosen[0] if chosen else action
+    for index,value in enumerate(chosen[1:]):text+=(', ' if len(chosen)>2 and index==0 else ' and ')+_lower_first(value)
+    method=public_fact_text(candidate.get('tool_or_method'))
+    if method and method.casefold() not in text.casefold() and method not in actions:text+=' using '+method
+    context=public_fact_text(candidate.get('role_context'))
+    if context and any(v in context.casefold() for v in ('lab','simulat','course','exercise')) and context.casefold() not in text.casefold():text+=' in '+_lower_first(context)
+    outcome=_useful_result(candidate.get('outcome') or candidate.get('deliverable'))
+    words=lambda v:set(re.findall(r'[a-z0-9]+',v.casefold()))-{'a','an','the','and','for','with','to'}
+    if outcome and text and not words(outcome)<=words(text):
+        verb=re.match(r'^(?:produced|created|delivered|built|supported|validated|completed|documented|reviewed|drafted|reduced|increased|improved|saved|resolved)\b',outcome,re.I)
+        passive=re.match(r'^(.+?) (approved|adopted|completed|reviewed|retained) (by|for|across|with)\b',outcome,re.I)
+        if passive and not verb:
+            subject=passive[1];be='were' if subject.casefold().endswith('s') else 'was'
+            outcome=subject+' '+be+' '+outcome[len(subject)+1:];verb=True
+        text+=('; ' if verb else ', producing ')+_lower_first(outcome)
+    output['text']=_sentence(text)
+    output['copy_engine']='RECRUITER_CONVERSION_V2'
     return output
 
 
@@ -342,6 +392,7 @@ def public_copy_boundary(content: dict[str, Any]) -> dict[str, Any]:
     surfaces = {"summary": _plain(content.get("summary")), "headline": _plain(content.get("resume_header", {}).get("positioning_headline"))}
     for section_name in ("employment", "projects"):
         for section_index, section in enumerate(content.get(section_name, [])):
+            if section.get('contribution'):surfaces[f'{section_name}[{section_index}].contribution']=_plain(section['contribution'])
             for bullet_index, bullet in enumerate(section.get("bullets", [])):
                 surfaces[f"{section_name}[{section_index}].bullets[{bullet_index}]"] = _plain(bullet.get("text"))
     findings = []
@@ -427,7 +478,7 @@ def recruiter_copy_quality_v2(
         "EMPLOYER_RELEVANCE": 9.6 if represented_need and not jd_mimicry else 7.5,
         "CAREER_STORY": 9.5 if (has_professional and has_technical) or bool(strategy) else 8.8,
         "HUMAN_VOICE": 9.6 if variation["status"] == "PASS" and boundary["status"] == "PASS" else 6.5,
-        "CONCISION": 9.5 if 40 <= len(words) <= 80 and all(len(_plain(item.get("text")).split()) <= 36 for item in bullets) else 8.0,
+        "CONCISION": 9.5 if 15 <= len(words) <= 80 and traces_complete and all(len(_plain(item.get("text")).split()) <= 36 for item in bullets) else 8.0,
         "EVIDENCE_DENSITY": 9.7 if traces_complete else 5.0,
         "DIFFERENTIATION": 9.4 if strategy and strategy.get("key_differentiator") else 9.0,
         "READABILITY": 9.6 if sentences and all(len(item.split()) <= 34 for item in sentences) else 7.5,
@@ -439,13 +490,16 @@ def recruiter_copy_quality_v2(
         "who_is_this_person": bool(summary), "target_role_clear": bool(content.get("target_role")),
         "reason_to_keep_reading": concrete >= 2 or bool(strategy and strategy.get("key_differentiator")),
         "evidence_visible": traces_complete and bool(bullets),
-        "transition_credibility": not (has_professional and has_technical) or "professional" in summary.casefold(),
+        "transition_credibility": not (has_professional and has_technical) or bool(strategy and strategy.get("strongest_professional_credibility_signals")) or "professional" in summary.casefold(),
     }
     findings = [*boundary["findings"]]
     findings.extend({"code": "JD_LANGUAGE_MIMICRY", **item} for item in jd_mimicry)
     findings.extend({"code": "GENERIC_ABSTRACTION", "term": item, "surface": "resume"} for item in abstract_hits)
     findings.extend({"code": item, "term": "", "surface": "resume"} for item in variation["flags"])
-    hard_fail = boundary["status"] == "FAIL" or not traces_complete or bool(jd_mimicry) or not all(takeaway.values())
+    incomplete = [b for b in bullets if len(_plain(b.get('text')).split(';')[0].split())<2]
+    if incomplete:findings.append({'code':'INCOMPLETE_ACTION','term':'Action lacks its object','surface':'resume'})
+    if incomplete:dimensions['SPECIFICITY']=6.5;score=round(sum(dimensions.values())/len(QUALITY_DIMENSIONS),1)
+    hard_fail = bool(incomplete) or boundary["status"] == "FAIL" or not traces_complete or bool(jd_mimicry) or not all(takeaway.values())
     return {
         "schema": "careeros.recruiter-copy-quality.v2", "schema_version": "2.0.0",
         "status": "PASS" if score >= 9.3 and not hard_fail else "FAIL", "score": score, "threshold": 9.3,

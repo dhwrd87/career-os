@@ -391,33 +391,20 @@ def _preferred_mode(evidence_id: str, matrix: dict[str, Any], signals: list[dict
 
 def render_adaptive_bullet(candidate: dict[str, Any], mode: str) -> dict[str, Any]:
     """Recompose supported fields without altering their factual boundary."""
-    action = candidate.get("action", "").rstrip(".")
-    method = candidate.get("tool_or_method", "").rstrip(".")
-    outcome = candidate.get("outcome", "").rstrip(".")
-    deliverable = candidate.get("deliverable", "").rstrip(".")
-    context = str(candidate.get("role_context") or "").rstrip(".")
-    actions = [str(item).rstrip(".") for item in candidate.get("supported_actions", []) if str(item).strip()]
-    if not actions and action:
-        actions = [action]
-        if method:
-            actions.append(method)
-    actions = actions[:3]
-    if len(actions) == 1:
-        text = actions[0]
-    elif len(actions) == 2:
-        text = f"{actions[0]} and {actions[1][0].lower() + actions[1][1:]}"
-    elif actions:
-        text = f"{actions[0]}, {actions[1][0].lower() + actions[1][1:]}, and {actions[2][0].lower() + actions[2][1:]}"
-    else:
-        text = deliverable
-    if mode == "CUSTOMER" and context and "customer" in context.casefold():
-        text += f" in {context[0].lower() + context[1:]}"
-    if outcome and outcome.casefold() not in text.casefold():
-        text += f"; {outcome[0].lower() + outcome[1:]}"
-    adapted = dict(candidate)
-    adapted["variant_mode"] = mode
-    adapted["base_text"] = candidate.get("text", "")
-    adapted["text"] = text.rstrip(".") + "."
+    from careeros.recruiter_conversion import render_recruiter_bullet_v2
+    adapted=render_recruiter_bullet_v2(candidate)
+    adapted['variant_mode']=mode
+    adapted['base_text']=candidate.get('text','')
+    # Lead a tailored bullet with a concise completed result when available.
+    # Both clauses remain exact facts from the same evidence record; this
+    # changes the emphasis from activity to accomplishment without a new claim.
+    from careeros.recruiter_conversion import public_fact_text, _useful_result
+    result=_useful_result(candidate.get('outcome'))
+    if result and len(result.split())<=14 and re.match(r'^(?:documented|created|produced|validated|reviewed|completed|resolved)\b',result,re.I):
+        original=adapted['text'].rstrip('.')
+        tail='; '+result[:1].lower()+result[1:]
+        if original.endswith(tail):original=original[:-len(tail)]
+        if result.casefold() not in original.casefold():adapted['text']=result.rstrip('.')+'. '+original.rstrip('.')+'.'
     adapted["truth_boundary"] = {
         "evidence_ids": list(candidate.get("evidence_ids", [])), "action": candidate.get("action"),
         "tool_or_method": candidate.get("tool_or_method"), "role_context": candidate.get("role_context"),
