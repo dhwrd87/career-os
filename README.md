@@ -4,9 +4,10 @@
 
 Career OS helps you turn your experience into a practical job search and career plan. Tell your AI assistant what you have done and where you would like to go. It can compare real openings, suggest other roles, prepare tailored resumes and help you build the skills for your next step.
 
-**v0.4.2 — Human Experience Update: review candidate.** The published [v0.4.1 release](https://github.com/dhwrd87/career-os/releases/tag/v0.4.1) stays unchanged. Install this branch from source to try the new workflows.
+**[v0.4.2 — Human Experience Update](https://github.com/dhwrd87/career-os/releases/tag/v0.4.2).** Natural, professional resume writing, integrated job discovery and tailored drafts, and personalized learning and career plans. The earlier [v0.4.1 release](https://github.com/dhwrd87/career-os/releases/tag/v0.4.1) remains available.
 
-[![CI](https://github.com/dhwrd87/career-os/actions/workflows/ci.yml/badge.svg?branch=codex%2Fhuman-experience-v0.4.2)](https://github.com/dhwrd87/career-os/actions)
+[![CI](https://github.com/dhwrd87/career-os/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/dhwrd87/career-os/actions)
+[![Version](https://img.shields.io/badge/version-0.4.2-21618c)](https://github.com/dhwrd87/career-os/releases/tag/v0.4.2)
 [![MIT](https://img.shields.io/badge/license-MIT-167d63)](LICENSE)
 
 ## Start with a conversation
@@ -35,7 +36,7 @@ Your career home links your job matches, resume drafts, applications, interviews
 
 <img src="docs/images/career-changer-pdf-docx.png" width="940" alt="A tailored resume PDF beside its editable DOCX version">
 
-Each resume starts with the career facts and examples you have approved. The checks help protect dates, job titles, qualifications, supported results and readable layout. If a required qualification or job detail is missing, Career OS holds the draft and explains what needs attention.
+Resumes use natural, professional writing, clear summaries and specific accomplishments. Cover letters connect relevant examples to the role. Each document starts with career facts and examples you have approved. The checks help protect dates, job titles, qualifications, supported results and readable layout. If a required qualification or job detail is missing, Career OS holds the draft and explains what needs attention.
 
 <img src="docs/images/learning-desktop.png" width="940" alt="A learning plan with practical next steps and options that fit the person's time and budget">
 
@@ -43,25 +44,25 @@ Learning Path Intelligence compares courses and other resources, checks what you
 
 See the [examples](examples/workspace/README.md), [before and after](docs/human-experience-update.md) and [visual gallery](docs/visual-gallery.md). See the [recruiter-copy review](docs/recruiter-copy-review-0.4.2.md) for actual eight-person resume and cover-letter comparisons.
 
-## Install this candidate
+## Install Career OS
 
 Use Python **3.11 or 3.12**. Install Poppler for PDF checks: `brew install poppler` on macOS, or `sudo apt-get install poppler-utils` on Ubuntu.
 
-From this branch's checkout:
+Install the published wheel in a virtual environment:
 
 ```bash
 python3.12 -m venv .venv
 source .venv/bin/activate
-python -m pip install ".[resume,docx]"
+python -m pip install "career-os[resume,docx] @ https://github.com/dhwrd87/career-os/releases/download/v0.4.2/career_os-0.4.2-py3-none-any.whl"
 careeros --workspace "$HOME/career-workspace" init
 careeros --workspace "$HOME/career-workspace" doctor --json
 ```
 
-For Codex, copy the complete `skills/career-os` folder into `~/.codex/skills/career-os`, then refresh skill discovery. The assistant's shell needs access to the installed `careeros` command. Say, “Set up Career OS from my resume.” No resume? The assistant can help you build a profile from scratch.
+Download the [matching skill ZIP](https://github.com/dhwrd87/career-os/releases/download/v0.4.2/career-os-0.4.2-skill.zip), extract it, and copy its complete `career-os` folder into `~/.codex/skills/career-os`. From a source checkout, copy the complete `skills/career-os` folder into `~/.codex/skills/career-os`, then refresh skill discovery. The assistant's shell needs access to the installed `careeros` command. Say, “Set up Career OS from my resume.” No resume? The assistant can help you build a profile from scratch.
 
 You review the details before they are saved. The assistant asks about missing facts, then helps you choose a career direction. You do not need to learn the package's commands or internal terms.
 
-Read the [setup guide](docs/installation.md) and [first steps](docs/onboarding-workflows.md). The CLI is also available for people who prefer it. This candidate is not published to PyPI or released as v0.4.2 yet.
+Read the [setup guide](docs/installation.md) and [first steps](docs/onboarding-workflows.md). The CLI is also available for people who prefer it. Downloads are on the [v0.4.2 release page](https://github.com/dhwrd87/career-os/releases/tag/v0.4.2); Career OS is not published to PyPI.
 
 ## What else can you do?
 
@@ -84,6 +85,8 @@ Career OS prepares local drafts. It does not submit applications, send messages,
 Live discovery supports bounded Greenhouse employer-board searches and reviewed postings from other sources. It does not search every job board. Your assistant needs access to a suitable public source or postings you supply. Current course details may need checking before they can be recommended. Roadmaps use practical estimates, not promises about jobs, pay or training results.
 
 Python 3.11/3.12 on Ubuntu is covered by the [CI matrix](https://github.com/dhwrd87/career-os/actions). Local macOS/Python 3.12 has also been tested. Windows, Microsoft Word layout and other AI-host integrations remain unverified. Codex-style skill routing and real package commands are tested.
+
+The writer still needs good factual input and human review. Thin profiles can produce sparse letters. No matched competitor comparison or independent blind human evaluation was completed; internal copy scores are heuristics, and competitive superiority or hiring outcomes are not established.
 
 One premium, single-column resume design is supported. PDFs contain selectable text but are not tagged for PDF accessibility standards. Editable DOCX files may look different in Word or another editor. Broad non-Latin-script support and custom fonts/themes are not included. [More about formats and layout](docs/renderer-capabilities.md).
 

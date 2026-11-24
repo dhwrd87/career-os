@@ -1,6 +1,6 @@
 # Visual comparison gallery
 
-For the v0.4.2 wording and workflow changes, see the [current before-and-after examples](human-experience-update.md). The historical comparisons below remain available; newer workspace, learning and editable-resume screenshots are refreshed from the current synthetic example.
+[Career OS v0.4.2 is available](https://github.com/dhwrd87/career-os/releases/tag/v0.4.2). For the wording and workflow changes, see the [current before-and-after examples](human-experience-update.md). The historical comparisons below remain available; newer workspace, learning and editable-resume screenshots are refreshed from the current synthetic example.
 
 Every image here is a saved render or screenshot of actual generated synthetic artifacts. Reference columns use the actual personal standard and compact renderers with fictional input; the right column uses the public renderer. No private career data, private accepted PDF or private golden is included. Wider margins and single-column flow are deliberate public defaults.
 
@@ -46,7 +46,7 @@ All pages of the synthetic career-changer profile, progress, opportunity, cover-
 
 ![Generated report contact sheet](images/reports.png)
 
-The [example workspace](../examples/workspace/README.md) includes the actual PDF, DOCX, Markdown, data and lineage behind the demonstration. The release owner still reviews the selected candidate before public publication; these images are not silently promoted into approved private or synthetic goldens.
+The [example workspace](../examples/workspace/README.md) includes the actual PDF, DOCX, Markdown, data and lineage behind the demonstration. The release includes these reviewed synthetic examples. Existing private and synthetic visual goldens remain unchanged.
 
 The multipage DOCX was also rendered independently; both pages were inspected:
 

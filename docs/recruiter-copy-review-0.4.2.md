@@ -73,7 +73,7 @@ Use the existing synthetic onboarding matrix, then `scripts/review_recruiter_cop
 
 `examples/recruiter-copy-review/results.json` records the document results and page counts. Its copy scores are internal heuristics. Historical fields called `human_test` are automated checks, not human feedback. Review the rendered files and facts as well as the test results.
 
-The final installed test results, CI and checksums are attached to the candidate receipt and PR. Existing visual goldens are retained. The candidate remains for owner review; this update does not merge the PR or publish v0.4.2.
+The final installed test results, CI and checksums are attached to the candidate receipt and PR. Existing visual goldens are retained. This review preceded owner authorization to merge PR #2 and publish [v0.4.2](https://github.com/dhwrd87/career-os/releases/tag/v0.4.2). Its findings and limitations remain unchanged.
 
 ## Remaining limits
 
