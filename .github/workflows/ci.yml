@@ -33,3 +33,14 @@ jobs:
       - run: |
           cd "$RUNNER_TEMP"
           python "$GITHUB_WORKSPACE/tests/e2e/run_installed_wheel_matrix.py" --runtime-root "$RUNNER_TEMP/personas" --fixture-root "$GITHUB_WORKSPACE/fixtures/synthetic/onboarding-matrix" --output "$RUNNER_TEMP/personas.json"
+      - name: Save the Python 3.12 review candidate
+        if: matrix.python == '3.12'
+        uses: actions/upload-artifact@v4
+        with:
+          name: career-os-review-candidate
+          path: |
+            ${{ runner.temp }}/release/*.whl
+            ${{ runner.temp }}/release/*-source.zip
+            ${{ runner.temp }}/release/*-skill.zip
+            ${{ runner.temp }}/release/release-manifest.json
+          if-no-files-found: error

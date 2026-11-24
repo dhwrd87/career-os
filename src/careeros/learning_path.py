@@ -581,7 +581,7 @@ def optimize_minimal_path(
                 "schema": "careeros.learning-step.v1", "schema_version": "1.0.0",
                 "learning_step_id": step_id, "sequence": len(steps) + 1, "step_type": {'KNOWLEDGE_RESOURCE':'REVIEW','PRACTICAL_PROJECT':'PROJECT','LAB_PLATFORM':'LAB','INDUSTRY_CERTIFICATION_PREP':'CERTIFICATION_PREP','INDUSTRY_CERTIFICATION':'CERTIFICATION_ATTEMPT'}.get(course['course_type'], 'COURSE'),
                 "objective_ids": [objective["objective_id"]], "course_candidate_id": course["course_candidate_id"],
-                "title": course["title"], "completion_condition": "Verified completion plus planned practical evidence; completion alone does not prove competency.",
+                "title": course["title"], "completion_condition": "Finish the learning step, then keep a piece of work that shows what you can do. Completing a course alone does not prove the skill.",
                 "prerequisites": course["prerequisites"], "estimated_time": course["estimated_duration"],
                 "estimated_cost": course["cost_state"], "status": "PROPOSED",
             }

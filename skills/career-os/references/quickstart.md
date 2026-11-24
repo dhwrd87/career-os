@@ -1,9 +1,11 @@
-# First use
+# Help someone get started
 
-Install the reviewed Career OS checkout with Python 3.11/3.12 and `python -m pip install ".[resume,docx]"`; ensure Poppler is on PATH. This release is not assumed to exist on a package index. Run `careeros version --json` and `careeros doctor --json`.
+The person should not need to learn Career OS commands. Use the installed package as your tool, explain the useful result and ask for only the facts or decisions you need.
 
-Resolve a private workspace outside the package. With an existing resume, run `careeros --workspace <path> workflow setup --start --source <file> --mode FAST`. Present the extracted draft and uncertainties, capture corrections and use the package setup completion/clarification/review flow. Obtain explicit approval before `workflow setup --approve --actor <human>`.
+For this review candidate, require package `>=0.4.2,<0.5.0`. Use a private workspace outside the package and skill folders. If the package is missing, follow the repository's [installation guide](../../../docs/installation.md). Do not imply that v0.4.1 has the new connected workflows.
 
-Without a resume, initialize the workspace and use `scripts/bootstrap.py` with the installed questionnaire. Do not require the user to hand-author schemas. Read [workflows](workflows.md) only for the selected onboarding stage.
+Start with a PDF, DOCX, text or Markdown resume. Say what was found, ask about unclear details and show the proposed profile before saving it. With no resume, `scripts/bootstrap.py` provides a questionnaire with plain-language prompts. Unknown dates, qualifications and results stay unknown.
 
-Review proposed career pathways and approve a role family. Build and review a lane base. Use [complete workflows](complete-workflows.md) for jobs, resumes, applications, interviews, follow-ups, learning and reports. Finish with `careeros --workspace <path> workspace dashboard` and open `outputs/index.html`.
+Once the profile is approved, help the person choose a career direction. Explain useful options and transferable experience; get their decision before approving a role family or accepting a starting resume. The package keeps those exact internal terms, but use ordinary words in the conversation.
+
+For the five connected workflows, read [human-workflows.md](human-workflows.md). For other everyday tasks, read [complete-workflows.md](complete-workflows.md). Keep the saved career facts, public-source checks and review boundaries intact. Surface the actual home page, report or draft rather than a raw JSON response.

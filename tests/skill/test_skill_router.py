@@ -34,8 +34,8 @@ bootstrap_module = load_script("bootstrap")
 class SkillContractTests(unittest.TestCase):
     def test_manifest_declares_thin_compatible_skill(self):
         manifest = json.loads((SKILL_ROOT / "skill-manifest.json").read_text(encoding="utf-8"))
-        self.assertEqual(manifest["skill_version"], "0.4.1")
-        self.assertEqual(manifest["career_os_package"], {"minimum": "0.4.1", "maximum_exclusive": "0.5.0"})
+        self.assertEqual(manifest["skill_version"], "0.4.2")
+        self.assertEqual(manifest["career_os_package"], {"minimum": "0.4.2", "maximum_exclusive": "0.5.0"})
         self.assertFalse(manifest["external_adapters_enabled"])
         self.assertEqual(manifest["phase_endpoint"], "REVIEW_REQUIRED_OR_CANONICAL_UPDATE_COMMITTED")
 
@@ -56,7 +56,7 @@ class SkillContractTests(unittest.TestCase):
 
 class CompatibilityTests(unittest.TestCase):
     def test_supported_package(self):
-        self.assertEqual(route_module.classify_package_version("0.4.1"), "SUPPORTED")
+        self.assertEqual(route_module.classify_package_version("0.4.2"), "SUPPORTED")
 
     def test_older_package(self):
         self.assertEqual(route_module.classify_package_version("0.2.9"), "OLDER_BUT_MIGRATABLE")
@@ -145,7 +145,7 @@ class WorkspaceStateRouterTests(unittest.TestCase):
             self.assertEqual(result["workflow"], "GUIDED_BOOTSTRAP")
 
     def test_clarification_overrides_resume_request(self):
-        supported = {"status": "SUPPORTED", "version": "0.4.1", "required": ["0.4.1", "0.4.1"]}
+        supported = {"status": "SUPPORTED", "version": "0.4.2", "required": ["0.4.2", "0.4.2"]}
         with patch.object(route_module, "package_probe", return_value=supported), patch.object(
             route_module, "workspace_snapshot", return_value={"state": "CLARIFICATION_REQUIRED", "workspace": "/tmp/workspace"}
         ):
@@ -153,7 +153,7 @@ class WorkspaceStateRouterTests(unittest.TestCase):
         self.assertEqual(result["effective_intent"], "REVIEW_CLARIFICATIONS")
 
     def test_migration_overrides_resume_request(self):
-        supported = {"status": "SUPPORTED", "version": "0.4.1", "required": ["0.4.1", "0.4.1"]}
+        supported = {"status": "SUPPORTED", "version": "0.4.2", "required": ["0.4.2", "0.4.2"]}
         with patch.object(route_module, "package_probe", return_value=supported), patch.object(
             route_module, "workspace_snapshot", return_value={"state": "MIGRATION_REQUIRED", "workspace": "/tmp/workspace"}
         ):
@@ -161,7 +161,7 @@ class WorkspaceStateRouterTests(unittest.TestCase):
         self.assertEqual(result["workflow"], "MIGRATION_PLAN_THEN_APPROVAL")
 
     def test_linked_source_state_routes_to_one_permission_decision(self):
-        supported = {"status": "SUPPORTED", "version": "0.4.1", "required": ["0.4.1", "0.4.1"]}
+        supported = {"status": "SUPPORTED", "version": "0.4.2", "required": ["0.4.2", "0.4.2"]}
         with patch.object(route_module, "package_probe", return_value=supported), patch.object(
             route_module, "workspace_snapshot", return_value={
                 "state": "SOURCE_ENRICHMENT_APPROVAL_REQUIRED", "workspace": "/tmp/workspace",
@@ -258,7 +258,7 @@ class AdversarialTruthTests(unittest.TestCase):
     )
 
     def test_truth_attacks_are_blocked(self):
-        supported = {"status": "SUPPORTED", "version": "0.3.10", "required": ["0.3.10", "0.4.1"]}
+        supported = {"status": "SUPPORTED", "version": "0.3.10", "required": ["0.3.10", "0.4.2"]}
         for request in self.CASES:
             with self.subTest(request=request), patch.object(route_module, "package_probe", return_value=supported), patch.object(
                 route_module, "workspace_snapshot", return_value={"state": "READY", "workspace": "/tmp/workspace"}
@@ -280,7 +280,7 @@ class ApprovalBoundaryTests(unittest.TestCase):
     )
 
     def test_consequential_actions_are_prepare_only(self):
-        supported = {"status": "SUPPORTED", "version": "0.3.10", "required": ["0.3.10", "0.4.1"]}
+        supported = {"status": "SUPPORTED", "version": "0.3.10", "required": ["0.3.10", "0.4.2"]}
         for request, action_class in self.CASES:
             with self.subTest(request=request), patch.object(route_module, "package_probe", return_value=supported), patch.object(
                 route_module, "workspace_snapshot", return_value={"state": "READY", "workspace": "/tmp/workspace"}
@@ -325,7 +325,7 @@ if __name__ == "__main__":
 
 class CompleteWorkflowRouteTests(unittest.TestCase):
     def test_multi_request_preserves_technical_stage_and_refreshes_home_last(self):
-        with patch.object(route_module, 'package_probe', return_value={'status':'SUPPORTED','version':'0.4.1'}), patch.object(route_module, 'workspace_snapshot', return_value={'state':'READY'}):
+        with patch.object(route_module, 'package_probe', return_value={'status':'SUPPORTED','version':'0.4.2'}), patch.object(route_module, 'workspace_snapshot', return_value={'state':'READY'}):
             result = route_module.route('Show my applications, prepare me for a technical interview, show career progress and workspace home', Path('/tmp/synthetic-workspace'))
         commands = result['next_commands']
         self.assertTrue(any('--stage TECHNICAL' in c for c in commands))
@@ -336,10 +336,10 @@ class CompleteWorkflowRouteTests(unittest.TestCase):
 
 class LiveDiscoveryRoutingTests(unittest.TestCase):
     def test_explicit_current_job_request_uses_public_source_route(self):
-        with patch.object(route_module, 'package_probe', return_value={'status':'SUPPORTED','version':'0.4.1'}), patch.object(route_module, 'workspace_snapshot', return_value={'state':'READY'}):
+        with patch.object(route_module, 'package_probe', return_value={'status':'SUPPORTED','version':'0.4.2'}), patch.object(route_module, 'workspace_snapshot', return_value={'state':'READY'}):
             result = route_module.route('Find current jobs for me', Path('/tmp/synthetic-workspace'))
-        self.assertEqual(result['effective_intent'],'LIVE_OPPORTUNITY_SEARCH')
-        self.assertTrue(any('discover-source' in c for c in result['next_commands']))
+        self.assertIn(result['effective_intent'],{'FIND_ACTUAL_JOBS','LIVE_OPPORTUNITY_SEARCH'})
+        self.assertTrue(any('workflow jobs' in c for c in result['next_commands']))
         self.assertFalse(result['external_action_performed'])
 
 class LearningWorkflowRouteTests(unittest.TestCase):
@@ -355,7 +355,31 @@ class LearningWorkflowRouteTests(unittest.TestCase):
             'Reassess role eligibility after training':'learning reassess',
         }
         for request,command in cases.items():
-            with self.subTest(request=request),patch.object(route_module,'package_probe',return_value={'status':'SUPPORTED','version':'0.4.1'}),patch.object(route_module,'workspace_snapshot',return_value={'state':'READY'}):
+            with self.subTest(request=request),patch.object(route_module,'package_probe',return_value={'status':'SUPPORTED','version':'0.4.2'}),patch.object(route_module,'workspace_snapshot',return_value={'state':'READY'}):
                 result=route_module.route(request,Path('/tmp/synthetic-workspace'))
                 self.assertTrue(any(command in value for value in result['next_commands']),result)
                 self.assertFalse(result['external_action_performed'])
+
+
+class HumanJourneyRoutingTests(unittest.TestCase):
+    def test_ordinary_requests_reach_real_connected_workflows(self):
+        requests={
+            'Find jobs that fit my experience':'workflow jobs',
+            'What other roles could I try?':'workflow roles',
+            'Make resumes for my top three matches':'workflow prepare',
+            'Help me plan for a stretch role':'workflow plan',
+            'Make a plan for my dream job':'workflow plan',
+            'Show my Ready Now and Stretch Roles':'workflow opportunities',
+        }
+        for request,command in requests.items():
+            with self.subTest(request=request),patch.object(route_module,'package_probe',return_value={'status':'SUPPORTED','version':'0.4.2'}),patch.object(route_module,'workspace_snapshot',return_value={'state':'READY'}):
+                result=route_module.route(request,Path('/tmp/synthetic-workspace'))
+                self.assertEqual(result['workflow'],'CONNECTED_CAREER_WORKFLOW')
+                self.assertTrue(any(command in c for c in result['next_commands']),result)
+                self.assertFalse(result['external_action_performed'])
+
+    def test_search_and_prepare_request_uses_one_batch_workflow(self):
+        with patch.object(route_module,'package_probe',return_value={'status':'SUPPORTED','version':'0.4.2'}),patch.object(route_module,'workspace_snapshot',return_value={'state':'READY'}):
+            result=route_module.route('Find actual jobs and make resumes for the top matches',Path('/tmp/synthetic-workspace'))
+        self.assertEqual(sum('workflow jobs' in c for c in result['next_commands']),1)
+        self.assertFalse(any('workflow prepare' in c for c in result['next_commands']))

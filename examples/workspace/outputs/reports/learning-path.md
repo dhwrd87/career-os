@@ -1,1 +1,1 @@
-[Open your learning module](../learning/index.html)
+[Open your learning plan](../learning/index.html)

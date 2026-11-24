@@ -2,16 +2,16 @@
 
 Implementation Coordinator at Hearthline Civic Tools
 
-Qualification: QUALIFIED
+Your fit: Your background fits
 
-Requirement: Process Mapping (REQUIRED)
+Requirement: Process Mapping (Required)
 
-Requirement: Training (REQUIRED)
+Requirement: Training (Required)
 
-Requirement: Data Cleanup (REQUIRED)
+Requirement: Data Cleanup (Required)
 
-Evidence for Process Mapping: Mapped an intake workflow and documented handoff responsibilities for program staff.
+Your experience with Process Mapping: Mapped an intake workflow and documented handoff responsibilities for program staff.
 
-Evidence for Training: Prepared and delivered role-based training for new store associates.
+Your experience with Training: Prepared and delivered role-based training for new store associates.
 
-Evidence for Data Cleanup: Standardized program records before migration into a new internal tracker.
+Your experience with Data Cleanup: Standardized program records before migration into a new internal tracker.

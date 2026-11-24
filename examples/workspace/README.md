@@ -1,11 +1,9 @@
-# Synthetic example workspace
+# Try a fictional career workspace
 
-This is an initialized, executable fictional career-changer workspace for Priya Calder. All employers, evidence, jobs and recorded activity are synthetic. The SUBMITTED event demonstrates local tracking; no external application was sent.
+Meet Priya Calder, a fictional operations professional exploring her next move. All people, employers, job postings, learning offers and application activity here are made up. No application or message was sent.
 
-Open [the dashboard](outputs/index.html) or [Markdown home](outputs/HOME.md). Canonical data, sources, workflow state and generated documents are included so you can inspect actual lineage. This snapshot resolves package_root relative to this source checkout. Do not replace it with private career data or use it as your real workspace.
+Open [your career home](outputs/index.html), [job matches and resume drafts](outputs/job-search/index.html), [other roles to explore](outputs/career/other-roles.md), or [the learning plan](outputs/learning/index.html). The job results include Ready Now, Stretch Roles and a user-chosen Dream Role. Two separate tailored resumes are ready for review.
 
-From the checkout run `careeros --workspace examples/workspace doctor --json`, `application list`, or `workspace dashboard`. For your own career, initialize a new workspace outside the checkout. To reproduce three synthetic workspaces from scratch, run `python scripts/build_demo.py --output /tmp/careeros-example` into a new empty directory.
+This example includes the records and files used to make the documents. It is designed to run from this source checkout. For your own career, create a fresh workspace outside the checkout and keep it private.
 
-## Learning Path Intelligence
-
-Open [Learning and development](outputs/learning/index.html) for actual typed gaps, constraints, course/resource comparisons, evidence projects, training progress and role reassessment. All resources are fictional `example.invalid` records at the fixed synthetic date. A verified project has a pending canonical changeset; no skill or employment claim has been silently promoted. Old submitted resume artifacts remain historical. Rebuild with current source facts before using any plan for real decisions.
+To build the example again, run `python scripts/build_demo.py --output /tmp/careeros-example` with a new empty output folder. The script uses the real onboarding, job comparison, resume, application, interview and learning tools with fictional inputs.

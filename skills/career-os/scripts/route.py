@@ -13,10 +13,16 @@ from pathlib import Path
 from typing import Any
 
 
-MIN_PACKAGE = "0.4.1"
+MIN_PACKAGE = "0.4.2"
 MAX_PACKAGE_EXCLUSIVE = "0.5.0"
 
 INTENT_PATTERNS: tuple[tuple[str, tuple[str, ...]], ...] = (
+    ("SHOW_OPPORTUNITIES", (r"show.*(?:ready now|stretch roles|dream roles)", r"my job matches")),
+    ("PLAN_DREAM_ROLE", (r"dream (?:role|job|career)", r"(?:work|plan).*towards?", r"(?:become|want to be) (?:a|an) ")),
+    ("PLAN_STRETCH_ROLE", (r"(?:training|learn|plan).*(?:stretch|this role|that role|target role)", r"close.*(?:skill gaps|gaps for)")),
+    ("SUGGEST_OTHER_ROLES", (r"other job titles", r"other roles", r"what else could i do", r"jobs i haven.t considered", r"additional career paths")),
+    ("PREPARE_TOP_MATCHES", (r"(?:resumes?|applications?).*(?:top|best|selected)", r"(?:top|best|selected).*(?:resumes?|applications?)")),
+    ("FIND_ACTUAL_JOBS", (r"find.*(?:jobs|openings|work)", r"search.*(?:jobs|openings)")),
     ("DISCOVER_LEARNING_RESOURCES", (r"find.*(?:current|live).*(?:courses|learning resources)", r"discover.*(?:courses|learning resources)")),
     ("SET_LEARNING_PREFERENCES", (r"learning budget", r"learning preferences", r"subscriptions.*learning", r"hours.*learn")),
     ("REASSESS_AFTER_LEARNING", (r"reassess.*(?:learning|training|eligibility|roles)", r"update.*profile.*(?:course|training|learning)")),
@@ -308,6 +314,23 @@ def route(request: str, workspace: Path, command: str = "careeros") -> dict[str,
         elif effective in {'WHAT_SHOULD_I_LEARN_NEXT', 'BUILD_MY_LEARNING_PATH', 'COMPARE_COURSES', 'SHOW_MY_HIGHEST_ROI_GAPS', 'IMPROVE_MY_SOC_RESUME', 'IMPROVE_MY_NOC_RESUME', 'IMPROVE_MY_VULNERABILITY_RESUME', 'WHAT_CERTIFICATIONS_ARE_WORTH_IT', 'WHAT_PROJECT_SHOULD_I_BUILD'}:
             next_commands = ['careeros --workspace ' + shlex.quote(str(workspace.resolve())) + ' ' + c for c in ['learning gaps','learning preferences','learning build --catalog <verified-course-catalog.json>']]
             workflow = 'LEARNING_PATH_ANALYSIS_REVIEW_ONLY'
+
+    connected={
+        'FIND_ACTUAL_JOBS':'workflow jobs --request <search-request.json> --approve-network',
+        'LIVE_OPPORTUNITY_SEARCH':'workflow jobs --request <search-request.json> --approve-network',
+        'HELP_ME_GET_A_JOB':'workflow jobs --request <search-request.json> --approve-network',
+        'SUGGEST_OTHER_ROLES':'workflow roles', 'FIND_MY_CAREER_PATHS':'workflow roles',
+        'PREPARE_TOP_MATCHES':'workflow prepare --top 3',
+        'SHOW_OPPORTUNITIES':'workflow opportunities',
+        'PLAN_DREAM_ROLE':'workflow plan --opportunity-id <target-posting-id> --catalog <verified-learning-options.json>',
+        'PLAN_STRETCH_ROLE':'workflow plan --opportunity-id <target-posting-id> --catalog <verified-learning-options.json>',
+    }
+    if snapshot['state']=='READY' and effective in connected and not boundaries['external_actions'] and not boundaries['truth_risks']:
+        selected=[connected[intent] for intent in intents if intent in connected]
+        if any('workflow jobs' in command for command in selected):selected=[command for command in selected if 'workflow prepare' not in command]
+        selected=list(dict.fromkeys(selected))
+        next_commands=['careeros --workspace '+shlex.quote(str(workspace.resolve()))+' '+command for command in selected]
+        workflow='CONNECTED_CAREER_WORKFLOW'
 
     return {
         "schema": "careeros.skill-route.v1",

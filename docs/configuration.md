@@ -1,9 +1,13 @@
-# Configuration
+# Set your preferences
 
-Initialization writes JSON to `careeros.yaml`; this is deliberate and requires no YAML library. Keep package_root, user_data_root, state_root, output_root and cache_root relative to that file and non-overlapping. The package root must not contain runtime data.
+Tell your assistant what matters for your next job: the work you want, locations, remote or in-person arrangements, hours, travel and pay. Clear preferences make the results more useful. When a posting leaves something important unclear, check it rather than assuming it fits.
 
-Defaults include locale and timezone, candidate visibility/contact policy, career preferences, qualification weights and resume template/font policy. Identity, career data, role families, evidence and naming are configurable. The released premium template uses fixed, tested Helvetica geometry; arbitrary font/theme overrides are not supported.
+For a learning plan, add your current knowledge, time each week, budget and currency, preferred learning formats and subscriptions. A subscription only covers a resource when its plan details say so. Unknown prices or study time may keep an option out of a strict plan.
 
-Use `careeros schemas list` and `careeros schemas validate <json>` for the exact contracts. Do not store passwords, tokens or API keys in configuration. External-action adapters stay disabled. Changes to canonical career facts use `update propose/preview/approve/commit`, preserving revisions and derivative staleness.
+Your assistant uses these settings behind the scenes. You do not need to learn the internal file layout. Corrections to career facts still use the normal review and approval process.
 
-The dashboard and reports are regenerated local derivatives. You can edit their presentation copies, but rebuilding replaces them. Keep source corrections in the canonical update workflow.
+## Technical reference
+
+Initialization writes JSON to `careeros.yaml`; no YAML dependency is required. `package_root`, `user_data_root`, `state_root`, `output_root` and `cache_root` are relative to that file and must remain separate. Runtime data does not belong in the package root. Use `careeros schemas list` and `careeros schemas validate <json>` for exact contracts.
+
+Search-request fields and learning preferences are documented in the skill references. Do not store passwords, API keys or tokens in configuration. Rendered pages are generated copies; rebuilding replaces them. Correct the source facts through the update workflow.

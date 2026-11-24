@@ -32,7 +32,8 @@ def greenhouse_catalog(payload: dict[str, Any], *, board: str, employer: str, li
     if not isinstance(payload.get('jobs'), list):raise ValueError('Provider response has no job list')
     now=utc_now(timestamp);jobs=[]
     for row in payload['jobs']:
-        if query and query.casefold() not in str(row.get('title','')).casefold():continue
+        queries=[query] if isinstance(query,str) else (query or [])
+        if queries and not any(term.casefold() in str(row.get('title','')).casefold() for term in queries):continue
         if row.get('internal_job_id') is None:continue # Prospect posts are not a specific job.
         parser=_Text();parser.feed(html.unescape(html.unescape(str(row.get('content') or ''))))
         text='\n'.join(re.sub(r'\s+',' ',line).strip() for line in ''.join(parser.parts).splitlines() if line.strip())

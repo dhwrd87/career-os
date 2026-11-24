@@ -3,16 +3,16 @@
   "schema_version": "1.0.0",
   "questionnaire_id": "generic-onboarding-v1",
   "sections": [
-    {"id": "workspace_privacy", "label": "Workspace and privacy consent"},
-    {"id": "identity", "label": "Identity, contact, and public identity"},
+    {"id": "workspace_privacy", "label": "Your workspace and privacy"},
+    {"id": "identity", "label": "Your name and contact details"},
     {"id": "employment", "label": "Employment"},
     {"id": "education", "label": "Education"},
     {"id": "credentials", "label": "Credentials"},
     {"id": "skills", "label": "Skills"},
     {"id": "projects", "label": "Projects"},
-    {"id": "evidence", "label": "Evidence and achievements"},
+    {"id": "evidence", "label": "Examples of your work"},
     {"id": "preferences", "label": "Career preferences"},
-    {"id": "target_roles", "label": "Target roles"},
+    {"id": "target_roles", "label": "Jobs you would like"},
     {"id": "review", "label": "Review"}
   ],
   "questions": [

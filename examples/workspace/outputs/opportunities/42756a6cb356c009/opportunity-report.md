@@ -2,20 +2,20 @@
 
 Implementation Analyst at Example Implementation Cooperative
 
-Qualification: NOT_QUALIFIED
+Your fit: Required qualifications are missing
 
-Requirement: Python (REQUIRED)
+Requirement: Python (Required)
 
-Requirement: Statistics (REQUIRED)
+Requirement: Statistics (Required)
 
-Requirement: Cloud Practitioner (PREFERRED)
+Requirement: Cloud Practitioner (Preferred)
 
-Requirement: Professional Implementation (REQUIRED)
+Requirement: Professional Implementation (Required)
 
-Gap: Python — UNKNOWN_EVIDENCE
+To address: Python. Check the posting or add a clear example of your work before deciding.
 
-Gap: Statistics — HARD_GAP
+To address: Statistics. Check the exact education requirement. Short courses do not replace a required degree.
 
-Gap: Cloud Practitioner — PREFERRED_AND_MISSING
+To address: Cloud Practitioner. Check which award the employer accepts, its entry rules, exam cost and renewal dates.
 
-Gap: Professional Implementation — HARD_GAP
+To address: Professional Implementation. Look for supervised work that builds this experience. A course or project does not replace required employment experience.

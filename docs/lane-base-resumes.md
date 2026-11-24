@@ -1,26 +1,11 @@
-# Governed lane-base resumes
+# Keep a useful starting resume
 
-`LaneBaseResumeV1` is the immutable, reusable default resume for one approved role family. It is built from `CareerProfileV1`, an approved `RoleFamilyV1`, a lane storyline, editorial policy, and presentation policy. It does not require or copy a job description.
+You may want different starting resumes for different kinds of work. For example, one could focus on operations while another focuses on training. Each uses the same approved career history, with the most useful examples for that direction.
 
-## Lifecycle
+Ask, “Build a starting resume for this kind of role.” Choose and review the career direction first. Then check the draft and approve it before it is used as the foundation for tailored resumes.
 
-```text
-approved role family
-→ careeros lane-base build
-→ PDF + manifest + QA + REVIEW_REQUIRED
-→ explicit human review
-→ careeros lane-base accept
-→ ACCEPTED
-```
+A starting resume does not change job titles, add experience or turn a project into employment. Tailoring a real job still checks that posting's needs and keeps your claims within what you can support.
 
-The executable commands are `careeros lane-base build`, `careeros lane-base accept`, and `careeros lane-base status`. Build is deterministic for the same governed inputs. Acceptance is explicit and only succeeds after all required QA gates pass.
+If your career facts change, the starting resume may need refreshing. Existing application records keep their original documents.
 
-An accepted base remains an immutable historical artifact. A canonical-profile, role-family, editorial-policy, or template change changes its effective status to `STALE_PROFILE_CHANGE`, `STALE_ROLE_FAMILY_CHANGE`, `STALE_POLICY_CHANGE`, or `STALE_TEMPLATE_CHANGE`. Rebuilding creates a successor; it does not rewrite the accepted artifact.
-
-## Tailoring boundary
-
-Job-specific resume compilation may use a current accepted lane base plus `JobDescriptionIntelligenceV1` and `JobEvidenceMatrixV1`. It may reorder, select, compress, expand, adapt the summary, reorder skills/projects, and use fact-preserving bullet variants. It cannot change canonical facts, introduce unsupported keywords, or exceed lane-level prohibited claims.
-
-## Quality contract
-
-A lane base must pass schema, truth, provenance, chronology/continuity, professional credibility, storyline completeness, evidence sufficiency, editorial quality, lane differentiation, unsupported-metric, ATS, autofill, page geometry, visual, underfill/overfill, filename/metadata, and lineage checks. Relevant evidence is prioritized rather than deleted; professional continuity and project breadth remain explicit completeness requirements.
+For developers and command users, this is the existing lane-base lifecycle: `lane-base build`, review, `lane-base accept`, and `lane-base status`. The same engine and inheritance rules remain in place. See the [technical inheritance reference](production-family-inheritance.md).

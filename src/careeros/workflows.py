@@ -13,6 +13,7 @@ from careeros.workspace import utc_now
 
 
 HIGH_LEVEL_WORKFLOWS = (
+    "FIND_ACTUAL_JOBS", "SUGGEST_OTHER_ROLES", "PREPARE_TOP_MATCHES", "PLAN_STRETCH_ROLE", "PLAN_DREAM_ROLE",
     "SET_ME_UP", "IMPROVE_MY_CAREER_PROFILE", "FIND_MY_CAREER_PATHS",
     "HELP_ME_GET_A_JOB", "TAILOR_FOR_THIS_JOB", "UPDATE_MY_CAREER", "SHOW_MY_GAPS",
     "BUILD_LANE_BASE", "WHAT_SHOULD_I_LEARN_NEXT", "BUILD_MY_LEARNING_PATH",
@@ -132,6 +133,11 @@ def route_high_level(intent: str) -> dict[str, Any]:
     if intent not in HIGH_LEVEL_WORKFLOWS:
         raise ValueError(f"unsupported high-level workflow: {intent}")
     routes = {
+        "FIND_ACTUAL_JOBS": ["workflow jobs", "source requirement review", "comparison", "ranked resume drafts"],
+        "SUGGEST_OTHER_ROLES": ["workflow roles"],
+        "PREPARE_TOP_MATCHES": ["workflow prepare", "resume validation", "human review"],
+        "PLAN_STRETCH_ROLE": ["workflow plan", "targeted learning", "verified work review"],
+        "PLAN_DREAM_ROLE": ["workflow plan", "targeted learning", "verified work review"],
         "SET_ME_UP": ["intake compile", "intake complete", "commit preview", "explicit approval", "initial outputs"],
         "IMPROVE_MY_CAREER_PROFILE": ["evidence-expansion", "canonical update"],
         "FIND_MY_CAREER_PATHS": ["career lanes", "role title universe", "candidate preference review"],

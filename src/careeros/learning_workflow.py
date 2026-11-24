@@ -60,13 +60,13 @@ def preferences(workspace: Path, values: dict | None = None) -> dict:
     return values
 
 
-def analyze_gaps(workspace: Path, *, timestamp=None) -> dict:
+def analyze_gaps(workspace: Path, *, opportunity_ids=None, include_profile_gaps=True, timestamp=None) -> dict:
     roots=roots_for(workspace);profile=read_json(roots.state_root/'profile/career-profile.json');family=read_json(roots.state_root/'role-families/active.json');prefs=preferences(workspace)
     from careeros.updates import require_derivative_current
     require_derivative_current(roots,'CAREER_PROFILE',profile['profile_id'])
     require_derivative_current(roots,'ROLE_FAMILY',family['role_family_id'])
     qualifications=[read_json(p) for p in sorted((roots.state_root/'qualifications').glob('*.json'))]
-    qualifications=[q for q in qualifications if q.get('role_family_id')==family['role_family_id']]
+    qualifications=[q for q in qualifications if q.get('role_family_id')==family['role_family_id'] and (opportunity_ids is None or q['opportunity_id'] in opportunity_ids)]
     for q in qualifications:require_derivative_current(roots,'QUALIFICATION',q['qualification_id'])
     grouped={}
     subtype={'EXPERIENCE':'EXPERIENCE','CREDENTIAL':'CREDENTIAL','EDUCATION':'KNOWLEDGE','TOOL':'TOOL','SKILL':'PRACTICAL_SKILL'}
@@ -88,13 +88,13 @@ def analyze_gaps(workspace: Path, *, timestamp=None) -> dict:
             row['preferred_gap_frequency']+=int(not required)
             row['requirement_importance']=max(row['requirement_importance'],5 if required else 2.5)
             row['provenance'].append({'type':'OBSERVED_JOB_REQUIREMENT','ref':q['qualification_id'],'opportunity_id':q['opportunity_id'],'requirement':capability,'requirement_class':req.get('requirement_class','UNKNOWN')})
-    for g in profile.get('preferences',{}).get('career_gaps',[]):
+    for g in (profile.get('preferences',{}).get('career_gaps',[]) if include_profile_gaps else []):
         statement=g.get('gap_statement') or g.get('capability') or g.get('description')
         if not statement:continue
         kind=str(g.get('gap_type') or 'KNOWLEDGE').upper()
         if kind=='SKILL':kind='PRACTICAL_SKILL'
         grouped.setdefault((statement.casefold(),kind),{**g,'gap_type':kind,'gap_statement':statement,'source_gap_ids':[profile['preferences']['record_id']],'recurrence_count':0,'provenance':[{'type':'APPROVED_CAREER_PREFERENCE','ref':profile['preferences']['record_id']}],'opportunity_ids':[]})
-    for skill in profile.get('skills',[]):
+    for skill in (profile.get('skills',[]) if include_profile_gaps else []):
         if not skill.get('evidence_ids'):
             grouped.setdefault((skill['name'].casefold(),'EVIDENCE'),{'gap_type':'EVIDENCE','gap_statement':skill['name'],'source_gap_ids':[skill['record_id']],'recurrence_count':0,'provenance':[{'type':'CANONICAL_SKILL_WITHOUT_EVIDENCE','ref':skill['record_id']}],'opportunity_ids':[]})
     rows=[];source_count=max(1,len(qualifications))
@@ -109,8 +109,8 @@ def analyze_gaps(workspace: Path, *, timestamp=None) -> dict:
     _save(roots,'gaps.json',result);return result
 
 
-def build(workspace: Path, catalog: Path, *, timestamp=None) -> dict:
-    roots=roots_for(workspace);profile=read_json(roots.state_root/'profile/career-profile.json');family=read_json(roots.state_root/'role-families/active.json');prefs=preferences(workspace);analysis=analyze_gaps(workspace,timestamp=timestamp)
+def build(workspace: Path, catalog: Path, *, opportunity_ids=None, include_profile_gaps=True, timestamp=None) -> dict:
+    roots=roots_for(workspace);profile=read_json(roots.state_root/'profile/career-profile.json');family=read_json(roots.state_root/'role-families/active.json');prefs=preferences(workspace);analysis=analyze_gaps(workspace,opportunity_ids=opportunity_ids,include_profile_gaps=include_profile_gaps,timestamp=timestamp)
     gaps=analysis['gap_priorities'];raw=read_json(catalog);raw=raw if isinstance(raw,list) else raw.get('courses',[])
     candidates=[engine.build_course_candidate(c,timestamp=timestamp) for c in raw]
     completed=[]
@@ -130,7 +130,7 @@ def build(workspace: Path, catalog: Path, *, timestamp=None) -> dict:
             rois.append(engine.build_learning_roi(evaluation,gap,jobs_currently_blocked=gap['hard_gap_frequency'],jobs_partially_affected=gap['preferred_gap_frequency']))
     def factory(step,objective):
         gap=next(g for g in gaps if g['gap_id']==objective['gap_id'])
-        return engine.build_evidence_creation_plan(learning_step_id=step['learning_step_id'],target_evidence=gap['gap_statement']+' demonstration',project_type='KNOWLEDGE_REVIEW' if gap['gap_type']=='KNOWLEDGE' else 'PRACTICAL_PROJECT',objective=objective['objective_statement'],required_tools=prefs.get('available_tools',[]),expected_actions=['Define a bounded task','Produce original work','Test and document results'],expected_artifacts=['Original work sample','Test or review notes'],verification_method=['File SHA-256','Human review against objective'])
+        return engine.build_evidence_creation_plan(learning_step_id=step['learning_step_id'],target_evidence=gap['gap_statement']+' demonstration',project_type='KNOWLEDGE_REVIEW' if gap['gap_type']=='KNOWLEDGE' else 'PRACTICAL_PROJECT',objective=objective['objective_statement'],required_tools=prefs.get('available_tools',[]),expected_actions=['Choose a small task','Make a piece of work of your own','Check the result and keep notes'],expected_artifacts=['Your work sample','Notes from testing or review'],verification_method=['Keep the original files','Ask someone to review the work against your goal'])
     # Reserve practical work within the time budget before selecting education.
     project_hours=prefs.get('project_hours',2);needs_project=[g for g in gaps if g['gap_type'] in {'PRACTICAL_SKILL','TOOL','PLATFORM','PROTOCOL','EVIDENCE','PORTFOLIO'}]
     max_hours=prefs.get('max_duration_hours')
@@ -138,10 +138,11 @@ def build(workspace: Path, catalog: Path, *, timestamp=None) -> dict:
     project_count=min(len(needs_project),int(max_hours//project_hours)) if max_hours is not None else len(needs_project)
     project_gaps=needs_project[:project_count];effective={**prefs,'as_of':utc_now(timestamp)}
     if max_hours is not None:effective['max_duration_hours']=max(0,max_hours-project_count*project_hours)
-    path,steps,plans=engine.optimize_minimal_path(candidate_profile_id=profile['profile_id'],role_family_id=family['role_family_id'],target_role_ids=family.get('target_titles',[]),objectives=objectives,candidates=candidates,evaluations=evaluations,evidence_plan_factory=factory,preferences=effective,timestamp=timestamp)
+    target_titles=[read_json(roots.state_root/'opportunities'/key/'opportunity.json')['role_title'] for key in opportunity_ids] if opportunity_ids is not None else family.get('target_titles',[])
+    path,steps,plans=engine.optimize_minimal_path(candidate_profile_id=profile['profile_id'],role_family_id=family['role_family_id'],target_role_ids=target_titles,objectives=objectives,candidates=candidates,evaluations=evaluations,evidence_plan_factory=factory,preferences=effective,timestamp=timestamp)
     for gap in project_gaps:
         objective=next(o for o in objectives if o['gap_id']==gap['gap_id']);step_id='learning-step:'+sha256_value([path['learning_path_id'],gap['gap_id'],'project'])[:24]
-        step={'schema':'careeros.learning-step.v1','schema_version':'1.0.0','learning_step_id':step_id,'sequence':len(steps)+1,'step_type':'PROJECT','objective_ids':[objective['objective_id']],'course_candidate_id':None,'title':'Create an original '+gap['gap_statement']+' work sample','completion_condition':'Submit original files, tests and a human-reviewed account of the work; no professional experience credit.','prerequisites':[],'estimated_time':str(project_hours)+' hours','estimated_cost':'Use available tools; verify any additional expense','status':'PROPOSED'}
+        step={'schema':'careeros.learning-step.v1','schema_version':'1.0.0','learning_step_id':step_id,'sequence':len(steps)+1,'step_type':'PROJECT','objective_ids':[objective['objective_id']],'course_candidate_id':None,'title':'Create an original '+gap['gap_statement']+' work sample','completion_condition':'Keep your original work and check the result with someone who can review it. Describe it as project work, not employment.','prerequisites':[],'estimated_time':str(project_hours)+' hours','estimated_cost':'Use available tools; verify any additional expense','status':'PROPOSED'}
         step['prerequisites']=[s['learning_step_id'] for s in steps if objective['objective_id'] in s['objective_ids']]
         SchemaRegistry(schema_dir()).validate('urn:careeros:schema:learning-step:v1',step);steps.append(step);plans.append(factory(step,objective))
     path['steps']=[s['learning_step_id'] for s in steps]
@@ -154,7 +155,7 @@ def build(workspace: Path, catalog: Path, *, timestamp=None) -> dict:
     path['estimated_total_time']=(str(total_hours)+' hours'+(' + unknown education time' if None in hours else ''))
     path['estimated_total_cost']=(str(total_cost)+' '+prefs.get('currency','currency unspecified')+(' + unknown costs' if None in costs else '')+'; practical materials not priced')
     run_id=sha256_value([profile,prefs,analysis,raw])[:24]
-    result={'schema':'careeros.learning-workflow.v1','run_id':run_id,'created_at':utc_now(timestamp),'path':path,'steps':steps,'evidence_plans':plans,'gap_priorities':gaps,'gap_analysis':analysis,'objectives':objectives,'course_candidates':candidates,'course_evaluations':evaluations,'redundancy':redundancies,'learning_roi':rois,'impact':impact,'provider_comparison':engine.compare_provider_options(evaluations,candidates),'preferences':prefs,'personalization_state':'READY_FOR_REVIEW' if prefs else 'PREFERENCES_NOT_SUPPLIED','qa':qa,'catalog_sha256':sha256_file(catalog),'source_profile_hash':sha256_value(profile),'experience_actions':[{'gap_id':g['gap_id'],'capability':g['gap_statement'],'action':'Seek actual supervised professional work; training does not satisfy this requirement.','requirement_state':'UNSATISFIED'} for g in gaps if g['gap_type']=='EXPERIENCE'],'uncovered_gap_ids':[g['gap_id'] for g in gaps if g['gap_id'] not in path['expected_gap_coverage']],'canonical_mutations':0,'external_actions':0}
+    result={'schema':'careeros.learning-workflow.v1','run_id':run_id,'target_opportunity_ids':opportunity_ids,'created_at':utc_now(timestamp),'path':path,'steps':steps,'evidence_plans':plans,'gap_priorities':gaps,'gap_analysis':analysis,'objectives':objectives,'course_candidates':candidates,'course_evaluations':evaluations,'redundancy':redundancies,'learning_roi':rois,'impact':impact,'provider_comparison':engine.compare_provider_options(evaluations,candidates),'preferences':prefs,'personalization_state':'READY_FOR_REVIEW' if prefs else 'PREFERENCES_NOT_SUPPLIED','qa':qa,'catalog_sha256':sha256_file(catalog),'source_profile_hash':sha256_value(profile),'experience_actions':[{'gap_id':g['gap_id'],'capability':g['gap_statement'],'action':'Seek actual supervised professional work; training does not satisfy this requirement.','requirement_state':'UNSATISFIED'} for g in gaps if g['gap_type']=='EXPERIENCE'],'uncovered_gap_ids':[g['gap_id'] for g in gaps if g['gap_id'] not in path['expected_gap_coverage']],'canonical_mutations':0,'external_actions':0}
     _save(roots,'runs/'+run_id+'.json',result);_save(roots,'latest.json',result);render(workspace,result);return result
 
 
@@ -267,57 +268,59 @@ def reassess(workspace: Path, *, timestamp=None) -> dict:
 
 
 def render(workspace: Path, bundle: dict):
-    from careeros.experience import _write, _report_pdf, _table
+    from careeros.experience import _write, _report_pdf
+    from careeros.presentation import label
     from html import escape
     roots=roots_for(workspace);prefs=bundle.get('preferences',{})
-    def label(value):return str(value).replace('_',' ').capitalize()
-    lines=['# Learning and development','Learn, create evidence, then review career impact.','Plan state: '+label(bundle.get('freshness','PROPOSED_FOR_REVIEW')),'## Your constraints',f"Budget: {prefs.get('budget','Not supplied')} {prefs.get('currency','')} · Weekly time: {prefs.get('weekly_hours','Not supplied')} hours · Planning horizon: {prefs.get('weeks_available','Not supplied')} weeks",'Owned subscriptions: '+(', '.join(prefs.get('subscriptions_owned',[])) or 'None recorded'),'## Prioritized gaps']
-    for g in bundle.get('gap_priorities',[]):lines.append(f"{g['gap_statement']} · {label(g['gap_type'])} · {label(g['priority_class'])} ({g['priority_score']}) · {g['recurrence_count']} observed jobs")
-    if bundle.get('created_at'):lines.insert(2,'Assessment date: '+bundle['created_at'])
-    if bundle.get('freshness')=='STALE_REBUILD_REQUIRED':lines.insert(3,'Review required: profile, preferences, or selected resource facts changed or expired. Reverify sources and rebuild before acting on this historical assessment.')
-    candidate_index={c['course_candidate_id']:c for c in bundle.get('course_candidates',[])};completions={c['step_id']:label(c['state'])+(' / Artifact review required' if c.get('artifact_integrity')=='REVIEW_REQUIRED' else '') for c in bundle.get('completions',[])}
-    if candidate_index and all(any(r.get('type')=='SYNTHETIC' for r in c.get('source_refs',[])) for c in candidate_index.values()):lines.insert(2,'Synthetic example: all resources, subscriptions and prices are fictional.')
-    lines.append('## Your roadmap')
-    if not bundle.get('steps'):lines.append('No eligible steps selected. Set your budget, available time, existing knowledge and learning preferences, then discover or supply current resource records. Review the gaps and exclusions before building a plan.')
-    for s in bundle.get('steps',[]):
-        c=candidate_index.get(s.get('course_candidate_id'),{});lines+=['### '+str(s['sequence'])+'. '+s['title'],label(s['step_type'])+' · '+completions.get(s['learning_step_id'],'Not started')+' · '+s['estimated_time'],s['completion_condition']]
-        if c:lines.append('Resource: '+c['url'])
-    lines.append('## Learn to prove')
-    step_numbers={s['learning_step_id']:s['sequence'] for s in bundle.get('steps',[])}
-    for p in bundle.get('evidence_plans',[]):lines += ['### Step '+str(step_numbers.get(p['learning_step_id'],'?'))+' · '+p['target_evidence'],'Create: '+', '.join(p['expected_artifacts']),'Verify: '+', '.join(p['verification_method'])]
-    lines.append('## ROI and career impact')
-    chosen={s.get('course_candidate_id') for s in bundle.get('steps',[])}
-    evaluations=bundle.get('course_evaluations',[])
-    selected_pairs={(s.get('course_candidate_id'),o) for s in bundle.get('steps',[]) for o in s['objective_ids']}
-    selected_evaluations=[e for e in evaluations if e['ranking_eligible'] and (e['course_candidate_id'],e['objective_id']) in selected_pairs]
-    selected_roi={e['course_evaluation_id'] for e in selected_evaluations}
-    for r in [r for r in bundle.get('learning_roi',[]) if r.get('course_evaluation_id') in selected_roi][:12]:
-        g=next(g for g in bundle['gap_priorities'] if g['gap_id']==r['gap_id']);lines.append(g['gap_statement']+': '+label(r['roi_class'])+' learning ROI; estimated, no employment outcome promised.')
-    lines += ['Estimated education cost: '+bundle['path']['estimated_total_cost'],'Estimated time: '+bundle['path']['estimated_total_time']]
-    for a in bundle.get('experience_actions',[]):lines.append(a['capability']+': '+a['action'])
+    lines=['# Your learning plan','Choose a useful next step, try it, and keep an example of what you can do.']
+    if bundle.get('created_at'):lines.append('Plan checked on: '+bundle['created_at'])
+    if bundle.get('freshness')=='STALE_REBUILD_REQUIRED':lines.append('Update this plan before you start. Some profile or course details have changed or are out of date. Check the sources and make a new plan.')
+    lines+=['## What fits your life',f"Budget: {prefs.get('budget','Not set')} {prefs.get('currency','')}. Time each week: {prefs.get('weekly_hours','Not set')} hours. Planning ahead: {prefs.get('weeks_available','Not set')} weeks.",'Subscriptions you already have: '+(', '.join(v.replace('_',' ').title() for v in prefs.get('subscriptions_owned',[])) or 'None recorded')]
+    candidates={c['course_candidate_id']:c for c in bundle.get('course_candidates',[])}
+    if candidates and all(any(r.get('type')=='SYNTHETIC' for r in c.get('source_refs',[])) for c in candidates.values()):lines.insert(2,'Fictional example: these courses, subscriptions and prices are for demonstration only.')
+    lines.append('## Where to focus')
+    for g in bundle.get('gap_priorities',[]):
+        count=g['recurrence_count'];lines.append(g['gap_statement']+' — '+label(g['gap_type'])+'. Found in '+str(count)+(' job we checked.' if count==1 else ' jobs we checked.'))
+    lines.append('## Your next steps')
+    if not bundle.get('steps'):lines.append('We do not yet have a learning option that fits. Set your time, budget and starting skills, then check current course details. We will not fill the plan with guessed recommendations.')
+    completion={c['step_id']:c for c in bundle.get('completions',[])}
+    for step in bundle.get('steps',[]):
+        state=completion.get(step['learning_step_id'],{});course=candidates.get(step.get('course_candidate_id'))
+        lines+=['### '+str(step['sequence'])+'. '+step['title'],label(step['step_type'])+' · '+label(state.get('state','NOT_STARTED'))+' · '+step['estimated_time'],step['completion_condition']]
+        if state.get('artifact_integrity')=='REVIEW_REQUIRED':lines.append('A file has changed since it was checked. Review the work again before using it as support for a career claim.')
+        if course:lines.append('Resource: '+course['url'])
+    lines.append('## Turn learning into work you can show')
+    numbers={step['learning_step_id']:step['sequence'] for step in bundle.get('steps',[])}
+    for evidence in bundle.get('evidence_plans',[]):lines+=['### Step '+str(numbers.get(evidence['learning_step_id'],'?'))+' · '+evidence['target_evidence'],'Keep: '+', '.join(evidence['expected_artifacts']),'Check your work: '+', '.join(evidence['verification_method'])]
+    lines.append('## How this may help your career')
+    selected={(step.get('course_candidate_id'),o) for step in bundle.get('steps',[]) for o in step['objective_ids']}
+    evaluations=bundle.get('course_evaluations',[]);chosen={e['course_evaluation_id'] for e in evaluations if e['ranking_eligible'] and (e['course_candidate_id'],e['objective_id']) in selected}
+    for roi in bundle.get('learning_roi',[]):
+        if roi['course_evaluation_id'] not in chosen:continue
+        gap=next(g for g in bundle['gap_priorities'] if g['gap_id']==roi['gap_id']);lines.append(gap['gap_statement']+': '+label(roi['roi_class']).lower()+' estimated learning value. This is a comparison aid, not a promise of a job or higher pay.')
+    path=bundle.get('path',{});lines+=['Planned learning cost: '+path.get('estimated_total_cost','Not yet known').replace('; practical materials not priced',' for selected resources; check any extra project costs').replace('currency unspecified','(currency not set)').replace('+ unknown costs','plus costs still to check')+'.','Planned learning time: '+path.get('estimated_total_time','Not yet known')+'.']
+    for action in bundle.get('experience_actions',[]):lines.append(action['capability']+': Look for supervised work where you can carry out this responsibility. Keep a record of what you actually did. Courses and practice projects do not replace required professional experience.')
     reassessment=roots.state_root/'learning/reassessment.json'
     if reassessment.exists():
-        lines.append('## Role eligibility reassessment')
-        for r in read_json(reassessment)['results']:lines.append(r['role_title']+': '+label(r['before'])+' → '+label(r['after'])+'. Remaining gaps: '+(', '.join(r['remaining_gaps']) or 'None observed'))
-    if bundle.get('uncovered_gap_ids'):lines.append('Some gaps have no eligible option within current evidence, prerequisites, freshness, budget or time. Review excluded options and missing source facts before extending the plan.')
-    lines+=['Course completion never creates professional experience. Canonical changes require a separate reviewed changeset.','Affiliate influence on ranking: zero.']
-    lines.append('## Resource comparison and exclusions')
-    # Show every resource's relevant comparisons, rather than repeating its
-    # mismatch against unrelated gaps. Retain one exclusion when none fit.
+        lines.append('## Check your fit again')
+        rows=[row for row in read_json(reassessment)['results'] if bundle.get('target_opportunity_ids') is None or row['opportunity_id'] in bundle['target_opportunity_ids']]
+        if not rows:lines.append('This role has not been reassessed yet. After you approve new career information, compare its requirements again.')
+        for row in rows:
+            lines.append(row['role_title']+': '+label(row['after'])+'. Still to address: '+(', '.join(row['remaining_gaps']) or 'No gaps in the requirements we checked.'))
+    if bundle.get('uncovered_gap_ids'):lines.append('Some requirements still have no suitable learning step. Check missing course details, costs and entry rules before adding more training.')
+    lines+=['A completed course does not prove professional experience. Review any new skill or actual award before adding it to your career profile.','Affiliate links never change which resources we recommend.']
     comparisons=[]
-    for candidate_id in candidate_index:
-        options=[e for e in evaluations if e['course_candidate_id']==candidate_id]
-        relevant=[e for e in options if e['dimensions']['GAP_COVERAGE']>0]
-        comparisons.extend(relevant or sorted(options,key=lambda e:-e['overall_routing_score'])[:1])
+    for key in candidates:
+        options=[e for e in evaluations if e['course_candidate_id']==key];relevant=[e for e in options if e['dimensions']['GAP_COVERAGE']>0];comparisons.extend(relevant or sorted(options,key=lambda e:-e['overall_routing_score'])[:1])
+    if comparisons:lines+=['## Compare your learning options','The four scores below are out of five. They compare learning content, the award, job relevance and work you could show.']
     for e in sorted(comparisons,key=lambda e:-e['overall_routing_score'])[:24]:
-        c=candidate_index[e['course_candidate_id']];gap=next(g for g in bundle['gap_priorities'] if g['gap_id']==e['gap_id'])
-        reasons=e.get('preference_alignment',{}).get('reasons',[])
-        if c['freshness_state']!='CURRENT':reasons=reasons+['CATALOG_'+c['freshness_state']]
-        if e['redundancy_class']=='HIGHLY_REDUNDANT':reasons=reasons+['HIGHLY_REDUNDANT']
-        if e['candidate_level_match'] in {'TOO_ADVANCED','PREREQUISITE_MISSING'}:reasons=reasons+[e['candidate_level_match']]
-        lines += ['### '+c['title']+' / '+gap['gap_statement'],label(c['course_type'])+' · '+c['provider'].replace('_',' ')+' · '+('Eligible' if e['ranking_eligible'] else 'Excluded')+' · score '+str(e['overall_routing_score']), 'Learning value '+str(e['four_value_model']['LearningValue'])+' / Credential signal '+str(e['four_value_model']['CredentialSignal'])+' / Employer relevance '+str(e['four_value_model']['EmployerRelevance'])+' / Evidence creation '+str(e['four_value_model']['EvidenceCreationValue']), 'Level: '+label(e['candidate_level_match'])+' · Redundancy: '+label(e['redundancy_class'])+' · Verified: '+(c['last_verified_at'] or 'Unknown'),'Reasons: '+(', '.join(label(r) for r in reasons) or 'Source-backed fit; no commercial adjustment')]
-    _write(roots,'learning/learning-roadmap.md','\n\n'.join(lines)+'\n');_write(roots,'reports/learning-path.md','[Open your learning module](../learning/index.html)\n')
-    _report_pdf('Learning and Development',lines[1:],roots.assert_write_allowed(roots.output_root/'learning/learning-roadmap.pdf','output'),keep_subsections=True)
+        course=candidates[e['course_candidate_id']];gap=next(g for g in bundle['gap_priorities'] if g['gap_id']==e['gap_id']);reasons=list(e.get('preference_alignment',{}).get('reasons',[]))
+        if course['freshness_state']!='CURRENT':reasons.append('CATALOG_'+course['freshness_state'])
+        if e['redundancy_class']=='HIGHLY_REDUNDANT':reasons.append('HIGHLY_REDUNDANT')
+        if e['candidate_level_match'] in {'TOO_ADVANCED','PREREQUISITE_MISSING'}:reasons.append(e['candidate_level_match'])
+        value=e['four_value_model'];lines+=['### '+course['title']+' · '+gap['gap_statement'],label(course['course_type'])+' · '+course['provider'].replace('_',' ')+' · '+('Could fit this plan' if e['ranking_eligible'] else 'Not a fit right now'),'Learning: '+str(value['LearningValue'])+'/5. Award: '+str(value['CredentialSignal'])+'/5. Job relevance: '+str(value['EmployerRelevance'])+'/5. Work you can show: '+str(value['EvidenceCreationValue'])+'/5.','Starting level: '+label(e['candidate_level_match'])+'. Familiar material: '+label(e['redundancy_class'])+'.','Why: '+('; '.join(label(reason) for reason in reasons) or 'Addresses a requirement in the jobs we checked.')]
+    _write(roots,'learning/learning-roadmap.md','\n\n'.join(lines)+'\n');_write(roots,'reports/learning-path.md','[Open your learning plan](../learning/index.html)\n')
+    _report_pdf('Your Learning Plan',lines[1:],roots.assert_write_allowed(roots.output_root/'learning/learning-roadmap.pdf','output'),keep_subsections=True)
     parts=[]
     for line in lines:
         if line.startswith('#'):
@@ -325,5 +328,5 @@ def render(workspace: Path, bundle: dict):
         elif line.startswith('Resource: https://'):
             url=line[len('Resource: '):];parts.append('<p>Resource: <a rel="noreferrer" href="'+escape(url,quote=True)+'">'+escape(url)+'</a></p>')
         else:parts.append('<p>'+escape(line)+'</p>')
-    page='<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Learning and development</title><style>body{margin:0;background:#f2f5f8;color:#15233a;font:16px/1.6 system-ui}main{max-width:980px;margin:36px auto;padding:30px;background:white}h1{font-size:38px}h2{color:#1f4f78;margin-top:36px;border-top:1px solid #dce3eb;padding-top:18px}h3{margin-top:26px}p{overflow-wrap:anywhere}nav a{color:#1f4f78;margin-right:18px}@media(max-width:600px){main{margin:0;padding:22px}h1{font-size:29px}}</style><main><nav><a href="../index.html">Career home</a><a href="learning-roadmap.pdf">Roadmap PDF</a><a href="learning-roadmap.md">Markdown</a></nav>'+''.join(parts)+'</main></html>'
+    page='<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Your learning plan</title><style>body{margin:0;background:#f2f5f8;color:#15233a;font:16px/1.6 system-ui}main{max-width:980px;margin:36px auto;padding:30px;background:white}h1{font-size:38px}h2{color:#1f4f78;margin-top:36px;border-top:1px solid #dce3eb;padding-top:18px}h3{margin-top:26px}p{overflow-wrap:anywhere}nav a{color:#1f4f78;margin-right:18px}@media(max-width:600px){main{margin:0;padding:22px}h1{font-size:29px}}</style><main><nav><a href="../index.html">Your career home</a><a href="learning-roadmap.pdf">Download your plan</a><a href="learning-roadmap.md">Text version</a></nav>'+''.join(parts)+'</main></html>'
     _write(roots,'learning/index.html',page)

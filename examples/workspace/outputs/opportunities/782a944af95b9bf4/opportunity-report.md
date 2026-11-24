@@ -2,14 +2,14 @@
 
 Software Implementation Specialist at Northwind Practice Cloud
 
-Qualification: BORDERLINE
+Your fit: Some points need work or review
 
-Requirement: Process Mapping (REQUIRED)
+Requirement: Process Mapping (Required)
 
-Requirement: Implementation Delivery (PREFERRED)
+Requirement: Implementation Delivery (Preferred)
 
-Evidence for Process Mapping: Mapped an intake workflow and documented handoff responsibilities for program staff.
+Your experience with Process Mapping: Mapped an intake workflow and documented handoff responsibilities for program staff.
 
-Evidence for Implementation Delivery: Coordinated test cases and a staff walkthrough for a volunteer scheduling-tool rollout.
+Your experience with Implementation Delivery: Coordinated test cases and a staff walkthrough for a volunteer scheduling-tool rollout.
 
-Gap: Implementation Delivery — PREFERRED_AND_MISSING
+To address: Implementation Delivery. Look for supervised work that builds this experience. A course or project does not replace required employment experience.

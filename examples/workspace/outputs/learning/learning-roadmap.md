@@ -1,181 +1,171 @@
-# Learning and development
+# Your learning plan
 
-Learn, create evidence, then review career impact.
+Choose a useful next step, try it, and keep an example of what you can do.
 
-Synthetic example: all resources, subscriptions and prices are fictional.
+Fictional example: these courses, subscriptions and prices are for demonstration only.
 
-Assessment date: 2026-10-02T12:00:00Z
+Plan checked on: 2026-10-02T12:00:00Z
 
-Review required: profile, preferences, or selected resource facts changed or expired. Reverify sources and rebuild before acting on this historical assessment.
+## What fits your life
 
-Plan state: Stale rebuild required
+Budget: 40 USD. Time each week: 4 hours. Planning ahead: 4 weeks.
 
-## Your constraints
+Subscriptions you already have: Practice Plus
 
-Budget: 40 USD · Weekly time: 4 hours · Planning horizon: 4 weeks
+## Where to focus
 
-Owned subscriptions: PRACTICE_PLUS
+Statistics — Knowledge. Found in 1 job we checked.
 
-## Prioritized gaps
+Python — Practical skill. Found in 1 job we checked.
 
-Statistics · Knowledge · Medium (47.63) · 1 observed jobs
+Professional Implementation — Professional experience. Found in 1 job we checked.
 
-Python · Practical skill · Medium (45.03) · 1 observed jobs
+Cloud Practitioner — Credential. Found in 1 job we checked.
 
-Professional Implementation · Experience · Medium (42.23) · 1 observed jobs
-
-Cloud Practitioner · Credential · Low (38.43) · 1 observed jobs
-
-Implementation Delivery · Experience · Low (32.23) · 1 observed jobs
-
-## Your roadmap
+## Your next steps
 
 ### 1. Python and Statistics Foundations
 
 Course · Not started · 4 hours
 
-Verified completion plus planned practical evidence; completion alone does not prove competency.
+Finish the learning step, then keep a piece of work that shows what you can do. Completing a course alone does not prove the skill.
 
 Resource: https://example.invalid/python-statistics
 
 ### 2. Cloud Practitioner Exam Preparation
 
-Certification prep · Not started · 2 hours
+Exam preparation · Not started · 2 hours
 
-Verified completion plus planned practical evidence; completion alone does not prove competency.
+Finish the learning step, then keep a piece of work that shows what you can do. Completing a course alone does not prove the skill.
 
 Resource: https://example.invalid/cloud-prep
 
 ### 3. Create an original Python work sample
 
-Project · Verified · 3 hours
+Project · Not started · 3 hours
 
-Submit original files, tests and a human-reviewed account of the work; no professional experience credit.
+Keep your original work and check the result with someone who can review it. Describe it as project work, not employment.
 
-## Learn to prove
+## Turn learning into work you can show
 
 ### Step 1 · Statistics demonstration
 
-Create: Original work sample, Test or review notes
+Keep: Your work sample, Notes from testing or review
 
-Verify: File SHA-256, Human review against objective
+Check your work: Keep the original files, Ask someone to review the work against your goal
 
 ### Step 1 · Python demonstration
 
-Create: Original work sample, Test or review notes
+Keep: Your work sample, Notes from testing or review
 
-Verify: File SHA-256, Human review against objective
+Check your work: Keep the original files, Ask someone to review the work against your goal
 
 ### Step 2 · Cloud Practitioner demonstration
 
-Create: Original work sample, Test or review notes
+Keep: Your work sample, Notes from testing or review
 
-Verify: File SHA-256, Human review against objective
+Check your work: Keep the original files, Ask someone to review the work against your goal
 
 ### Step 3 · Python demonstration
 
-Create: Original work sample, Test or review notes
+Keep: Your work sample, Notes from testing or review
 
-Verify: File SHA-256, Human review against objective
+Check your work: Keep the original files, Ask someone to review the work against your goal
 
-## ROI and career impact
+## How this may help your career
 
-Statistics: Very high learning ROI; estimated, no employment outcome promised.
+Statistics: very high estimated learning value. This is a comparison aid, not a promise of a job or higher pay.
 
-Python: Very high learning ROI; estimated, no employment outcome promised.
+Python: very high estimated learning value. This is a comparison aid, not a promise of a job or higher pay.
 
-Cloud Practitioner: Very high learning ROI; estimated, no employment outcome promised.
+Cloud Practitioner: very high estimated learning value. This is a comparison aid, not a promise of a job or higher pay.
 
-Estimated education cost: 0.0 USD; practical materials not priced
+Planned learning cost: 0.0 USD for selected resources; check any extra project costs.
 
-Estimated time: 9.0 hours
+Planned learning time: 9.0 hours.
 
-Professional Implementation: Seek actual supervised professional work; training does not satisfy this requirement.
+Professional Implementation: Look for supervised work where you can carry out this responsibility. Keep a record of what you actually did. Courses and practice projects do not replace required professional experience.
 
-Implementation Delivery: Seek actual supervised professional work; training does not satisfy this requirement.
+## Check your fit again
 
-## Role eligibility reassessment
+This role has not been reassessed yet. After you approve new career information, compare its requirements again.
 
-Software Implementation Specialist: Borderline → Borderline. Remaining gaps: Implementation Delivery
+Some requirements still have no suitable learning step. Check missing course details, costs and entry rules before adding more training.
 
-Implementation Coordinator: Qualified → Qualified. Remaining gaps: None observed
+A completed course does not prove professional experience. Review any new skill or actual award before adding it to your career profile.
 
-Implementation Analyst: Not qualified → Not qualified. Remaining gaps: Python, Statistics, Cloud Practitioner, Professional Implementation
+Affiliate links never change which resources we recommend.
 
-Some gaps have no eligible option within current evidence, prerequisites, freshness, budget or time. Review excluded options and missing source facts before extending the plan.
+## Compare your learning options
 
-Course completion never creates professional experience. Canonical changes require a separate reviewed changeset.
+The four scores below are out of five. They compare learning content, the award, job relevance and work you could show.
 
-Affiliate influence on ranking: zero.
+### Python and Statistics Foundations · Statistics
 
-## Resource comparison and exclusions
+Course · OTHER · Could fit this plan
 
-### Python and Statistics Foundations / Statistics
+Learning: 3.22/5. Award: 0/5. Job relevance: 5.0/5. Work you can show: 3.7/5.
 
-Course · OTHER · Eligible · score 64.23
+Starting level: A suitable starting level. Familiar material: New material that may help.
 
-Learning value 3.22 / Credential signal 0 / Employer relevance 5.0 / Evidence creation 3.7
+Why: Fits your wish to study at your own pace; Fits how you prefer to learn
 
-Level: Appropriate · Redundancy: Novel high value · Verified: 2026-10-02T12:00:00Z
+### Python and Statistics Foundations · Python
 
-Reasons: Self paced match, Learning style match
+Course · OTHER · Could fit this plan
 
-### Python and Statistics Foundations / Python
+Learning: 3.22/5. Award: 0/5. Job relevance: 5.0/5. Work you can show: 3.7/5.
 
-Course · OTHER · Eligible · score 64.23
+Starting level: A suitable starting level. Familiar material: New material that may help.
 
-Learning value 3.22 / Credential signal 0 / Employer relevance 5.0 / Evidence creation 3.7
+Why: Fits your wish to study at your own pace; Fits how you prefer to learn
 
-Level: Appropriate · Redundancy: Novel high value · Verified: 2026-10-02T12:00:00Z
+### Cloud Practitioner Exam Preparation · Cloud Practitioner
 
-Reasons: Self paced match, Learning style match
+Exam preparation · OTHER · Could fit this plan
 
-### Cloud Practitioner Exam Preparation / Cloud Practitioner
+Learning: 3.39/5. Award: 0/5. Job relevance: 5.0/5. Work you can show: 1.0/5.
 
-Industry certification prep · OTHER · Eligible · score 57.27
+Starting level: A suitable starting level. Familiar material: Mostly new to you.
 
-Learning value 3.39 / Credential signal 0 / Employer relevance 5.0 / Evidence creation 1.0
+Why: Addresses a requirement in the jobs we checked.
 
-Level: Appropriate · Redundancy: Mostly new · Verified: 2026-10-02T12:00:00Z
+### Statistics Knowledge Reference · Statistics
 
-Reasons: Source-backed fit; no commercial adjustment
+Reading or another learning resource · OTHER · Could fit this plan
 
-### Statistics Knowledge Reference / Statistics
+Learning: 3.11/5. Award: 0/5. Job relevance: 5.0/5. Work you can show: 1.0/5.
 
-Knowledge resource · OTHER · Eligible · score 56.3
+Starting level: A suitable starting level. Familiar material: Mostly new to you.
 
-Learning value 3.11 / Credential signal 0 / Employer relevance 5.0 / Evidence creation 1.0
+Why: Addresses a requirement in the jobs we checked.
 
-Level: Appropriate · Redundancy: Mostly new · Verified: 2026-10-02T12:00:00Z
+### Subscribed Python Practice Lab · Python
 
-Reasons: Source-backed fit; no commercial adjustment
+Hands-on practice · OTHER · Could fit this plan
 
-### Subscribed Python Practice Lab / Python
+Learning: 3.11/5. Award: 0/5. Job relevance: 5.0/5. Work you can show: 2.2/5.
 
-Lab platform · OTHER · Eligible · score 52.43
+Starting level: A suitable starting level. Familiar material: Some familiar material.
 
-Learning value 3.11 / Credential signal 0 / Employer relevance 5.0 / Evidence creation 2.2
+Why: Covered by a subscription you already have
 
-Level: Appropriate · Redundancy: Partially redundant · Verified: 2026-10-02T12:00:00Z
+### Unverified Older Python Course · Python
 
-Reasons: Subscription owned
+Course · OTHER · Not a fit right now
 
-### Unverified Older Python Course / Python
+Learning: 3.06/5. Award: 0/5. Job relevance: 5.0/5. Work you can show: 1.0/5.
 
-Course · OTHER · Excluded · score 38.04
+Starting level: A suitable starting level. Familiar material: Covers much of what you already know.
 
-Learning value 3.06 / Credential signal 0 / Employer relevance 5.0 / Evidence creation 1.0
+Why: The course details need checking again; Covers much of what you already know
 
-Level: Appropriate · Redundancy: Highly redundant · Verified: 2024-01-01T00:00:00Z
+### Premium Python Bootcamp · Python
 
-Reasons: Catalog reverify, Highly redundant
+Bootcamp · OTHER · Not a fit right now
 
-### Premium Python Bootcamp / Python
+Learning: 3.11/5. Award: 0/5. Job relevance: 5.0/5. Work you can show: 1.0/5.
 
-Bootcamp · OTHER · Excluded · score 31.65
+Starting level: A suitable starting level. Familiar material: Covers much of what you already know.
 
-Learning value 3.11 / Credential signal 0 / Employer relevance 5.0 / Evidence creation 1.0
-
-Level: Appropriate · Redundancy: Highly redundant · Verified: 2026-10-02T12:00:00Z
-
-Reasons: Budget exceeded, Time budget unverified or exceeded, Highly redundant
+Why: Above your budget; Too long, or the time needed is not confirmed; Covers much of what you already know

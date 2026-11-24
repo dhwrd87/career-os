@@ -2,11 +2,11 @@
 
 Implementation Coordinator at Hearthline Civic Tools
 
-Stage: TECHNICAL
+Your interview: Technical
 
-Employer need: Process Mapping
+What the employer needs: Process Mapping
 
-## Story 1 · Star
+## Example 1 · STAR: situation, task, action, result
 
 Situation: Program operations.
 
@@ -16,9 +16,9 @@ Actions: Interviewed staff; Mapped handoffs
 
 Result: Created a reviewed current-state workflow.
 
-Answer boundaries: Do not imply leadership or team ownership.
+Keep your answer accurate: Do not imply leadership or team ownership.
 
-## Story 2 · Star
+## Example 2 · STAR: situation, task, action, result
 
 Situation: Retail operations.
 
@@ -28,9 +28,9 @@ Actions: Drafted guide; Led sessions
 
 Result: Training materials approved by store manager.
 
-Answer boundaries: Do not imply leadership or team ownership.
+Keep your answer accurate: Do not imply leadership or team ownership.
 
-## Story 3 · Star
+## Example 3 · STAR: situation, task, action, result
 
 Situation: Program operations.
 
@@ -40,9 +40,9 @@ Actions: Reviewed duplicate records; Documented corrections
 
 Result: Produced a reviewed cleanup log for the migration handoff.
 
-Answer boundaries: Percentage lacks retained measurement source. Do not imply leadership or team ownership.
+Keep your answer accurate: Percentage lacks retained measurement source. Do not imply leadership or team ownership.
 
-## Story 4 · Technical Walkthrough
+## Example 4 · Technical walkthrough
 
 Situation: Volunteer project.
 
@@ -52,13 +52,13 @@ Actions: Logged test cases; Facilitated walkthrough
 
 Result: Pilot completed with documented open issues.
 
-Answer boundaries: Does not establish direct implementation employment. Do not describe this project, lab, simulation, or coursework as professional employment. Do not imply production ownership, enterprise scale, customers, SLAs, or on-call responsibility unless source evidence states them. Do not imply leadership or team ownership.
+Keep your answer accurate: Does not establish direct implementation employment. Do not describe this project, lab, simulation, or coursework as professional employment. Do not imply production ownership, enterprise scale, customers, SLAs, or on-call responsibility unless your records show that you had them. Do not imply leadership or team ownership.
 
 ## Technical walkthrough
 
 Objective: Coordinated test cases and a staff walkthrough for a volunteer scheduling-tool rollout.
 
-Environment: PROJECT
+Environment: Project
 
 What I Did: Logged test cases; Facilitated walkthrough
 
@@ -76,12 +76,12 @@ Question to ask: How does the team decide when and how to escalate an issue?
 
 Question to ask: How does this role collaborate with adjacent teams during routine work and high-priority situations?
 
-Review each selected story against its evidence IDs.
+Check each example against your notes and work records.
 
 Practice concise and detailed versions without memorizing a script.
 
 State project, lab, coursework, and professional context accurately.
 
-Use only supported metrics and outcomes.
+Use only numbers and results you can back up.
 
-Prepare to say that a detail is unknown or not yet experienced.
+Be ready to say when you do not know a detail or have not done something yet.

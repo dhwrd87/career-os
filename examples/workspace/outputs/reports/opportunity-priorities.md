@@ -1,9 +1,11 @@
-# Opportunity priorities
+# Jobs to consider first
 
-Fit is observed evidence coverage. Expected value is a user-assumed scenario, not a predicted hiring outcome. Freshness and artifact QA remain separate mandatory gates.
+Start with jobs where your experience supports the requirements. Check missing details before deciding. These comparisons are not hiring predictions.
 
-| Role | Employer | Qualification | Supported fit | Assumed value |
+| Job | Employer | Your fit | Requirements supported | Your value estimate |
 | --- | --- | --- | --- | --- |
-| Implementation Coordinator | Hearthline Civic Tools | QUALIFIED | 100.0% | Not estimated |
-| Software Implementation Specialist | Northwind Practice Cloud | BORDERLINE | 100.0% | Not estimated |
-| Implementation Analyst | Example Implementation Cooperative | NOT_QUALIFIED | 0% | Not estimated |
+| Training Coordinator | Example Learning Services | Your background fits | 100.0% | Not estimated |
+| Implementation Coordinator | Hearthline Civic Tools | Your background fits | 100.0% | Not estimated |
+| Software Implementation Specialist | Northwind Practice Cloud | Some points need work or review | 100.0% | Not estimated |
+| Data Operations Lead | Example Implementation Cooperative | Required qualifications are missing | 0% | Not estimated |
+| Implementation Analyst | Example Implementation Cooperative | Required qualifications are missing | 0% | Not estimated |

@@ -1,20 +1,15 @@
-# Read-only job discovery
+# Where job results come from
 
-Career OS includes a bounded Greenhouse public-board adapter and a provider-neutral reviewed-catalog ingestion path. The adapter uses the documented public GET job-board endpoint; see the [Greenhouse Job Board API](https://docs.greenhouse.io/job-board). It has no credential or application-submission path.
+Career OS compares actual postings. Your assistant can read supported Greenhouse employer boards or bring in current postings from another allowed source. It must have access to the full employer description, not just a search snippet.
 
-```bash
-careeros --workspace <path> discover-source --greenhouse-board <board-token> \
-  --employer "Verified Employer Name" --query "Support" --limit 25 --approve-network
-```
+A posting needs an employer, title, source link, saved description, checked date and observed status. Required qualifications stay separate from preferences. The assistant reviews source wording before comparing the job with your profile. Missing requirements cannot be treated as a good match.
 
-This performs one GET request, rejects redirects and oversized responses, strips HTML into retained source text, ignores prospect posts, and writes a source proposal. Limits are 1–100 selected postings, 8 MiB and a 20-second request timeout. It sends only a public board token and generic request headers; no candidate profile is transmitted.
+A search uses your experience, approved direction and preferences. Supported searches are bounded; they do not cover every employer or job board. A request for current jobs permits the relevant public read-only search, not unrelated personal-source access. Private career details stay out of outside search queries.
 
-A fetched description is not automatically a reviewed requirement model. Read the retained text, extract required/preferred requirements with source-grounded language, fill the proposed jobs' `requirements` arrays, and set `requirement_review_status` to `REVIEWED`. Then run:
+Previously seen jobs are compared with saved results so they are not called new every time. A changed or reposted job is shown as such. Old or unavailable details need checking; age alone does not prove that a role closed.
 
-```bash
-careeros --workspace <path> discover --catalog <saved-proposal.json> --limit 25
-```
+Ready Now results need current source details and a supported qualification match. Other jobs may be useful stretch or dream targets, with their gaps clearly explained. Closed or mismatched postings are left out with a reason. See [finding your next role](find-your-next-role.md).
 
-The ingestion path blocks unreviewed provider proposals and empty requirements. An independently supplied empty requirement list is BORDERLINE rather than qualified. Persistent registry reconciliation classifies new, known, updated, reposted and already-applied roles before creating work. Qualification and packet freshness remain separate gates.
+## Assistant and developer tools
 
-The local release check made one real read-only request against a public board, observed 770 provider posts and bounded selection to two. Only aggregate results were retained for release evidence; no real job descriptions are shipped as fixtures. This proves the observed adapter path at that time, not future source availability, every board, other providers or scheduled alerts. Synthetic tests cover parsing, consent, endpoint control, GET-only behavior and review boundaries.
+`workflow jobs --request <json> --approve-network` handles the supported board reader and reviewed catalogs. Live proposals require requirement review before ingestion. The original `discover-source`, `discover` and persistent opportunity registry remain available. No authenticated job-board API, scheduled alert or application submission is included.

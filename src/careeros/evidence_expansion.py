@@ -49,15 +49,15 @@ CONTEXT_BY_TYPE = {
 
 QUESTION_LIBRARY = {
     "ACTION_DEPTH": ("RESPONSIBILITY", "What did you personally do, step by step?", "actions", "HIGH_VALUE"),
-    "CONTEXT_DEPTH": ("PROCESS", "Why did this work exist, and what problem or need did it address?", "problem_or_need", "MEDIUM_VALUE"),
-    "TOOL_DEPTH": ("TOOLS", "Which tools, systems, methods, or procedures did you actually use?", "tools_methods", "HIGH_VALUE"),
-    "SCOPE_DEPTH": ("SCOPE", "What was the recurring scope or scale—such as volume, frequency, systems, locations, or people supported?", "scope", "MEDIUM_VALUE"),
-    "OUTCOME_DEPTH": ("OUTCOMES", "What was finished, delivered, validated, improved, resolved, or handed off because of this work?", "outcomes", "HIGH_VALUE"),
-    "METRIC_DEPTH": ("METRICS", "Is there a defensible count, volume, duration, frequency, turnaround, accuracy, or other scale measure? Approximate or unknown is acceptable.", "metrics", "MEDIUM_VALUE"),
-    "OWNERSHIP_DEPTH": ("LEADERSHIP", "Which responsibility level is accurate: participated, supported, executed, coordinated, owned, led, approved, or unknown?", "responsibility", "HIGH_VALUE"),
-    "STAKEHOLDER_DEPTH": ("STAKEHOLDERS", "Who used, received, reviewed, depended on, or was supported by this work?", "stakeholders", "MEDIUM_VALUE"),
-    "ARTIFACT_DEPTH": ("ARTIFACT", "What concrete artifact, report, ticket, dataset, dashboard, document, code, or work product exists?", "artifacts", "HIGH_VALUE"),
-    "VERIFICATION_DEPTH": ("QUALITY", "What source can verify this claim, if any? Unknown is acceptable.", "source_refs", "MEDIUM_VALUE"),
+    "CONTEXT_DEPTH": ("PROCESS", "What problem were you trying to solve?", "problem_or_need", "MEDIUM_VALUE"),
+    "TOOL_DEPTH": ("TOOLS", "Which tools or methods did you use?", "tools_methods", "HIGH_VALUE"),
+    "SCOPE_DEPTH": ("SCOPE", "How often did you do this work? How many people, locations or tasks did it involve?", "scope", "MEDIUM_VALUE"),
+    "OUTCOME_DEPTH": ("OUTCOMES", "What did you finish, fix or improve? What happened next?", "outcomes", "HIGH_VALUE"),
+    "METRIC_DEPTH": ("METRICS", "Do you know a useful number, such as time saved or people helped? Tell me if it is an estimate or if you are unsure.", "metrics", "MEDIUM_VALUE"),
+    "OWNERSHIP_DEPTH": ("LEADERSHIP", "Did you help with the work, carry it out yourself, coordinate it or lead it? Which part was yours?", "responsibility", "HIGH_VALUE"),
+    "STAKEHOLDER_DEPTH": ("STAKEHOLDERS", "Who used or checked your work? Who did it help?", "stakeholders", "MEDIUM_VALUE"),
+    "ARTIFACT_DEPTH": ("ARTIFACT", "Is there a work sample, report, file or other result you can point to?", "artifacts", "HIGH_VALUE"),
+    "VERIFICATION_DEPTH": ("QUALITY", "What could help check this example? It is fine if you do not have a record.", "source_refs", "MEDIUM_VALUE"),
 }
 
 

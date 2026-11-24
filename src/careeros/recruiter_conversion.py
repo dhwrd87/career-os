@@ -263,11 +263,11 @@ def build_recruiter_summary_v2(
     has_projects = any(item.get('project_ids') for item in evidence.values())
     work_context = 'project work' if has_projects else 'work'
     if differentiator and differentiator.casefold().startswith('bilingual '):
-        intro = f"{target}-focused professional with {differentiator} and hands-on {skill_phrase} {work_context}"
+        intro = f"Offers {differentiator} and hands-on {skill_phrase} {work_context} for {target} roles"
     elif archetype == 'PROFESSIONAL_TRANSITION':
-        intro = f"Professional transitioning into {target} with hands-on {skill_phrase} {work_context}"
+        intro = f"Moving into {target} roles with hands-on {skill_phrase} {work_context}"
     else:
-        intro = f"{target}-focused professional with hands-on {skill_phrase} {work_context}"
+        intro = f"Brings hands-on {skill_phrase} {work_context} to {target} roles"
     clauses.append(_summary_clause(intro, skill_ids, config_source='RoleFamilyV1', job_relevance=relevance))
 
     # Keep a concrete professional bridge and a distinct project example.
@@ -291,9 +291,6 @@ def build_recruiter_summary_v2(
     shift = _plain((opportunity or {}).get('shift_schedule'))
     if shift and any(_plain(item).casefold().replace('_', ' ') in shift.casefold().replace('_', ' ') for item in schedules):
         clauses.append(_summary_clause(f"Available for {shift}", config_source='CareerProfileV1.preferences.schedule_preferences', job_relevance='JOB'))
-    for clause in clauses:
-        parts = clause['summary_clause'].split('; ')
-        clause['summary_clause'] = '. '.join(part[:1].upper() + part[1:] if index else part for index, part in enumerate(parts))
     seen_sentences: set[str] = set()
     for clause in clauses:
         retained = []
