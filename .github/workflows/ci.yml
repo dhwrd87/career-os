@@ -8,6 +8,7 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     strategy:
       matrix:
         python: ['3.11', '3.12']
@@ -16,7 +17,15 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
-      - run: sudo apt-get update && sudo apt-get install -y poppler-utils libreoffice-writer
+      - name: Ensure PDF rendering dependency
+        run: |
+          if ! command -v pdftoppm >/dev/null; then
+            sudo apt-get -o Acquire::Retries=1 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 update
+            sudo apt-get install -y --no-install-recommends poppler-utils
+          fi
+          pdftoppm -v
+      - name: Prepare release build tools
+        run: python -m pip install --upgrade pip "setuptools>=77"
       - run: python -m pip install ".[resume,docx,dev,test]"
       - run: python -m unittest discover -s tests -v
       - run: python scripts/package_release.py --output "$RUNNER_TEMP/release"
