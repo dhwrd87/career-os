@@ -1,0 +1,36 @@
+Jules Navarro
+ Junior Technical Operations
+ Example City, US | jules.navarro@example.org
+ github.example/jules-navarro
+SUMMARY
+Technical Workshop Assistant with experience in Python relevant to Junior Technical Operations. Documented workshop setups
+and escalated equipment issues to the technical lead. Configured services in an isolated Linux lab and documented validation
+steps.
+CORE SKILLS
+NETWORKING: Networking
+PROGRAMMING: Python
+OPERATIONS: Documentation | Linux | Testing
+PROFESSIONAL EXPERIENCE
+Technical Workshop Assistant
+Example Makerspace | 2024 - Present
+ - Documented workshop setups and escalated equipment issues to the technical lead.
+ 
+FEATURED PROJECTS
+Network Status Monitor
+Individual contributor
+ - Built and tested a Python monitor that recorded synthetic host-status events.
+ Documentation Site
+Individual contributor
+ - Created a static technical documentation site and validated internal links.
+ Inventory API
+Individual contributor
+ - Built a local API prototype with tests and setup documentation.
+ Linux Service Lab
+Individual contributor
+ - Configured services in an isolated Linux lab and documented validation steps.
+ ADDITIONAL PROJECTS
+Log Review Notebook - Analyzed synthetic logs and produced a reproducible findings notebook.
+EDUCATION
+Desert Valley College
+Associate of Science in Computer Technology - 2026
+

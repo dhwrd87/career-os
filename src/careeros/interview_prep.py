@@ -107,7 +107,7 @@ def _prohibited_inferences(evidence: dict[str, Any], context: str) -> list[str]:
     if context not in {"PROFESSIONAL", "PAID_CONTRACT"}:
         boundaries.extend([
             "Do not describe this project, lab, simulation, or coursework as professional employment.",
-            "Do not imply production ownership, enterprise scale, customers, SLAs, or on-call responsibility unless source evidence states them.",
+            "Do not imply production ownership, enterprise scale, customers, SLAs, or on-call responsibility unless your records show that you had them.",
         ])
     if not evidence.get("leadership_ownership"):
         boundaries.append("Do not imply leadership or team ownership.")
@@ -339,7 +339,7 @@ def _answer_outline(story: dict[str, Any], format_name: str) -> dict[str, Any]:
 
 
 def _technical_walkthrough(story: dict[str, Any]) -> dict[str, Any]:
-    missing = "Not established in source evidence; say so if asked."
+    missing = "Your records do not include this detail. Say so if asked."
     return {
         "walkthrough_id": f"technical-walkthrough:{uuid.uuid5(uuid.NAMESPACE_URL, story['story_id'])}",
         "story_id": story["story_id"], "source_evidence_ids": story["source_evidence_ids"],
@@ -354,11 +354,11 @@ def _technical_walkthrough(story: dict[str, Any]) -> dict[str, Any]:
 def _follow_up_probes(story: dict[str, Any]) -> dict[str, Any]:
     notes = {
         "What exactly did you do?": story["actions"] or [story["task"]],
-        "What tool did you use?": story["tools_methods"] or ["No tool is established in the source evidence."],
-        "How did you validate it?": [story.get("outcome") or "No validation outcome is established in the source evidence."],
+        "What tool did you use?": story["tools_methods"] or ["Your records do not name a tool for this example."],
+        "How did you validate it?": [story.get("outcome") or "Your records do not say how you checked the result."],
         "Was this professional or a lab/project?": [story["story_context"]],
-        "What was the scale?": story["metrics"] or ["No supported scale is established."],
-        "What would you do differently?": ["Offer a reflective answer, clearly separated from the recorded facts."],
+        "What was the scale?": story["metrics"] or ["Your records do not say how large the work was."],
+        "What would you do differently?": ["Explain what you would change, and make clear that this is your reflection."],
     }
     return {"story_id": story["story_id"], "source_evidence_ids": story["source_evidence_ids"], "probes": [{"question": key, "safe_notes": value} for key, value in notes.items()]}
 
@@ -476,9 +476,9 @@ def build_interview_evidence_pack(
         "prohibited_claims": list(dict.fromkeys([text for item in selected for text in item["prohibited_inferences"]])),
         "candidate_questions": _candidate_questions(employer_need_trace, stage),
         "prep_checklist": [
-            "Review each selected story against its evidence IDs.", "Practice concise and detailed versions without memorizing a script.",
-            "State project, lab, coursework, and professional context accurately.", "Use only supported metrics and outcomes.",
-            "Prepare to say that a detail is unknown or not yet experienced.",
+            "Check each example against your notes and work records.", "Practice concise and detailed versions without memorizing a script.",
+            "State project, lab, coursework, and professional context accurately.", "Use only numbers and results you can back up.",
+            "Be ready to say when you do not know a detail or have not done something yet.",
         ],
         "artifact_refs": [{"artifact_type": "STORY_SHORTLIST", "artifact_id": story_bank["story_bank_id"]}, {"artifact_type": "ANSWER_BOUNDARIES", "artifact_id": boundary_set["boundary_set_id"]}],
         "lineage": {

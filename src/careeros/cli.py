@@ -73,6 +73,17 @@ def parser() -> argparse.ArgumentParser:
     workflow_sub = workflow.add_subparsers(dest="workflow_command", required=True)
     workflow_route = workflow_sub.add_parser("route")
     workflow_route.add_argument("intent", choices=workflows.HIGH_LEVEL_WORKFLOWS)
+    search = workflow_sub.add_parser('jobs')
+    search.add_argument('--request', required=True)
+    search.add_argument('--approve-network', action='store_true')
+    workflow_sub.add_parser('roles')
+    workflow_sub.add_parser('opportunities')
+    batch = workflow_sub.add_parser('prepare')
+    batch.add_argument('--top', type=int, default=3)
+    batch.add_argument('--opportunity-id', action='append')
+    plan = workflow_sub.add_parser('plan')
+    plan.add_argument('--opportunity-id', required=True)
+    plan.add_argument('--catalog')
     setup = workflow_sub.add_parser("setup")
     setup_mode = setup.add_mutually_exclusive_group(required=True)
     setup_mode.add_argument("--start", action="store_true")
@@ -230,6 +241,13 @@ def run(args: argparse.Namespace) -> tuple[Any, ExitCode]:
     target = _workspace(args)
     timestamp = args.timestamp
     from careeros import experience
+    if args.command == 'workflow' and args.workflow_command in {'jobs','roles','opportunities','prepare','plan'}:
+        from careeros import journey
+        if args.workflow_command=='jobs':return journey.find_jobs(target,read_json(Path(args.request)),approved=args.approve_network,timestamp=timestamp),ExitCode.OK
+        if args.workflow_command=='roles':return journey.suggest_roles(target,timestamp=timestamp),ExitCode.OK
+        if args.workflow_command=='opportunities':return journey.overview(target,timestamp=timestamp),ExitCode.OK
+        if args.workflow_command=='prepare':return journey.prepare(target,top=args.top,selected_ids=args.opportunity_id,timestamp=timestamp),ExitCode.OK
+        return journey.plan(target,args.opportunity_id,catalog=Path(args.catalog) if args.catalog else None,timestamp=timestamp),ExitCode.OK
     if args.command == 'discover-source':
         from careeros.discovery_sources import fetch_greenhouse
         from careeros.core.io import atomic_write_json

@@ -3,11 +3,11 @@
 
 Recorded applications: 1
 
-Sample maturity: INSUFFICIENT
+What these results can tell you: Too few applications to see a useful pattern
 
-These observations describe this workspace. They do not establish causation.
+These results describe the applications you recorded here. They cannot tell us what caused an employer to respond.
 
-## Observed conversion
+## How your applications are progressing
 
 Application To Screen: 0 / 1 (0%)
 
@@ -27,6 +27,6 @@ Application To Response: 0 / 1 (0%)
 
 Implementation Delivery: 1 observed jobs; one off gap
 
-## Career capital
+## Strengths you can build on
 
-Signals describe the observed opportunity cohort. Build a larger, comparable outcome sample before changing strategy.
+Keep records of similar jobs and their outcomes. With more results, it becomes easier to see what is working.

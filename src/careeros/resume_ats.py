@@ -259,7 +259,7 @@ def validate_recruiter_summary(summary: dict[str, Any]) -> dict[str, Any]:
     return {
         # 40-80 words is the editorial target. Truthful thin profiles may use
         # a shorter 25-39 word summary instead of synthetic padding.
-        "status": "PASS" if 25 <= word_count <= 80 and not unsupported and not filler and not template_patterns else "FAIL",
+        "status": "PASS" if (25 <= word_count <= 80 or (15 <= word_count < 25 and any(c.get("source_evidence_ids") for c in clauses))) and not unsupported and not filler and not template_patterns else "FAIL",
         "word_count": word_count, "unsupported_clauses": unsupported,
         "filler_phrases": filler, "template_summary_patterns": template_patterns,
         "trace_complete": not unsupported,

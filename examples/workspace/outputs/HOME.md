@@ -4,47 +4,56 @@ Career OS workspace
 
 ## Overview
 
-3 opportunities · 2 application packets · 2 follow ups
+5 opportunities · 1 application packets · 1 follow ups
 
 ## Opportunities
 
-| Role | Employer | Qualification | Application state |
+| Job | Employer | Where it fits | Application progress |
 | --- | --- | --- | --- |
-| Implementation Coordinator | Hearthline Civic Tools | QUALIFIED | SUBMITTED |
-| Software Implementation Specialist | Northwind Practice Cloud | BORDERLINE | NOT_PREPARED |
-| Implementation Analyst | Example Implementation Cooperative | NOT_QUALIFIED | NOT_PREPARED |
+| Training Coordinator | Example Learning Services | Ready Now | No application draft yet |
+| Implementation Coordinator | Hearthline Civic Tools | Ready Now | Submitted |
+| Software Implementation Specialist | Northwind Practice Cloud | Stretch Roles | No application draft yet |
+| Data Operations Lead | Example Implementation Cooperative | Dream Roles | No application draft yet |
+| Implementation Analyst | Example Implementation Cooperative | Stretch Roles | No application draft yet |
 
 ## Documents
 
-- [Cover Letter · MD](applications/974a24fc38430487/cover-letter.md)
-- [Cover Letter · PDF](applications/974a24fc38430487/cover-letter.pdf)
-- [Follow Up · MD](applications/980b84c6b07173e8/follow-up.md)
-- [Application Tracker · MD](applications/application-tracker.md)
-- [Cover Letter · MD](applications/c1fbdafc7f441998/cover-letter.md)
-- [Cover Letter · PDF](applications/c1fbdafc7f441998/cover-letter.pdf)
-- [Follow Up · MD](applications/d0d543fb644d20dc/follow-up.md)
-- [Follow Ups · MD](applications/follow-ups.md)
-- [Priya Calder   Implementation Coordinator Resume · DOCX](editable/Priya%20Calder%20-%20Implementation%20Coordinator%20Resume.docx)
-- [Interview Preparation · MD](interviews/76ad996d47b07cb6/interview-preparation.md)
+- [Cover Letter · Text](applications/44c05a4bcd4a428a/cover-letter.md)
+- [Cover Letter · PDF](applications/44c05a4bcd4a428a/cover-letter.pdf)
+- [Follow Up · Text](applications/7573cadc9757272f/follow-up.md)
+- [Your applications · Text](applications/application-tracker.md)
+- [Your follow-ups · Text](applications/follow-ups.md)
+- [Other roles to explore · Text](career/other-roles.md)
+- [Other roles to explore · PDF](career/other-roles.pdf)
+- [Career Plan · Text](career/plans/64d729c6b3c40393/career-plan.md)
+- [Career Plan · PDF](career/plans/64d729c6b3c40393/career-plan.pdf)
+- [Learning Plan · PDF](career/plans/64d729c6b3c40393/learning-plan.pdf)
+- [Priya Calder   Implementation Coordinator Resume · Editable DOCX](editable/Priya%20Calder%20-%20Implementation%20Coordinator%20Resume.docx)
+- [Interview Preparation · Text](interviews/76ad996d47b07cb6/interview-preparation.md)
 - [Interview Preparation · PDF](interviews/76ad996d47b07cb6/interview-preparation.pdf)
-- [Multipage · DOCX](layout-stress/multipage.docx)
+- [Your next career move · Text](job-search/your-next-move.md)
+- [Your next career move · PDF](job-search/your-next-move.pdf)
+- [Multipage · Editable DOCX](layout-stress/multipage.docx)
 - [Multipage · PDF](layout-stress/multipage.pdf)
-- [Learning Roadmap · MD](learning/learning-roadmap.md)
-- [Learning Roadmap · PDF](learning/learning-roadmap.pdf)
-- [Implementation Analyst · Example Implementation Cooperative · MD](opportunities/42756a6cb356c009/opportunity-report.md)
+- [Your learning plan · Text](learning/learning-roadmap.md)
+- [Your learning plan · PDF](learning/learning-roadmap.pdf)
+- [Implementation Analyst · Example Implementation Cooperative · Text](opportunities/42756a6cb356c009/opportunity-report.md)
 - [Implementation Analyst · Example Implementation Cooperative · PDF](opportunities/42756a6cb356c009/opportunity-report.pdf)
-- [Software Implementation Specialist · Northwind Practice Cloud · MD](opportunities/782a944af95b9bf4/opportunity-report.md)
+- [Data Operations Lead · Example Implementation Cooperative · Text](opportunities/64d729c6b3c40393/opportunity-report.md)
+- [Data Operations Lead · Example Implementation Cooperative · PDF](opportunities/64d729c6b3c40393/opportunity-report.pdf)
+- [Software Implementation Specialist · Northwind Practice Cloud · Text](opportunities/782a944af95b9bf4/opportunity-report.md)
 - [Software Implementation Specialist · Northwind Practice Cloud · PDF](opportunities/782a944af95b9bf4/opportunity-report.pdf)
-- [Implementation Coordinator · Hearthline Civic Tools · MD](opportunities/a1667f25c5d23277/opportunity-report.md)
+- [Implementation Coordinator · Hearthline Civic Tools · Text](opportunities/a1667f25c5d23277/opportunity-report.md)
 - [Implementation Coordinator · Hearthline Civic Tools · PDF](opportunities/a1667f25c5d23277/opportunity-report.pdf)
-- [Application packet · Resume · PDF](packets/11af3041-b467-5836-aaa7-6daf63fb1592/Priya%20Calder%20-%20Implementation%20Coordinator%20Resume.pdf)
-- [Application packet · Review checklist · MD](packets/11af3041-b467-5836-aaa7-6daf63fb1592/README.md)
-- [Application packet · Resume · PDF](packets/4e46ebc1-1e89-5115-8883-05dcac7aa857/Priya%20Calder%20-%20Implementation%20Coordinator%20Resume.pdf)
-- [Application packet · Review checklist · MD](packets/4e46ebc1-1e89-5115-8883-05dcac7aa857/README.md)
-- [Career Profile · MD](profile/career-profile.md)
-- [Career Profile · PDF](profile/career-profile.pdf)
-- [Career Progress · MD](reports/career-progress.md)
-- [Career Progress · PDF](reports/career-progress.pdf)
-- [Learning Path · MD](reports/learning-path.md)
-- [Opportunity Priorities · MD](reports/opportunity-priorities.md)
+- [Training Coordinator · Example Learning Services · Text](opportunities/eee0937dec31da8d/opportunity-report.md)
+- [Training Coordinator · Example Learning Services · PDF](opportunities/eee0937dec31da8d/opportunity-report.pdf)
+- [Application documents · Resume · PDF](packets/79998f4d-acfd-5bd2-bc5d-f4a210d93a12/Priya%20Calder%20-%20Implementation%20Coordinator%20Resume.pdf)
+- [Application documents · Review checklist · Text](packets/79998f4d-acfd-5bd2-bc5d-f4a210d93a12/README.md)
+- [Your career profile · Text](profile/career-profile.md)
+- [Your career profile · PDF](profile/career-profile.pdf)
+- [Your career progress · Text](reports/career-progress.md)
+- [Your career progress · PDF](reports/career-progress.pdf)
+- [Learning Path · Text](reports/learning-path.md)
+- [Jobs to consider first · Text](reports/opportunity-priorities.md)
 - [Priya Calder   Implementation Coordinator Resume · PDF](resumes/Priya%20Calder%20-%20Implementation%20Coordinator%20Resume.pdf)
+- [Priya Calder   Training Coordinator Resume · PDF](resumes/Priya%20Calder%20-%20Training%20Coordinator%20Resume.pdf)

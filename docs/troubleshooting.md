@@ -1,27 +1,20 @@
-# Troubleshooting
+# When something does not work
 
-- `MIGRATION_REQUIRED`: run `careeros migrate --plan`; review the files and backup requirement before `--apply`.
-- `FUTURE_WORKSPACE`: use the package version that created the workspace; do not downgrade or edit the manifest manually.
-- `WORKSPACE_CORRUPT`: run `careeros workspace verify` and inspect failed integrity/reference checks. Restore only from a verified backup.
-- `DEPENDENCY_MISSING`: install `career-os[resume]` and ensure Poppler is on `PATH`.
-- `DEPENDENCY_INCOMPATIBLE`: use Python 3.11 or 3.12 and the documented dependency ranges.
-- `PRIVACY_BOUNDARY_FAILURE`: move data, state, outputs, or cache outside installed package source.
-- `SCHEMA_INVALID`: use `careeros schemas validate <path>` for field-level details.
-- `CHANGESET_CONFLICT`: canonical truth changed after proposal; regenerate, review, and approve a fresh changeset.
-- `CHANGESET_TRANSACTION_FAILED`: inspect the transaction ID and failure event. Pre-commit failures restore and verify the previous canonical hash; a `canonical_committed: true` context means only a post-commit operation failed.
+Tell your assistant what you were trying to do and what happened. Keep the full error available, but you should get a plain explanation and a useful next step.
 
-Typed engine errors include code, message, retryability, remediation and context. CLI usage and ordinary policy/input errors also produce nonzero exits; inspect their message and correct the input before retrying.
+| Problem | What to try |
+|---|---|
+| Career OS is not found | Activate the environment where you installed it. Make sure the assistant can run `careeros version --json`. Use the matching v0.4.2 candidate skill. |
+| PDF checks cannot run | Install the resume extras and Poppler. Run Doctor again. |
+| A resume will not import | Keep the original file. Try PDF, DOCX, text or Markdown. Check whether the file is corrupt or protected. |
+| Setup asks more questions | Check only the missing or unclear details. Dates, qualifications and results should not be guessed. |
+| No jobs appear | Check the search sources, titles, location and working arrangements. A limited search is not proof that no jobs exist. |
+| Job details need review | Read the employer posting, separate required and preferred needs and check unclear information. Empty requirements cannot establish fit. |
+| A resume is held | Read the stated qualification, source or content issue. Correct facts through review; do not bypass the check. |
+| A source cannot be reached | Try again or use another current employer posting. Do not call a failed fetch a checked opening. |
+| A learning plan is out of date | Check selected resource details and your profile/preferences, then build a new plan. Old course completion evidence is still separately reviewable. |
+| No course fits | Check budget, time, starting level, price and entry rules. A useful practice project may still be possible. |
+| A completed-work file changed | Review the current file again before using it to support a new career claim. |
+| An older workspace needs an update | Back it up, review the migration plan and approve the supported update. Do not edit its records by hand. |
 
-| Exit | Meaning |
-|---:|---|
-| 0 | success / ready |
-| 2 | CLI usage error |
-| 10–19 | configuration, dependency, path, permission, migration, boundary, or workspace bootstrap failure |
-| 20–24 | validation, clarification, approval, qualification, or safe-overwrite stop |
-| 25 | migration failed and recovery information is available |
-| 26–30 | schema, integrity, renderer, conflict, or external-action failure |
-| 31–33 | workspace missing, already initialized, or unsupported |
-| 34 | changeset optimistic-concurrency conflict |
-| 35 | canonical changeset transaction failed |
-
-The exact stable mapping is defined by `careeros.core.exit_codes.ExitCode` and is part of the 0.4 compatibility surface.
+Doctor is available with `careeros --workspace <path> doctor --json`. Keep generated work and private career data outside the package. If you need help, use a small fictional reproduction in [Issues](https://github.com/dhwrd87/career-os/issues), not your real resume or private work history.

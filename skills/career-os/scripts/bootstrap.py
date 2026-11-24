@@ -77,6 +77,22 @@ def questions(section: str) -> dict[str, Any]:
     if section not in _sections():
         raise ValueError(f"unknown onboarding section: {section}")
     items = [item for item in _questionnaire()["questions"] if item["section"] == section]
+    prompts={
+        'privacy.consent':'May Career OS use the information you provide to build your private career workspace?',
+        'identity.public_name':'What name would you like employers to see?',
+        'identity.contact':'Which contact details and location would you like to use? Which should stay private?',
+        'employment.records':'Tell me about your jobs: employer, actual title, dates, responsibilities and useful examples.',
+        'education.records':'What education have you completed or started? Include the school, course and dates you know.',
+        'credentials.records':'Which certificates or licenses have you earned? Who issued them, and are any still in progress or expired?',
+        'skills.records':'Which skills and tools have you used, and where did you use them?',
+        'projects.records':'Tell me about a project or volunteer role. What did you personally do, and what was the result?',
+        'evidence.records':'Which examples best show what you can do? Include work samples or results you can support.',
+        'preferences.record':'What matters for your next job: location, working arrangement, pay, hours, travel or other limits?',
+        'target_roles.intents':'What kinds of jobs interest you now? Is there a longer-term role you would like to work toward?',
+        'review.confirm':'Are these details accurate, and do you approve saving them to your career profile?',
+    }
+    items=[{**item,'prompt':prompts[item['question_id']]} for item in items]
+
     return {"schema": "careeros.guided-bootstrap-questions.v1", "section": section, "questions": items}
 
 

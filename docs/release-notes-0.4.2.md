@@ -1,0 +1,21 @@
+# Career OS v0.4.2 — Human Experience Update
+
+Review candidate for [issue #1](https://github.com/dhwrd87/career-os/issues/1). The published v0.4.1 release and tag remain unchanged.
+
+Career OS now brings job search and career development into one set of everyday workflows:
+
+- Find actual openings through supported employer boards or reviewed postings, then compare them with your experience and preferences.
+- Explore other job titles using your history and relevant requirements in checked postings.
+- Prepare separate, validated resume drafts for selected or top-ranked suitable jobs.
+- Understand stretch roles and choose focused learning, credentials, projects or experience-building steps.
+- Build a plan for a named dream role, based on that role's actual requirements.
+
+Ready Now, Stretch Roles and Dream Roles make the results easier to use. Unknown details stay questions to check. Required qualifications still hold a resume when they are missing; courses never become professional experience.
+
+The README, user guides, onboarding questions, assistant instructions, dashboard, job reports, learning plans and application/interview reports use clearer, more natural language. Technical contracts and exact developer terminology are retained. Existing discovery, qualification, resume and Learning Path Intelligence engines are reused.
+
+Package, compiler and skill advance to 0.4.2. Workspace format 1.1.0 and schema bundle 1.24.0 stay compatible. Existing application artifacts remain historical; no migration of career facts or automatic profile change is introduced. Install from the candidate source/wheel with the matching skill. No v0.4.2 release or merge has been performed.
+
+Discovery is still source-bounded, not a search of every job board. Authenticated course-provider search, external sending/submission and purchases remain unsupported. Format and environment limits remain in the README.
+
+The focused [recruiter-copy review](recruiter-copy-review-0.4.2.md) adds actual eight-person master, career-specific, tailored and cover-letter outputs; complete source actions, clearer proof selection, more natural letters and accepted-document preservation. Competitive preference and independent human validation remain unverified.

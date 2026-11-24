@@ -79,7 +79,7 @@ class InterviewEvidencePackParityTests(unittest.TestCase):
     def test_03_weak_outcome_remains_unknown(self):
         pack, bank, _ = build([evidence("evidence:no-result", "Reviewed fictional alerts", tools=["Log viewer"])])
         self.assertIsNone(bank["stories"][0]["outcome"])
-        self.assertIn("Not established in source evidence", pack["technical_walkthroughs"][0]["RESULT"])
+        self.assertIn("Your records do not include this detail", pack["technical_walkthroughs"][0]["RESULT"])
 
     def test_04_project_heavy_candidate_gets_multiple_stories(self):
         records = [

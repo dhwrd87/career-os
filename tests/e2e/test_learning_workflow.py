@@ -116,7 +116,7 @@ class LearningWorkflowTests(unittest.TestCase):
         from careeros.cli import main
         from careeros import experience
         experience.dashboard(self.target)
-        self.assertIn('Learning and development', (self.target/'outputs/index.html').read_text())
+        self.assertIn('href="learning/index.html"', (self.target/'outputs/index.html').read_text())
         for command in (['learning','gaps'],['learning','preferences'],['learning','build','--catalog',str(self.catalog)],['learning','status'],['learning','reassess']):
             with self.subTest(command=command),redirect_stdout(io.StringIO()) as output:
                 self.assertEqual(main(['--workspace',str(self.target),*command]),0)

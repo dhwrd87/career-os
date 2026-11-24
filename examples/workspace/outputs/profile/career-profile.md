@@ -25,7 +25,7 @@ Alder Finch Market · Mar 2018 - Aug 2022
 - Data Cleanup
 - Implementation Delivery
 
-## Credentials
+## Qualifications and awards
 
 - Facilitation Essentials
 
@@ -37,7 +37,7 @@ Alder Finch Market · Mar 2018 - Aug 2022
 
 - Neighborhood Scheduling Pilot
 
-## Evidence
+## Examples of your work
 
 - Mapped an intake workflow and documented handoff responsibilities for program staff.
 - Prepared and delivered role-based training for new store associates.

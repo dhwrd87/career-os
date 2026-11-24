@@ -1,4 +1,12 @@
-# Career conversion learning
+# Learn from your application results
+
+Career OS can help you spot patterns in your own job search. It compares applications you actually submitted with the outcomes you recorded. A draft resume or an unanswered application is not counted as a rejection.
+
+A small or mixed set of results may not tell you much. The report says when there is too little information for a useful recommendation. A pattern does not prove that a resume change, course or skill caused an interview or offer.
+
+Use the findings to choose what to investigate next: the roles you target, the examples in your resume, recurring gaps or how you follow up. Your results stay specific to you. They do not become advice for other users without separate consent and review.
+
+## Developer reference
 
 Career OS 0.3.17 adds candidate-specific, descriptive learning over real `OpportunityV1`, `ApplicationEventV1`, qualification, resume-lineage, and employer-need records. Packet preparation, unsubmitted drafts, missing responses, and guessed historical activity never enter a cohort.
 

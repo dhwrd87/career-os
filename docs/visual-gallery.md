@@ -1,5 +1,7 @@
 # Visual comparison gallery
 
+For the v0.4.2 wording and workflow changes, see the [current before-and-after examples](human-experience-update.md). The historical comparisons below remain available; newer workspace, learning and editable-resume screenshots are refreshed from the current synthetic example.
+
 Every image here is a saved render or screenshot of actual generated synthetic artifacts. Reference columns use the actual personal standard and compact renderers with fictional input; the right column uses the public renderer. No private career data, private accepted PDF or private golden is included. Wider margins and single-column flow are deliberate public defaults.
 
 ## Early career
@@ -69,3 +71,7 @@ All 4 pages of the generated learning PDF were rendered and visually inspected. 
 ![Learning module at desktop width](images/learning-desktop.png)
 
 ![Learning module at mobile width](images/learning-mobile.png)
+
+## Recruiter-copy review
+
+See the [eight-person copy gallery and assessment](recruiter-copy-review-0.4.2.md). It includes actual master, career-specific, tailored and cover-letter outputs, with the limits of competitor and human evaluation clearly stated.

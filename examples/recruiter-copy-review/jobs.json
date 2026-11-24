@@ -1,0 +1,252 @@
+[
+  {
+    "persona": "complete-resume",
+    "job": {
+      "schema": "careeros.synthetic-opportunity-input.v1",
+      "source_type": "SYNTHETIC",
+      "opportunity_id": "copy-review-complete-resume",
+      "employer_name": "Example Career Services",
+      "role_title": "Operations Coordinator",
+      "location": "United States",
+      "requirements": [
+        {
+          "capability": "Documentation",
+          "requirement_class": "REQUIRED",
+          "requirement_subtype": "SKILL",
+          "level": "CORE"
+        },
+        {
+          "capability": "Issue Escalation",
+          "requirement_class": "REQUIRED",
+          "requirement_subtype": "SKILL",
+          "level": "CORE"
+        },
+        {
+          "capability": "Customer Support",
+          "requirement_class": "REQUIRED",
+          "requirement_subtype": "SKILL",
+          "level": "CORE"
+        }
+      ],
+      "job_description": "Example Career Services seeks a Operations Coordinator. The role requires Documentation, Issue Escalation, Customer Support. Work includes keeping records clear, resolving issues within the role and handing work to the right colleagues."
+    }
+  },
+  {
+    "persona": "very-weak-resume",
+    "job": {
+      "schema": "careeros.synthetic-opportunity-input.v1",
+      "source_type": "SYNTHETIC",
+      "opportunity_id": "copy-review-very-weak-resume",
+      "employer_name": "Example Career Services",
+      "role_title": "Customer Service Associate",
+      "location": "United States",
+      "requirements": [
+        {
+          "capability": "Customer Support",
+          "requirement_class": "REQUIRED",
+          "requirement_subtype": "SKILL",
+          "level": "CORE"
+        },
+        {
+          "capability": "Documentation",
+          "requirement_class": "REQUIRED",
+          "requirement_subtype": "SKILL",
+          "level": "CORE"
+        }
+      ],
+      "job_description": "Example Career Services seeks a Customer Service Associate. The role requires Customer Support, Documentation. Work includes keeping records clear, resolving issues within the role and handing work to the right colleagues."
+    }
+  },
+  {
+    "persona": "student",
+    "job": {
+      "schema": "careeros.synthetic-opportunity-input.v1",
+      "source_type": "SYNTHETIC",
+      "opportunity_id": "copy-review-student",
+      "employer_name": "Example Career Services",
+      "role_title": "IT Support Assistant",
+      "location": "United States",
+      "requirements": [
+        {
+          "capability": "Technical Support",
+          "requirement_class": "REQUIRED",
+          "requirement_subtype": "SKILL",
+          "level": "CORE"
+        },
+        {
+          "capability": "Documentation",
+          "requirement_class": "REQUIRED",
+          "requirement_subtype": "SKILL",
+          "level": "CORE"
+        },
+        {
+          "capability": "Python",
+          "requirement_class": "REQUIRED",
+          "requirement_subtype": "SKILL",
+          "level": "CORE"
+        }
+      ],
+      "job_description": "Example Career Services seeks a IT Support Assistant. The role requires Technical Support, Documentation, Python. Work includes keeping records clear, resolving issues within the role and handing work to the right colleagues."
+    }
+  },
+  {
+    "persona": "experienced-professional",
+    "job": {
+      "schema": "careeros.synthetic-opportunity-input.v1",
+      "source_type": "SYNTHETIC",
+      "opportunity_id": "copy-review-experienced-professional",
+      "employer_name": "Example Career Services",
+      "role_title": "Operations Manager",
+      "location": "United States",
+      "requirements": [
+        {
+          "capability": "Operations Leadership",
+          "requirement_class": "REQUIRED",
+          "requirement_subtype": "SKILL",
+          "level": "CORE"
+        },
+        {
+          "capability": "Vendor Coordination",
+          "requirement_class": "REQUIRED",
+          "requirement_subtype": "SKILL",
+          "level": "CORE"
+        },
+        {
+          "capability": "Risk Documentation",
+          "requirement_class": "REQUIRED",
+          "requirement_subtype": "SKILL",
+          "level": "CORE"
+        }
+      ],
+      "job_description": "Example Career Services seeks a Operations Manager. The role requires Operations Leadership, Vendor Coordination, Risk Documentation. Work includes keeping records clear, resolving issues within the role and handing work to the right colleagues."
+    }
+  },
+  {
+    "persona": "career-changer",
+    "job": {
+      "schema": "careeros.synthetic-opportunity-input.v1",
+      "source_type": "SYNTHETIC",
+      "opportunity_id": "copy-review-career-changer",
+      "employer_name": "Example Career Services",
+      "role_title": "Implementation Coordinator",
+      "location": "United States",
+      "requirements": [
+        {
+          "capability": "Process Mapping",
+          "requirement_class": "REQUIRED",
+          "requirement_subtype": "SKILL",
+          "level": "CORE"
+        },
+        {
+          "capability": "Training",
+          "requirement_class": "REQUIRED",
+          "requirement_subtype": "SKILL",
+          "level": "CORE"
+        },
+        {
+          "capability": "Data Cleanup",
+          "requirement_class": "REQUIRED",
+          "requirement_subtype": "SKILL",
+          "level": "CORE"
+        }
+      ],
+      "job_description": "Example Career Services seeks a Implementation Coordinator. The role requires Process Mapping, Training, Data Cleanup. Work includes keeping records clear, resolving issues within the role and handing work to the right colleagues."
+    }
+  },
+  {
+    "persona": "project-heavy-technical",
+    "job": {
+      "schema": "careeros.synthetic-opportunity-input.v1",
+      "source_type": "SYNTHETIC",
+      "opportunity_id": "copy-review-project-heavy-technical",
+      "employer_name": "Example Career Services",
+      "role_title": "Junior Systems Technician",
+      "location": "United States",
+      "requirements": [
+        {
+          "capability": "Python",
+          "requirement_class": "REQUIRED",
+          "requirement_subtype": "SKILL",
+          "level": "CORE"
+        },
+        {
+          "capability": "Linux",
+          "requirement_class": "REQUIRED",
+          "requirement_subtype": "SKILL",
+          "level": "CORE"
+        },
+        {
+          "capability": "Networking",
+          "requirement_class": "REQUIRED",
+          "requirement_subtype": "SKILL",
+          "level": "CORE"
+        }
+      ],
+      "job_description": "Example Career Services seeks a Junior Systems Technician. The role requires Python, Linux, Networking. Work includes keeping records clear, resolving issues within the role and handing work to the right colleagues."
+    }
+  },
+  {
+    "persona": "credential-heavy",
+    "job": {
+      "schema": "careeros.synthetic-opportunity-input.v1",
+      "source_type": "SYNTHETIC",
+      "opportunity_id": "copy-review-credential-heavy",
+      "employer_name": "Example Career Services",
+      "role_title": "Quality Coordinator",
+      "location": "United States",
+      "requirements": [
+        {
+          "capability": "Quality Review",
+          "requirement_class": "REQUIRED",
+          "requirement_subtype": "SKILL",
+          "level": "CORE"
+        },
+        {
+          "capability": "Compliance Documentation",
+          "requirement_class": "REQUIRED",
+          "requirement_subtype": "SKILL",
+          "level": "CORE"
+        },
+        {
+          "capability": "Issue Escalation",
+          "requirement_class": "REQUIRED",
+          "requirement_subtype": "SKILL",
+          "level": "CORE"
+        }
+      ],
+      "job_description": "Example Career Services seeks a Quality Coordinator. The role requires Quality Review, Compliance Documentation, Issue Escalation. Work includes keeping records clear, resolving issues within the role and handing work to the right colleagues."
+    }
+  },
+  {
+    "persona": "overlapping-employment",
+    "job": {
+      "schema": "careeros.synthetic-opportunity-input.v1",
+      "source_type": "SYNTHETIC",
+      "opportunity_id": "copy-review-overlapping-employment",
+      "employer_name": "Example Career Services",
+      "role_title": "Service Dispatcher",
+      "location": "United States",
+      "requirements": [
+        {
+          "capability": "Dispatch Coordination",
+          "requirement_class": "REQUIRED",
+          "requirement_subtype": "SKILL",
+          "level": "CORE"
+        },
+        {
+          "capability": "Documentation",
+          "requirement_class": "REQUIRED",
+          "requirement_subtype": "SKILL",
+          "level": "CORE"
+        },
+        {
+          "capability": "Shift Handoff",
+          "requirement_class": "REQUIRED",
+          "requirement_subtype": "SKILL",
+          "level": "CORE"
+        }
+      ],
+      "job_description": "Example Career Services seeks a Service Dispatcher. The role requires Dispatch Coordination, Documentation, Shift Handoff. Work includes keeping records clear, resolving issues within the role and handing work to the right colleagues."
+    }
+  }
+]

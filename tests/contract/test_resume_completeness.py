@@ -117,7 +117,8 @@ class ResumeCompletenessTests(unittest.TestCase):
         add_project(profile, 4)
         add_project(profile, 5)
         content, _ = compile_profile(profile)
-        self.assertEqual(len(content["projects"]), 4)
+        self.assertEqual(len(content["projects"]), 5)
+        self.assertEqual(sum(p.get("presentation_tier")=="ADDITIONAL" for p in content["projects"]),1)
         self.assertEqual(content["resume_completeness"]["technical_project_coverage"]["status"], "PASS")
 
     def test_one_anchor_and_four_supporting_projects_are_not_starved(self):
@@ -128,7 +129,8 @@ class ResumeCompletenessTests(unittest.TestCase):
         for number in range(1, 6):
             add_project(profile, number, anchor=number == 1)
         content, _ = compile_profile(profile)
-        self.assertEqual(len(content["projects"]), 4)
+        self.assertEqual(len(content["projects"]), 5)
+        self.assertEqual(sum(p.get("presentation_tier")=="ADDITIONAL" for p in content["projects"]),1)
         self.assertGreaterEqual(content["resume_completeness"]["supporting_evidence_count"]["included"], 2)
 
     def test_underfilled_page_with_unused_positive_evidence_fails(self):

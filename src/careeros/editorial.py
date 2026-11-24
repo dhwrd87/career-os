@@ -11,7 +11,7 @@ import re
 from collections import defaultdict
 from typing import Any, Iterable
 
-from careeros.recruiter_conversion import render_recruiter_bullet_v2
+from careeros.recruiter_conversion import render_recruiter_bullet_v2, evidence_action, public_fact_text, _useful_result
 
 
 PUBLIC_VISIBILITY = {"PUBLIC", "EMPLOYER_SAFE", "INTERNAL"}
@@ -222,13 +222,16 @@ def build_bullet_candidates(profile: dict[str, Any], storyline: dict[str, Any]) 
             value for value in (_completed_action(item, completed) for item in (evidence.get("actions") or [evidence.get("summary")]))
             if value
         ]
-        action = supported_actions[0] if supported_actions else ""
-        outcomes = evidence.get("outcomes") or []
-        deliverables = evidence.get("deliverables") or []
+        action = _completed_action(evidence_action(evidence),completed)
+        if supported_actions and len(supported_actions[0].split())<=2:supported_actions=[action]
+        elif supported_actions:supported_actions[0]=action
+        elif action:supported_actions=[action]
+        outcomes = [_useful_result(v) for v in evidence.get("outcomes",[]) if _useful_result(v)]
+        deliverables = [_useful_result(v) for v in evidence.get("deliverables",[]) if _useful_result(v)]
         deliverable = _completed_action(deliverables[0] if deliverables else evidence.get("summary", ""), completed)
         outcome = _completed_action(outcomes[0], completed) if outcomes else ""
         methods = [str(item) for item in evidence.get("tools_methods", []) if str(item).strip()]
-        method = methods[0] if methods else (supported_actions[1] if len(supported_actions) > 1 else "")
+        method = methods[0] if methods else ""
         if action and outcome:
             text = f"{action}; {outcome[0].lower() + outcome[1:] if outcome else outcome}."
             pattern = "ACTION + RESULT"

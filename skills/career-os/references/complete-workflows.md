@@ -6,9 +6,9 @@ The engine performs these actions; do not recreate its decisions in conversation
 | Request | Executable path | Required input |
 |---|---|---|
 | Show my dashboard and profile | `workspace dashboard` | Initialized workspace; approved profile for career detail |
-| Find suitable jobs | `discover --catalog <json> --limit 25` | User-supplied catalog of opportunity inputs; never describe catalog results as a live internet search |
+| Find suitable jobs | `workflow jobs --request <json>` | Supported live employer boards or reviewed current postings; follow human-workflows.md |
 | Evaluate this job | `opportunity ingest --input <json>`, `qualify --opportunity-id <id>` | Source text, source URL, timestamp and requirements |
-| Prioritize opportunities | `workspace dashboard` and `report` | Current qualifications and recorded events |
+| Prioritize opportunities | `workflow opportunities` and `report` | Current qualifications and recorded events |
 | Export an editable resume | `resume export-docx --build-id <id>` | Passing, current resume build; docx extra |
 | Write a cover letter | `application cover-letter --opportunity-id <id> --build-id <id>` | Qualified job and current, validated resume |
 | Prepare my application | `application prepare --opportunity-id <id> --build-id <id>` | Accepted resume and fresh qualified opportunity; stops at REVIEW_REQUIRED |

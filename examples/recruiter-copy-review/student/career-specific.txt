@@ -1,0 +1,28 @@
+Avery Solis
+ Junior Technical Support
+ Example City, US | avery.solis@example.org
+ portfolio.example/avery-solis
+SUMMARY
+Student Support Assistant with experience in technical support and SQL relevant to Junior Technical Support. Documented
+student support requests and escalated account-access issues to campus technicians. Built and tested a small Python and SQL
+inventory tracker with setup documentation in a project.
+CORE SKILLS
+PROGRAMMING: Python | SQL
+OPERATIONS: Documentation | Technical Support
+PROFESSIONAL EXPERIENCE
+Student Support Assistant
+Campus Technology Desk | 2025 - Present
+ - Documented student support requests and escalated account-access issues to campus technicians.
+ 
+FEATURED PROJECTS
+Campus Inventory Tracker
+Individual contributor
+ - Built and tested a small Python and SQL inventory tracker with setup documentation.
+ Support Ticket Analysis
+Individual contributor
+ - Analyzed a synthetic ticket dataset and produced a categorized findings report.
+ 
+EDUCATION
+Front Range University
+Bachelor of Science in Information Systems - In progress - expected 2027
+

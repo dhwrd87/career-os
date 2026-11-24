@@ -1,0 +1,29 @@
+{
+  "schema": "careeros.synthetic-opportunity-input.v1",
+  "source_type": "SYNTHETIC",
+  "opportunity_id": "copy-review-student",
+  "employer_name": "Example Career Services",
+  "role_title": "IT Support Assistant",
+  "location": "United States",
+  "requirements": [
+    {
+      "capability": "Technical Support",
+      "requirement_class": "REQUIRED",
+      "requirement_subtype": "SKILL",
+      "level": "CORE"
+    },
+    {
+      "capability": "Documentation",
+      "requirement_class": "REQUIRED",
+      "requirement_subtype": "SKILL",
+      "level": "CORE"
+    },
+    {
+      "capability": "Python",
+      "requirement_class": "REQUIRED",
+      "requirement_subtype": "SKILL",
+      "level": "CORE"
+    }
+  ],
+  "job_description": "Example Career Services seeks a IT Support Assistant. The role requires Technical Support, Documentation, Python. Work includes keeping records clear, resolving issues within the role and handing work to the right colleagues."
+}

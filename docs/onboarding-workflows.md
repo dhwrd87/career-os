@@ -1,44 +1,23 @@
-# Source-first onboarding workflows
+# Your first steps
 
-Career OS 0.3.10 provides a package-owned guided path for PDF, DOCX, Markdown, and plain-text career sources plus consent-gated LinkedIn, GitHub, and portfolio enrichment. Local source files remain inside the selected workspace. Each extraction records a SHA-256 hash, source reference, capture time, and page, paragraph, line, or linked-item locator. Extracted content is proposal material, never canonical truth.
+Start with what you already have. Give your assistant a resume or career notes and say, “Set up Career OS from this.” It can read PDF, DOCX, text and Markdown files. If you have no resume, it can help you describe your experience from scratch.
 
-Linked URLs are detected before the consolidated intake and are never fetched implicitly. The user approves or declines one read-only enrichment pass. `SourceEnrichmentManifestV1` records source type/location, approval, capture timestamp/hash, proposed records, conflicts, and enriched evidence blocks. GitHub/portfolio evidence remains project evidence; collaborative contribution and professional equivalence require explicit clarification.
+## Check your career details
 
-For an approved GitHub profile, the package uses a bounded public API capture of at most ten owner repositories and inspects public root/README material for observable languages, activity, documentation, tests, and deployment/code links. No repository is attributed as the candidate's personal contribution without confirmation.
+The assistant shows the jobs, dates, skills, education and qualifications it found. Correct anything that is wrong. Add useful work examples and tell it which details must stay private. Unknown dates or results should stay unknown; they should not be filled in with guesses.
 
-## Default journey
+You may be asked what you personally did, which tools you used and what happened as a result. A short, specific example is more useful than polished claims. Projects, study and volunteer work can help, but they are described honestly rather than treated as employment.
 
-```text
-UPLOAD SOURCES
-→ AUTOMATIC EXTRACTION AND CLAIM DECOMPOSITION
-→ PRE-FILLED CAREER INTAKE
-→ ONE FAST OR DEEP COMPLETION PASS
-→ EXCEPTION-ONLY CLARIFICATION
-→ COMMIT PREVIEW
-→ EXPLICIT HUMAN APPROVAL
-→ CANONICAL PROFILE
-→ INITIAL CAREER OUTPUTS
-```
+If your source links to a website or portfolio, the assistant explains what it could read and asks about access when needed. A failed fetch does not become evidence about your career.
 
-FAST asks nine consolidated candidate-facing prompts. DEEP adds two prompts for reusable story material and supporting artifacts. Both modes allow unknown answers and progressive later enrichment. Intake exceptions are capped at five; the ordinary schema/truth clarification queue remains authoritative when consequential conflicts survive completion.
+## Approve what will be saved
 
-## Safe inference boundary
+Review the summary before saving it. Approval saves your career profile; it does not publish it or submit an application. You can correct details later through the same review process.
 
-Career OS may parse document structure, explicit dates, exact employer/title/institution/credential text, contact strings, and source-linked tool mentions. It may deduplicate exact source claims and decompose bullets into action, object, context, tool, result, metric, and stakeholder components.
+## Choose your next direction
 
-Career OS does not infer responsibility level, skill proficiency, employment equivalence, credential completion, outcomes, metric validity, confidentiality, or permission for public use. Those require candidate confirmation or remain unknown.
+Tell the assistant what kinds of work interest you and what matters for location, working hours, remote work, pay and travel. Review its suggestions before choosing a direction. It can also use checked job postings to suggest titles you have not considered.
 
-## Package workflows
+Your home page brings together your profile, resume, job matches and next steps. Ask, “Find jobs that fit me,” “What else could I do?” or “Make a plan for my dream role.” Read [finding your next role](find-your-next-role.md) for examples.
 
-- `careeros intake compile --source <path> --mode FAST|DEEP` produces the pre-filled intake.
-- `careeros intake complete --answers <path>` processes candidate-confirmed structured answers without committing them.
-- `careeros intake preview` displays the candidate-review boundary.
-- `careeros workflow setup --start|--complete|--resolve|--approve|--status` owns the complete source-first orchestration.
-
-The user-facing skill translates ordinary conversation into workspace-local transports. A normal user does not edit JSON or run these commands.
-
-After approved commit, the standard output manifest points to `CareerProfileV1`, `ProfileEvidenceReadinessV1`, the Master Recruiter Resume, proposed career lanes, the role-title universe, career gaps, and development priorities. Candidate lane preferences remain proposed until separately approved.
-
-## Progressive enrichment
-
-An initial profile may be useful before every historical record is rich. Later lane-aware, job-aware, outcome/metric, and interview-story expansion reuses canonical IDs and the changeset workflow; it does not repeat initial onboarding or mutate historical derivatives.
+For the command-based setup flow, use `workflow setup --start --source <resume> --mode FAST`. The assistant follows with review, answers and approval. The detailed tool steps live in the skill's [setup reference](../skills/career-os/references/workflows.md); you do not need to learn them to use the assistant.

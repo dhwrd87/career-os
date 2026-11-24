@@ -32,6 +32,8 @@ def main():
         if persona=='career-changer':
             from build_learning_example import build as build_learning
             build_learning(workspace)
+            from build_human_example import build as build_human
+            build_human(workspace)
         experience.dashboard(workspace)
     print(json.dumps({'status':summary['status'],'workspaces':3,'synthetic_only':True,'external_actions':0}))
 

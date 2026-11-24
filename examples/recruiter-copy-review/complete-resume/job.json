@@ -1,0 +1,29 @@
+{
+  "schema": "careeros.synthetic-opportunity-input.v1",
+  "source_type": "SYNTHETIC",
+  "opportunity_id": "copy-review-complete-resume",
+  "employer_name": "Example Career Services",
+  "role_title": "Operations Coordinator",
+  "location": "United States",
+  "requirements": [
+    {
+      "capability": "Documentation",
+      "requirement_class": "REQUIRED",
+      "requirement_subtype": "SKILL",
+      "level": "CORE"
+    },
+    {
+      "capability": "Issue Escalation",
+      "requirement_class": "REQUIRED",
+      "requirement_subtype": "SKILL",
+      "level": "CORE"
+    },
+    {
+      "capability": "Customer Support",
+      "requirement_class": "REQUIRED",
+      "requirement_subtype": "SKILL",
+      "level": "CORE"
+    }
+  ],
+  "job_description": "Example Career Services seeks a Operations Coordinator. The role requires Documentation, Issue Escalation, Customer Support. Work includes keeping records clear, resolving issues within the role and handing work to the right colleagues."
+}

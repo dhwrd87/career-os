@@ -4,7 +4,7 @@ Use typed package output. Give the remediation first and keep the full diagnosti
 
 | Condition | User-facing recovery |
 |---|---|
-| Package absent | Explain that Career OS `>=0.4.1,<0.5.0` is required. Install the approved package with the resume extra, then rerun `careeros version` and Doctor. Do not download an unapproved package. |
+| Package absent | Explain that Career OS `>=0.4.2,<0.5.0` is required. Install the approved package with the resume extra, then rerun `careeros version` and Doctor. Do not download an unapproved package. |
 | Source extraction failed | Preserve the source, name the unsupported/corrupt file, and offer PDF, DOCX, Markdown, or text. Never transcribe silently or discard provenance. |
 | `SOURCE_ENRICHMENT_APPROVAL_REQUIRED` | List detected LinkedIn/GitHub/portfolio URLs once. Ask whether to perform a read-only proposal-only enrichment pass. Approve or decline explicitly; never fetch implicitly. |
 | Linked-source capture failed | Keep the failed URL visible, continue only with successful/local sources, and offer retry or decline. Never treat failed capture as evidence. |

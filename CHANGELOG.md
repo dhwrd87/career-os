@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.4.2 — Human Experience Update (review candidate)
+
+- Connect discovery, role ideas, ranked/selected resume batches and target-specific career plans through existing engines.
+- Present Ready Now, Stretch Roles and Dream Roles with clear reasons and next steps.
+- Rewrite user guides, prompts, assistant guidance and generated views in plain professional English.
+- Keep exact internal contracts, private-data controls and review/qualification boundaries. Preserve the v0.4.1 release.
+
+- Recruiter-copy follow-up for 0.4.2: restore complete source actions, improve proof selection and paragraph flow, keep project cautions internal, retain compact project evidence, preserve accepted career-specific PDFs, and add the actual eight-person output gallery. Internal scores remain distinct from human or competitor validation.
+
 ## 0.4.1 release candidate
 
 - Fix disposable-cache recovery checks and calendar expiry of saved learning recommendations; preserve read-only diagnostics.

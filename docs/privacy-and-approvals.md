@@ -1,5 +1,15 @@
-# Privacy and human-action boundary
+# Your information and your choices
 
-Package defaults contain no person, employer, project, credential, salary, preference, or private path. Candidate facts enter only through typed workspace records. External adapters are disabled. The implemented lifecycle ends at an application packet in `REVIEW_REQUIRED`.
+Keep your career workspace in a private folder outside the package checkout. It may contain resumes, contact details, work samples, application history and reports. Backups and exports need the same care as the original folder.
 
-Career OS 0.4.0 may initialize a local workspace, ingest local PDF/DOCX/text/Markdown career sources, detect linked career sources without reading them, perform one candidate-approved read-only LinkedIn/GitHub/portfolio enrichment pass, compile a pre-filled non-canonical intake, build proposed records, run resumable evidence expansion, accept explicit human clarification and commit events, apply separately approved transactional canonical changesets, preserve chained history, mark derivatives stale, create governed lane-base resumes, analyze supplied job descriptions, fetch a consented public Greenhouse board into a review proposal, qualify reviewed opportunities, generate local resume PDFs, validate them, and prepare review-only packets. It cannot send outreach, edit public profiles, submit applications, schedule interviews, negotiate compensation, or perform external writes.
+You choose which facts are saved and what may appear in employer-facing documents. Imported information starts as a proposal. Review it, correct mistakes and approve it before it becomes part of your career profile.
+
+A request to find current openings lets the assistant read the relevant public job sources. It should use generic job titles and broad locations, not your private name, contact details or full career history in outside queries. Other linked career sources need a clear access decision. A failed or restricted page is not a source the assistant may pretend to have read.
+
+The package writes files locally. Your assistant may process them under its host's terms, so choose that host and its access settings carefully. Public examples, issues and tests must use fictional information. Never post confidential employer records, a real resume or credentials in the repository.
+
+Preparing a resume or application document does not send it. Recording an application means recording something you report having done. Follow-up drafts are local. No purchases, enrolment, messages, applications, public-profile edits or commitments are made for you.
+
+Learning can lead to new work examples. It does not automatically add skills, award credentials or turn coursework into employment. Review the actual work or award, then approve any profile change.
+
+Read [security](../SECURITY.md) for sensitive problems and [profile corrections](canonical-updates.md) for the review process.

@@ -22,7 +22,7 @@ from careeros.resume_ats import (
     validate_recruiter_summary,
 )
 from careeros.recruiter_conversion import (
-    build_recruiter_conversion_strategy,
+    build_recruiter_conversion_strategy, _evidence_phrase, public_fact_text,
     public_copy_boundary,
     recruiter_copy_quality_v2,
 )
@@ -47,14 +47,7 @@ def _clean_sentence(value: str) -> str:
 
 
 def _evidence_text(item: dict[str, Any]) -> str:
-    actions = list(item.get("actions", []))
-    outcomes = list(item.get("outcomes", []))
-    deliverables = list(item.get("deliverables", []))
-    if actions and outcomes:
-        return _clean_sentence(f"{actions[0]}; {outcomes[0][0].lower() + outcomes[0][1:] if outcomes[0] else ''}")
-    if actions and deliverables:
-        return _clean_sentence(f"{actions[0]} to produce {deliverables[0]}")
-    return _clean_sentence(item.get("summary") or (actions[0] if actions else ""))
+    return _clean_sentence(_evidence_phrase(item))
 
 
 def _skill_groups(profile: dict[str, Any]) -> list[dict[str, Any]]:
@@ -98,7 +91,7 @@ def master_resume_content(profile: dict[str, Any]) -> dict[str, Any]:
         if bullets:
             projects.append({
                 "name": project["name"], "date_range": project.get("date_range"),
-                "contribution": project.get("contribution") or "Project contributor",
+                "contribution": public_fact_text(project.get("contribution")) or "Project contributor",
                 "record_id": project["record_id"], "bullets": bullets[:3], "selection_tier": "PRIMARY",
             })
     groups = _skill_groups(profile)
@@ -106,7 +99,7 @@ def master_resume_content(profile: dict[str, Any]) -> dict[str, Any]:
     role_names = list(dict.fromkeys(item["actual_title"] for item in employment))[:3]
     foundation = ", ".join(role_names) if role_names else "documented professional and project experience"
     preparation = ", ".join(skill_names) if skill_names else "documented career capabilities"
-    target = public_artifact_title("MASTER_RECRUITER")
+    target = role_names[0] if role_names else "Career Profile"
     content = {
         "schema": "careeros.resume-content.v1", "candidate": profile["candidate"],
         "target_role": target, "role_family_id": "role-family:master-recruiter",
@@ -227,39 +220,30 @@ def build_master_resume(workspace: Path, *, timestamp: str | None = None) -> dic
     return record
 
 
-def discover_lanes(profile: dict[str, Any], *, timestamp: str | None = None) -> dict[str, Any]:
-    intents = profile.get("preferences", {}).get("target_role_intents", [])
-    categories = Counter(item.get("category") or "General" for item in profile.get("skills", []) if item.get("evidence_ids"))
-    lanes: list[dict[str, Any]] = []
-    for intent in intents[:6]:
-        lanes.append({
-            "lane_id": f"lane:{uuid.uuid5(uuid.NAMESPACE_URL, intent['display_name'])}",
-            "display_name": intent["display_name"], "classification": "CURRENTLY_PLAUSIBLE",
-            "example_titles": intent.get("target_titles", []),
-            "why": "Candidate-stated direction with linked canonical career evidence.",
-            "evidence_ids": sorted({eid for skill in profile.get("skills", []) for eid in skill.get("evidence_ids", [])})[:12],
-            "major_barriers": [], "preference_state": "PROPOSED",
-        })
-    for category, _ in categories.most_common(6):
-        if len(lanes) >= 6 or any(category.casefold() in lane["display_name"].casefold() for lane in lanes):
-            continue
-        related = [item for item in profile.get("skills", []) if (item.get("category") or "General") == category]
-        lanes.append({
-            "lane_id": f"lane:{uuid.uuid5(uuid.NAMESPACE_URL, category)}", "display_name": f"{category} roles",
-            "classification": "BRIDGE_PLAUSIBLE", "example_titles": [f"{category} Associate", f"{category} Support Specialist"],
-            "why": "Derived from multiple evidence-linked skills; requires candidate preference review.",
-            "evidence_ids": sorted({eid for item in related for eid in item.get("evidence_ids", [])}),
-            "major_barriers": ["Exact role fit requires market/job validation."], "preference_state": "PROPOSED",
-        })
-    if not lanes:
-        titles = list(dict.fromkeys(item["actual_title"] for item in profile.get("employment", [])))
-        lanes.append({
-            "lane_id": "lane:professional-foundation", "display_name": "Professional foundation roles",
-            "classification": "CURRENTLY_PLAUSIBLE", "example_titles": titles[:4],
-            "why": "Directly supported by canonical employment history.", "evidence_ids": [],
-            "major_barriers": [], "preference_state": "PROPOSED",
-        })
-    return {"schema": "careeros.career-lane-analysis.v1", "created_at": utc_now(timestamp), "lanes": lanes[:6], "requires_candidate_review": True}
+def discover_lanes(profile: dict[str, Any], *, market_opportunities=None, timestamp: str | None = None) -> dict[str, Any]:
+    """Keep career suggestions tied to stated goals, work history and real titles."""
+    from careeros.opportunity import evaluate_requirement
+    lanes=[];seen=set()
+    for intent in profile.get('preferences',{}).get('target_role_intents',[])[:6]:
+        titles=intent.get('target_titles',[]);seen.update(t.casefold() for t in titles)
+        lanes.append({'lane_id':'lane:'+str(uuid.uuid5(uuid.NAMESPACE_URL,intent['display_name'])),'display_name':intent['display_name'],'classification':'CURRENTLY_PLAUSIBLE','example_titles':titles,'why':'You said this kind of work interests you. Compare current job requirements with your experience before choosing your next step.','evidence_ids':sorted({eid for skill in profile.get('skills',[]) for eid in skill.get('evidence_ids',[])})[:12],'major_barriers':[],'preference_state':'PROPOSED'})
+    for job in market_opportunities or []:
+        title=job['role_title']
+        if title.casefold() in seen:continue
+        matches=[];ids=set()
+        for requirement in job.get('requirements',[]):
+            evidence,gaps,_=evaluate_requirement(profile,requirement)
+            for match in evidence:
+                if match['match'] in {'SUPPORTED_MATCH','TRANSFERABLE_MATCH'} and not gaps:
+                    matches.append(match['capability']);ids.update(match['record_ids'])
+        if not matches:continue
+        seen.add(title.casefold())
+        lanes.append({'lane_id':'lane:'+str(uuid.uuid5(uuid.NAMESPACE_URL,title)),'display_name':title,'classification':'BRIDGE_PLAUSIBLE','example_titles':[title],'why':'Your work with '+', '.join(dict.fromkeys(matches))+' is relevant to the posting from '+job['employer_name']+'. Check the remaining requirements before applying.','evidence_ids':sorted(ids),'major_barriers':['A matching skill does not mean you meet every requirement.'],'preference_state':'PROPOSED'})
+    for employment in profile.get('employment',[]):
+        title=employment['actual_title']
+        if title.casefold() in seen:continue
+        seen.add(title.casefold());lanes.append({'lane_id':'lane:'+str(uuid.uuid5(uuid.NAMESPACE_URL,title)),'display_name':title,'classification':'CURRENTLY_PLAUSIBLE','example_titles':[title],'why':'This builds on work you have already done. It is a search idea, not a verified opening.','evidence_ids':[],'major_barriers':[],'preference_state':'PROPOSED'})
+    return {'schema':'careeros.career-lane-analysis.v1','created_at':utc_now(timestamp),'lanes':lanes[:12],'requires_candidate_review':True}
 
 
 def development_intelligence(profile: dict[str, Any], readiness: dict[str, Any], *, timestamp: str | None = None) -> dict[str, Any]:

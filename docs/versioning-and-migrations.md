@@ -2,7 +2,7 @@
 
 The package follows semantic versioning while its public surface is pre-1.0. Persisted schemas and workspace format have explicit versions. Policies used in a persisted qualification or build are immutable identifiers. Every build records compiler, policy, template, and font-profile versions. Rendered workspaces record the compiler and renderer versions used most recently. Adapters declare compatibility through the adapter API version. The thin Codex skill is versioned separately from the package.
 
-Career OS 0.4.1 writes Workspace Format 1.1.0 and accepts 1.0.0 only for explicit migration. The additive 1.23.0 schema bundle adds the persistent OpportunityRegistryV1 contract and cross-run discovery reconciliation without changing workspace format. Newer workspaces are reported as `FUTURE_WORKSPACE`; formats older than 1.0.0 are `UNSUPPORTED_WORKSPACE`.
+Career OS 0.4.2 writes Workspace Format 1.1.0 and accepts 1.0.0 only for explicit migration. The additive 1.23.0 schema bundle adds the persistent OpportunityRegistryV1 contract and cross-run discovery reconciliation without changing workspace format. Newer workspaces are reported as `FUTURE_WORKSPACE`; formats older than 1.0.0 are `UNSUPPORTED_WORKSPACE`.
 
 | Package | Workspace | Config | Schema bundle | Compiler | Renderer | Migration |
 |---|---|---|---|---|---|---|
@@ -39,3 +39,7 @@ Career OS 0.4.1 writes Workspace Format 1.1.0 and accepts 1.0.0 only for explici
 ## 0.4.1 candidate upgrade
 
 0.4.1 keeps workspace format 1.1.0 and config 1.0.0; additive schema bundle 1.24.0 adds optional course subscription/duration metadata and knowledge-resource/project classifications. It adds reachable workflows and human-readable derivatives without rewriting existing candidate records. Install the new package and matching 0.4 skill, run doctor and workspace verify, then regenerate derivatives you want to review. Historical or submitted artifacts remain unchanged. Back up your workspace before upgrading; no automatic migration or downgrade is performed. The existing explicit 1.0.0-to-1.1.0 migration and transaction rollback tests remain the migration authorities.
+
+## Upgrade to 0.4.2
+
+Back up your workspace, then install the new package and matching skill. Workspace format 1.1.0, config 1.0.0 and schema bundle 1.24.0 stay the same. Run doctor and workspace verify, then regenerate your dashboard and reports to see the new wording and job groups. Your approved career facts and submitted application documents stay unchanged. No new data migration is needed.

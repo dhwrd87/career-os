@@ -1,119 +1,96 @@
-<p align="left"><img src="docs/images/career-os-wordmark.svg" width="690" alt="Career OS — evidence, opportunity, growth"></p>
+<p><img src="docs/images/career-os-wordmark.svg" width="690" alt="Career OS — evidence, opportunity, growth"></p>
 
-# Your career, connected.
+# Find work that fits. Plan what comes next.
 
-**Career OS is an AI-powered career management and job search operating system.** Turn your experience, skills and professional evidence into clearer career pathways, better-qualified opportunities, stronger applications and a practical development plan.
+Career OS helps you turn your experience into a practical job search and career plan. Tell your AI assistant what you have done and where you would like to go. It can compare real openings, suggest other roles, prepare tailored resumes and help you build the skills for your next step.
 
-Operate it through your AI assistant or the local CLI. Your approved career facts form one foundation for career planning, Resume Studio, job evaluation, applications, interviews and Learning Path Intelligence. Corrections mark dependent artifacts stale; application records preserve the exact materials you used.
+**v0.4.2 — Human Experience Update: review candidate.** The published [v0.4.1 release](https://github.com/dhwrd87/career-os/releases/tag/v0.4.1) stays unchanged. Install this branch from source to try the new workflows.
 
-[![CI](https://github.com/dhwrd87/career-os/actions/workflows/ci.yml/badge.svg)](https://github.com/dhwrd87/career-os/actions/workflows/ci.yml)
-[![Public Beta](https://img.shields.io/badge/release-v0.4.1%20Public%20Beta-1f4f78)](https://github.com/dhwrd87/career-os/releases/tag/v0.4.1)
+[![CI](https://github.com/dhwrd87/career-os/actions/workflows/ci.yml/badge.svg?branch=codex%2Fhuman-experience-v0.4.2)](https://github.com/dhwrd87/career-os/actions)
 [![MIT](https://img.shields.io/badge/license-MIT-167d63)](LICENSE)
 
-**Local workspace · Evidence-based recommendations · Human-reviewed career truth · MIT open source**
+## Start with a conversation
 
-## See the system
+| Ask in your own words | What Career OS does |
+|---|---|
+| “Find jobs that fit my experience.” | Searches supported employer boards or compares current postings found by your assistant. It checks your background and preferences, removes duplicates and prepares resumes for the best-fitting jobs. |
+| “What other roles could I try?” | Suggests directions from your work history, goals and relevant requirements in checked postings. It explains what carries over and what still needs work. |
+| “Make resumes for my top matches.” | Prepares a separate, checked draft for each suitable job. You review the drafts before applying. |
+| “Help me reach this stretch role.” | Links the missing requirements to focused learning, credentials, practical projects or work experience. |
+| “Make a plan for my dream job.” | Uses a real posting for the role you want and builds a plan around your starting point, time and budget. |
 
-All people, employers, opportunities and resource offers shown below are fictional. These are actual generated artifacts and saved screenshots.
+Your results use three groups:
 
-### A home for your career
+- **Ready Now:** your recorded background fits the requirements we checked, the posting is current and it fits your search.
+- **Stretch Roles:** some skills, qualifications or details need work or review.
+- **Dream Roles:** roles you have chosen as longer-term goals. We show the steps still needed.
 
-<img src="docs/images/workspace.png" width="940" alt="Actual synthetic Career OS dashboard with opportunity pipeline and linked career documents">
+These groups help you decide where to focus. They do not predict a job offer. Missing information becomes a question to check, not an invented skill or qualification.
 
-Navigate your profile, opportunities, application pipeline, interviews, reports and development roadmap from one workspace.
+## See your next steps
 
-### Resumes built from the same evidence
+<img src="docs/images/workspace.png" width="940" alt="Career home showing Ready Now, Stretch Roles and Dream Roles">
 
-<img src="docs/images/career-changer-pdf-docx.png" width="940" alt="Actual synthetic resume PDF beside its independently rendered editable DOCX export">
+Your career home links your job matches, resume drafts, applications, interviews and learning plans. All people, employers and offers in these examples are fictional. The screenshots show actual generated workspaces.
 
-Master, reusable lane-base and tailored resumes share your approved evidence. PDF validation checks selectable text, reading order, layout and artifact integrity; DOCX provides an editable export.
+<img src="docs/images/career-changer-pdf-docx.png" width="940" alt="A tailored resume PDF beside its editable DOCX version">
 
-### Learning Path Intelligence
+Each resume starts with the career facts and examples you have approved. The checks help protect dates, job titles, qualifications, supported results and readable layout. If a required qualification or job detail is missing, Career OS holds the draft and explains what needs attention.
 
-<img src="docs/images/learning-desktop.png" width="940" alt="Actual Learning Path Intelligence screen showing constraints, typed development gaps and a sequenced roadmap">
+<img src="docs/images/learning-desktop.png" width="940" alt="A learning plan with practical next steps and options that fit the person's time and budget">
 
-Connect market requirements to knowledge, skill, credential, experience and evidence gaps. Compare resources, respect budget/time/subscriptions, create practical evidence, track completion and reassess eligibility after reviewed profile updates. The dated synthetic example deliberately warns when its fictional source facts expire. **Course completion never becomes professional experience.**
+Learning Path Intelligence compares courses and other resources, checks what you already know and helps you create work you can show. It keeps courses, certifications, projects and employment separate. Completing a course never becomes professional experience.
 
-Explore the [visual gallery](docs/visual-gallery.md), [synthetic workspace](examples/workspace/README.md) and [Learning Path Intelligence guide](docs/learning-path-intelligence.md).
+See the [examples](examples/workspace/README.md), [before and after](docs/human-experience-update.md) and [visual gallery](docs/visual-gallery.md). See the [recruiter-copy review](docs/recruiter-copy-review-0.4.2.md) for actual eight-person resume and cover-letter comparisons.
 
-## Install and start
+## Install this candidate
 
-Use **Python 3.11 or 3.12**. Install Poppler for PDF validation (`brew install poppler` on macOS, or `sudo apt-get install poppler-utils` on Ubuntu). Word or LibreOffice is optional for reviewing DOCX pagination.
+Use Python **3.11 or 3.12**. Install Poppler for PDF checks: `brew install poppler` on macOS, or `sudo apt-get install poppler-utils` on Ubuntu.
+
+From this branch's checkout:
 
 ```bash
 python3.12 -m venv .venv
 source .venv/bin/activate
-python -m pip install "career-os[resume,docx] @ https://github.com/dhwrd87/career-os/releases/download/v0.4.1/career_os-0.4.1-py3-none-any.whl"
-careeros version --json
+python -m pip install ".[resume,docx]"
 careeros --workspace "$HOME/career-workspace" init
 careeros --workspace "$HOME/career-workspace" doctor --json
-careeros --workspace "$HOME/career-workspace" workspace dashboard
 ```
 
-Open `$HOME/career-workspace/outputs/index.html`. Keep this workspace outside the source checkout. Career OS is distributed through [GitHub Releases](https://github.com/dhwrd87/career-os/releases); no PyPI installation is assumed.
+For Codex, copy the complete `skills/career-os` folder into `~/.codex/skills/career-os`, then refresh skill discovery. The assistant's shell needs access to the installed `careeros` command. Say, “Set up Career OS from my resume.” No resume? The assistant can help you build a profile from scratch.
 
-To install from source instead, download the tag's **Source code** archive or clone this repository, then run `python -m pip install ".[resume,docx]"` from the checkout. See [installation](docs/installation.md), [quick start](skills/career-os/references/quickstart.md) and [troubleshooting](docs/troubleshooting.md).
+You review the details before they are saved. The assistant asks about missing facts, then helps you choose a career direction. You do not need to learn the package's commands or internal terms.
 
-## Use your AI assistant
+Read the [setup guide](docs/installation.md) and [first steps](docs/onboarding-workflows.md). The CLI is also available for people who prefer it. This candidate is not published to PyPI or released as v0.4.2 yet.
 
-For Codex, copy the complete `skills/career-os` directory from the source checkout into `~/.codex/skills/career-os`, then refresh skill discovery. Ensure the assistant shell can find `careeros`. The [skill archive](https://github.com/dhwrd87/career-os/releases/download/v0.4.1/career-os-0.4.1-skill.zip) contains the same installable skill.
+## What else can you do?
 
-Try:
+Keep your career history, skills, education, credentials, projects and accomplishments together. Build a complete resume and reusable starting resumes for different kinds of work. Prepare cover letters and application documents, track applications and follow-ups, practise interview examples and review your progress over time.
 
-- “Set up Career OS from my resume.”
-- “Review and correct what you extracted before saving it.”
-- “Find suitable career paths and build a base resume for this lane.”
-- “Evaluate this opportunity and tailor my resume.”
-- “Prepare a cover letter and application packet.”
-- “Track this application and draft my follow-up.”
-- “Prepare me for the technical interview.”
-- “Show my career progress and highest-value development gaps.”
-- “Build a learning roadmap within my budget and subscriptions.”
-- “Find current courses and resources for these gaps.”
-- “I finished this project; review the evidence and reassess my eligibility.”
+Corrections stay traceable. Old application records keep the exact resume you used, even when your profile later changes. Backups and update checks help you recover from mistakes.
 
-The skill invokes real package commands, asks for missing facts and presents reviewable outputs. You approve canonical career information before it is committed. The CLI also works independently of an AI host. Codex-style orchestration and the executable router are tested; other AI-host integrations are unverified.
+See the [feature guide](docs/features.md), [job-search guide](docs/find-your-next-role.md), [learning guide](docs/learning-path-intelligence.md) and [help with problems](docs/troubleshooting.md).
 
-## Complete feature overview
+## Your information stays under your control
 
-| Module | What it connects |
-|---|---|
-| Career profile and evidence | Resume import, professional history, skills, credentials, education, accomplishments, projects, provenance and factual review |
-| Career intelligence | Capability-based pathways, progression planning, career capital and observed-market signals |
-| Job discovery | Bounded public-board retrieval, reviewed catalogs, persistent deduplication and source freshness |
-| Opportunity qualification | Employer needs, requirement semantics, evidence mapping, career-family inheritance and prioritization |
-| Resume Studio | Master and lane-base resumes, job tailoring, PDF/ATS/layout checks and editable DOCX |
-| Application materials | Evidence-linked cover letters, application packets, artifact hashes and immutable submitted lineage |
-| Pipeline and follow-up | Human-reported application states, outcomes, reminders/plans and local follow-up drafts |
-| Interview preparation | Story banks, question themes, answer boundaries and technical walkthroughs |
-| Learning Path Intelligence | Typed gaps, provider-neutral resource comparison, constrained roadmaps, projects, completion tracking, reviewed evidence/award updates and eligibility reassessment |
-| Reporting and reliability | Conversion analytics, sample-size safeguards, dashboards, backup-first migrations, canonical transactions and recovery |
+Your career workspace is a folder you choose, outside this repository and the skill folder. You approve changes to your career facts. You decide what may appear in a resume and what must stay private.
 
-See the [full feature inventory](docs/features.md), [architecture](docs/architecture.md), [configuration](docs/configuration.md), [functional reconciliation](docs/functional-parity.md) and [learning parity](docs/learning-parity.md).
+Your assistant may process information under its own host's terms. External searches use public sources with your permission; private names, contact details and career records do not belong in search queries. Never post a real resume, confidential employer information or private application records in a public issue.
 
-## Environments and known limitations
+Career OS prepares local drafts. It does not submit applications, send messages, buy training, enrol you in courses or edit public profiles. Read [privacy and review](docs/privacy-and-approvals.md).
 
-- **Local validation:** macOS with Python 3.12. **Automated matrix:** Ubuntu with Python 3.11 and 3.12; check the [actual CI results](https://github.com/dhwrd87/career-os/actions/workflows/ci.yml). Windows and Microsoft Word behavior are unverified.
-- Discovery supports a bounded Greenhouse reader, reviewed catalogs and public learning-resource pages/indexes. Authenticated Coursera/LinkedIn Learning/Udemy search, scheduled alerts, enrollment and purchases are not implemented. Source facts require periodic verification.
-- Learning ROI is descriptive; roadmap selection uses greedy resource reuse. It does not predict a salary or hiring outcome. Project hours are estimates and extra materials may need pricing.
-- One premium single-column PDF template is supported. Identity and career data are configurable; arbitrary fonts/themes and broad non-Latin-script typography are not supported. DOCX pagination can differ. PDFs are selectable but untagged and not PDF/UA certified; ATS-vendor behavior is not universally verified.
-- Career OS prepares and records activity. It does not submit applications, send messages, edit public profiles, schedule interviews or make commitments.
+## What to know before you use it
 
-The [release evidence and full limitations](docs/release-readiness.md) distinguish verified behavior from unverified environments. Existing visual goldens are preserved.
+Live discovery supports bounded Greenhouse employer-board searches and reviewed postings from other sources. It does not search every job board. Your assistant needs access to a suitable public source or postings you supply. Current course details may need checking before they can be recommended. Roadmaps use practical estimates, not promises about jobs, pay or training results.
 
-## Your data, your workspace
+Python 3.11/3.12 on Ubuntu is covered by the [CI matrix](https://github.com/dhwrd87/career-os/actions). Local macOS/Python 3.12 has also been tested. Windows, Microsoft Word layout and other AI-host integrations remain unverified. Codex-style skill routing and real package commands are tested.
 
-The package writes career data to your selected local workspace. Keep it outside this repository and outside the skill directory. You control which sources and files your assistant may access; your AI host's data-processing terms still apply. External read-only discovery requires consent, and career facts remain reviewable with provenance.
+One premium, single-column resume design is supported. PDFs contain selectable text but are not tagged for PDF accessibility standards. Editable DOCX files may look different in Word or another editor. Broad non-Latin-script support and custom fonts/themes are not included. [More about formats and layout](docs/renderer-capabilities.md).
 
-Only synthetic examples belong in this public repository. Never upload a real resume, contact details, confidential employer evidence, credentials or private application records to an issue or discussion. See [privacy and approvals](docs/privacy-and-approvals.md) and [security](SECURITY.md).
+## Help improve Career OS
 
-## Contribute, report issues, discuss
+Ask questions in [Discussions](https://github.com/dhwrd87/career-os/discussions). Report a bug in [Issues](https://github.com/dhwrd87/career-os/issues), using a small fictional example. Include what you tried, what you expected and what happened. Keep personal information out of public reports. See [security](SECURITY.md).
 
-Read [CONTRIBUTING.md](CONTRIBUTING.md). Report bugs in [Issues](https://github.com/dhwrd87/career-os/issues) with a minimal synthetic reproduction, Python/package versions, the command used and the observed result. Use [Discussions](https://github.com/dhwrd87/career-os/discussions) for questions and ideas. Follow [SECURITY.md](SECURITY.md) for sensitive reports.
+Contributors can use [CONTRIBUTING.md](CONTRIBUTING.md), [architecture](docs/architecture.md), [configuration](docs/configuration.md) and the technical references linked there. Internal contracts keep their precise names and meanings.
 
-```bash
-python -m pip install ".[resume,docx,dev,test]"
-python -m unittest discover -s tests -v
-```
-
-Career OS is released under the [MIT license](LICENSE). See the [changelog](CHANGELOG.md) and [v0.4.1 release notes](docs/release-notes-0.4.1.md).
+Career OS uses the [MIT license](LICENSE). See [what changed in v0.4.2](docs/release-notes-0.4.2.md).

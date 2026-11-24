@@ -15,6 +15,7 @@ from typing import Any
 from careeros.config.loader import load_config
 from careeros.core.io import atomic_write_json, read_json, sha256_file, sha256_value
 from careeros.workspace import require_current_workspace, utc_now
+from careeros.presentation import label as display_label, gap_advice
 
 
 def context(workspace: Path):
@@ -57,12 +58,17 @@ def _table(headers, rows):
     return '\n'.join(['| ' + ' | '.join(map(cell, headers)) + ' |', '| ' + ' | '.join('---' for _ in headers) + ' |', *['| ' + ' | '.join(map(cell, r)) + ' |' for r in rows]]) + '\n'
 
 
-def _report_pdf(title: str, paragraphs: list[str], path: Path, *, keep_subsections: bool = False):
+def _report_pdf(title: str, paragraphs: list[str], path: Path, *, keep_subsections: bool = False, compact: bool = False):
     from reportlab.lib import colors
     from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
     from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, KeepTogether
     styles = getSampleStyleSheet()
-    styles.add(ParagraphStyle('ReportBody', fontName='Helvetica', fontSize=10, leading=14, spaceAfter=8))
+    styles.add(ParagraphStyle('ReportBody', fontName='Helvetica', fontSize=10, leading=13 if compact else 14, spaceAfter=5 if compact else 8))
+    if compact:
+        styles['Heading2'].fontSize=12
+        styles['Heading2'].leading=15
+        styles['Heading2'].spaceBefore=8
+        styles['Heading2'].spaceAfter=4
     story = [Paragraph(html.escape(title), styles['Title']), Spacer(1, 12)]
     block=[];pending=[]
     if keep_subsections:styles['Heading2'].keepWithNext=True
@@ -124,14 +130,33 @@ def cover_letter(workspace: Path, opportunity_id: str, build_id: str) -> dict:
     evidence = [b for s in [*content.get('employment', []), *content.get('projects', [])] for b in s['bullets'] if b.get('evidence_ids')][:3]
     if not evidence:
         raise ValueError('No supported evidence available for a cover letter')
-    paragraphs = [f"Dear {opp['employer_name']} hiring team,", f"I am applying for the {opp['role_title']} role. {content['summary']}"]
-    # Preserve the exact approved evidence wording and its employment/project context.
-    for section in [*content.get('employment', []), *content.get('projects', [])]:
-        chosen = [b for b in section['bullets'] if b in evidence]
-        if chosen:
-            label = f"At {section['employer']}" if section.get('employer') else f"In my {section['name']} project"
-            paragraphs.append(label + ': ' + ' '.join(b['text'] for b in chosen))
-    paragraphs += ['I would welcome a conversation about how this experience could support your team.', 'Sincerely,\n' + content['candidate']['public_name']]
+    # Explain two relevant connections rather than turn the whole resume into
+    # prose. Employer needs guide selection; all claims still come from the
+    # validated resume's evidence-bearing bullets.
+    need_ids={key for need in content.get('employer_need_trace',{}).get('needs',[])[:3] for key in need.get('candidate_evidence_ids',[])}
+    examples=[(section,b) for section in [*content.get('employment',[]),*content.get('projects',[])] for b in section['bullets'] if b.get('evidence_ids')]
+    examples.sort(key=lambda row:(not bool(set(row[1]['evidence_ids']) & need_ids),not bool(row[0].get('employer'))))
+    chosen=[];seen=set()
+    for section,bullet in examples:
+        if set(bullet['evidence_ids']) & seen:continue
+        chosen.append((section,bullet));seen.update(bullet['evidence_ids'])
+        if len(chosen)==2:break
+    evidence=[b for _,b in chosen]
+    requirement=next((v['capability'] for v in opp.get('requirements',[]) if v.get('requirement_class')=='REQUIRED'),None)
+    need_text=requirement if requirement and (requirement.isupper() or requirement in {'Python','Linux','JavaScript','Splunk','Wireshark','Salesforce'}) else (requirement.lower() if requirement else None)
+    opening=(f"Your {opp['role_title']} opening at {opp['employer_name']} calls for {need_text}." if requirement else f"I am applying for the {opp['role_title']} role at {opp['employer_name']}.")
+    paragraphs=[f"Dear {opp['employer_name']} hiring team,",opening]
+    previous_section=None
+    for section,bullet in chosen:
+        text=bullet['text'];claim=text[:1].lower()+text[1:]
+        if section.get('employer'):
+            letter_context=f"As {section['actual_title']} at {section['employer']}"
+        else:letter_context=f"In the {section['name']} project"
+        if section is previous_section:paragraphs[-1]+=' I also '+claim
+        elif len(paragraphs)==2:paragraphs[-1]+=' '+letter_context+', I '+claim
+        else:paragraphs.append(letter_context+', I '+claim)
+        previous_section=section
+    paragraphs+=['I can discuss this work and the results in more detail.','Sincerely,\n'+content['candidate']['public_name']]
     key = sha256_value([opportunity_id, build_id])[:16]
     path = _write(roots, f'applications/{key}/cover-letter.md', '# Cover letter\n\n' + '\n\n'.join(paragraphs) + '\n')
     pdf = roots.assert_write_allowed(path.with_suffix('.pdf'), 'output')
@@ -193,23 +218,23 @@ def interview(workspace: Path, opportunity_id: str, *, stage='RECRUITER_SCREEN',
     pack, stories, boundaries = build_interview_evidence_pack(profile=profile, opportunity=opp, snapshot=snapshot, qualification=qual, employer_need_trace=trace, application_id=app['application_id'], interview_id='interview:' + key, stage=stage, timestamp=timestamp)
     atomic_write_json(roots.assert_write_allowed(roots.state_root / 'interview-packs' / f'{key}.json', 'state'), pack)
     atomic_write_json(roots.assert_write_allowed(roots.state_root / 'interview-packs' / f'{key}-stories.json', 'state'), stories)
-    paragraphs = [f"{opp['role_title']} at {opp['employer_name']}", 'Stage: ' + stage]
-    paragraphs += ['Employer need: ' + n['statement'] for n in pack['employer_need_summary']]
+    paragraphs = [f"{opp['role_title']} at {opp['employer_name']}", 'Your interview: ' + display_label(stage)]
+    paragraphs += ['What the employer needs: ' + n['statement'] for n in pack['employer_need_summary']]
     for index, outline in enumerate(pack['answer_outlines'], 1):
-        paragraphs.append(f'## Story {index} · ' + outline['format'].replace('_', ' ').title())
+        paragraphs.append(f'## Example {index} · ' + ('STAR: situation, task, action, result' if outline['format']=='STAR' else display_label(outline['format'])))
         for label, value in outline['fields'].items():
             if not value:
                 continue
             if isinstance(value, list):
                 value = '; '.join(str(v.get('value', v)) if isinstance(v, dict) else str(v) for v in value)
-            paragraphs.append(label.title() + ': ' + str(value))
-        paragraphs.append('Answer boundaries: ' + ' '.join(outline['prohibited_inferences']))
+            paragraphs.append(label.replace('_',' ').capitalize() + ': ' + str(value))
+        paragraphs.append('Keep your answer accurate: ' + ' '.join(outline['prohibited_inferences']))
     for walkthrough in pack['technical_walkthroughs']:
         paragraphs.append('## Technical walkthrough')
         for label in ('OBJECTIVE', 'ENVIRONMENT', 'TOOLS', 'WHAT_I_DID', 'WHAT_I_OBSERVED', 'RESULT'):
             value = walkthrough[label]
             if value:
-                paragraphs.append(label.replace('_', ' ').title() + ': ' + ('; '.join(map(str, value)) if isinstance(value, list) else str(value)))
+                paragraphs.append(label.replace('_', ' ').title() + ': ' + ('; '.join(map(str, value)) if isinstance(value, list) else (display_label(value) if label=='ENVIRONMENT' else str(value))))
     paragraphs += ['Question to ask: ' + str(q.get('question') or q) for q in pack['candidate_questions']]
     paragraphs += pack['prep_checklist']
     md = _write(roots, f'interviews/{key}/interview-preparation.md', '# Interview preparation\n\n' + '\n\n'.join(paragraphs) + '\n')
@@ -226,16 +251,16 @@ def analytics(workspace: Path, *, window_start='2000-01-01T00:00:00Z', window_en
     logs = {a['application_id']: read_event_log(roots.state_root / 'application-events' / (a['application_id'].split(':')[-1] + '.jsonl')) for a in apps}
     bundle = build_conversion_learning_bundle(candidate_profile_id=profile['profile_id'], opportunities=[read_json(p) for p in (roots.state_root / 'opportunities').glob('*/opportunity.json')], applications=apps, event_logs=logs, qualifications=records(roots.state_root / 'qualifications'), resume_variants=[read_json(p) for p in (roots.state_root / 'resume-builds').glob('*/build.json')], employer_need_traces=[read_json(p) for p in (roots.state_root / 'resume-builds').glob('*/employer-need-trace.json')], development_actions=[], course_options=[], window_start=window_start, window_end=window_end or utc_now(timestamp), timestamp=timestamp)
     atomic_write_json(roots.assert_write_allowed(roots.state_root / 'reports/conversion-learning.json', 'state'), bundle)
-    lines = ['# Career progress\n', 'Recorded applications: ' + str(bundle['cohort']['sample_count']), 'Sample maturity: ' + bundle['cohort']['maturity_state'], 'These observations describe this workspace. They do not establish causation.', '## Observed conversion']
+    lines = ['# Career progress\n', 'Recorded applications: ' + str(bundle['cohort']['sample_count']), 'What these results can tell you: ' + display_label(bundle['cohort']['maturity_state']), 'These results describe the applications you recorded here. They cannot tell us what caused an employer to respond.', '## How your applications are progressing']
     for label, rate in bundle['conversion_metrics']['rates'].items():
         value = 'No observations' if rate['rate'] is None else f"{rate['numerator']} / {rate['denominator']} ({rate['rate']:.0%})"
         lines.append(label.replace('_', ' ').title() + ': ' + value)
     lines.append('## Development gaps')
     lines += [g['capability'] + ': ' + str(g['job_count']) + ' observed jobs; ' + g['classification'].replace('_', ' ').lower() for g in bundle['gap_recurrence']['gaps']]
     if not bundle['gap_recurrence']['gaps']:
-        lines.append('No gaps recorded in evaluated opportunities. This does not establish broad market readiness.')
-    lines.append('## Career capital')
-    lines.append('Signals describe the observed opportunity cohort. Build a larger, comparable outcome sample before changing strategy.')
+        lines.append('We have not found gaps in the jobs checked so far. A wider search may reveal other requirements.')
+    lines.append('## Strengths you can build on')
+    lines.append('Keep records of similar jobs and their outcomes. With more results, it becomes easier to see what is working.')
     _write(roots, 'reports/career-progress.md', '\n\n'.join(lines))
     _report_pdf('Career Progress', lines[1:], roots.assert_write_allowed(roots.output_root / 'reports/career-progress.pdf', 'output'))
     return bundle
@@ -283,11 +308,17 @@ def dashboard(workspace: Path) -> dict:
     opportunities = [read_json(p) for p in sorted((roots.state_root / 'opportunities').glob('*/opportunity.json'))]
     qualifications = {q['opportunity_id']: q for q in records(roots.state_root / 'qualifications')}
     priorities = prioritize(workspace)
+    journey_view=None
+    family_path=roots.state_root/'role-families/active.json'
+    if profile and family_path.is_file() and read_json(family_path)['approval_state']=='APPROVED':
+        from careeros.journey import overview
+        journey_view=overview(workspace)
+    categories={j['opportunity_id']:j['category'] for j in journey_view['jobs']} if journey_view else {}
     order = {r['opportunity_id']: i for i, r in enumerate(priorities['rankings'])}
     opportunities.sort(key=lambda o: order[o['opportunity_id']])
     applications = records(roots.state_root / 'applications')
     follows = records(roots.state_root / 'follow-ups')
-    rows = [[o['role_title'], o['employer_name'], qualifications.get(o['opportunity_id'], {}).get('decision', 'NOT_EVALUATED'), next((a['current_state'] for a in applications if a['opportunity_id'] == o['opportunity_id']), 'NOT_PREPARED')] for o in opportunities]
+    rows = [[o['role_title'], o['employer_name'], categories.get(o['opportunity_id'],display_label(qualifications.get(o['opportunity_id'], {}).get('decision', 'NOT_EVALUATED'))), display_label(next((a['current_state'] for a in applications if a['opportunity_id'] == o['opportunity_id']), 'NOT_PREPARED'))] for o in opportunities]
     profile_md = '# Career profile\n\n' + name + '\n\n## Professional experience\n\n'
     employment = sorted(profile.get('employment', []), key=lambda r: (r.get('end_year') is None, int(r.get('start_year') or 0)), reverse=True)
     for role in employment:
@@ -295,25 +326,25 @@ def dashboard(workspace: Path) -> dict:
         profile_md += f"### {role['actual_title']}\n\n{role['employer']} · {format_public_date(role)}\n\n"
         profile_md += '\n'.join('- ' + e['summary'] for e in profile.get('evidence', []) if role['record_id'] in e.get('employment_ids', [])) + '\n\n'
     for key in ('skills', 'credentials', 'education', 'projects', 'evidence'):
-        profile_md += f'## {key.title()}\n\n' + '\n'.join('- ' + str(i.get('name') or i.get('title') or i.get('institution') or i.get('summary') or i.get('statement') or 'Details need review') for i in profile.get(key, [])) + '\n\n'
+        profile_md += f'## {dict(evidence="Examples of your work",credentials="Qualifications and awards").get(key,key.title())}\n\n' + '\n'.join('- ' + str(i.get('name') or i.get('title') or i.get('institution') or i.get('summary') or i.get('statement') or 'Details need review') for i in profile.get(key, [])) + '\n\n'
     _write(roots, 'profile/career-profile.md', profile_md)
     _report_pdf(name + ' Career Profile', [line for line in profile_md.split('\n\n') if line], roots.assert_write_allowed(roots.output_root / 'profile/career-profile.pdf', 'output'))
     for opp in opportunities:
         qual = qualifications.get(opp['opportunity_id'], {})
-        paragraphs = [opp['role_title'] + ' at ' + opp['employer_name'], 'Qualification: ' + qual.get('decision', 'NOT_EVALUATED')]
-        paragraphs += ['Requirement: ' + r['capability'] + ' (' + r.get('requirement_class', 'UNKNOWN') + ')' for r in opp['requirements']]
+        paragraphs = [opp['role_title'] + ' at ' + opp['employer_name'], 'Your fit: ' + display_label(qual.get('decision', 'NOT_EVALUATED'))]
+        paragraphs += ['Requirement: ' + r['capability'] + ' (' + display_label(r.get('requirement_class', 'UNKNOWN')) + ')' for r in opp['requirements']]
         evidence_index = {e['record_id']: e for e in profile.get('evidence', [])}
         for match in qual.get('evidence', []):
             sources = [evidence_index[r]['summary'] for r in match.get('record_ids', []) if r in evidence_index]
             if sources:
-                paragraphs.append('Evidence for ' + match['capability'] + ': ' + ' '.join(sources))
-        paragraphs += ['Gap: ' + g.get('capability', 'Unknown') + ' — ' + g.get('match', 'UNKNOWN') for g in qual.get('gaps', [])]
+                paragraphs.append('Your experience with ' + match['capability'] + ': ' + ' '.join(sources))
+        paragraphs += ['To address: ' + g.get('capability', 'Unknown') + '. ' + gap_advice(g) for g in qual.get('gaps', [])]
         key = sha256_value(opp['opportunity_id'])[:16]
         _write(roots, f'opportunities/{key}/opportunity-report.md', '# Opportunity report\n\n' + '\n\n'.join(paragraphs) + '\n')
         _report_pdf('Opportunity Report', paragraphs, roots.assert_write_allowed(roots.output_root / f'opportunities/{key}/opportunity-report.pdf', 'output'))
-    tracker = '# Application tracker\n\n' + _table(['Role', 'Employer', 'Qualification', 'Application state'], rows)
+    tracker = '# Application tracker\n\n' + _table(['Job', 'Employer', 'Where it fits', 'Application progress'], rows)
     _write(roots, 'applications/application-tracker.md', tracker)
-    follow_md = '# Follow ups\n\n' + _table(['Application', 'Due', 'Channel', 'Disposition'], [[f['application_id'], f['due_at'], f['channel'], f['disposition']] for f in follows])
+    follow_md = '# Follow ups\n\n' + _table(['Application', 'Due', 'How to follow up', 'Progress'], [[next((o['role_title']+' at '+o['employer_name'] for o in opportunities if any(a['application_id']==f['application_id'] and a['opportunity_id']==o['opportunity_id'] for a in applications)),'Application'), f['due_at'], display_label(f['channel']), display_label(f['disposition'])] for f in follows])
     _write(roots, 'applications/follow-ups.md', follow_md)
     # Relative, browser-safe links to generated artifacts only; no third-party assets.
     links = []
@@ -321,23 +352,26 @@ def dashboard(workspace: Path) -> dict:
         if not p.is_file() or p.suffix not in {'.md', '.pdf', '.docx'} or p.name == 'HOME.md':
             continue
         relative = p.relative_to(roots.output_root)
-        title = p.stem.replace('-', ' ').title()
+        title = {'career-profile':'Your career profile','learning-roadmap':'Your learning plan','career-progress':'Your career progress','application-tracker':'Your applications','follow-ups':'Your follow-ups','opportunity-priorities':'Jobs to consider first','other-roles':'Other roles to explore','your-next-move':'Your next career move'}.get(p.stem,p.stem.replace('-', ' ').title())
         if relative.parts[0] == 'opportunities':
             match = next((o for o in opportunities if sha256_value(o['opportunity_id'])[:16] == relative.parts[1]), None)
             if match:
                 title = match['role_title'] + ' · ' + match['employer_name']
         elif relative.parts[0] == 'packets':
-            title = 'Application packet · ' + ('Review checklist' if p.stem == 'README' else 'Resume')
-        links.append((str(relative), title + ' · ' + p.suffix[1:].upper()))
-    md = f'# {name}\n\nCareer OS workspace\n\n## Overview\n\n{len(opportunities)} opportunities · {len(applications)} application packets · {len(follows)} follow ups\n\n## Opportunities\n\n' + _table(['Role', 'Employer', 'Qualification', 'Application state'], rows) + '\n## Documents\n\n' + '\n'.join(f'- [{title}]({path.replace(" ", "%20")})' for path, title in links) + '\n'
+            title = 'Application documents · ' + ('Review checklist' if p.stem == 'README' else 'Resume')
+        links.append((str(relative), title + ' · ' + {'.md':'Text','.pdf':'PDF','.docx':'Editable DOCX'}[p.suffix]))
+    md = f'# {name}\n\nCareer OS workspace\n\n## Overview\n\n{len(opportunities)} opportunities · {len(applications)} application packets · {len(follows)} follow ups\n\n## Opportunities\n\n' + _table(['Job', 'Employer', 'Where it fits', 'Application progress'], rows) + '\n## Documents\n\n' + '\n'.join(f'- [{title}]({path.replace(" ", "%20")})' for path, title in links) + '\n'
     _write(roots, 'HOME.md', md)
     def esc(v): return html.escape(str(v), quote=True)
     table = '<table><thead><tr>' + ''.join('<th>' + esc(h) + '</th>' for h in ['Role','Employer','Fit','Stage']) + '</tr></thead><tbody>' + ''.join('<tr>' + ''.join('<td>' + esc(c) + '</td>' for c in r) + '</tr>' for r in rows) + '</tbody></table>'
     cards = ''.join(f'<article><strong>{v}</strong><span>{label}</span></article>' for v, label in [(len(opportunities),'Opportunities'),(len(applications),'Applications'),(len(follows),'Follow ups')])
     nav = ''.join(f'<a href="{esc(path.replace(" ", "%20"))}">{esc(title)}</a>' for path, title in links)
-    nav = '<a href="learning/index.html">Learning and development · Roadmap</a>' + nav if (roots.output_root / 'learning/index.html').exists() else nav
+    nav = '<a href="learning/index.html">Your learning plan</a>' + nav if (roots.output_root / 'learning/index.html').exists() else nav
+    if journey_view:
+        nav='<a href="job-search/index.html">Ready Now, Stretch Roles and Dream Roles</a>'+nav
+        cards=''.join(f'<article><strong>{journey_view["categories"][category]}</strong><span>{category}</span></article>' for category in ('Ready Now','Stretch Roles','Dream Roles'))
     page = f'''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(name)} Career OS</title><style>
-body{{margin:0;background:#f2f5f8;color:#15233a;font:16px/1.55 system-ui,sans-serif}}main{{max-width:1120px;margin:56px auto;padding:0 28px}}header{{border-bottom:1px solid #c7d2df;padding-bottom:24px}}small{{text-transform:uppercase;letter-spacing:.15em;color:#1f4f78}}h1{{font-size:42px;margin:10px 0}}h2{{font-size:22px;margin-top:32px}}.cards{{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:28px 0}}article{{background:white;padding:22px;border:1px solid #dce3eb;border-radius:12px}}strong{{display:block;font-size:32px}}span{{color:#526171}}table{{border-collapse:collapse;width:100%;background:white}}td,th{{text-align:left;padding:14px;border-bottom:1px solid #dce3eb}}th{{font-size:12px;text-transform:uppercase;color:#526171}}nav{{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}}a{{color:#1f4f78;text-decoration:none;background:white;padding:12px;border:1px solid #dce3eb;border-radius:6px;overflow-wrap:anywhere}}a:hover,a:focus{{outline:2px solid #1f4f78}}@media(max-width:700px){{main{{margin:24px auto}}h1{{font-size:30px}}.cards,nav{{grid-template-columns:1fr}}table{{display:block;overflow:auto}}}}@media print{{body{{background:white}}main{{margin:0}}}}</style><main><header><small>Career OS · private workspace</small><h1>{esc(name)}</h1><p>Evidence, opportunities and your next career move.</p></header><section class="cards" aria-label="Workspace totals">{cards}</section><h2>Opportunity pipeline</h2>{table}<h2>Your documents</h2><nav aria-label="Generated documents">{nav}</nav><p>Generated from your workspace. Review drafts before using them externally.</p></main></html>'''
+body{{margin:0;background:#f2f5f8;color:#15233a;font:16px/1.55 system-ui,sans-serif}}main{{max-width:1120px;margin:56px auto;padding:0 28px}}header{{border-bottom:1px solid #c7d2df;padding-bottom:24px}}small{{text-transform:uppercase;letter-spacing:.15em;color:#1f4f78}}h1{{font-size:42px;margin:10px 0}}h2{{font-size:22px;margin-top:32px}}.cards{{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:28px 0}}article{{background:white;padding:22px;border:1px solid #dce3eb;border-radius:12px}}strong{{display:block;font-size:32px}}span{{color:#526171}}table{{border-collapse:collapse;width:100%;background:white}}td,th{{text-align:left;padding:14px;border-bottom:1px solid #dce3eb}}th{{font-size:12px;text-transform:uppercase;color:#526171}}nav{{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}}a{{color:#1f4f78;text-decoration:none;background:white;padding:12px;border:1px solid #dce3eb;border-radius:6px;overflow-wrap:anywhere}}a:hover,a:focus{{outline:2px solid #1f4f78}}@media(max-width:700px){{main{{margin:24px auto}}h1{{font-size:30px}}.cards,nav{{grid-template-columns:1fr}}table{{display:block;overflow:auto}}}}@media print{{body{{background:white}}main{{margin:0}}}}</style><main><header><small>Your career, in one place</small><h1>{esc(name)}</h1><p>Build on what you know. Find work that fits you, and plan your next step.</p></header><section class="cards" aria-label="Workspace totals">{cards}</section><h2>Jobs to consider</h2>{table}<h2>Your documents</h2><nav aria-label="Generated documents">{nav}</nav><p>These drafts use the career details you have reviewed. Check them before you share or send them.</p></main></html>'''
     _write(roots, 'index.html', page)
     return {'home': 'index.html', 'markdown': 'HOME.md', 'documents': len(links), 'opportunities': len(opportunities), 'applications': len(applications), 'external_actions': 0}
 
@@ -380,7 +414,7 @@ def packet_view(workspace: Path, packet: dict, artifact: dict) -> dict:
     shutil.copyfile(source, target)
     manifest = {'packet_id': packet['packet_id'], 'opportunity_id': packet['opportunity_id'], 'review_state': packet['human_review_state'], 'resume': {'filename': target.name, 'sha256': sha256_file(target)}, 'jd_snapshot_hash': packet['jd_snapshot']['content_hash'], 'external_actions': 0}
     atomic_write_json(folder / 'manifest.json', manifest)
-    _write(roots, f'packets/{key}/README.md', '# Application packet\n\nReview required. No application has been submitted.\n\n' + f'- [Resume]({target.name.replace(" ", "%20")})\n- [Artifact lineage](manifest.json)\n\n' + 'Check contact details, evidence, employer and role, job freshness, and application answers before applying.\n')
+    _write(roots, f'packets/{key}/README.md', '# Application packet\n\nReview required. No application has been submitted.\n\n' + f'- [Resume]({target.name.replace(" ", "%20")})\n- [Document details](manifest.json)\n\n' + 'Check your contact details, examples, employer, job title and answers before applying. Make sure the posting is still open.\n')
     return manifest
 
 
@@ -389,5 +423,5 @@ def prioritize(workspace: Path, assumptions: dict | None = None) -> dict:
     roots = context(workspace)
     result = rank_opportunities([read_json(p) for p in (roots.state_root / 'opportunities').glob('*/opportunity.json')], records(roots.state_root / 'qualifications'), assumptions=assumptions)
     atomic_write_json(roots.assert_write_allowed(roots.state_root / 'reports/opportunity-priorities.json', 'state'), result)
-    _write(roots, 'reports/opportunity-priorities.md', '# Opportunity priorities\n\n' + result['boundary'] + '\n\n' + _table(['Role','Employer','Qualification','Supported fit','Assumed value'], [[r['role_title'],r['employer_name'],r['qualification'],str(r['supported_fit_percent'])+'%',r['assumed_expected_value'] if r['assumed_expected_value'] is not None else 'Not estimated'] for r in result['rankings']]))
+    _write(roots, 'reports/opportunity-priorities.md', '# Jobs to consider first\n\n' + 'Start with jobs where your experience supports the requirements. Check missing details before deciding. These comparisons are not hiring predictions.' + '\n\n' + _table(['Job','Employer','Your fit','Requirements supported','Your value estimate'], [[r['role_title'],r['employer_name'],display_label(r['qualification']),str(r['supported_fit_percent'])+'%',r['assumed_expected_value'] if r['assumed_expected_value'] is not None else 'Not estimated'] for r in result['rankings']]))
     return result

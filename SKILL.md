@@ -1,6 +1,6 @@
 ---
 name: career-os
-description: Use the Career OS installed CLI to initialize a career workspace, review career evidence, evaluate opportunities, generate resumes and application materials, and track interviews and outcomes, and operate Learning Path Intelligence for gaps, resource discovery, roadmaps and reviewed training evidence.
+description: Help people find suitable jobs, explore career paths, prepare tailored applications, and plan their learning and career growth with the installed Career OS tools.
 ---
 
 # Career OS skill entry point

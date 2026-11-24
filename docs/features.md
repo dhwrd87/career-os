@@ -1,22 +1,31 @@
-# Feature inventory
+# What you can do with Career OS
 
-| Area | Implemented behavior | Main interface |
-|---|---|---|
-| Career truth | Candidate, employment, skills, credentials, education, project and evidence records; consent, visibility, provenance, clarification | `onboarding`, `profile`, `update`, `history` |
-| Source intake | PDF, DOCX, text and Markdown extraction; FAST/DEEP intake; resumable evidence expansion; optional consented linked-source capture | `workflow setup`, `intake`, `evidence-expansion` |
-| Career pathways | Capability-based lanes, title proposals, preferences, role-family approval and production-family inheritance | Initial outputs, `role-family` |
-| Job intelligence | Retained JD snapshot, requirement semantics, employer needs, evidence mapping and qualification | `opportunity`, `qualify` |
-| Discovery | Bounded read-only Greenhouse discovery, reviewed catalogs, cross-run identity, freshness and qualification | `discover-source`, `discover` |
-| Resumes | Master, lane-base lifecycle and job tailoring; chronology, public-use and material-evidence-loss controls | `lane-base`, `resume` |
-| Presentation | Premium centered masthead; single-column US Letter PDF; selectable text, links, independent extraction, geometry/density and object preflight | `resume validate`, `workspace queue-audit` |
-| Editable output | Same semantic content in DOCX; content readback; external renderer required for layout approval | `resume export-docx` |
-| Applications | Review packet, PDF/JD hashes, repeat-safe preparation, evidence-linked cover-letter Markdown/PDF | `application prepare`, `application cover-letter` |
-| Pipeline | Append-only human-reported events, corrections, outcomes and immutable submission lineage | `application list`, `application record` |
-| Follow-up | Dated local planning and review-only drafts | `application follow-up` |
-| Interview | Evidence-linked story bank, question themes, answer boundaries, technical probes, checklist and report | `interview` |
-| Career intelligence | Cohorts, descriptive conversion, confounding and sample maturity, recurring gaps, career-capital and observed-market signals | `report` |
-| Learning Path Intelligence | Typed market-driven gaps; preferences; live public resource discovery; provider-neutral freshness/redundancy/four-value evaluation; aggregate budget/time/subscription-aware roadmap; original projects; completion journal; verified evidence/award proposals and role reassessment | `learning gaps/preferences/discover/build/progress/propose-update/reassess/status` |
-| Workspace experience | HTML/Markdown home, career profile, opportunity/application tracker and artifact links | `workspace dashboard` |
-| Portability | Relative roots, package doctor, backup-first migrations, canonical transaction recovery, export and isolation tests | `doctor`, `migrate`, `workspace verify`, `export` |
+## Know your starting point
 
-No external action is implied by any of these commands. Research catalogs and activity records must come from the user or a separately available read-only research source. Broad labor-market coverage, authenticated provider APIs and verified AI-host integrations beyond the tested router are not claimed.
+Bring in a resume or describe your career. Review your jobs, dates, skills, education, qualifications, projects and achievements before saving them. Keep useful work examples and choose what may be shared with employers.
+
+## Find and compare jobs
+
+Search supported employer boards or compare real postings found by your assistant or supplied by you. Career OS removes duplicate listings, checks available source details and compares the requirements with your profile. Ready Now, Stretch Roles and Dream Roles help you decide where to focus.
+
+## Explore more possibilities
+
+Use your work history and transferable skills to explore other job titles. Checked postings help show where those skills matter and which gaps remain. Suggestions do not change your past titles or award new qualifications.
+
+## Prepare strong applications
+
+Build a full career resume, a starting resume for a kind of work, or a resume tailored to a specific opening. Prepare several suitable resumes at once. Export PDF or editable DOCX files, draft a cover letter and keep application documents together. Checks protect factual claims, readable layout and the exact resume used for an application.
+
+## Follow through
+
+Track the applications and outcomes you report. Plan a follow-up and review a local draft. Prepare interview examples, questions to ask and honest answers about your role in past work. Review patterns over time without treating a small sample as proof of what caused a result.
+
+## Grow toward your goals
+
+Build a plan for a chosen stretch or dream role. Learning Path Intelligence compares current courses and resources, checks for repeated material and helps fit work into your time and budget. Create projects, track progress and review demonstrated skills or actual awards before updating your profile. Course completion never counts as professional experience.
+
+## Keep control
+
+Your workspace lives in a folder you choose. Changes to career facts require review. Earlier application records keep the resume you used. Backups, version checks and recovery tools help you move safely between supported versions.
+
+Career OS does not apply for jobs, send messages, buy training, enrol you in courses, change public profiles or make commitments. Live sources and environment limits are explained in the [README](../README.md). Developers can find exact command and data details in [architecture](architecture.md) and [contracts](contracts.md).

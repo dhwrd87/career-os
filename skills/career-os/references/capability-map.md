@@ -1,6 +1,6 @@
 # Capability map
 
-The skill routes to Career OS package `>=0.4.1,<0.5.0`. It does not implement the engine.
+The skill routes to Career OS package `>=0.4.2,<0.5.0`. It does not implement the engine.
 
 | User capability | Package authority | Availability |
 |---|---|---|
