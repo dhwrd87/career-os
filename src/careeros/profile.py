@@ -113,13 +113,26 @@ def build_role_family(workspace: Path, *, intent_index: int = 0, approve: bool =
     }
     SchemaRegistry(schema_dir()).validate("urn:careeros:schema:role-family:v1", family)
     atomic_write_json(roots.assert_write_allowed(roots.state_root / "role-families/active.json", "state"), family)
-    profile["role_families"] = [family]
+    profile['role_families']=[v for v in profile.get('role_families',[]) if v['role_family_id']!=family_id]+[family]
+    atomic_write_json(roots.assert_write_allowed(roots.state_root/'role-families'/('family-'+family_id.split(':')[-1]+'.json'),'state'),family)
     profile["generated_at"] = created_at
     atomic_write_json(roots.state_root / "profile/career-profile.json", profile)
     manifest_path = roots.state_root / "profile/profile-build-manifest.json"
     manifest = read_json(manifest_path)
     manifest["profile_hash"] = sha256_value(profile)
-    manifest["role_family_ids"] = [family_id]
+    manifest["role_family_ids"] = [v["role_family_id"] for v in profile["role_families"]]
     atomic_write_json(manifest_path, manifest)
     mark_derivative_current(roots, "ROLE_FAMILY", family_id, timestamp=created_at, lineage_hash=sha256_value(family))
+    return family
+
+
+def activate_role_family(workspace: Path, role_family_id: str, *, timestamp=None) -> dict[str, Any]:
+    """Choose an approved derivative without rewriting the career profile."""
+    require_current_workspace(workspace)
+    roots=load_config(workspace/'careeros.yaml').roots
+    profile=read_json(roots.state_root/'profile/career-profile.json')
+    family=next((v for v in profile.get('role_families',[]) if v['role_family_id']==role_family_id),None)
+    if not family or family['approval_state']!='APPROVED':raise PermissionError('Choose a career direction that you have approved.')
+    atomic_write_json(roots.assert_write_allowed(roots.state_root/'role-families/active.json','state'),family)
+    mark_derivative_current(roots,'ROLE_FAMILY',role_family_id,timestamp=utc_now(timestamp),lineage_hash=sha256_value(family))
     return family

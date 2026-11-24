@@ -356,6 +356,10 @@ def ingest(workspace: Path, input_path: Path, *, timestamp: str | None = None) -
         "supersedes": raw.get("supersedes"),
         "repost_group_id": raw.get("repost_group_id"),
     }
+    for field in ('application_url','application_url_source','application_questions','application_question_source','cover_letter_requirement'):
+        if field in raw:opportunity[field]=raw[field]
+    from careeros.application_documents import validate_application_details
+    validate_application_details(opportunity)
     snapshot_text = raw["job_description"]
     snapshot = {
         "schema": "careeros.job-description-snapshot.v1", "schema_version": "1.0.0",
@@ -429,6 +433,7 @@ def qualify(workspace: Path, opportunity_id: str, *, timestamp: str | None = Non
         "schema": "careeros.qualification-decision.v1", "schema_version": "1.0.0",
         "qualification_id": qualification_id, "opportunity_id": opportunity_id,
         "profile_hash": profile_manifest["profile_hash"], "role_family_id": family["role_family_id"],
+        "jd_snapshot_hash": read_json(opportunity_path.parent/"jd-snapshot.json")["content_hash"],
         "policy_version": QUALIFICATION_POLICY_VERSION, "decision": decision_name,
         "evidence": evidence, "gaps": gaps, "hard_disqualifiers": sorted(set(hard)),
         "confidence": "HIGH" if decision_name != "BORDERLINE" else "MEDIUM", "human_override": None, "created_at": created_at,

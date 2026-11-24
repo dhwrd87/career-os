@@ -11,7 +11,7 @@ Use the installed package and the person's chosen workspace. Keep their career d
 
 - Resolve the workspace, then run `python scripts/route.py --workspace <path> --request "<request>"` from this skill folder. If the package is missing or incompatible, use [setup help](references/quickstart.md).
 - For new users, start with their resume or career notes. Follow [onboarding](references/workflows.md): show what was found, ask about missing facts, and get approval before saving their career profile. With no resume, use `scripts/bootstrap.py` to guide the conversation.
-- For jobs, other career options, resumes for top matches, stretch roles or dream-role plans, follow [the connected career workflows](references/human-workflows.md). Carry the request through the actual commands and inspect the returned files; a route or a list of steps is not a completed task.
+- For jobs, other career options, master and career-specific resumes, complete application packages, stretch roles or dream-role plans, follow [the connected career workflows](references/human-workflows.md). Carry the request through the actual commands and inspect the returned files; a route or a list of steps is not a completed task.
 - For applications, interviews, follow-ups, exports and progress reports, use the matching section in [everyday workflows](references/complete-workflows.md). For learning progress or new awards, use [learning](references/learning-path-intelligence.md).
 - Finish by refreshing `workspace dashboard`, then link the useful report or draft and explain the next step in ordinary language. If a check fails, say what needs attention and repair it or ask for the missing fact.
 

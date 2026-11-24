@@ -75,3 +75,7 @@ All 4 pages of the generated learning PDF were rendered and visually inspected. 
 ## Recruiter-copy review
 
 See the [eight-person copy gallery and assessment](recruiter-copy-review-0.4.2.md). It includes actual master, career-specific, tailored and cover-letter outputs, with the limits of competitor and human evaluation clearly stated.
+
+## Complete application journey — v0.4.3 candidate
+
+[Open the actual document gallery and verification](complete-application-journey.md#what-was-executed-for-this-candidate), or [the complete fictional application folder](../examples/application-journey/README.md). The source fixtures and existing goldens are unchanged.

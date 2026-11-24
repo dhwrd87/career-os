@@ -148,20 +148,36 @@ def cover_letter(workspace: Path, opportunity_id: str, build_id: str) -> dict:
     paragraphs=[f"Dear {opp['employer_name']} hiring team,",opening]
     previous_section=None
     for section,bullet in chosen:
-        text=bullet['text'];claim=text[:1].lower()+text[1:]
+        from careeros.recruiter_conversion import first_person_fact
+        claim=first_person_fact(bullet['text'])
+        claim=claim if claim.startswith('I ') else claim[:1].lower()+claim[1:]
         if section.get('employer'):
             letter_context=f"As {section['actual_title']} at {section['employer']}"
         else:letter_context=f"In the {section['name']} project"
-        if section is previous_section:paragraphs[-1]+=' I also '+claim
-        elif len(paragraphs)==2:paragraphs[-1]+=' '+letter_context+', I '+claim
-        else:paragraphs.append(letter_context+', I '+claim)
+        if section is previous_section:paragraphs[-1]+=' '+(claim.replace('I ','I also ',1) if claim.startswith('I ') else claim[:1].upper()+claim[1:])
+        elif len(paragraphs)==2:paragraphs[-1]+=' '+letter_context+', '+claim
+        else:paragraphs.append(letter_context+', '+claim)
         previous_section=section
     paragraphs+=['I can discuss this work and the results in more detail.','Sincerely,\n'+content['candidate']['public_name']]
     key = sha256_value([opportunity_id, build_id])[:16]
     path = _write(roots, f'applications/{key}/cover-letter.md', '# Cover letter\n\n' + '\n\n'.join(paragraphs) + '\n')
     pdf = roots.assert_write_allowed(path.with_suffix('.pdf'), 'output')
     _report_pdf(content['candidate']['public_name'] + ' Cover Letter', paragraphs, pdf)
-    result = {'schema': 'careeros.cover-letter-export.v1', 'opportunity_id': opportunity_id, 'build_id': build_id, 'status': 'REVIEW_REQUIRED', 'evidence_ids': sorted({e for b in evidence for e in b['evidence_ids']}), 'source_content_sha256': sha256_file(build.parent / 'content.json'), 'job_snapshot_hash': snapshot['content_hash'], 'artifacts': [{'path': str(p.relative_to(roots.output_root)), 'sha256': sha256_file(p)} for p in (path, pdf)], 'external_actions': 0}
+    from docx import Document
+    from docx.shared import Inches, Pt
+    docx_path=roots.assert_write_allowed(path.with_suffix('.docx'),'output')
+    document=Document();section=document.sections[0]
+    section.page_width,section.page_height=Inches(8.5),Inches(11)
+    section.left_margin=section.right_margin=Inches(.72)
+    section.top_margin=section.bottom_margin=Inches(.6)
+    normal=document.styles['Normal'];normal.font.name='Arial';normal.font.size=Pt(11)
+    normal.paragraph_format.space_after=Pt(10)
+    for paragraph in paragraphs:document.add_paragraph(paragraph)
+    document.core_properties.title=content['candidate']['public_name']+' Cover Letter'
+    document.core_properties.author=content['candidate']['public_name'];document.core_properties.last_modified_by='';document.core_properties.comments=''
+    document.save(docx_path)
+    if [p.text for p in Document(docx_path).paragraphs]!=paragraphs:raise ValueError('Cover letter DOCX lost paragraph content.')
+    result = {'schema': 'careeros.cover-letter-export.v1', 'opportunity_id': opportunity_id, 'build_id': build_id, 'status': 'REVIEW_REQUIRED', 'evidence_ids': sorted({e for b in evidence for e in b['evidence_ids']}), 'source_content_sha256': sha256_file(build.parent / 'content.json'), 'job_snapshot_hash': snapshot['content_hash'], 'artifacts': [{'path': str(p.relative_to(roots.output_root)), 'sha256': sha256_file(p)} for p in (path, pdf, docx_path)], 'external_actions': 0}
     atomic_write_json(roots.assert_write_allowed(roots.state_root / 'cover-letters' / f'{key}.json', 'state'), result)
     return result
 
@@ -175,6 +191,9 @@ def record_event(workspace: Path, application_id: str, payload: dict, *, timesta
     if payload['event_type'] == 'SUBMITTED':
         opp, snapshot, qual = job_context(roots, state['opportunity_id'])
         packet = selected(roots.state_root / 'application-packets', 'packet_id', state['packet_id'])
+        if packet.get('document_manifest'):
+            from careeros.application_documents import verify_packet
+            verify_packet(roots,packet)
         artifact = next((read_json(p) for p in (roots.state_root / 'resume-builds').glob('*/artifact.json') if read_json(p)['artifact_id'] == state['resume_artifact_id']), None)
         artifact_path = (roots.output_root / artifact['path']).resolve() if artifact else None
         if not artifact_path or not artifact_path.is_relative_to(roots.output_root.resolve()) or not artifact_path.is_file() or sha256_file(artifact_path) != packet['resume_sha256']:
@@ -398,24 +417,19 @@ def queue_audit(workspace: Path) -> dict:
         if quality['status'] != 'PASS':
             findings.append({'artifact_id': artifact['artifact_id'], 'issue': 'PDF_PREFLIGHT', 'details': quality['findings']})
         checked.append({'artifact_id': artifact['artifact_id'], 'status': quality['status'], 'accessibility': quality['accessibility']})
+    from careeros.application_documents import verify_packet
+    for packet in records(roots.state_root/'application-packets'):
+        if packet.get('document_manifest'):
+            try:verify_packet(roots,packet)
+            except PermissionError as exc:findings.append({'packet_id':packet['packet_id'],'error':str(exc)})
     profile_path = roots.state_root / 'profile/career-profile.json'
     summary_review = cross_summary_templates([read_json(p) for p in sorted((roots.state_root / 'resume-builds').glob('*/content.json'))], read_json(profile_path) if profile_path.is_file() else {})
     return {'status': 'FAIL' if findings else summary_review['status'], 'artifacts_checked': len(checked), 'artifacts': checked, 'findings': findings, 'summary_batch_review': summary_review}
 
 
 def packet_view(workspace: Path, packet: dict, artifact: dict) -> dict:
-    import shutil
-    roots = context(workspace)
-    key = packet['packet_id'].split(':')[-1]
-    folder = roots.assert_write_allowed(roots.output_root / 'packets' / key, 'output')
-    folder.mkdir(parents=True, exist_ok=True)
-    source = roots.output_root / artifact['path']
-    target = roots.assert_write_allowed(folder / source.name, 'output')
-    shutil.copyfile(source, target)
-    manifest = {'packet_id': packet['packet_id'], 'opportunity_id': packet['opportunity_id'], 'review_state': packet['human_review_state'], 'resume': {'filename': target.name, 'sha256': sha256_file(target)}, 'jd_snapshot_hash': packet['jd_snapshot']['content_hash'], 'external_actions': 0}
-    atomic_write_json(folder / 'manifest.json', manifest)
-    _write(roots, f'packets/{key}/README.md', '# Application packet\n\nReview required. No application has been submitted.\n\n' + f'- [Resume]({target.name.replace(" ", "%20")})\n- [Document details](manifest.json)\n\n' + 'Check your contact details, examples, employer, job title and answers before applying. Make sure the posting is still open.\n')
-    return manifest
+    from careeros.application_documents import packet_view as complete_packet
+    return complete_packet(workspace,packet,artifact)
 
 
 def prioritize(workspace: Path, assumptions: dict | None = None) -> dict:

@@ -77,10 +77,16 @@ def parser() -> argparse.ArgumentParser:
     search.add_argument('--request', required=True)
     search.add_argument('--approve-network', action='store_true')
     workflow_sub.add_parser('roles')
+    workflow_sub.add_parser('strategy')
+    directions=workflow_sub.add_parser('directions')
+    directions.add_argument('--intent-index',type=int,action='append',required=True)
+    directions.add_argument('--approve',action='store_true');directions.add_argument('--actor')
     workflow_sub.add_parser('opportunities')
     batch = workflow_sub.add_parser('prepare')
     batch.add_argument('--top', type=int, default=3)
     batch.add_argument('--opportunity-id', action='append')
+    batch.add_argument('--resume-only',action='store_true')
+    batch.add_argument('--cover-letter',choices=['AUTO','REQUESTED','OMIT'],default='AUTO')
     plan = workflow_sub.add_parser('plan')
     plan.add_argument('--opportunity-id', required=True)
     plan.add_argument('--catalog')
@@ -152,6 +158,9 @@ def parser() -> argparse.ArgumentParser:
     app_prepare = app_sub.add_parser("prepare")
     app_prepare.add_argument("--opportunity-id", required=True)
     app_prepare.add_argument("--build-id", required=True)
+    app_prepare.add_argument('--cover-letter',choices=['AUTO','REQUESTED','OMIT'],default='AUTO')
+    bank=app_sub.add_parser('answer-bank')
+    bank.add_argument('--input');bank.add_argument('--approve',action='store_true');bank.add_argument('--actor')
     update = commands.add_parser("update")
     update_sub = update.add_subparsers(dest="update_command", required=True)
     update_propose = update_sub.add_parser("propose")
@@ -218,6 +227,7 @@ def parser() -> argparse.ArgumentParser:
     source_discovery.add_argument('--approve-network', action='store_true')
     source_discovery.add_argument('--limit', type=int, default=25)
     source_discovery.add_argument('--query')
+    source_discovery.add_argument('--job-id')
     priority = commands.add_parser("prioritize")
     priority.add_argument("--assumptions")
     learning_cmd = commands.add_parser("learning")
@@ -241,18 +251,22 @@ def run(args: argparse.Namespace) -> tuple[Any, ExitCode]:
     target = _workspace(args)
     timestamp = args.timestamp
     from careeros import experience
-    if args.command == 'workflow' and args.workflow_command in {'jobs','roles','opportunities','prepare','plan'}:
+    if args.command == 'workflow' and args.workflow_command in {'jobs','roles','opportunities','prepare','plan','strategy','directions'}:
         from careeros import journey
         if args.workflow_command=='jobs':return journey.find_jobs(target,read_json(Path(args.request)),approved=args.approve_network,timestamp=timestamp),ExitCode.OK
+        if args.workflow_command=='strategy':
+            from careeros.career_outputs import write_search_strategy
+            return write_search_strategy(target,timestamp=timestamp),ExitCode.OK
+        if args.workflow_command=='directions':return journey.career_directions(target,args.intent_index,approved=args.approve,actor=args.actor,timestamp=timestamp),ExitCode.OK
         if args.workflow_command=='roles':return journey.suggest_roles(target,timestamp=timestamp),ExitCode.OK
         if args.workflow_command=='opportunities':return journey.overview(target,timestamp=timestamp),ExitCode.OK
-        if args.workflow_command=='prepare':return journey.prepare(target,top=args.top,selected_ids=args.opportunity_id,timestamp=timestamp),ExitCode.OK
+        if args.workflow_command=='prepare':return journey.prepare(target,top=args.top,selected_ids=args.opportunity_id,resume_only=args.resume_only,cover_letter_policy=args.cover_letter,timestamp=timestamp),ExitCode.OK
         return journey.plan(target,args.opportunity_id,catalog=Path(args.catalog) if args.catalog else None,timestamp=timestamp),ExitCode.OK
     if args.command == 'discover-source':
-        from careeros.discovery_sources import fetch_greenhouse
+        from careeros.discovery_sources import fetch_greenhouse, fetch_greenhouse_job
         from careeros.core.io import atomic_write_json
         roots = experience.context(target)
-        result = fetch_greenhouse(board=args.greenhouse_board, employer=args.employer, approved=args.approve_network, limit=args.limit, query=args.query, timestamp=timestamp)
+        result = fetch_greenhouse_job(board=args.greenhouse_board,job_id=args.job_id,employer=args.employer,approved=args.approve_network,timestamp=timestamp) if args.job_id else fetch_greenhouse(board=args.greenhouse_board, employer=args.employer, approved=args.approve_network, limit=args.limit, query=args.query, timestamp=timestamp)
         path = roots.assert_write_allowed(roots.state_root / 'discovery/provider-proposal.json', 'state')
         atomic_write_json(path, result)
         return {'status':'REQUIREMENT_REVIEW_REQUIRED','proposal':str(path),'selected_posts':result['selected_posts'],'network_requests':result['network_requests'],'external_writes':0}, ExitCode.OK
@@ -305,6 +319,9 @@ def run(args: argparse.Namespace) -> tuple[Any, ExitCode]:
         result = experience.queue_audit(target)
         return result, ExitCode.OK if result['status'] == 'PASS' else ExitCode.VALIDATION_FAILURE
     if args.command == "application" and args.application_command != "prepare":
+        if args.application_command == 'answer-bank':
+            from careeros.application_answers import save_bank,load_bank
+            return (save_bank(target,read_json(Path(args.input)),approved=args.approve,actor=args.actor,timestamp=timestamp) if args.input else load_bank(experience.context(target))),ExitCode.OK
         if args.application_command == "list":
             return {"applications": experience.records(experience.context(target).state_root / 'applications')}, ExitCode.OK
         if args.application_command == "record":
@@ -436,7 +453,7 @@ def run(args: argparse.Namespace) -> tuple[Any, ExitCode]:
         result, manifest = resume.validate(target, args.build_id)
         return {"validation": result, "manifest": manifest}, ExitCode.OK if result["status"] == "PASS" else ExitCode.VALIDATION_FAILURE
     if args.command == "application":
-        return application.prepare(target, args.opportunity_id, args.build_id, timestamp=timestamp), ExitCode.OK
+        return application.prepare(target, args.opportunity_id, args.build_id, cover_letter_policy=args.cover_letter, timestamp=timestamp), ExitCode.OK
     if args.command == "update":
         if args.update_command == "propose":
             result = updates.propose(target, Path(args.input), timestamp=timestamp)

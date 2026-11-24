@@ -13,7 +13,7 @@ from pathlib import Path
 from typing import Any
 
 
-MIN_PACKAGE = "0.4.2"
+MIN_PACKAGE = "0.4.3"
 MAX_PACKAGE_EXCLUSIVE = "0.5.0"
 
 INTENT_PATTERNS: tuple[tuple[str, tuple[str, ...]], ...] = (
@@ -21,7 +21,7 @@ INTENT_PATTERNS: tuple[tuple[str, tuple[str, ...]], ...] = (
     ("PLAN_DREAM_ROLE", (r"dream (?:role|job|career)", r"(?:work|plan).*towards?", r"(?:become|want to be) (?:a|an) ")),
     ("PLAN_STRETCH_ROLE", (r"(?:training|learn|plan).*(?:stretch|this role|that role|target role)", r"close.*(?:skill gaps|gaps for)")),
     ("SUGGEST_OTHER_ROLES", (r"other job titles", r"other roles", r"what else could i do", r"jobs i haven.t considered", r"additional career paths")),
-    ("PREPARE_TOP_MATCHES", (r"(?:resumes?|applications?).*(?:top|best|selected)", r"(?:top|best|selected).*(?:resumes?|applications?)")),
+    ("PREPARE_TOP_MATCHES", (r"(?:resumes?|applications?).*(?:top|best|selected|strongest)", r"(?:top|best|selected|strongest).*(?:resumes?|applications?)")),
     ("FIND_ACTUAL_JOBS", (r"find.*(?:jobs|openings|work)", r"search.*(?:jobs|openings)")),
     ("DISCOVER_LEARNING_RESOURCES", (r"find.*(?:current|live).*(?:courses|learning resources)", r"discover.*(?:courses|learning resources)")),
     ("SET_LEARNING_PREFERENCES", (r"learning budget", r"learning preferences", r"subscriptions.*learning", r"hours.*learn")),
@@ -33,10 +33,10 @@ INTENT_PATTERNS: tuple[tuple[str, tuple[str, ...]], ...] = (
     ("CAREER_PROGRESS", (r"career progress", r"conversion report", r"outcome report", r"career capital")),
     ("COVER_LETTER", (r"cover letter",)),
     ("EXPORT_DOCX", (r"editable resume", r"docx", r"word resume")),
-    ("SET_ME_UP", (r"here(?:'|’)s my (?:resume|cv).*(?:set up|career os)", r"set me up from (?:my )?(?:resume|cv)", r"build my career os from")),
+    ("SET_ME_UP", (r"build my master resume", r"establish.*professional history", r"here(?:'|’)s my (?:resume|cv).*(?:set up|career os)", r"set me up from (?:my )?(?:resume|cv)", r"build my career os from")),
     ("IMPROVE_MY_CAREER_PROFILE", (r"improve my career profile", r"deepen my career evidence")),
     ("FIND_MY_CAREER_PATHS", (r"find my career paths", r"what career paths", r"career lane")),
-    ("BUILD_LANE_BASE", (r"build (?:my |a )?lane base", r"base resume", r"resume for (?:this |my )?role family")),
+    ("BUILD_LANE_BASE", (r"resumes for.*(?:types|families|directions)", r"career.specific.*resumes", r"build (?:my |a )?lane base", r"base resume", r"resume for (?:this |my )?role family")),
     ("LIVE_OPPORTUNITY_SEARCH", (r"live (?:job|opportunity) search", r"fresh (?:job|role|opportunity) search", r"find (?:me )?(?:current|live) (?:jobs|roles|opportunities)")),
     ("CATALOG_DISCOVERY", (r"discover.*opportunit", r"find.*jobs", r"find.*opportunit")),
     ("HELP_ME_GET_A_JOB", (r"help me get a job", r"start my job search")),

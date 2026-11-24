@@ -1,6 +1,6 @@
 {
   "schema": "careeros.schema-registry.v1",
-  "schema_bundle_version": "1.24.0",
+  "schema_bundle_version": "1.25.0",
   "entries": [
     {
       "schema_id": "careeros.config.v1",

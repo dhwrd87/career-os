@@ -1,13 +1,95 @@
 {
-  "$schema":"https://json-schema.org/draft/2020-12/schema",
-  "$id":"urn:careeros:schema:application-packet:v1",
-  "title":"ApplicationPacketV1","type":"object","additionalProperties":false,
-  "required":["schema","schema_version","packet_id","opportunity_id","qualification_id","resume_artifact_id","jd_snapshot","cover_letter","application_answers","gate_summary","human_review_state","created_at"],
-  "properties":{
-    "schema":{"const":"careeros.application-packet.v1"},"schema_version":{"const":"1.0.0"},"packet_id":{"type":"string"},"application_id":{"type":"string"},"opportunity_id":{"type":"string"},
-    "qualification_id":{"type":"string"},"resume_artifact_id":{"type":"string"},"resume_sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"},"jd_snapshot":{"$ref":"urn:careeros:schema:job-description-snapshot:v1"},
-    "opportunity_freshness":{"$ref":"urn:careeros:schema:opportunity-freshness:v1"},
-    "cover_letter":{"type":["object","null"]},"application_answers":{"type":["object","null"]},"gate_summary":{"type":"array","items":{"type":"object"}},
-    "human_review_state":{"const":"REVIEW_REQUIRED"},"created_at":{"type":"string","format":"date-time"}
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:careeros:schema:application-packet:v1",
+  "title": "ApplicationPacketV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "schema_version",
+    "packet_id",
+    "opportunity_id",
+    "qualification_id",
+    "resume_artifact_id",
+    "jd_snapshot",
+    "cover_letter",
+    "application_answers",
+    "gate_summary",
+    "human_review_state",
+    "created_at"
+  ],
+  "properties": {
+    "schema": {
+      "const": "careeros.application-packet.v1"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "packet_id": {
+      "type": "string"
+    },
+    "application_id": {
+      "type": "string"
+    },
+    "opportunity_id": {
+      "type": "string"
+    },
+    "qualification_id": {
+      "type": "string"
+    },
+    "resume_artifact_id": {
+      "type": "string"
+    },
+    "resume_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "jd_snapshot": {
+      "$ref": "urn:careeros:schema:job-description-snapshot:v1"
+    },
+    "opportunity_freshness": {
+      "$ref": "urn:careeros:schema:opportunity-freshness:v1"
+    },
+    "cover_letter": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "application_answers": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "gate_summary": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "human_review_state": {
+      "const": "REVIEW_REQUIRED"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "build_id": {
+      "type": "string"
+    },
+    "document_manifest": {
+      "type": "string"
+    },
+    "start_here": {
+      "type": "string"
+    },
+    "completion_state": {
+      "type": "string"
+    },
+    "document_manifest_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
   }
 }

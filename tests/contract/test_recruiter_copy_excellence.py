@@ -13,6 +13,11 @@ def profile():
 
 
 class RecruiterCopyExcellenceTests(unittest.TestCase):
+    def test_letter_person_preserves_every_sentence_and_passive_results(self):
+        from careeros.recruiter_conversion import first_person_fact
+        self.assertEqual(first_person_fact('Created a reviewed workflow. Mapped the intake steps.'),'I created a reviewed workflow. I mapped the intake steps.')
+        self.assertEqual(first_person_fact('The plan was adopted. Led the documented review.'),'The plan was adopted. I led the documented review.')
+
     def test_intake_verb_recovers_its_source_object_without_a_generic_result(self):
         p=profile();before=copy.deepcopy(p);story=editorial.plan_storyline(p,{'display_name':'Customer Support','core_capabilities':['Customer Support']})
         bullets=editorial.build_bullet_candidates(p,story)
@@ -74,7 +79,7 @@ class RecruiterCopyExcellenceTests(unittest.TestCase):
             first=lane_base.build_lane_base(w,accept=True,actor='synthetic-human')
             old=w/'outputs'/first['artifact']['path'];digest=sha256_file(old)
             active=read_json(w/'state/lane-bases/active.json')
-            with patch.object(lane_base,'COMPILER_VERSION','0.4.3'):
+            with patch.object(lane_base,'COMPILER_VERSION','0.4.4'):
                 second=lane_base.build_lane_base(w)
             self.assertNotEqual(second['artifact']['path'],first['artifact']['path'])
             self.assertEqual(sha256_file(old),digest)

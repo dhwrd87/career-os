@@ -58,3 +58,40 @@ def fetch_greenhouse(*, board: str, employer: str, approved: bool, limit=25, que
     result=greenhouse_catalog(json.loads(body),board=board,employer=employer,limit=limit,query=query,timestamp=timestamp)
     result['network_requests']=1
     return result
+
+
+def fetch_greenhouse_job(*,board:str,job_id:str,employer:str,approved:bool,timestamp=None,opener=None):
+    """Read a specific public job and its actual application-question schema."""
+    if approved is not True:raise PermissionError('Read-only public-source permission is required.')
+    if not re.fullmatch(r'[A-Za-z0-9_-]{1,100}',board) or not re.fullmatch(r'[0-9]{1,20}',str(job_id)):raise ValueError('Invalid employer board or job ID.')
+    if not employer.strip():raise ValueError('Supply the verified employer name.')
+    url=f'https://boards-api.greenhouse.io/v1/boards/{board}/jobs/{job_id}?questions=true'
+    client=opener or build_opener(_NoRedirect())
+    with client.open(Request(url,headers={'Accept':'application/json','User-Agent':'CareerOS/0.4 public-read-only'},method='GET'),timeout=20) as response:
+        if response.geturl()!=url:raise ValueError('Unexpected provider response URL.')
+        body=response.read(MAX_BYTES+1)
+    if len(body)>MAX_BYTES:raise ValueError('Provider response exceeds discovery budget.')
+    row=json.loads(body)
+    if str(row.get('id'))!=str(job_id):raise ValueError('The provider returned a different job.')
+    proposal=greenhouse_catalog({'jobs':[row]},board=board,employer=employer,limit=1,timestamp=timestamp)
+    if not proposal['opportunities']:raise ValueError('This is not a complete, currently available job posting.')
+    now=utc_now(timestamp);questions=[]
+    groups=[*(row.get('questions') or []),*(row.get('location_questions') or []),*(row.get('compliance') or [])]
+    demographic=row.get('demographic_questions') or {}
+    if isinstance(demographic,dict):groups+=demographic.get('questions') or []
+    for index,q in enumerate(groups):
+        fields=q.get('fields') or [{}]
+        # Greenhouse may offer a file OR text input for one resume question.
+        # Preserve the alternatives rather than inventing two required questions.
+        field=next((v for v in fields if 'file' in str(v.get('type',''))),fields[0])
+        question={'id':str(field.get('name') or q.get('id') or f'question-{index}')+f'-{index}','text':str(q.get('label') or q.get('text') or field.get('name') or 'Application question'),'required':q.get('required') is True,'field_type':str(field.get('type') or 'text'),'field_name':field.get('name'),'options':field.get('values') or q.get('answer_options') or [],'alternative_fields':fields}
+        questions.append(question)
+    job=proposal['opportunities'][0];job['application_questions']=questions
+    job['application_question_source']={'url':url,'captured_at':now,'method':'PUBLIC_PROVIDER_QUESTION_SCHEMA','complete':isinstance(row.get('questions'),list)}
+    from urllib.parse import urlsplit
+    source=urlsplit(str(job.get('source_url') or ''))
+    if source.hostname in {'job-boards.greenhouse.io','boards.greenhouse.io','job-boards.eu.greenhouse.io'} and source.path.rstrip('/').endswith('/jobs/'+str(job_id)):
+        job['application_url']=job['source_url']
+        job['application_url_source']={'url':url,'captured_at':now,'method':'PROVIDER_HOSTED_FORM','verified':True}
+    proposal.update(source_endpoint=url,network_requests=1)
+    return proposal

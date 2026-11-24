@@ -11,7 +11,8 @@ The engine performs these actions; do not recreate its decisions in conversation
 | Prioritize opportunities | `workflow opportunities` and `report` | Current qualifications and recorded events |
 | Export an editable resume | `resume export-docx --build-id <id>` | Passing, current resume build; docx extra |
 | Write a cover letter | `application cover-letter --opportunity-id <id> --build-id <id>` | Qualified job and current, validated resume |
-| Prepare my application | `application prepare --opportunity-id <id> --build-id <id>` | Accepted resume and fresh qualified opportunity; stops at REVIEW_REQUIRED |
+| Prepare my application | `application prepare --opportunity-id <id> --build-id <id>` | Validated resume and fresh qualified opportunity; creates a self-contained PDF/DOCX package and stops at REVIEW_REQUIRED |
+| Save reusable answers | `application answer-bank --input <json> --approve --actor <person>` | Exact questions, reviewed answers and explicit reuse scope |
 | Track my applications | `application list` | Existing packets |
 | Record activity or an outcome | `application record --application-id <id> --input <event.json>` | Human-confirmed activity with actor, event_type, occurred_at and human_confirmed=true |
 | I already applied | Same record command with event_type SUBMITTED | Human reports actual prior action; engine verifies PDF and records immutable PDF/JD hashes. Never infer submission from packet generation |

@@ -34,8 +34,8 @@ bootstrap_module = load_script("bootstrap")
 class SkillContractTests(unittest.TestCase):
     def test_manifest_declares_thin_compatible_skill(self):
         manifest = json.loads((SKILL_ROOT / "skill-manifest.json").read_text(encoding="utf-8"))
-        self.assertEqual(manifest["skill_version"], "0.4.2")
-        self.assertEqual(manifest["career_os_package"], {"minimum": "0.4.2", "maximum_exclusive": "0.5.0"})
+        self.assertEqual(manifest["skill_version"], "0.4.3")
+        self.assertEqual(manifest["career_os_package"], {"minimum": "0.4.3", "maximum_exclusive": "0.5.0"})
         self.assertFalse(manifest["external_adapters_enabled"])
         self.assertEqual(manifest["phase_endpoint"], "REVIEW_REQUIRED_OR_CANONICAL_UPDATE_COMMITTED")
 
@@ -56,7 +56,7 @@ class SkillContractTests(unittest.TestCase):
 
 class CompatibilityTests(unittest.TestCase):
     def test_supported_package(self):
-        self.assertEqual(route_module.classify_package_version("0.4.2"), "SUPPORTED")
+        self.assertEqual(route_module.classify_package_version("0.4.3"), "SUPPORTED")
 
     def test_older_package(self):
         self.assertEqual(route_module.classify_package_version("0.2.9"), "OLDER_BUT_MIGRATABLE")
