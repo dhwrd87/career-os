@@ -1,0 +1,1 @@
+{"$schema":"https://json-schema.org/draft/2020-12/schema","$id":"urn:careeros:schema:resume-validation:v1","title":"ResumeValidationV1","type":"object","required":["schema","build_id","status","gates"],"properties":{"schema":{"const":"careeros.resume-validation.v1"},"build_id":{"type":"string"},"status":{"enum":["PASS","FAIL"]},"gates":{"type":"array"}}}

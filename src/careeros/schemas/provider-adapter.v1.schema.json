@@ -1,0 +1,5 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema","$id":"urn:careeros:schema:provider-adapter:v1","title":"ProviderAdapterV1","type":"object",
+  "required":["schema","schema_version","provider","capabilities","requires_candidate_pii","core_scraping_required"],
+  "properties":{"schema":{"const":"careeros.provider-adapter.v1"},"schema_version":{"const":"1.0.0"},"provider":{"type":"string"},"capabilities":{"type":"array","items":{"enum":["SEARCH","DETAIL","CURRICULUM","CREDENTIAL_TYPE","DURATION","COST","FRESHNESS"]}},"requires_candidate_pii":{"const":false},"core_scraping_required":{"const":false}},"additionalProperties":false
+}

@@ -1,0 +1,16 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"urn:careeros:schema:qualification-decision:v1",
+  "title":"QualificationDecisionV1","type":"object","additionalProperties":false,
+  "required":["schema","schema_version","qualification_id","opportunity_id","profile_hash","role_family_id","policy_version","decision","evidence","gaps","hard_disqualifiers","confidence","human_override","created_at"],
+  "properties":{
+    "schema":{"const":"careeros.qualification-decision.v1"},"schema_version":{"const":"1.0.0"},
+    "qualification_id":{"type":"string","minLength":3},"opportunity_id":{"type":"string","minLength":3},
+    "profile_hash":{"type":"string","pattern":"^[a-f0-9]{64}$"},"role_family_id":{"type":"string","minLength":3},
+    "policy_version":{"enum":["evidence-preserving-v1","evidence-preserving-v2"]},"decision":{"enum":["QUALIFIED","BORDERLINE","NOT_QUALIFIED"]},
+    "evidence":{"type":"array","items":{"type":"object","required":["capability","match","record_ids","experience_equivalence"],"properties":{"capability":{"type":"string"},"requirement_subtype":{"enum":["EXPERIENCE","EDUCATION","CREDENTIAL","SKILL","TOOL","LOGISTICS","WORK_AUTHORIZATION","SCHEDULE","TRAVEL","LOCATION"]},"match":{"enum":["SUPPORTED_MATCH","TRANSFERABLE_MATCH","PARTIALLY_SUPPORTED"]},"record_ids":{"type":"array","items":{"type":"string"}},"experience_equivalence":{"type":"boolean"},"supported_sub_capabilities":{"type":"array","items":{"type":"string"}},"missing_sub_capabilities":{"type":"array","items":{"type":"string"}}}}},
+    "gaps":{"type":"array","items":{"type":"object","required":["capability","match","reason"],"properties":{"capability":{"type":"string"},"requirement_subtype":{"enum":["EXPERIENCE","EDUCATION","CREDENTIAL","SKILL","TOOL","LOGISTICS","WORK_AUTHORIZATION","SCHEDULE","TRAVEL","LOCATION"]},"match":{"enum":["HARD_GAP","BRIDGEABLE_GAP","UNKNOWN","UNKNOWN_DECISION","UNKNOWN_EVIDENCE","PARTIALLY_SUPPORTED","PREFERRED_AND_MISSING"]},"reason":{"type":"string"},"supported_sub_capabilities":{"type":"array","items":{"type":"string"}},"missing_sub_capabilities":{"type":"array","items":{"type":"string"}}}}},
+    "hard_disqualifiers":{"type":"array","items":{"type":"string"}},"confidence":{"enum":["LOW","MEDIUM","HIGH"]},
+    "human_override":{"type":["object","null"]},"created_at":{"type":"string","format":"date-time"}
+  }
+}

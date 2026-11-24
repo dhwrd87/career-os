@@ -1,0 +1,16 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"urn:careeros:schema:ats-resume-round-trip:v1",
+  "title":"ATSResumeRoundTripV1","type":"object","additionalProperties":false,
+  "required":["schema","schema_version","status","gates","missing_header_fields","missing_employment_fields","autofill","expected_sections","extraction_backends","page_count","minimum_font_size","confidence"],
+  "properties":{
+    "schema":{"const":"careeros.ats-resume-round-trip.v1"},"schema_version":{"const":"1.0.0"},
+    "status":{"enum":["ATS_SAFE_HIGH_CONFIDENCE","FAIL"]},"gates":{"type":"object"},
+    "missing_header_fields":{"type":"array","items":{"type":"string"}},
+    "missing_employment_fields":{"type":"array","items":{"type":"string"}},
+    "autofill":{"type":"object"},"expected_sections":{"type":"array","items":{"type":"string"}},
+    "extraction_backends":{"type":"array","minItems":2,"items":{"type":"string"}},
+    "page_count":{"type":"integer"},"minimum_font_size":{"type":["number","null"]},
+    "confidence":{"enum":["HIGH","LOW"]}
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:careeros:schema:evidence-block:v1",
+  "title": "EvidenceBlockV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema", "schema_version", "record_id", "evidence_id", "record_type",
+    "employment_or_project_id", "evidence_context", "source_refs", "source_original_wording",
+    "context", "problem_or_need", "responsibility", "actions", "tools_methods",
+    "stakeholders", "scope", "scale", "frequency", "deliverables", "outcomes", "metrics",
+    "constraints", "quality_risk", "leadership_ownership", "handoffs_escalations",
+    "skills_demonstrated", "artifacts", "verification", "confidence", "visibility",
+    "public_use_policy", "created_at", "updated_at", "supersedes", "provenance", "status",
+    "claim_boundaries", "metric_boundaries", "skill_ids", "employment_ids", "project_ids"
+  ],
+  "properties": {
+    "schema": {"const": "careeros.evidence-block.v1"},
+    "schema_version": {"const": "1.0.0"},
+    "record_id": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{2,127}$"},
+    "evidence_id": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{2,127}$"},
+    "record_type": {"enum": ["EMPLOYMENT_EVIDENCE", "PROJECT_EVIDENCE", "TRAINING_EVIDENCE", "OTHER_EVIDENCE"]},
+    "employment_or_project_id": {"type": ["string", "null"]},
+    "evidence_context": {"enum": ["PROFESSIONAL_EMPLOYMENT", "PAID_CONTRACT", "VOLUNTEER", "PROJECT", "LAB", "SIMULATION", "COURSEWORK", "PERSONAL_PROJECT", "OTHER"]},
+    "source_refs": {"type": "array", "minItems": 1, "items": {"type": "object"}},
+    "source_original_wording": {"type": "array", "items": {"type": "string"}},
+    "summary": {"type": ["string", "null"]},
+    "context": {"type": ["string", "null"]},
+    "problem_or_need": {"type": ["string", "null"]},
+    "responsibility": {
+      "type": "object", "required": ["level", "description"], "additionalProperties": false,
+      "properties": {
+        "level": {"enum": ["PARTICIPATED", "SUPPORTED", "EXECUTED", "COORDINATED", "OWNED", "LED", "APPROVED", "UNKNOWN"]},
+        "description": {"type": ["string", "null"]}
+      }
+    },
+    "actions": {"type": "array", "items": {"type": "string"}},
+    "tools_methods": {"type": "array", "items": {"type": "string"}},
+    "stakeholders": {"type": "array", "items": {"type": "string"}},
+    "scope": {"type": ["string", "null"]},
+    "scale": {"type": "array", "items": {"type":"object","additionalProperties":false,"required":["measurement_id","metric_type","value","unit","state","approximate","formula","inputs","source_refs","public_use_allowed"],"properties":{"measurement_id":{"type":"string"},"metric_type":{"enum":["COUNT","VOLUME","TIME","FREQUENCY","TEAM_SIZE","USER_SCOPE","SYSTEM_SCOPE","VENDOR_SCOPE","PROJECT_SCOPE","THROUGHPUT","ACCURACY","SAVINGS","REDUCTION","IMPROVEMENT","RESPONSE_TIME","OTHER"]},"value":{"type":["string","number","integer","null"]},"unit":{"type":["string","null"]},"state":{"enum":["VERIFIED","DOCUMENT_BACKED","USER_CONFIRMED","USER_APPROXIMATE","RECONSTRUCTABLE","UNSUPPORTED"]},"approximate":{"type":"boolean"},"formula":{"type":["string","null"]},"inputs":{"type":"array","items":{"type":"object"}},"source_refs":{"type":"array","items":{"type":"object"}},"public_use_allowed":{"type":"boolean"}}}},
+    "frequency": {"type": ["string", "null"]},
+    "deliverables": {"type": "array", "items": {"type": "string"}},
+    "outcomes": {"type": "array", "items": {"type": "string"}},
+    "metrics": {"type": "array", "items": {"type":"object","additionalProperties":false,"required":["measurement_id","metric_type","value","unit","state","approximate","formula","inputs","source_refs","public_use_allowed"],"properties":{"measurement_id":{"type":"string"},"metric_type":{"enum":["COUNT","VOLUME","TIME","FREQUENCY","TEAM_SIZE","USER_SCOPE","SYSTEM_SCOPE","VENDOR_SCOPE","PROJECT_SCOPE","THROUGHPUT","ACCURACY","SAVINGS","REDUCTION","IMPROVEMENT","RESPONSE_TIME","OTHER"]},"value":{"type":["string","number","integer","null"]},"unit":{"type":["string","null"]},"state":{"enum":["VERIFIED","DOCUMENT_BACKED","USER_CONFIRMED","USER_APPROXIMATE","RECONSTRUCTABLE","UNSUPPORTED"]},"approximate":{"type":"boolean"},"formula":{"type":["string","null"]},"inputs":{"type":"array","items":{"type":"object"}},"source_refs":{"type":"array","items":{"type":"object"}},"public_use_allowed":{"type":"boolean"}}}},
+    "constraints": {"type": "array", "items": {"type": "string"}},
+    "quality_risk": {"type": "array", "items": {"type": "string"}},
+    "leadership_ownership": {"type": "array", "items": {"type": "string"}},
+    "handoffs_escalations": {"type": "array", "items": {"type": "string"}},
+    "skills_demonstrated": {
+      "type": "array", "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["skill_id", "context", "level", "evidence_basis"],
+        "properties": {
+          "skill_id": {"type": "string"},
+          "context": {"enum": ["PROFESSIONAL", "PROJECT", "LAB", "COURSEWORK", "BASIC_FAMILIARITY", "UNSUPPORTED"]},
+          "level": {"type": ["string", "null"]},
+          "evidence_basis": {"type": ["string", "null"]}
+        }
+      }
+    },
+    "artifacts": {"type": "array", "items": {"type": "object"}},
+    "verification": {"enum": ["UNVERIFIED", "NEEDS_VERIFICATION", "VERIFIED", "DISPUTED", "DOCUMENT_BACKED", "USER_CONFIRMED"]},
+    "confidence": {"enum": ["LOW", "MEDIUM", "HIGH", "UNKNOWN"]},
+    "visibility": {"enum": ["PRIVATE", "INTERNAL", "PUBLIC", "EMPLOYER_SAFE", "RESTRICTED"]},
+    "public_use_policy": {"enum": ["ALLOWED", "ALLOWED_WITH_BOUNDARIES", "INTERNAL_ONLY", "PROHIBITED", "REVIEW_REQUIRED"]},
+    "created_at": {"type": "string", "format": "date-time"},
+    "updated_at": {"type": "string", "format": "date-time"},
+    "supersedes": {"type": ["string", "null"]},
+    "provenance": {"type": "array", "minItems": 1, "items": {"$ref": "urn:careeros:schema:provenance-record:v1"}},
+    "status": {"enum": ["ACTIVE", "SUPERSEDED", "REJECTED"]},
+    "claim_boundaries": {"type": "array", "items": {"type": "string"}},
+    "metric_boundaries": {"type": "array", "items": {"type": "string"}},
+    "skill_ids": {"type": "array", "items": {"type": "string"}},
+    "employment_ids": {"type": "array", "items": {"type": "string"}},
+    "project_ids": {"type": "array", "items": {"type": "string"}}
+  }
+}

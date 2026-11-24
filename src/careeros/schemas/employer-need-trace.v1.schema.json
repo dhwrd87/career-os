@@ -1,0 +1,24 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"urn:careeros:schema:employer-need-trace:v1",
+  "title":"EmployerNeedTraceV1","type":"object","additionalProperties":false,
+  "required":["schema","schema_version","trace_id","job_id","snapshot_id","needs","top_third_coverage","source_policy","trace_hash"],
+  "properties":{
+    "schema":{"const":"careeros.employer-need-trace.v1"},"schema_version":{"const":"1.0.0"},
+    "trace_id":{"type":"string"},"job_id":{"type":"string"},"snapshot_id":{"type":"string"},
+    "source_policy":{"const":"SOURCE_LOCATED_NO_FREQUENCY_ONLY_IMPORTANCE"},"trace_hash":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+    "top_third_coverage":{"type":"object","additionalProperties":false,"required":["supported_material_needs","prominently_represented","ratio","status"],"properties":{"supported_material_needs":{"type":"integer","minimum":0},"prominently_represented":{"type":"integer","minimum":0},"ratio":{"type":"number","minimum":0,"maximum":1},"status":{"enum":["PASS","FAIL"]}}},
+    "needs":{"type":"array","items":{"type":"object","additionalProperties":false,
+      "required":["need_id","job_id","source_refs","need_statement","need_type","importance","requirement_class","frequency","top_third_signal","repeated_signal","responsibility_signal","qualification_signal","candidate_evidence_ids","coverage_class","evidence_strength","resume_usage","resume_location","prominence","omission_reason","gap_state"],
+      "properties":{
+        "need_id":{"type":"string"},"job_id":{"type":"string"},"source_refs":{"type":"array","minItems":1,"items":{"type":"object","required":["snapshot_id","locator","quote"]}},
+        "need_statement":{"type":"string","minLength":1},"need_type":{"enum":["CORE_DELIVERY","TECHNICAL","OPERATIONS","CUSTOMER","SECURITY","NETWORKING","ANALYTICS","COMPLIANCE","LEADERSHIP","COMMUNICATION","AUTOMATION","PROCESS","OTHER"]},
+        "importance":{"enum":["CRITICAL","HIGH","MEDIUM","LOW"]},"requirement_class":{"enum":["REQUIRED","PREFERRED","OPTIONAL","RESPONSIBILITY","OPERATING_CONDITION","UNKNOWN"]},
+        "frequency":{"type":"integer","minimum":1},"top_third_signal":{"enum":["TOP_THIRD","MIDDLE_THIRD","BOTTOM_THIRD","UNKNOWN"]},"repeated_signal":{"type":"boolean"},"responsibility_signal":{"type":"boolean"},"qualification_signal":{"type":"boolean"},
+        "candidate_evidence_ids":{"type":"array","items":{"type":"string"}},"coverage_class":{"enum":["STRONGLY_COVERED","COVERED","PARTIALLY_COVERED","TRANSFERABLE_ONLY","GAP","UNKNOWN","OMITTED"]},"evidence_strength":{"type":"string"},
+        "resume_usage":{"enum":["USED","OMITTED"]},"resume_location":{"type":"array","items":{"enum":["SUMMARY","TOP_SKILLS","OTHER_SKILLS","FIRST_EXPERIENCE_BULLETS","EXPERIENCE","FIRST_PROJECT_BULLETS","PROJECTS"]}},"prominence":{"enum":["HIGH","STANDARD","NONE"]},
+        "omission_reason":{"type":["string","null"],"enum":["SPACE","REDUNDANCY","PRIVACY","PUBLIC_USE_BLOCK","JOB_MISMATCH","CONTEXT_MISMATCH","DOCUMENT_BALANCE","OTHER",null]},"gap_state":{"enum":["NONE","PARTIAL","NO_CANDIDATE_EVIDENCE","RESUME_OMISSION","UNKNOWN"]}
+      }
+    }}
+  }
+}

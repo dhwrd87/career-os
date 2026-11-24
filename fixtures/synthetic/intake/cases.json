@@ -1,0 +1,13 @@
+{
+  "schema": "careeros.synthetic-intake-cases.v1",
+  "cases": [
+    {"id": "complete-resume", "profile": "reasonably complete", "expected_prompts": [8, 15]},
+    {"id": "very-weak-resume", "profile": "one title and one vague bullet", "expected_prompts": [8, 15]},
+    {"id": "career-changer", "profile": "transferable work plus technical preparation", "expected_prompts": [8, 15]},
+    {"id": "student", "profile": "education and projects with limited employment", "expected_prompts": [8, 15]},
+    {"id": "experienced-professional", "profile": "long chronology and leadership", "expected_prompts": [8, 15]},
+    {"id": "project-heavy-technical", "profile": "five distinct technical projects", "expected_prompts": [8, 15]},
+    {"id": "credential-heavy", "profile": "multiple credential states and expirations", "expected_prompts": [8, 15]},
+    {"id": "overlapping-jobs", "profile": "concurrent or part-time employment", "expected_prompts": [8, 15]}
+  ]
+}

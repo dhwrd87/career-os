@@ -1,0 +1,14 @@
+{
+  "schema": "careeros.synthetic-opportunity-input.v1",
+  "source_type": "SYNTHETIC",
+  "opportunity_id": "opp-matrix-career-changer",
+  "employer_name": "Cedar Bridge Civic Systems",
+  "role_title": "Implementation Support Coordinator",
+  "location": "Remote US",
+  "requirements": [
+    {"capability": "Process Mapping", "level": "CORE", "requirement_class": "REQUIRED", "requirement_subtype": "SKILL"},
+    {"capability": "Training", "level": "CORE", "requirement_class": "REQUIRED", "requirement_subtype": "SKILL"},
+    {"capability": "Data Cleanup", "level": "CORE", "requirement_class": "REQUIRED", "requirement_subtype": "SKILL"}
+  ],
+  "job_description": "Cedar Bridge Civic Systems seeks an entry-level Implementation Support Coordinator to map intake processes, prepare accurate records, document escalations, and support practical user training. Project experience may support readiness but is not equivalent to professional implementation tenure."
+}

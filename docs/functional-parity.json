@@ -1,0 +1,1007 @@
+{
+  "schema": "careeros.functional-parity-reconciliation.v1",
+  "version": "0.4.1",
+  "historical_rows": 110,
+  "counts": {
+    "PUBLIC_ADVANTAGE": 37,
+    "EQUIVALENT": 26,
+    "RECONCILED_GENERIC": 31,
+    "REGRESSION_REPAIRED": 3,
+    "INTENTIONAL_DIFFERENCE": 5,
+    "PERSONAL_CONFIG_ONLY": 5,
+    "NOT_PORTED_LEGACY": 3
+  },
+  "scope": "Generic behavior; not copied private data, branding or provider credentials. Test coverage is feature-level, not a claim of independently proving every private implementation detail.",
+  "capabilities": [
+    {
+      "id": 1,
+      "capability": "Canonical truth separation",
+      "historical_class": "PACKAGE_BETTER",
+      "current_class": "PUBLIC_ADVANTAGE",
+      "implementation": "profile.py",
+      "evidence_test": "test_phase2_contracts.py",
+      "assessment": "Retained generic implementation and regression coverage."
+    },
+    {
+      "id": 2,
+      "capability": "Canonical revisions",
+      "historical_class": "PACKAGE_BETTER",
+      "current_class": "PUBLIC_ADVANTAGE",
+      "implementation": "updates.py",
+      "evidence_test": "test_phase5b_transactions.py",
+      "assessment": "Revisioned canonical truth, recovery, staleness and immutable derivative checks."
+    },
+    {
+      "id": 3,
+      "capability": "Transactional changesets",
+      "historical_class": "PACKAGE_BETTER",
+      "current_class": "PUBLIC_ADVANTAGE",
+      "implementation": "updates.py",
+      "evidence_test": "test_phase5b_transactions.py",
+      "assessment": "Revisioned canonical truth, recovery, staleness and immutable derivative checks."
+    },
+    {
+      "id": 4,
+      "capability": "End-to-end provenance",
+      "historical_class": "PARITY",
+      "current_class": "EQUIVALENT",
+      "implementation": "profile.py",
+      "evidence_test": "test_phase2_contracts.py",
+      "assessment": "Retained generic implementation and regression coverage."
+    },
+    {
+      "id": 5,
+      "capability": "Evidence atomization",
+      "historical_class": "PACKAGE_BETTER",
+      "current_class": "PUBLIC_ADVANTAGE",
+      "implementation": "profile.py",
+      "evidence_test": "test_phase2_contracts.py",
+      "assessment": "Retained generic implementation and regression coverage."
+    },
+    {
+      "id": 6,
+      "capability": "Public/private evidence boundary",
+      "historical_class": "PARITY",
+      "current_class": "EQUIVALENT",
+      "implementation": "profile.py",
+      "evidence_test": "test_phase2_contracts.py",
+      "assessment": "Retained generic implementation and regression coverage."
+    },
+    {
+      "id": 7,
+      "capability": "Immutable historical derivatives",
+      "historical_class": "PACKAGE_BETTER",
+      "current_class": "PUBLIC_ADVANTAGE",
+      "implementation": "updates.py",
+      "evidence_test": "test_phase5b_transactions.py",
+      "assessment": "Revisioned canonical truth, recovery, staleness and immutable derivative checks."
+    },
+    {
+      "id": 8,
+      "capability": "Consented source enrichment",
+      "historical_class": "PACKAGE_BETTER",
+      "current_class": "PUBLIC_ADVANTAGE",
+      "implementation": "workflows.py",
+      "evidence_test": "test_onboarding_portable_workflows.py",
+      "assessment": "Source-first approval flow plus eight source-first synthetic personas."
+    },
+    {
+      "id": 9,
+      "capability": "Source-first onboarding",
+      "historical_class": "PACKAGE_BETTER",
+      "current_class": "PUBLIC_ADVANTAGE",
+      "implementation": "workflows.py",
+      "evidence_test": "test_onboarding_portable_workflows.py",
+      "assessment": "Source-first approval flow plus eight source-first synthetic personas."
+    },
+    {
+      "id": 10,
+      "capability": "Question-value optimization",
+      "historical_class": "PACKAGE_BETTER",
+      "current_class": "PUBLIC_ADVANTAGE",
+      "implementation": "workflows.py",
+      "evidence_test": "test_onboarding_portable_workflows.py",
+      "assessment": "Source-first approval flow plus eight source-first synthetic personas."
+    },
+    {
+      "id": 11,
+      "capability": "Clean-room setup",
+      "historical_class": "PACKAGE_BETTER",
+      "current_class": "PUBLIC_ADVANTAGE",
+      "implementation": "workflows.py",
+      "evidence_test": "test_onboarding_portable_workflows.py",
+      "assessment": "Source-first approval flow plus eight source-first synthetic personas."
+    },
+    {
+      "id": 12,
+      "capability": "Workspace migrations",
+      "historical_class": "PACKAGE_BETTER",
+      "current_class": "PUBLIC_ADVANTAGE",
+      "implementation": "workflows.py",
+      "evidence_test": "test_onboarding_portable_workflows.py",
+      "assessment": "Source-first approval flow plus eight source-first synthetic personas."
+    },
+    {
+      "id": 13,
+      "capability": "Doctor/compatibility",
+      "historical_class": "PACKAGE_BETTER",
+      "current_class": "PUBLIC_ADVANTAGE",
+      "implementation": "workflows.py",
+      "evidence_test": "test_onboarding_portable_workflows.py",
+      "assessment": "Source-first approval flow plus eight source-first synthetic personas."
+    },
+    {
+      "id": 14,
+      "capability": "Thin skill routing",
+      "historical_class": "PACKAGE_BETTER",
+      "current_class": "PUBLIC_ADVANTAGE",
+      "implementation": "workflows.py",
+      "evidence_test": "test_onboarding_portable_workflows.py",
+      "assessment": "Source-first approval flow plus eight source-first synthetic personas."
+    },
+    {
+      "id": 15,
+      "capability": "Role-family configuration",
+      "historical_class": "PARITY",
+      "current_class": "EQUIVALENT",
+      "implementation": "production_family.py",
+      "evidence_test": "test_production_family_inheritance.py",
+      "assessment": "Explicit family inheritance and protected policies; lane acceptance remains separate."
+    },
+    {
+      "id": 16,
+      "capability": "Lane discovery",
+      "historical_class": "PARITY",
+      "current_class": "EQUIVALENT",
+      "implementation": "production_family.py",
+      "evidence_test": "test_production_family_inheritance.py",
+      "assessment": "Explicit family inheritance and protected policies; lane acceptance remains separate."
+    },
+    {
+      "id": 17,
+      "capability": "Accepted lane lifecycle",
+      "historical_class": "PACKAGE_BETTER",
+      "current_class": "PUBLIC_ADVANTAGE",
+      "implementation": "production_family.py",
+      "evidence_test": "test_production_family_inheritance.py",
+      "assessment": "Explicit family inheritance and protected policies; lane acceptance remains separate."
+    },
+    {
+      "id": 18,
+      "capability": "Production-family inheritance",
+      "historical_class": "PRIVATE_BETTER_GENERICALLY_PORTABLE",
+      "current_class": "RECONCILED_GENERIC",
+      "implementation": "production_family.py",
+      "evidence_test": "test_production_family_inheritance.py",
+      "assessment": "Explicit family inheritance and protected policies; lane acceptance remains separate."
+    },
+    {
+      "id": 19,
+      "capability": "Deterministic fallback routing",
+      "historical_class": "PRIVATE_BETTER_GENERICALLY_PORTABLE",
+      "current_class": "RECONCILED_GENERIC",
+      "implementation": "production_family.py",
+      "evidence_test": "test_production_family_inheritance.py",
+      "assessment": "Explicit family inheritance and protected policies; lane acceptance remains separate."
+    },
+    {
+      "id": 20,
+      "capability": "Project inclusion decision",
+      "historical_class": "PRIVATE_BETTER_GENERICALLY_PORTABLE",
+      "current_class": "RECONCILED_GENERIC",
+      "implementation": "production_family.py",
+      "evidence_test": "test_production_family_inheritance.py",
+      "assessment": "Explicit family inheritance and protected policies; lane acceptance remains separate."
+    },
+    {
+      "id": 21,
+      "capability": "JD requirement extraction",
+      "historical_class": "PARITY",
+      "current_class": "EQUIVALENT",
+      "implementation": "job_intelligence.py",
+      "evidence_test": "test_job_description_intelligence.py",
+      "assessment": "Retained requirements, source locators, evidence matching, qualifications and adaptive tailoring."
+    },
+    {
+      "id": 22,
+      "capability": "Required vs preferred requirements",
+      "historical_class": "PARITY",
+      "current_class": "EQUIVALENT",
+      "implementation": "job_intelligence.py",
+      "evidence_test": "test_job_description_intelligence.py",
+      "assessment": "Retained requirements, source locators, evidence matching, qualifications and adaptive tailoring."
+    },
+    {
+      "id": 23,
+      "capability": "JD false-positive suppression",
+      "historical_class": "PRIVATE_BETTER_GENERICALLY_PORTABLE",
+      "current_class": "RECONCILED_GENERIC",
+      "implementation": "job_intelligence.py",
+      "evidence_test": "test_job_description_intelligence.py",
+      "assessment": "Retained requirements, source locators, evidence matching, qualifications and adaptive tailoring."
+    },
+    {
+      "id": 24,
+      "capability": "Employer-need inference and trace",
+      "historical_class": "PACKAGE_REGRESSION",
+      "current_class": "REGRESSION_REPAIRED",
+      "implementation": "career_conversion.py",
+      "evidence_test": "test_career_conversion_parity.py",
+      "assessment": "Employer needs, role fact sets, omission accounting and material-loss gates."
+    },
+    {
+      "id": 25,
+      "capability": "Job evidence matrix",
+      "historical_class": "PACKAGE_BETTER",
+      "current_class": "PUBLIC_ADVANTAGE",
+      "implementation": "job_intelligence.py",
+      "evidence_test": "test_job_description_intelligence.py",
+      "assessment": "Retained requirements, source locators, evidence matching, qualifications and adaptive tailoring."
+    },
+    {
+      "id": 26,
+      "capability": "Truthful fit/qualification",
+      "historical_class": "PARITY",
+      "current_class": "EQUIVALENT",
+      "implementation": "job_intelligence.py",
+      "evidence_test": "test_job_description_intelligence.py",
+      "assessment": "Retained requirements, source locators, evidence matching, qualifications and adaptive tailoring."
+    },
+    {
+      "id": 27,
+      "capability": "Targeted resume delta",
+      "historical_class": "PACKAGE_BETTER",
+      "current_class": "PUBLIC_ADVANTAGE",
+      "implementation": "job_intelligence.py",
+      "evidence_test": "test_job_description_intelligence.py",
+      "assessment": "Retained requirements, source locators, evidence matching, qualifications and adaptive tailoring."
+    },
+    {
+      "id": 28,
+      "capability": "Application expected value",
+      "historical_class": "PRIVATE_BETTER_GENERICALLY_PORTABLE",
+      "current_class": "RECONCILED_GENERIC",
+      "implementation": "prioritization.py",
+      "evidence_test": "test_prioritization.py",
+      "assessment": "Evidence-fit ranking and explicit user-assumed value scenarios; no invented hiring probabilities."
+    },
+    {
+      "id": 29,
+      "capability": "Job discovery freshness",
+      "historical_class": "PRIVATE_BETTER_GENERICALLY_PORTABLE",
+      "current_class": "RECONCILED_GENERIC",
+      "implementation": "job_intelligence.py",
+      "evidence_test": "test_job_description_intelligence.py",
+      "assessment": "Retained requirements, source locators, evidence matching, qualifications and adaptive tailoring."
+    },
+    {
+      "id": 30,
+      "capability": "Evidence utility scoring",
+      "historical_class": "PACKAGE_BETTER",
+      "current_class": "PUBLIC_ADVANTAGE",
+      "implementation": "editorial.py",
+      "evidence_test": "test_resume_editorial_intelligence.py",
+      "assessment": "Source-bound evidence, history retention, visibility and claim controls; overlap persona included."
+    },
+    {
+      "id": 31,
+      "capability": "Bullet construction",
+      "historical_class": "PARITY",
+      "current_class": "EQUIVALENT",
+      "implementation": "editorial.py",
+      "evidence_test": "test_resume_editorial_intelligence.py",
+      "assessment": "Source-bound evidence, history retention, visibility and claim controls; overlap persona included."
+    },
+    {
+      "id": 32,
+      "capability": "Fact-preserving bullet variants",
+      "historical_class": "PARITY",
+      "current_class": "EQUIVALENT",
+      "implementation": "editorial.py",
+      "evidence_test": "test_resume_editorial_intelligence.py",
+      "assessment": "Source-bound evidence, history retention, visibility and claim controls; overlap persona included."
+    },
+    {
+      "id": 33,
+      "capability": "Outcome/metric rendering",
+      "historical_class": "PARITY",
+      "current_class": "EQUIVALENT",
+      "implementation": "editorial.py",
+      "evidence_test": "test_resume_editorial_intelligence.py",
+      "assessment": "Source-bound evidence, history retention, visibility and claim controls; overlap persona included."
+    },
+    {
+      "id": 34,
+      "capability": "Semantic deduplication",
+      "historical_class": "PARITY",
+      "current_class": "EQUIVALENT",
+      "implementation": "editorial.py",
+      "evidence_test": "test_resume_editorial_intelligence.py",
+      "assessment": "Source-bound evidence, history retention, visibility and claim controls; overlap persona included."
+    },
+    {
+      "id": 35,
+      "capability": "Role fact-set preservation",
+      "historical_class": "PACKAGE_REGRESSION",
+      "current_class": "REGRESSION_REPAIRED",
+      "implementation": "career_conversion.py",
+      "evidence_test": "test_career_conversion_parity.py",
+      "assessment": "Employer needs, role fact sets, omission accounting and material-loss gates."
+    },
+    {
+      "id": 36,
+      "capability": "Material-evidence-loss gate",
+      "historical_class": "PACKAGE_REGRESSION",
+      "current_class": "REGRESSION_REPAIRED",
+      "implementation": "career_conversion.py",
+      "evidence_test": "test_career_conversion_parity.py",
+      "assessment": "Employer needs, role fact sets, omission accounting and material-loss gates."
+    },
+    {
+      "id": 37,
+      "capability": "Commercial/responsibility truth",
+      "historical_class": "PRIVATE_BETTER_GENERICALLY_PORTABLE",
+      "current_class": "RECONCILED_GENERIC",
+      "implementation": "career_conversion.py",
+      "evidence_test": "test_career_conversion_parity.py",
+      "assessment": "Employer needs, role fact sets, omission accounting and material-loss gates."
+    },
+    {
+      "id": 38,
+      "capability": "Professional-history sufficiency",
+      "historical_class": "PACKAGE_BETTER",
+      "current_class": "PUBLIC_ADVANTAGE",
+      "implementation": "editorial.py",
+      "evidence_test": "test_resume_editorial_intelligence.py",
+      "assessment": "Source-bound evidence, history retention, visibility and claim controls; overlap persona included."
+    },
+    {
+      "id": 39,
+      "capability": "Long-running role protection",
+      "historical_class": "PACKAGE_BETTER",
+      "current_class": "PUBLIC_ADVANTAGE",
+      "implementation": "editorial.py",
+      "evidence_test": "test_resume_editorial_intelligence.py",
+      "assessment": "Source-bound evidence, history retention, visibility and claim controls; overlap persona included."
+    },
+    {
+      "id": 40,
+      "capability": "Multiple roles, overlaps, precision",
+      "historical_class": "PRIVATE_BETTER_GENERICALLY_PORTABLE",
+      "current_class": "RECONCILED_GENERIC",
+      "implementation": "editorial.py",
+      "evidence_test": "test_resume_editorial_intelligence.py",
+      "assessment": "Source-bound evidence, history retention, visibility and claim controls; overlap persona included."
+    },
+    {
+      "id": 41,
+      "capability": "Public title normalization",
+      "historical_class": "PARITY",
+      "current_class": "EQUIVALENT",
+      "implementation": "editorial.py",
+      "evidence_test": "test_resume_editorial_intelligence.py",
+      "assessment": "Source-bound evidence, history retention, visibility and claim controls; overlap persona included."
+    },
+    {
+      "id": 42,
+      "capability": "Reverse chronology",
+      "historical_class": "PARITY",
+      "current_class": "EQUIVALENT",
+      "implementation": "editorial.py",
+      "evidence_test": "test_resume_editorial_intelligence.py",
+      "assessment": "Source-bound evidence, history retention, visibility and claim controls; overlap persona included."
+    },
+    {
+      "id": 43,
+      "capability": "Skill-evidence linkage",
+      "historical_class": "PACKAGE_BETTER",
+      "current_class": "PUBLIC_ADVANTAGE",
+      "implementation": "editorial.py",
+      "evidence_test": "test_resume_editorial_intelligence.py",
+      "assessment": "Source-bound evidence, history retention, visibility and claim controls; overlap persona included."
+    },
+    {
+      "id": 44,
+      "capability": "Skill aliases and lane/JD routing",
+      "historical_class": "PRIVATE_BETTER_GENERICALLY_PORTABLE",
+      "current_class": "RECONCILED_GENERIC",
+      "implementation": "job_intelligence.py",
+      "evidence_test": "test_job_description_intelligence.py",
+      "assessment": "Retained requirements, source locators, evidence matching, qualifications and adaptive tailoring."
+    },
+    {
+      "id": 45,
+      "capability": "Credential verification/routing",
+      "historical_class": "PARITY",
+      "current_class": "EQUIVALENT",
+      "implementation": "editorial.py",
+      "evidence_test": "test_resume_editorial_intelligence.py",
+      "assessment": "Source-bound evidence, history retention, visibility and claim controls; overlap persona included."
+    },
+    {
+      "id": 46,
+      "capability": "Education composition",
+      "historical_class": "PACKAGE_BETTER",
+      "current_class": "PUBLIC_ADVANTAGE",
+      "implementation": "editorial.py",
+      "evidence_test": "test_resume_editorial_intelligence.py",
+      "assessment": "Source-bound evidence, history retention, visibility and claim controls; overlap persona included."
+    },
+    {
+      "id": 47,
+      "capability": "Comprehensive master resume",
+      "historical_class": "PACKAGE_BETTER",
+      "current_class": "PUBLIC_ADVANTAGE",
+      "implementation": "editorial.py",
+      "evidence_test": "test_resume_editorial_intelligence.py",
+      "assessment": "Source-bound evidence, history retention, visibility and claim controls; overlap persona included."
+    },
+    {
+      "id": 48,
+      "capability": "Public-quality lane base",
+      "historical_class": "PACKAGE_BETTER",
+      "current_class": "PUBLIC_ADVANTAGE",
+      "implementation": "production_family.py",
+      "evidence_test": "test_production_family_inheritance.py",
+      "assessment": "Explicit family inheritance and protected policies; lane acceptance remains separate."
+    },
+    {
+      "id": 49,
+      "capability": "Job-targeted resume",
+      "historical_class": "PARITY",
+      "current_class": "EQUIVALENT",
+      "implementation": "job_intelligence.py",
+      "evidence_test": "test_job_description_intelligence.py",
+      "assessment": "Retained requirements, source locators, evidence matching, qualifications and adaptive tailoring."
+    },
+    {
+      "id": 50,
+      "capability": "Content routing by production family",
+      "historical_class": "PRIVATE_BETTER_GENERICALLY_PORTABLE",
+      "current_class": "RECONCILED_GENERIC",
+      "implementation": "production_family.py",
+      "evidence_test": "test_production_family_inheritance.py",
+      "assessment": "Explicit family inheritance and protected policies; lane acceptance remains separate."
+    },
+    {
+      "id": 51,
+      "capability": "Clause-level summary trace",
+      "historical_class": "PACKAGE_BETTER",
+      "current_class": "PUBLIC_ADVANTAGE",
+      "implementation": "recruiter_conversion.py",
+      "evidence_test": "test_recruiter_conversion_copy_engine_v2.py",
+      "assessment": "Traced clauses, source-sentence repair, deduplicated outcomes and readable role/employer bridge."
+    },
+    {
+      "id": 52,
+      "capability": "Summary naturalness",
+      "historical_class": "PARITY",
+      "current_class": "EQUIVALENT",
+      "implementation": "recruiter_conversion.py",
+      "evidence_test": "test_recruiter_conversion_copy_engine_v2.py",
+      "assessment": "Traced clauses, source-sentence repair, deduplicated outcomes and readable role/employer bridge."
+    },
+    {
+      "id": 53,
+      "capability": "Employer-need/top-third summary",
+      "historical_class": "PRIVATE_BETTER_GENERICALLY_PORTABLE",
+      "current_class": "RECONCILED_GENERIC",
+      "implementation": "career_conversion.py",
+      "evidence_test": "test_career_conversion_parity.py",
+      "assessment": "Employer needs, role fact sets, omission accounting and material-loss gates."
+    },
+    {
+      "id": 54,
+      "capability": "Cross-resume formula repetition",
+      "historical_class": "PRIVATE_BETTER_GENERICALLY_PORTABLE",
+      "current_class": "RECONCILED_GENERIC",
+      "implementation": "recruiter_conversion.py",
+      "evidence_test": "test_recruiter_conversion_copy_engine_v2.py",
+      "assessment": "Per-document formula checks, repeated-sentence suppression and cross-target sentence-frame review in the production queue; factual skills remain distinct."
+    },
+    {
+      "id": 55,
+      "capability": "ATS-safe header contract",
+      "historical_class": "PACKAGE_BETTER",
+      "current_class": "PUBLIC_ADVANTAGE",
+      "implementation": "resume.py",
+      "evidence_test": "test_header_summary_ats.py",
+      "assessment": "Actual PDF generation, independent extraction, visual density and ATS reconstruction."
+    },
+    {
+      "id": 56,
+      "capability": "Header visual hierarchy",
+      "historical_class": "PARITY",
+      "current_class": "EQUIVALENT",
+      "implementation": "resume.py",
+      "evidence_test": "test_header_summary_ats.py",
+      "assessment": "Actual PDF generation, independent extraction, visual density and ATS reconstruction."
+    },
+    {
+      "id": 57,
+      "capability": "Long contact/international variants",
+      "historical_class": "PACKAGE_BETTER",
+      "current_class": "PUBLIC_ADVANTAGE",
+      "implementation": "resume.py",
+      "evidence_test": "test_header_summary_ats.py",
+      "assessment": "Actual PDF generation, independent extraction, visual density and ATS reconstruction."
+    },
+    {
+      "id": 58,
+      "capability": "Public naming sanitization",
+      "historical_class": "PACKAGE_BETTER",
+      "current_class": "PUBLIC_ADVANTAGE",
+      "implementation": "resume.py",
+      "evidence_test": "test_header_summary_ats.py",
+      "assessment": "Actual PDF generation, independent extraction, visual density and ATS reconstruction."
+    },
+    {
+      "id": 59,
+      "capability": "ATS section contract/order",
+      "historical_class": "PACKAGE_BETTER",
+      "current_class": "PUBLIC_ADVANTAGE",
+      "implementation": "resume.py",
+      "evidence_test": "test_header_summary_ats.py",
+      "assessment": "Actual PDF generation, independent extraction, visual density and ATS reconstruction."
+    },
+    {
+      "id": 60,
+      "capability": "Single-column default",
+      "historical_class": "INTENTIONAL_DIFFERENCE",
+      "current_class": "INTENTIONAL_DIFFERENCE",
+      "implementation": "resume.py",
+      "evidence_test": "test_header_summary_ats.py",
+      "assessment": "One premium single-column production template. Compact renderer is not shipped; no silent template fallback."
+    },
+    {
+      "id": 61,
+      "capability": "Compact two-column default",
+      "historical_class": "INTENTIONAL_DIFFERENCE",
+      "current_class": "INTENTIONAL_DIFFERENCE",
+      "implementation": "resume.py",
+      "evidence_test": "test_header_summary_ats.py",
+      "assessment": "One premium single-column production template. Compact renderer is not shipped; no silent template fallback."
+    },
+    {
+      "id": 62,
+      "capability": "Typography/geometry tokens",
+      "historical_class": "PARITY",
+      "current_class": "EQUIVALENT",
+      "implementation": "resume.py",
+      "evidence_test": "test_header_summary_ats.py",
+      "assessment": "Actual PDF generation, independent extraction, visual density and ATS reconstruction."
+    },
+    {
+      "id": 63,
+      "capability": "Visual density/page utilization",
+      "historical_class": "PARITY",
+      "current_class": "EQUIVALENT",
+      "implementation": "resume.py",
+      "evidence_test": "test_header_summary_ats.py",
+      "assessment": "Actual PDF generation, independent extraction, visual density and ATS reconstruction."
+    },
+    {
+      "id": 64,
+      "capability": "Widows/orphans/near-empty pages",
+      "historical_class": "PRIVATE_BETTER_GENERICALLY_PORTABLE",
+      "current_class": "RECONCILED_GENERIC",
+      "implementation": "resume.py",
+      "evidence_test": "test_header_summary_ats.py",
+      "assessment": "Actual PDF generation, independent extraction, visual density and ATS reconstruction."
+    },
+    {
+      "id": 65,
+      "capability": "Featured/additional project hierarchy",
+      "historical_class": "PACKAGE_BETTER",
+      "current_class": "PUBLIC_ADVANTAGE",
+      "implementation": "resume.py",
+      "evidence_test": "test_header_summary_ats.py",
+      "assessment": "Actual PDF generation, independent extraction, visual density and ATS reconstruction."
+    },
+    {
+      "id": 66,
+      "capability": "One/two-page logic",
+      "historical_class": "PARITY",
+      "current_class": "EQUIVALENT",
+      "implementation": "resume.py",
+      "evidence_test": "test_header_summary_ats.py",
+      "assessment": "Actual PDF generation, independent extraction, visual density and ATS reconstruction."
+    },
+    {
+      "id": 67,
+      "capability": "Template fallback authorization",
+      "historical_class": "PRIVATE_BETTER_GENERICALLY_PORTABLE",
+      "current_class": "INTENTIONAL_DIFFERENCE",
+      "implementation": "resume.py",
+      "evidence_test": "test_header_summary_ats.py",
+      "assessment": "One premium single-column production template. Compact renderer is not shipped; no silent template fallback."
+    },
+    {
+      "id": 68,
+      "capability": "Dual PDF extraction",
+      "historical_class": "PARITY",
+      "current_class": "EQUIVALENT",
+      "implementation": "resume.py",
+      "evidence_test": "test_header_summary_ats.py",
+      "assessment": "Actual PDF generation, independent extraction, visual density and ATS reconstruction."
+    },
+    {
+      "id": 69,
+      "capability": "Structured ATS round trip",
+      "historical_class": "PACKAGE_BETTER",
+      "current_class": "PUBLIC_ADVANTAGE",
+      "implementation": "resume.py",
+      "evidence_test": "test_header_summary_ats.py",
+      "assessment": "Actual PDF generation, independent extraction, visual density and ATS reconstruction."
+    },
+    {
+      "id": 70,
+      "capability": "General autofill QA",
+      "historical_class": "PACKAGE_BETTER",
+      "current_class": "PUBLIC_ADVANTAGE",
+      "implementation": "resume.py",
+      "evidence_test": "test_header_summary_ats.py",
+      "assessment": "Actual PDF generation, independent extraction, visual density and ATS reconstruction."
+    },
+    {
+      "id": 71,
+      "capability": "Employer/title/date parsing",
+      "historical_class": "PARITY",
+      "current_class": "EQUIVALENT",
+      "implementation": "resume.py",
+      "evidence_test": "test_header_summary_ats.py",
+      "assessment": "Actual PDF generation, independent extraction, visual density and ATS reconstruction."
+    },
+    {
+      "id": 72,
+      "capability": "Link extraction/clickability",
+      "historical_class": "PARITY",
+      "current_class": "EQUIVALENT",
+      "implementation": "resume.py",
+      "evidence_test": "test_header_summary_ats.py",
+      "assessment": "Actual PDF generation, independent extraction, visual density and ATS reconstruction."
+    },
+    {
+      "id": 73,
+      "capability": "PDF object-level preflight",
+      "historical_class": "PRIVATE_BETTER_GENERICALLY_PORTABLE",
+      "current_class": "RECONCILED_GENERIC",
+      "implementation": "document_quality.py",
+      "evidence_test": "../e2e/test_complete_experience.py",
+      "assessment": "Object/font inspection, geometry drift comparator, semantic accessibility and hash queue audit. No PDF/UA certification."
+    },
+    {
+      "id": 74,
+      "capability": "Font embedding/ToUnicode/core-font QA",
+      "historical_class": "PRIVATE_BETTER_GENERICALLY_PORTABLE",
+      "current_class": "RECONCILED_GENERIC",
+      "implementation": "document_quality.py",
+      "evidence_test": "../e2e/test_complete_experience.py",
+      "assessment": "Object/font inspection, geometry drift comparator, semantic accessibility and hash queue audit. No PDF/UA certification."
+    },
+    {
+      "id": 75,
+      "capability": "Recruiter-safe PDF metadata",
+      "historical_class": "PACKAGE_BETTER",
+      "current_class": "PUBLIC_ADVANTAGE",
+      "implementation": "resume.py",
+      "evidence_test": "test_header_summary_ats.py",
+      "assessment": "Actual PDF generation, independent extraction, visual density and ATS reconstruction."
+    },
+    {
+      "id": 76,
+      "capability": "Filename/hash/packet manifest",
+      "historical_class": "PARITY",
+      "current_class": "EQUIVALENT",
+      "implementation": "resume.py",
+      "evidence_test": "test_header_summary_ats.py",
+      "assessment": "Actual PDF generation, independent extraction, visual density and ATS reconstruction."
+    },
+    {
+      "id": 77,
+      "capability": "Per-family visual goldens",
+      "historical_class": "PRIVATE_BETTER_GENERICALLY_PORTABLE",
+      "current_class": "RECONCILED_GENERIC",
+      "implementation": "resume.py",
+      "evidence_test": "test_header_summary_ats.py",
+      "assessment": "Three preserved synthetic visual goldens plus eight persona outputs; candidate geometry and contact sheets support release review. No private goldens copied."
+    },
+    {
+      "id": 78,
+      "capability": "Geometry-signature regression",
+      "historical_class": "PRIVATE_BETTER_GENERICALLY_PORTABLE",
+      "current_class": "RECONCILED_GENERIC",
+      "implementation": "document_quality.py",
+      "evidence_test": "../e2e/test_complete_experience.py",
+      "assessment": "Object/font inspection, geometry drift comparator, semantic accessibility and hash queue audit. No PDF/UA certification."
+    },
+    {
+      "id": 79,
+      "capability": "Contact sheets/human acceptance",
+      "historical_class": "PRIVATE_BETTER_GENERICALLY_PORTABLE",
+      "current_class": "RECONCILED_GENERIC",
+      "implementation": "resume.py",
+      "evidence_test": "test_header_summary_ats.py",
+      "assessment": "Three actual synthetic reference/public render comparisons, DOCX/PDF comparisons, dashboard and report contact sheets; owner visual acceptance pending release review."
+    },
+    {
+      "id": 80,
+      "capability": "Candidate-specific visual goldens",
+      "historical_class": "PRIVATE_BETTER_PERSONAL_SPECIFIC",
+      "current_class": "PERSONAL_CONFIG_ONLY",
+      "implementation": "",
+      "evidence_test": "",
+      "assessment": "Private identities, market universe, accepted artifacts or career voice corpus remain private; configure equivalents in user data."
+    },
+    {
+      "id": 81,
+      "capability": "Source/engine release lock",
+      "historical_class": "PRIVATE_BETTER_GENERICALLY_PORTABLE",
+      "current_class": "RECONCILED_GENERIC",
+      "implementation": "../../scripts/package_release.py",
+      "evidence_test": "test_phase5b_transactions.py",
+      "assessment": "Hash inventory and source/wheel/skill fingerprint; history-free source export. Publication uses the reviewed fingerprint."
+    },
+    {
+      "id": 82,
+      "capability": "Canonical evidence freshness",
+      "historical_class": "PACKAGE_BETTER",
+      "current_class": "PUBLIC_ADVANTAGE",
+      "implementation": "updates.py",
+      "evidence_test": "test_phase5b_transactions.py",
+      "assessment": "Revisioned canonical truth, recovery, staleness and immutable derivative checks."
+    },
+    {
+      "id": 83,
+      "capability": "New evidence propagation",
+      "historical_class": "PACKAGE_BETTER",
+      "current_class": "PUBLIC_ADVANTAGE",
+      "implementation": "updates.py",
+      "evidence_test": "test_phase5b_transactions.py",
+      "assessment": "Revisioned canonical truth, recovery, staleness and immutable derivative checks."
+    },
+    {
+      "id": 84,
+      "capability": "Accepted/submitted hash exactness",
+      "historical_class": "PRIVATE_BETTER_GENERICALLY_PORTABLE",
+      "current_class": "RECONCILED_GENERIC",
+      "implementation": "application_state.py",
+      "evidence_test": "test_opportunity_application_state_parity.py",
+      "assessment": "Reachable append-only human-reported activity, immutable PDF/JD lineage and local follow-ups."
+    },
+    {
+      "id": 85,
+      "capability": "Typed errors/remediation",
+      "historical_class": "PACKAGE_BETTER",
+      "current_class": "PUBLIC_ADVANTAGE",
+      "implementation": "updates.py",
+      "evidence_test": "test_phase5b_transactions.py",
+      "assessment": "Revisioned canonical truth, recovery, staleness and immutable derivative checks."
+    },
+    {
+      "id": 86,
+      "capability": "Transaction rollback/recovery",
+      "historical_class": "PACKAGE_BETTER",
+      "current_class": "PUBLIC_ADVANTAGE",
+      "implementation": "updates.py",
+      "evidence_test": "test_phase5b_transactions.py",
+      "assessment": "Revisioned canonical truth, recovery, staleness and immutable derivative checks."
+    },
+    {
+      "id": 87,
+      "capability": "Review-only application packet",
+      "historical_class": "PARITY",
+      "current_class": "EQUIVALENT",
+      "implementation": "application_state.py",
+      "evidence_test": "test_opportunity_application_state_parity.py",
+      "assessment": "Reachable append-only human-reported activity, immutable PDF/JD lineage and local follow-ups."
+    },
+    {
+      "id": 88,
+      "capability": "Application workflow/outcome state",
+      "historical_class": "PRIVATE_BETTER_GENERICALLY_PORTABLE",
+      "current_class": "RECONCILED_GENERIC",
+      "implementation": "application_state.py",
+      "evidence_test": "test_opportunity_application_state_parity.py",
+      "assessment": "Reachable append-only human-reported activity, immutable PDF/JD lineage and local follow-ups."
+    },
+    {
+      "id": 89,
+      "capability": "Interview evidence pack",
+      "historical_class": "PRIVATE_BETTER_GENERICALLY_PORTABLE",
+      "current_class": "RECONCILED_GENERIC",
+      "implementation": "interview_prep.py",
+      "evidence_test": "test_interview_evidence_pack_parity.py",
+      "assessment": "Reachable evidence stories, answer boundaries, technical walkthroughs and readable preparation report."
+    },
+    {
+      "id": 90,
+      "capability": "Career-capital analysis",
+      "historical_class": "PRIVATE_BETTER_GENERICALLY_PORTABLE",
+      "current_class": "RECONCILED_GENERIC",
+      "implementation": "conversion_learning.py",
+      "evidence_test": "test_career_conversion_learning.py",
+      "assessment": "Observed-cohort career capital, market signals and descriptive conversion; insufficient samples remain insufficient."
+    },
+    {
+      "id": 91,
+      "capability": "Capability/market mapping",
+      "historical_class": "PRIVATE_BETTER_GENERICALLY_PORTABLE",
+      "current_class": "RECONCILED_GENERIC",
+      "implementation": "conversion_learning.py",
+      "evidence_test": "test_career_conversion_learning.py",
+      "assessment": "Observed-cohort career capital, market signals and descriptive conversion; insufficient samples remain insufficient."
+    },
+    {
+      "id": 92,
+      "capability": "Live gaps and course ROI",
+      "historical_class": "PRIVATE_BETTER_GENERICALLY_PORTABLE",
+      "current_class": "RECONCILED_GENERIC",
+      "implementation": "learning_path.py; learning_workflow.py; learning_sources.py",
+      "evidence_test": "test_learning_path_intelligence.py; test_learning_workflow.py",
+      "assessment": "V1 engine preserved; typed gap analysis, bounded live discovery, saved personalization, constrained roadmap, projects, completion journal, governed evidence/award updates and eligibility reassessment verified."
+    },
+    {
+      "id": 93,
+      "capability": "Promotion/readiness progression",
+      "historical_class": "PRIVATE_BETTER_GENERICALLY_PORTABLE",
+      "current_class": "RECONCILED_GENERIC",
+      "implementation": "conversion_learning.py",
+      "evidence_test": "test_career_conversion_learning.py",
+      "assessment": "Observed-cohort career capital, market signals and descriptive conversion; insufficient samples remain insufficient."
+    },
+    {
+      "id": 94,
+      "capability": "Conversion/outcome learning",
+      "historical_class": "PRIVATE_BETTER_GENERICALLY_PORTABLE",
+      "current_class": "RECONCILED_GENERIC",
+      "implementation": "conversion_learning.py",
+      "evidence_test": "test_career_conversion_learning.py",
+      "assessment": "Observed-cohort career capital, market signals and descriptive conversion; insufficient samples remain insufficient."
+    },
+    {
+      "id": 95,
+      "capability": "Job discovery/funnel runtime",
+      "historical_class": "PRIVATE_BETTER_GENERICALLY_PORTABLE",
+      "current_class": "RECONCILED_GENERIC",
+      "implementation": "discovery_sources.py",
+      "evidence_test": "test_discovery_sources.py",
+      "assessment": "Bounded read-only Greenhouse adapter, actual public GET observed, reviewed requirement proposals, catalog dedupe/freshness/qualification. Other provider adapters and scheduled alerts are unverified."
+    },
+    {
+      "id": 96,
+      "capability": "Concrete private role-title universe",
+      "historical_class": "PRIVATE_BETTER_PERSONAL_SPECIFIC",
+      "current_class": "PERSONAL_CONFIG_ONLY",
+      "implementation": "",
+      "evidence_test": "",
+      "assessment": "Private identities, market universe, accepted artifacts or career voice corpus remain private; configure equivalents in user data."
+    },
+    {
+      "id": 97,
+      "capability": "Private voice/positioning corpus",
+      "historical_class": "PRIVATE_BETTER_PERSONAL_SPECIFIC",
+      "current_class": "PERSONAL_CONFIG_ONLY",
+      "implementation": "",
+      "evidence_test": "",
+      "assessment": "Private identities, market universe, accepted artifacts or career voice corpus remain private; configure equivalents in user data."
+    },
+    {
+      "id": 98,
+      "capability": "Historical provider/job regressions",
+      "historical_class": "PRIVATE_BETTER_PERSONAL_SPECIFIC",
+      "current_class": "PERSONAL_CONFIG_ONLY",
+      "implementation": "",
+      "evidence_test": "",
+      "assessment": "Private identities, market universe, accepted artifacts or career voice corpus remain private; configure equivalents in user data."
+    },
+    {
+      "id": 99,
+      "capability": "Studio identity in public PDF metadata",
+      "historical_class": "LEGACY_PRIVATE_BEHAVIOR",
+      "current_class": "NOT_PORTED_LEGACY",
+      "implementation": "",
+      "evidence_test": "",
+      "assessment": "Private hardcoded/monolithic behavior deliberately excluded; generic contracts retained."
+    },
+    {
+      "id": 100,
+      "capability": "Hard-coded candidate phrase guards",
+      "historical_class": "LEGACY_PRIVATE_BEHAVIOR",
+      "current_class": "NOT_PORTED_LEGACY",
+      "implementation": "",
+      "evidence_test": "",
+      "assessment": "Private hardcoded/monolithic behavior deliberately excluded; generic contracts retained."
+    },
+    {
+      "id": 101,
+      "capability": "Mixed code/data monolith",
+      "historical_class": "LEGACY_PRIVATE_BEHAVIOR",
+      "current_class": "NOT_PORTED_LEGACY",
+      "implementation": "",
+      "evidence_test": "",
+      "assessment": "Private hardcoded/monolithic behavior deliberately excluded; generic contracts retained."
+    },
+    {
+      "id": 102,
+      "capability": "No external submission API",
+      "historical_class": "INTENTIONAL_DIFFERENCE",
+      "current_class": "INTENTIONAL_DIFFERENCE",
+      "implementation": "profile.py",
+      "evidence_test": "test_phase2_contracts.py",
+      "assessment": "Retained generic implementation and regression coverage."
+    },
+    {
+      "id": 103,
+      "capability": "Portable runtime roots",
+      "historical_class": "INTENTIONAL_DIFFERENCE",
+      "current_class": "INTENTIONAL_DIFFERENCE",
+      "implementation": "profile.py",
+      "evidence_test": "test_phase2_contracts.py",
+      "assessment": "Retained generic implementation and regression coverage."
+    },
+    {
+      "id": 104,
+      "capability": "Privacy/package hygiene",
+      "historical_class": "PARITY",
+      "current_class": "EQUIVALENT",
+      "implementation": "updates.py",
+      "evidence_test": "test_phase5b_transactions.py",
+      "assessment": "Revisioned canonical truth, recovery, staleness and immutable derivative checks."
+    },
+    {
+      "id": 105,
+      "capability": "Installed-wheel/clean-room matrix",
+      "historical_class": "PACKAGE_BETTER",
+      "current_class": "PUBLIC_ADVANTAGE",
+      "implementation": "updates.py",
+      "evidence_test": "test_phase5b_transactions.py",
+      "assessment": "Revisioned canonical truth, recovery, staleness and immutable derivative checks."
+    },
+    {
+      "id": 106,
+      "capability": "Gold fixture refresh governance",
+      "historical_class": "PRIVATE_BETTER_GENERICALLY_PORTABLE",
+      "current_class": "RECONCILED_GENERIC",
+      "implementation": "resume.py",
+      "evidence_test": "test_header_summary_ats.py",
+      "assessment": "Unchanged existing goldens; geometry compare is read-only. New candidate baselines require human visual review before promotion."
+    },
+    {
+      "id": 107,
+      "capability": "Candidate-neutral synthetic personas",
+      "historical_class": "PACKAGE_BETTER",
+      "current_class": "PUBLIC_ADVANTAGE",
+      "implementation": "workflows.py",
+      "evidence_test": "test_onboarding_portable_workflows.py",
+      "assessment": "Source-first approval flow plus eight source-first synthetic personas."
+    },
+    {
+      "id": 108,
+      "capability": "Actual accepted-family regression",
+      "historical_class": "PRIVATE_BETTER_PERSONAL_SPECIFIC",
+      "current_class": "PERSONAL_CONFIG_ONLY",
+      "implementation": "",
+      "evidence_test": "",
+      "assessment": "Private identities, market universe, accepted artifacts or career voice corpus remain private; configure equivalents in user data."
+    },
+    {
+      "id": 109,
+      "capability": "Accessibility review",
+      "historical_class": "PRIVATE_BETTER_GENERICALLY_PORTABLE",
+      "current_class": "RECONCILED_GENERIC",
+      "implementation": "document_quality.py",
+      "evidence_test": "../e2e/test_complete_experience.py",
+      "assessment": "Object/font inspection, geometry drift comparator, semantic accessibility and hash queue audit. No PDF/UA certification."
+    },
+    {
+      "id": 110,
+      "capability": "Production queue audit",
+      "historical_class": "PRIVATE_BETTER_GENERICALLY_PORTABLE",
+      "current_class": "RECONCILED_GENERIC",
+      "implementation": "document_quality.py",
+      "evidence_test": "../e2e/test_complete_experience.py",
+      "assessment": "Object/font inspection, geometry drift comparator, semantic accessibility and hash queue audit. No PDF/UA certification."
+    }
+  ]
+}

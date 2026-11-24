@@ -1,0 +1,2 @@
+-c constraints-py312.txt
+coverage>=7,<8

@@ -1,0 +1,10 @@
+{
+  "schema":"careeros.clarification-resolutions.v1",
+  "resolutions":[
+    {"local_id":"job-cedar","issue_type":"OVERLAPPING_EMPLOYMENT","decision":"CONFIRM_CONCURRENT_TRANSITION","set_fields":{}},
+    {"local_id":"edu-piedmont","issue_type":"INCOMPLETE_EDUCATION_STATE","decision":"SET_VALUE","set_fields":{"completion_status":"WITHDRAWN"}},
+    {"local_id":"ev-cleanup","issue_type":"UNSUPPORTED_METRIC","decision":"REMOVE_UNSUPPORTED_METRIC","set_fields":{"outcomes":["Produced a reviewed cleanup log for the migration handoff."],"verification_state":"VERIFIED"}},
+    {"local_id":"skill-cleanup","issue_type":"CONFLICTING_VISIBILITY","decision":"REMOVE_PRIVATE_LINK","set_fields":{"evidence_ids":["ref:ev-cleanup"]}},
+    {"local_id":"preferences","issue_type":"CAREER_GAP_DISPLAY_CHOICE","decision":"SET_VALUE","set_fields":{"career_gaps":[{"start_year":2018,"end_year":2018,"reason":"Education transition","display":"OMIT_FROM_RESUME"}]}}
+  ]
+}

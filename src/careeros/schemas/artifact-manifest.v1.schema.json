@@ -1,0 +1,11 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"urn:careeros:schema:artifact-manifest:v1",
+  "title":"ArtifactManifestV1","type":"object","additionalProperties":false,
+  "required":["schema","schema_version","manifest_id","build_id","artifacts","lineage_hash","created_at"],
+  "properties":{
+    "schema":{"const":"careeros.artifact-manifest.v1"},"schema_version":{"const":"1.0.0"},"manifest_id":{"type":"string"},"build_id":{"type":"string"},
+    "artifacts":{"type":"array","items":{"$ref":"urn:careeros:schema:resume-artifact:v1"}},"lineage_hash":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+    "created_at":{"type":"string","format":"date-time"}
+  }
+}

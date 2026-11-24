@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:careeros:schema:candidate-profile:v1",
+  "title": "CandidateProfileV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "schema_version", "record_id", "created_at", "updated_at", "provenance", "verification_state", "confidence", "visibility", "status", "public_name", "contact"],
+  "properties": {
+    "schema": {"const": "careeros.candidate-profile.v1"},
+    "schema_version": {"const": "1.0.0"},
+    "record_id": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{2,127}$"},
+    "created_at": {"type": "string", "format": "date-time"},
+    "updated_at": {"type": "string", "format": "date-time"},
+    "provenance": {"type": "array", "minItems": 1, "items": {"$ref": "urn:careeros:schema:provenance-record:v1"}},
+    "verification_state": {"enum": ["UNVERIFIED", "NEEDS_VERIFICATION", "VERIFIED", "DISPUTED"]},
+    "confidence": {"enum": ["LOW", "MEDIUM", "HIGH"]},
+    "visibility": {"enum": ["PRIVATE", "INTERNAL", "PUBLIC", "EMPLOYER_SAFE", "RESTRICTED"]},
+    "status": {"enum": ["ACTIVE", "SUPERSEDED", "REJECTED"]},
+    "supersedes_record_id": {"type": ["string", "null"]},
+    "public_name": {"type": "string", "minLength": 1},
+    "legal_name": {"type": ["string", "null"]},
+    "location": {"type": ["string", "null"]},
+    "contact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["email", "phone", "urls"],
+      "properties": {
+        "email": {"type": ["string", "null"]},
+        "phone": {"type": ["string", "null"]},
+        "urls": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "work_authorization": {"type": ["string", "null"]}
+  }
+}

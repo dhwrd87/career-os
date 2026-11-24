@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:careeros:schema:compiler-input:v1",
+  "title": "CompilerInputV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "schema_version", "profile", "role_family", "target_context", "presentation_policy"],
+  "properties": {
+    "schema": {"const": "careeros.compiler-input.v1"},
+    "schema_version": {"const": "1.0.0"},
+    "profile": {"$ref": "urn:careeros:schema:career-profile:v1"},
+    "role_family": {"$ref": "urn:careeros:schema:role-family:v1"},
+    "target_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target_role", "target_organization", "job_description_reference"],
+      "properties": {
+        "target_role": {"type": "string", "minLength": 1},
+        "target_organization": {"type": ["string", "null"]},
+        "job_description_reference": {"type": ["string", "null"]}
+      }
+    },
+    "presentation_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["policy_id", "template_id", "page_target", "output_naming"],
+      "properties": {
+        "policy_id": {"type": "string", "minLength": 1},
+        "template_id": {"type": "string", "minLength": 1},
+        "page_target": {"type": "integer"},
+        "output_naming": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}
+

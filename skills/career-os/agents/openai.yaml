@@ -1,0 +1,6 @@
+interface:
+  display_name: "Career OS"
+  short_description: "Guide governed career and resume workflows"
+  default_prompt: "Use $career-os to check my workspace and continue with the next safe career step."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,19 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"urn:careeros:schema:resume-bullet-candidate:v1",
+  "title":"ResumeBulletCandidateV1",
+  "type":"object",
+  "required":["schema","schema_version","bullet_id","evidence_ids","action","scope","tool_or_method","deliverable","outcome","metric_refs","verification_state","visibility","lane_relevance","jd_relevance","confidence","source_lineage","text"],
+  "properties":{
+    "schema":{"const":"careeros.resume-bullet-candidate.v1"},"schema_version":{"const":"1.0.0"},"bullet_id":{"type":"string"},
+    "evidence_ids":{"type":"array","items":{"type":"string"},"minItems":1},"role_context":{"type":["string","null"]},
+    "action":{"type":"string"},"scope":{"type":["string","null"]},"tool_or_method":{"type":"string"},"supported_actions":{"type":"array","items":{"type":"string"}},"deliverable":{"type":"string"},
+    "outcome":{"type":"string"},"outcome_class":{"enum":["TECHNICAL","OPERATIONAL","DELIVERY","QUALITY","RISK","COMPLIANCE","CUSTOMER","EFFICIENCY","COMMERCIAL","LEARNING_PROJECT"]},
+    "metric_refs":{"type":"array"},"unsupported_metric_tokens":{"type":"array"},"source_unsupported_metric_tokens":{"type":"array"},"verification_state":{"type":"string"},"visibility":{"type":"string"},
+    "lane_relevance":{"enum":["ANCHOR","SUPPORTING","CONTEXT","OPTIONAL","DISTRACTING"]},"jd_relevance":{"type":"string"},
+    "confidence":{"type":"string"},"source_lineage":{"type":"array"},"pattern":{"type":"string"},"text":{"type":"string"},
+    "variant_mode":{"enum":["TECHNICAL","OPERATIONS","CUSTOMER","INVESTIGATION","DOCUMENTATION","ESCALATION","QUALITY","COMPLIANCE"]},
+    "base_text":{"type":"string"},"truth_boundary":{"type":"object"},"matched_requirement_ids":{"type":"array","items":{"type":"string"}},
+    "selection_score":{"type":"number"},"job_term_overlap":{"type":"integer"},"evidence_tier":{"type":"string"}
+  }
+}

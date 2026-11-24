@@ -1,0 +1,19 @@
+{
+  "schema": "careeros.config.v1",
+  "config_version": "1.0.0",
+  "workspace": {"package_root": "../../../src/careeros", "user_data_root": "../../../workspace/data", "state_root": "../../../workspace/state", "output_root": "../../../workspace/outputs", "cache_root": "../../../workspace/.cache", "locale": "en-US", "timezone": "UTC"},
+  "candidate": {"profile_id": "candidate_invalid_external", "profile_path": "profile.json", "public_identity_policy_path": null},
+  "privacy": {"default_visibility": "PRIVATE", "source_document_retention": "USER_MANAGED", "generated_artifact_retention_days": null, "allow_network_enrichment": false, "allow_sensitive_data_in_logs": false, "require_human_approval_for_external_actions": true},
+  "career": {"preferences_path": "preferences.json", "role_families_path": "role-families.json", "market_map_path": null},
+  "discovery": {"enabled": false, "adapters": [], "freshness_policy": null, "dedupe_policy": null},
+  "qualification": {"policy": "default-v1", "compensation_is_hard_gate": false},
+  "resume": {"template": "single-column-v1", "page_target": 2, "renderer": "none", "font_profile": "system-safe-v1", "compact_fallback": false, "output_naming": "{public_name} - {target_role}.{ext}", "gates": ["truth"]},
+  "applications": {"approval_policy": "human_before_external_action", "submitted_artifacts_immutable": true, "follow_up_policy": null, "interview_workflow": null},
+  "adapters": {
+    "email": {"enabled": true, "external_actions": true, "require_human_approval": false, "credential_reference": "ENV"},
+    "calendar": {"enabled": false, "external_actions": true, "require_human_approval": true, "credential_reference": null},
+    "crm": {"enabled": false, "external_actions": true, "require_human_approval": true, "credential_reference": null}
+  },
+  "runtime": {"poppler_bin": "auto", "office_converter": "disabled", "network_timeout_seconds": 20, "log_level": "info"}
+}
+

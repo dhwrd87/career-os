@@ -1,0 +1,10 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema","$id":"urn:careeros:schema:strongest-evidence-omission:v1",
+  "title":"StrongestEvidenceOmissionV1","type":"object","additionalProperties":false,
+  "required":["schema","schema_version","assessment_id","job_id","findings","silent_omission_count","status","assessment_hash"],
+  "properties":{
+    "schema":{"const":"careeros.strongest-evidence-omission.v1"},"schema_version":{"const":"1.0.0"},"assessment_id":{"type":"string"},"job_id":{"type":"string"},
+    "findings":{"type":"array","items":{"type":"object","additionalProperties":false,"required":["need_id","strongest_evidence_id","strongest_utility","selected_evidence_ids","selected_best_utility","code","rationale","silent"],"properties":{"need_id":{"type":"string"},"strongest_evidence_id":{"type":"string"},"strongest_utility":{"type":"number"},"selected_evidence_ids":{"type":"array","items":{"type":"string"}},"selected_best_utility":{"type":["number","null"]},"code":{"const":"STRONGEST_EVIDENCE_OMITTED"},"rationale":{"type":["string","null"],"enum":["SPACE","REDUNDANCY","PRIVACY","PUBLIC_USE_BLOCK","JOB_MISMATCH","CONTEXT_MISMATCH","DOCUMENT_BALANCE","OTHER",null]},"silent":{"type":"boolean"}}}},
+    "silent_omission_count":{"type":"integer","minimum":0},"status":{"enum":["PASS","FAIL"]},"assessment_hash":{"type":"string","pattern":"^[a-f0-9]{64}$"}
+  }
+}

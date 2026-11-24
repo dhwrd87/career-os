@@ -1,0 +1,5 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema","$id":"urn:careeros:schema:course-freshness:v1","title":"CourseFreshnessV1","type":"object",
+  "required":["schema","schema_version","course_candidate_id","freshness_state","freshness_reason","reverify_after_days","assessed_at","policy_version"],
+  "properties":{"schema":{"const":"careeros.course-freshness.v1"},"schema_version":{"const":"1.0.0"},"course_candidate_id":{"type":"string"},"freshness_state":{"enum":["CURRENT","REVERIFY","REMOVED","REPLACED","UNKNOWN"]},"freshness_reason":{"type":"string"},"last_verified_at":{"type":["string","null"]},"reverify_after_days":{"type":"integer"},"replacement_course_id":{"type":["string","null"]},"assessed_at":{"type":"string"},"policy_version":{"type":"string"}},"additionalProperties":false
+}

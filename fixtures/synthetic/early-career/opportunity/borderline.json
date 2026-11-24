@@ -1,0 +1,5 @@
+{
+  "schema":"careeros.synthetic-opportunity-input.v1","source_type":"SYNTHETIC","opportunity_id":"opp-early-borderline","employer_name":"Juniper Harbor Systems","role_title":"Support Data Associate","location":"Remote US",
+  "requirements":[{"capability":"Customer Support","level":"CORE","requirement_class":"REQUIRED","requirement_subtype":"SKILL"},{"capability":"Advanced SQL","level":"PREFERRED","requirement_class":"PREFERRED","requirement_subtype":"SKILL"}],
+  "job_description":"Juniper Harbor Systems seeks a Support Data Associate with customer-support experience and preferred advanced SQL capability for investigating account records."
+}

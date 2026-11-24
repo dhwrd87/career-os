@@ -1,0 +1,10 @@
+{
+  "schema":"careeros.synthetic-opportunity-input.v1","source_type":"SYNTHETIC","opportunity_id":"opp-learning-example","employer_name":"Example Implementation Cooperative","role_title":"Implementation Analyst","location":"Remote US",
+  "requirements":[
+    {"capability":"Python","level":"CORE","requirement_class":"REQUIRED","requirement_subtype":"SKILL"},
+    {"capability":"Statistics","level":"CORE","requirement_class":"REQUIRED","requirement_subtype":"EDUCATION"},
+    {"capability":"Cloud Practitioner","level":"PREFERRED","requirement_class":"PREFERRED","requirement_subtype":"CREDENTIAL"},
+    {"capability":"Professional Implementation","level":"CORE","requirement_class":"REQUIRED","requirement_subtype":"EXPERIENCE","direct_experience":true}
+  ],
+  "job_description":"Fictional learning demonstration only. This role requires Python skills, statistics knowledge, and professional implementation experience. A Cloud Practitioner credential is preferred. Projects and courses do not replace required professional experience."
+}

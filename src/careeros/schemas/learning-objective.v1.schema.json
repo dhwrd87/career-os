@@ -1,0 +1,5 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema","$id":"urn:careeros:schema:learning-objective:v1","title":"LearningObjectiveV1","type":"object",
+  "required":["schema","schema_version","objective_id","gap_id","objective_statement","target_competency","starting_state","desired_state","completion_evidence","lane_impact","job_impact","prerequisites","estimated_scope","policy_version"],
+  "properties":{"schema":{"const":"careeros.learning-objective.v1"},"schema_version":{"const":"1.0.0"},"objective_id":{"type":"string"},"gap_id":{"type":"string"},"objective_statement":{"type":"string"},"target_competency":{"type":"string"},"starting_state":{"type":"string"},"desired_state":{"type":"string"},"completion_evidence":{"type":"array","items":{"type":"string"}},"lane_impact":{"type":"array","items":{"type":"string"}},"job_impact":{"type":"array","items":{"type":"string"}},"prerequisites":{"type":"array","items":{"type":"string"}},"estimated_scope":{"type":"string"},"created_at":{"type":"string"},"policy_version":{"type":"string"}},"additionalProperties":false
+}

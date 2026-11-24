@@ -1,0 +1,10 @@
+{
+  "schema":"careeros.clarification-resolutions.v1",
+  "resolutions":[
+    {"local_id":"job-lantern","issue_type":"MISSING_EMPLOYMENT_DATE","decision":"SET_VALUE","set_fields":{"start_year":2025}},
+    {"local_id":"job-lantern","issue_type":"ACTUAL_VS_PUBLIC_TITLE","decision":"CONFIRM_PRESENTATION_ALIAS","set_fields":{}},
+    {"local_id":"cred-service","issue_type":"INCOMPLETE_CREDENTIAL_STATUS","decision":"SET_VALUE","set_fields":{"credential_state":"ACTIVE"}},
+    {"local_id":"skill-docs","issue_type":"MISSING_SKILL_EVIDENCE","decision":"LINK_EVIDENCE","set_fields":{"evidence_ids":["ref:ev-support"]}},
+    {"local_id":"project-guide","issue_type":"AMBIGUOUS_PROJECT_CONTRIBUTION","decision":"SET_VALUE","set_fields":{"contribution":"Drafted and revised the member-facing question guide under supervisor review."}}
+  ]
+}

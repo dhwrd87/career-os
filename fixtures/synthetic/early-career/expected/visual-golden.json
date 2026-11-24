@@ -1,0 +1,7 @@
+{
+  "schema":"careeros.synthetic-visual-golden.v1","accepted_at":"2026-10-02T12:00:00Z","acceptance":"MANUAL_AND_AUTOMATED_PASS",
+  "template_version":"generic-editorial-v1","font_profile_version":"reportlab-helvetica-v1","page_count":1,"raster_dpi":144,
+  "expected_canvas":{"width":1224,"height":1584},"content_bounds":{"minimum_left":80,"minimum_top":70,"maximum_right":1144,"maximum_bottom":950},
+  "checks":["no_overflow","no_clipping","no_collisions","clear_hierarchy","single_column_reading_order","no_unreadably_small_type"],
+  "reference_evidence":"private validation/phase2-clean-room-final-2026-10-02; no binary golden distributed"
+}

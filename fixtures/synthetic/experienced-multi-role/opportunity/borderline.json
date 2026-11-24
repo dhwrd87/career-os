@@ -1,0 +1,5 @@
+{
+  "schema":"careeros.synthetic-opportunity-input.v1","source_type":"SYNTHETIC","opportunity_id":"opp-experienced-borderline","employer_name":"Blue Mesa Manufacturing Services","role_title":"Strategic Procurement Manager","location":"Northern California",
+  "requirements":[{"capability":"Vendor Management","level":"CORE","requirement_class":"REQUIRED","requirement_subtype":"SKILL"},{"capability":"Enterprise Procurement","level":"PREFERRED","requirement_class":"PREFERRED","requirement_subtype":"SKILL"}],
+  "job_description":"Blue Mesa Manufacturing Services seeks a Strategic Procurement Manager with vendor-management evidence and preferred enterprise procurement program ownership."
+}

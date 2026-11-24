@@ -1,0 +1,5 @@
+{
+  "schema":"careeros.synthetic-opportunity-input.v1","source_type":"SYNTHETIC","opportunity_id":"opp-early-strong","employer_name":"Brightpath Member Network","role_title":"Customer Support Coordinator","location":"Remote US",
+  "requirements":[{"capability":"Customer Support","level":"CORE","requirement_class":"REQUIRED","requirement_subtype":"SKILL"},{"capability":"Documentation","level":"CORE","requirement_class":"REQUIRED","requirement_subtype":"SKILL"}],
+  "job_description":"Brightpath Member Network seeks a Customer Support Coordinator to answer member questions, document recurring issues, and maintain clear help content. The role values reliable communication, careful escalation, and evidence of customer support and documentation work."
+}

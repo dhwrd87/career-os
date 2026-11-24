@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:careeros:schema:profile-evidence-readiness:v1",
+  "title": "ProfileEvidenceReadinessV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "schema_version", "status", "dimensions", "blocking_record_ids", "recommended_record_ids", "evaluated_at"],
+  "properties": {
+    "schema": {"const": "careeros.profile-evidence-readiness.v1"},
+    "schema_version": {"const": "1.0.0"},
+    "status": {"enum": ["PROFILE_READY", "PROFILE_READY_WITH_GAPS", "EVIDENCE_EXPANSION_RECOMMENDED", "CLARIFICATION_REQUIRED"]},
+    "dimensions": {"type": "object"},
+    "blocking_record_ids": {"type": "array", "items": {"type": "string"}},
+    "recommended_record_ids": {"type": "array", "items": {"type": "string"}},
+    "evaluated_at": {"type": "string", "format": "date-time"}
+  }
+}

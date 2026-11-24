@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:careeros:schema:lane-base-build-manifest:v1",
+  "title": "LaneBaseBuildManifestV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema", "schema_version", "build_id", "lane_base_id", "career_profile_hash",
+    "role_family_hash", "storyline_hash", "input_evidence_ids", "selected_evidence_ids",
+    "compiler_version", "editorial_policy_version", "template_version", "font_profile_version",
+    "qa_status", "created_at", "canonical_evidence_freshness"
+  ],
+  "properties": {
+    "schema": {"const": "careeros.lane-base-build-manifest.v1"},
+    "schema_version": {"const": "1.0.0"},
+    "build_id": {"type": "string"},
+    "lane_base_id": {"type": "string"},
+    "career_profile_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "role_family_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "storyline_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "input_evidence_ids": {"type": "array", "items": {"type": "string"}},
+    "selected_evidence_ids": {"type": "array", "items": {"type": "string"}},
+    "compiler_version": {"type": "string"},
+    "editorial_policy_version": {"type": "string"},
+    "template_version": {"type": "string"},
+    "font_profile_version": {"type": "string"},
+    "qa_status": {"enum": ["BUILDING", "PASS", "FAIL"]},
+    "created_at": {"type": "string", "format": "date-time"},
+    "canonical_evidence_freshness":{"$ref":"urn:careeros:schema:canonical-evidence-freshness:v1"}
+  }
+}

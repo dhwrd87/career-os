@@ -1,0 +1,17 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"urn:careeros:schema:resume-header:v1",
+  "title":"ResumeHeaderV1","type":"object","additionalProperties":false,
+  "required":["schema","schema_version","candidate_name","public_location","phone","email","linkedin","portfolio","optional_github","positioning_headline","public_identity_policy","contact_visibility","link_display_policy","semantic_order","layout_policy"],
+  "properties":{
+    "schema":{"const":"careeros.resume-header.v1"},"schema_version":{"const":"1.0.0"},
+    "candidate_name":{"type":"string","minLength":1},"public_location":{"type":["string","null"]},
+    "phone":{"type":["string","null"]},"email":{"type":["string","null"]},
+    "linkedin":{"type":["string","null"]},"portfolio":{"type":["string","null"]},
+    "optional_github":{"type":["string","null"]},"positioning_headline":{"type":"string","minLength":1},
+    "public_identity_policy":{"const":"PUBLIC_NAME_ONLY"},"contact_visibility":{"const":"PUBLIC_FIELDS_ONLY"},
+    "link_display_policy":{"const":"PLAIN_TEXT_DISPLAY_WITH_CLICKABLE_ANNOTATION"},
+    "semantic_order":{"type":"array","minItems":3,"items":{"type":"string"}},
+    "layout_policy":{"const":"PREMIUM_CENTERED_MASTHEAD_WITH_ATS_MINIMAL_FALLBACK"}
+  }
+}

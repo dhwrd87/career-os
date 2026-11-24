@@ -1,0 +1,19 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"urn:careeros:schema:recruiter-conversion-strategy:v2",
+  "title":"RecruiterConversionStrategyV2","type":"object","additionalProperties":false,
+  "required":["schema","schema_version","target_role","candidate_positioning","career_transition_narrative","top_employer_needs","top_candidate_proof_points","strongest_professional_credibility_signals","strongest_technical_signals","key_differentiator","key_differentiator_source_ids","internal_risks_gaps","desired_recruiter_takeaway","summary_archetype"],
+  "properties":{
+    "schema":{"const":"careeros.recruiter-conversion-strategy.v2"},"schema_version":{"const":"2.0.0"},
+    "target_role":{"type":"string","minLength":1},"candidate_positioning":{"type":"string","minLength":1},
+    "career_transition_narrative":{"type":"string","minLength":1},
+    "top_employer_needs":{"type":"array","maxItems":3,"items":{"type":"object","required":["need_id","need_statement","importance"],"properties":{"need_id":{"type":["string","null"]},"need_statement":{"type":"string"},"importance":{"type":"string"}}}},
+    "top_candidate_proof_points":{"type":"array","maxItems":3,"items":{"type":"object","required":["evidence_id","proof"],"properties":{"evidence_id":{"type":"string"},"proof":{"type":"string"}}}},
+    "strongest_professional_credibility_signals":{"type":"array","items":{"type":"string"}},
+    "strongest_technical_signals":{"type":"array","items":{"type":"string"}},
+    "key_differentiator":{"type":["string","null"]},"key_differentiator_source_ids":{"type":"array","items":{"type":"string"}},
+    "internal_risks_gaps":{"type":"array","items":{"type":"string"}},
+    "desired_recruiter_takeaway":{"type":"string","minLength":1},
+    "summary_archetype":{"enum":["EVIDENCE_FIRST","PROFESSIONAL_TRANSITION","ROLE_FIRST","DIFFERENTIATOR_FIRST"]}
+  }
+}

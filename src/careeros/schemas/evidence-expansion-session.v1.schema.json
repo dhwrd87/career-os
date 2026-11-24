@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:careeros:schema:evidence-expansion-session:v1",
+  "title": "EvidenceExpansionSessionV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "schema_version", "session_id", "state", "source_hash", "lane_context", "job_context", "records", "created_at", "updated_at"],
+  "properties": {
+    "schema": {"const": "careeros.evidence-expansion-session.v1"},
+    "schema_version": {"const": "1.0.0"},
+    "session_id": {"type": "string"},
+    "state": {"enum": ["STARTED", "IN_PROGRESS", "REVIEW_READY", "APPROVED", "PROMOTED"]},
+    "source_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "lane_context": {"type": "array", "items": {"type": "string"}},
+    "job_context": {"type": "array", "items": {"type": "string"}},
+    "records": {"type": "array", "items": {"type": "object"}},
+    "created_at": {"type": "string", "format": "date-time"},
+    "updated_at": {"type": "string", "format": "date-time"},
+    "approved_at": {"type": ["string", "null"]},
+    "approved_by": {"type": ["string", "null"]}
+  }
+}

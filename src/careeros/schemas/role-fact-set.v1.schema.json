@@ -1,0 +1,13 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema","$id":"urn:careeros:schema:role-fact-set:v1",
+  "title":"RoleFactSetV1","type":"object","additionalProperties":false,
+  "required":["schema","schema_version","fact_set_id","profile_id","roles","importance_policy","fact_set_hash"],
+  "properties":{
+    "schema":{"const":"careeros.role-fact-set.v1"},"schema_version":{"const":"1.0.0"},"fact_set_id":{"type":"string"},"profile_id":{"type":"string"},"importance_policy":{"type":"string"},"fact_set_hash":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+    "roles":{"type":"array","items":{"type":"object","additionalProperties":false,"required":["role_record_id","employer_or_context","actual_title","public_title_alias","dates","location","employment_type","context_type","primary_responsibilities","material_outcomes","material_tools","material_scope","leadership_state","customer_stakeholder_context","verification","visibility","facts"],"properties":{
+      "role_record_id":{"type":"string"},"employer_or_context":{"type":"string"},"actual_title":{"type":["string","null"]},"public_title_alias":{"type":["string","null"]},"dates":{},"location":{"type":["string","null"]},"employment_type":{"type":["string","null"]},"context_type":{"enum":["EMPLOYMENT","PROJECT"]},
+      "primary_responsibilities":{"type":"array","items":{"type":"string"}},"material_outcomes":{"type":"array","items":{"type":"string"}},"material_tools":{"type":"array","items":{"type":"string"}},"material_scope":{"type":"array","items":{"type":"string"}},"leadership_state":{"enum":["PRESENT","NOT_EVIDENCED"]},"customer_stakeholder_context":{"type":"array","items":{"type":"string"}},"verification":{"type":"string"},"visibility":{"type":"string"},
+      "facts":{"type":"array","items":{"type":"object","additionalProperties":false,"required":["fact_id","category","value","importance","evidence_ids","verification","visibility","public_usable"],"properties":{"fact_id":{"type":"string"},"category":{"enum":["RESPONSIBILITY","OUTCOME","TOOL","SCOPE","LEADERSHIP","TECHNICAL"]},"value":{"type":"string"},"importance":{"enum":["CRITICAL","MATERIAL","SUPPORTING","OPTIONAL"]},"evidence_ids":{"type":"array","items":{"type":"string"}},"verification":{"type":"string"},"visibility":{"type":"string"},"public_usable":{"type":"boolean"}}}}
+    }}}
+  }
+}

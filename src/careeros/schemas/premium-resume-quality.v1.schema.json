@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:careeros:schema:premium-resume-quality:v1",
+  "title": "PremiumResumeQualityV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "schema_version", "status", "score", "components", "summary_naturalness", "bullet_rhythm", "flags", "human_test"],
+  "properties": {
+    "schema": {"const": "careeros.premium-resume-quality.v1"},
+    "schema_version": {"const": "1.0.0"},
+    "status": {"enum": ["PASS", "FAIL"]},
+    "score": {"type": "number", "minimum": 0, "maximum": 10},
+    "components": {"type": "object"},
+    "summary_naturalness": {"type": "object"},
+    "bullet_rhythm": {"type": "object"},
+    "flags": {"type": "array", "items": {"type": "string"}},
+    "human_test": {"type": "object"}
+  }
+}

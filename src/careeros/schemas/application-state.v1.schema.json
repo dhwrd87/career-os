@@ -1,0 +1,18 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"urn:careeros:schema:application-state:v1",
+  "title":"ApplicationStateV1","type":"object","additionalProperties":false,
+  "required":["schema","schema_version","application_id","opportunity_id","candidate_profile_id","current_state","qualification_id","resume_artifact_id","packet_id","submitted_artifact_hashes","created_at","updated_at","last_event_id","outcome","closure_reason","external_reference","human_confirmed","policy_version","integrity_state"],
+  "properties":{
+    "schema":{"const":"careeros.application-state.v1"},"schema_version":{"const":"1.0.0"},
+    "application_id":{"type":"string","minLength":3},"opportunity_id":{"type":"string","minLength":3},
+    "candidate_profile_id":{"type":"string","minLength":3},"current_state":{"type":"string","minLength":1},
+    "qualification_id":{"type":"string","minLength":3},"resume_artifact_id":{"type":"string","minLength":3},
+    "packet_id":{"type":"string","minLength":3},"submitted_artifact_hashes":{"type":"array","items":{"type":"string","pattern":"^[a-f0-9]{64}$"}},
+    "created_at":{"type":"string","format":"date-time"},"updated_at":{"type":"string","format":"date-time"},
+    "last_event_id":{"type":"string","minLength":3},
+    "outcome":{"enum":["UNKNOWN","ACTIVE","REJECTED","WITHDRAWN","OFFER_RECEIVED","OFFER_ACCEPTED","OFFER_DECLINED","HIRED","ROLE_CLOSED","NO_RESPONSE_CLOSED"]},
+    "closure_reason":{"type":["string","null"]},"external_reference":{"type":["string","null"]},
+    "human_confirmed":{"type":"boolean"},"policy_version":{"const":"application-state-v1"},"integrity_state":{"enum":["PASS","FAIL"]}
+  }
+}

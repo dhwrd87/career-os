@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:careeros:schema:career-profile:v1",
+  "title": "CareerProfileV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "schema_version", "profile_id", "generated_at", "source_snapshot_hash", "candidate", "employment", "education", "skills", "credentials", "evidence", "projects", "preferences", "role_families", "artifacts"],
+  "properties": {
+    "schema": {"const": "careeros.career-profile.v1"},
+    "schema_version": {"const": "1.0.0"},
+    "profile_id": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{2,127}$"},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "source_snapshot_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "candidate": {"$ref": "urn:careeros:schema:candidate-profile:v1"},
+    "employment": {"type": "array", "items": {"$ref": "urn:careeros:schema:employment-record:v1"}},
+    "education": {"type": "array", "items": {"$ref": "urn:careeros:schema:education-record:v1"}},
+    "skills": {"type": "array", "items": {"$ref": "urn:careeros:schema:skill-record:v1"}},
+    "credentials": {"type": "array", "items": {"$ref": "urn:careeros:schema:credential-record:v1"}},
+    "evidence": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {"$ref": "urn:careeros:schema:evidence-record:v1"},
+          {"$ref": "urn:careeros:schema:evidence-block:v1"}
+        ]
+      }
+    },
+    "projects": {"type": "array", "items": {"$ref": "urn:careeros:schema:project-evidence-record:v1"}},
+    "preferences": {"$ref": "urn:careeros:schema:career-preference:v1"},
+    "role_families": {"type": "array", "items": {"$ref": "urn:careeros:schema:role-family:v1"}},
+    "artifacts": {"type": "array", "items": {"$ref": "urn:careeros:schema:artifact-reference:v1"}}
+  }
+}

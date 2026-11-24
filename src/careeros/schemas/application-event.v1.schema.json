@@ -1,0 +1,24 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"urn:careeros:schema:application-event:v1",
+  "title":"ApplicationEventV1","type":"object","additionalProperties":false,
+  "required":["schema","schema_version","event_id","application_id","event_type","occurred_at","recorded_at","actor","source","evidence_refs","artifact_refs","external_ref","previous_state","resulting_state","notes","supersedes_event_id","human_confirmed","submission_lineage"],
+  "properties":{
+    "schema":{"const":"careeros.application-event.v1"},"schema_version":{"const":"1.0.0"},
+    "event_id":{"type":"string","minLength":3},"application_id":{"type":"string","minLength":3},
+    "event_type":{"enum":["PACKET_PREPARED","REVIEW_REQUESTED","APPROVED","SUBMISSION_PENDING","SUBMITTED","FOLLOW_UP_DUE","FOLLOW_UP_SENT","EMPLOYER_RESPONSE","INTERVIEW_INVITED","INTERVIEW_SCHEDULED","INTERVIEW_COMPLETED","REJECTED","WITHDRAWN","OFFER_RECEIVED","OFFER_ACCEPTED","OFFER_DECLINED","ROLE_CLOSED","NO_RESPONSE_CLOSED","CORRECTION","SUPERSEDED"]},
+    "occurred_at":{"type":["string","null"],"format":"date-time"},"recorded_at":{"type":"string","format":"date-time"},
+    "actor":{"type":"string","minLength":1},"source":{"type":"string","minLength":1},
+    "evidence_refs":{"type":"array","items":{"type":"string"}},
+    "artifact_refs":{"type":"array","items":{"type":"object","required":["artifact_id","sha256"],"properties":{"artifact_id":{"type":["string","null"]},"sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"}}}},
+    "external_ref":{"type":["string","null"]},"previous_state":{"type":["string","null"]},
+    "resulting_state":{"type":"string","minLength":1},"notes":{"type":["string","null"]},
+    "supersedes_event_id":{"type":["string","null"]},"human_confirmed":{"type":"boolean"},
+    "submission_lineage":{"type":["object","null"],"properties":{
+      "resume_artifact_id":{"type":["string","null"]},"resume_sha256":{"type":["string","null"]},
+      "cover_letter_hash":{"type":["string","null"]},"application_answer_hashes":{"type":"array","items":{"type":"string"}},
+      "job_snapshot_hash":{"type":["string","null"]},"submitted_artifact_hashes":{"type":"array","items":{"type":"string"}},
+      "submission_timestamp":{"type":["string","null"]},"external_reference":{"type":["string","null"]}
+    }}
+  }
+}

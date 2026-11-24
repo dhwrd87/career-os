@@ -1,0 +1,20 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"urn:careeros:schema:masthead-geometry:v1",
+  "title":"MastheadGeometryV1","type":"object","additionalProperties":false,
+  "required":["schema","schema_version","layout_mode","name_center_offset","headline_center_offset","primary_contact_center_offset","links_center_offset","headline_gap","contact_gap","link_gap","divider_gap","professional_links_bottom_y","divider_y","summary_top_y","links_to_divider_gap","divider_to_summary_gap","divider_balance_ratio","masthead_total_height","safe_width","center_tolerance","line_counts","missing_rows","clipping_risk","status"],
+  "properties":{
+    "schema":{"const":"careeros.masthead-geometry.v1"},"schema_version":{"const":"1.0.0"},
+    "layout_mode":{"enum":["STANDARD_CENTERED","COMPACT_CENTERED","CONTROLLED_HEADLINE_WRAP","ATS_MINIMAL_FALLBACK"]},
+    "name_center_offset":{"type":["number","null"]},"headline_center_offset":{"type":["number","null"]},
+    "primary_contact_center_offset":{"type":["number","null"]},"links_center_offset":{"type":["number","null"]},
+    "headline_gap":{"type":["number","null"]},"contact_gap":{"type":["number","null"]},
+    "link_gap":{"type":["number","null"]},"divider_gap":{"type":["number","null"]},
+    "professional_links_bottom_y":{"type":["number","null"]},"divider_y":{"type":["number","null"]},
+    "summary_top_y":{"type":["number","null"]},"links_to_divider_gap":{"type":["number","null"]},
+    "divider_to_summary_gap":{"type":["number","null"]},"divider_balance_ratio":{"type":["number","null"]},
+    "masthead_total_height":{"type":["number","null"]},"safe_width":{"type":"number"},"center_tolerance":{"type":"number"},
+    "line_counts":{"type":"object"},"missing_rows":{"type":"array","items":{"type":"string"}},
+    "clipping_risk":{"type":"boolean"},"status":{"enum":["PASS","FAIL","NOT_APPLICABLE_FALLBACK"]}
+  }
+}

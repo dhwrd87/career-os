@@ -1,0 +1,25 @@
+{
+  "schema":"careeros.onboarding-input.v1","schema_version":"1.0.0","privacy_consent":true,"review_confirmed":true,
+  "candidate":{"local_id":"candidate","public_name":"Maya Linwood","legal_name":null,"location":"Madison, WI","contact":{"email":"maya.linwood@example.com","phone":null,"urls":["https://portfolio.example/maya-linwood"]},"work_authorization":"Authorized without sponsorship","visibility":"INTERNAL","confidence":"HIGH"},
+  "employment":[
+    {"local_id":"job-lantern","employer":"Lantern Grove Cooperative","actual_title":"Member Services Assistant","normalized_title":"Customer Support Assistant","public_title":"Customer Support Coordinator","employment_type":"PART_TIME","location":"Madison, WI","start_month":"June","start_year":null,"end_month":null,"end_year":"PRESENT","date_precision":"MONTH","role_context":"Member support and knowledge-base upkeep.","evidence_ids":["ref:ev-support"],"claim_boundaries":["No supervisory responsibility."],"visibility":"PUBLIC"}
+  ],
+  "education":[
+    {"local_id":"edu-lakeshore","institution":"Lakeshore Public College","program":"Associate of Applied Science","field_of_study":"Business Communication","completion_status":"COMPLETED","start_year":2023,"end_year":2025,"claim_boundaries":[],"visibility":"PUBLIC","verification_state":"VERIFIED"}
+  ],
+  "credentials":[
+    {"local_id":"cred-service","title":"Service Desk Foundations","issuer":"Example Learning Council","platform":null,"credential_state":"UNKNOWN","issued_date":"2025-05","expiration_date":null,"credential_identifier":null,"credential_url":null,"capability_ids":["ref:skill-support"],"claim_boundaries":["Status requires confirmation."],"visibility":"PUBLIC"}
+  ],
+  "skills":[
+    {"local_id":"skill-support","name":"Customer Support","category":"Service","aliases":["Member Support"],"proficiency":"WORKING","most_recent_use":2026,"contexts":["Email and walk-up support"],"evidence_ids":["ref:ev-support"],"claim_boundaries":[],"visibility":"PUBLIC"},
+    {"local_id":"skill-docs","name":"Documentation","category":"Operations","aliases":["Knowledge Base"],"proficiency":"WORKING","most_recent_use":2026,"contexts":["Frequently asked questions"],"evidence_ids":[],"claim_boundaries":["No formal technical-writing title."],"visibility":"PUBLIC"}
+  ],
+  "evidence":[
+    {"local_id":"ev-support","evidence_type":"WORK_SAMPLE","summary":"Resolved member questions and documented recurring issues in a shared guide.","context":"Part-time member services role.","ownership":"Individual contributor with supervisor review.","actions":["Triaged questions","Updated guide entries"],"outcomes":["Documented 18 recurring questions with source tickets retained."],"skill_ids":["ref:skill-support","ref:skill-docs"],"employment_ids":["ref:job-lantern"],"project_ids":["ref:project-guide"],"metric_boundaries":["18 questions supported by retained ticket list."],"claim_boundaries":["No claim of organization-wide adoption."],"visibility":"PUBLIC","verification_state":"VERIFIED","confidence":"HIGH"}
+  ],
+  "projects":[
+    {"local_id":"project-guide","name":"Member Help Guide Refresh","purpose":"Make common answers easier for members to find.","date_range":"2025","contribution":"AMBIGUOUS","technologies":["Web editor","Spreadsheet"],"skill_ids":["ref:skill-docs"],"evidence_ids":["ref:ev-support"],"artifact_references":[],"claim_boundaries":["Collaborative project."],"visibility":"PUBLIC"}
+  ],
+  "preferences":{"local_id":"preferences","target_role_family_ids":["support-coordination"],"target_industries":["Education services","Membership organizations"],"work_modes":["HYBRID","REMOTE"],"location_preferences":["Wisconsin","Remote US"],"compensation":null,"travel_preference":"Occasional","schedule_preferences":["Daytime"],"career_change_intent":null,"constraints":["Entry-level scope"],"career_gaps":[],"visibility":"PRIVATE","confidence":"HIGH"},
+  "role_intents":[{"display_name":"Support Coordination","target_titles":["Customer Support Coordinator","Member Support Specialist"],"seniority":"ENTRY","description":"Entry-level service coordination roles.","headline":"Customer Support and Documentation","core_capabilities":["Customer Support","Documentation"],"preferred_capabilities":[],"transferable_capabilities":["Business Communication"],"hard_requirements":[],"evidence_preferences":["VERIFIED","PUBLIC"],"resume_strategy":"Lead with direct support and documented work samples.","evidence_requirements":["Customer Support","Documentation"]}]
+}

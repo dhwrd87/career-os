@@ -1,0 +1,18 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"urn:careeros:schema:job-description-intelligence:v1",
+  "title":"JobDescriptionIntelligenceV1","type":"object","additionalProperties":false,
+  "required":["schema","schema_version","intelligence_id","opportunity_id","snapshot_id","snapshot_hash","role_title","role_mission","seniority","requirements","responsibilities","required_qualifications","preferred_qualifications","optional_qualifications","experience_requirements","education_requirements","credentials","technical_skills","tools_platforms","domain_knowledge","operating_environment","shift_schedule","location_work_mode","travel","work_authorization","leadership_expectations","communication_expectations","measurable_outcomes","repeated_emphasized_concepts","ats_relevant_terms","hard_disqualifiers","ambiguous_requirements","source_policy","intelligence_hash"],
+  "properties":{
+    "schema":{"const":"careeros.job-description-intelligence.v1"},"schema_version":{"const":"1.0.0"},
+    "intelligence_id":{"type":"string"},"opportunity_id":{"type":"string"},"snapshot_id":{"type":"string"},
+    "snapshot_hash":{"type":"string","pattern":"^[a-f0-9]{64}$"},"role_title":{"type":"object"},"role_mission":{"type":"object"},"seniority":{"type":"object"},
+    "requirements":{"type":"array"},"responsibilities":{"type":"array"},"required_qualifications":{"type":"array"},"preferred_qualifications":{"type":"array"},"optional_qualifications":{"type":"array"},
+    "experience_requirements":{"type":"array"},"education_requirements":{"type":"array"},"credentials":{"type":"array"},"technical_skills":{"type":"array"},"tools_platforms":{"type":"array"},"domain_knowledge":{"type":"array"},
+    "operating_environment":{"type":"array"},"shift_schedule":{"type":"array"},"location_work_mode":{"type":"array"},"travel":{"type":"array"},"work_authorization":{"type":"array"},
+    "leadership_expectations":{"type":"array"},"communication_expectations":{"type":"array"},"measurable_outcomes":{"type":"array"},
+    "repeated_emphasized_concepts":{"type":"array","items":{"type":"string"}},"ats_relevant_terms":{"type":"array","items":{"type":"string"}},
+    "hard_disqualifiers":{"type":"array"},"ambiguous_requirements":{"type":"array"},
+    "source_policy":{"const":"EXTRACT_ONLY_NO_UNSUPPORTED_INFERENCE"},"intelligence_hash":{"type":"string","pattern":"^[a-f0-9]{64}$"}
+  }
+}

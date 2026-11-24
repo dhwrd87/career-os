@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:careeros:schema:career-preference:v1",
+  "title": "CareerPreferenceV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "schema_version", "record_id", "created_at", "updated_at", "provenance", "verification_state", "confidence", "visibility", "status", "target_role_family_ids", "target_industries", "work_modes", "location_preferences", "constraints"],
+  "properties": {
+    "schema": {"const": "careeros.career-preference.v1"},
+    "schema_version": {"const": "1.0.0"},
+    "record_id": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{2,127}$"},
+    "created_at": {"type": "string", "format": "date-time"},
+    "updated_at": {"type": "string", "format": "date-time"},
+    "provenance": {"type": "array", "minItems": 1, "items": {"$ref": "urn:careeros:schema:provenance-record:v1"}},
+    "verification_state": {"enum": ["UNVERIFIED", "NEEDS_VERIFICATION", "VERIFIED", "DISPUTED"]},
+    "confidence": {"enum": ["LOW", "MEDIUM", "HIGH"]},
+    "visibility": {"enum": ["PRIVATE", "INTERNAL", "PUBLIC", "EMPLOYER_SAFE", "RESTRICTED"]},
+    "status": {"enum": ["ACTIVE", "SUPERSEDED", "REJECTED"]},
+    "supersedes_record_id": {"type": ["string", "null"]},
+    "target_role_family_ids": {"type": "array", "items": {"type": "string"}},
+    "target_industries": {"type": "array", "items": {"type": "string"}},
+    "work_modes": {"type": "array", "items": {"type": "string"}},
+    "location_preferences": {"type": "array", "items": {"type": "string"}},
+    "compensation": {"type": ["object", "null"]},
+    "travel_preference": {"type": ["string", "null"]},
+    "schedule_preferences": {"type": "array", "items": {"type": "string"}},
+    "career_change_intent": {"type": ["string", "null"]},
+    "constraints": {"type": "array", "items": {"type": "string"}},
+    "career_gaps": {"type": "array", "items": {"type": "object"}},
+    "target_role_intents": {"type": "array", "items": {"type": "object"}}
+  }
+}

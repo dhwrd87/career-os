@@ -1,0 +1,5 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema","$id":"urn:careeros:schema:learning-roi:v1","title":"LearningROIV1","type":"object",
+  "required":["schema","schema_version","learning_roi_id","course_evaluation_id","gap_id","gap_importance","gap_recurrence","jobs_currently_blocked_by_gap","jobs_partially_affected","potential_qualification_impact","benefit_score","cost_score","roi_score","roi_class","employment_outcome_promised"],
+  "properties":{"schema":{"const":"careeros.learning-roi.v1"},"schema_version":{"const":"1.0.0"},"learning_roi_id":{"type":"string"},"course_evaluation_id":{"type":"string"},"gap_id":{"type":"string"},"gap_importance":{"type":"number"},"gap_recurrence":{"type":"integer"},"jobs_currently_blocked_by_gap":{"type":"integer"},"jobs_partially_affected":{"type":"integer"},"potential_qualification_impact":{"const":"POTENTIAL_QUALIFICATION_IMPACT"},"benefit_score":{"type":"number"},"cost_score":{"type":"number"},"roi_score":{"type":"number"},"roi_class":{"enum":["VERY_HIGH","HIGH","MEDIUM","LOW","NEGATIVE"]},"employment_outcome_promised":{"const":false}},"additionalProperties":false
+}

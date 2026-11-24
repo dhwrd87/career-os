@@ -1,0 +1,182 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:careeros:schema:course-candidate:v1",
+  "title": "CourseCandidateV1",
+  "type": "object",
+  "required": [
+    "schema",
+    "schema_version",
+    "course_candidate_id",
+    "provider",
+    "course_id",
+    "title",
+    "url",
+    "course_type",
+    "skill_topics",
+    "curriculum_topics",
+    "credential_type",
+    "certificate_available",
+    "estimated_duration",
+    "cost_state",
+    "prerequisites",
+    "project_work",
+    "labs",
+    "assessments",
+    "last_verified_at",
+    "freshness_state",
+    "source_refs"
+  ],
+  "properties": {
+    "schema": {
+      "const": "careeros.course-candidate.v1"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "course_candidate_id": {
+      "type": "string"
+    },
+    "provider": {
+      "type": "string"
+    },
+    "course_id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "issuer": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "instructor": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "url": {
+      "type": "string"
+    },
+    "course_type": {
+      "enum": [
+        "COURSE",
+        "PROFESSIONAL_CERTIFICATE",
+        "INDUSTRY_CERTIFICATION_PREP",
+        "INDUSTRY_CERTIFICATION",
+        "LAB_PLATFORM",
+        "BOOTCAMP",
+        "DEGREE_COURSEWORK",
+        "OTHER",
+        "KNOWLEDGE_RESOURCE",
+        "PRACTICAL_PROJECT"
+      ]
+    },
+    "skill_topics": {
+      "type": "array"
+    },
+    "curriculum_topics": {
+      "type": "array"
+    },
+    "credential_type": {
+      "type": "string"
+    },
+    "certificate_available": {
+      "type": "boolean"
+    },
+    "credential_issuer": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "estimated_duration": {
+      "type": "string"
+    },
+    "cost_state": {
+      "enum": [
+        "FREE",
+        "SUBSCRIPTION_INCLUDED",
+        "ONE_TIME",
+        "FINANCIAL_AID_AVAILABLE",
+        "UNKNOWN"
+      ]
+    },
+    "cost_amount": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "cost_currency": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "price_verified_at": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "prerequisites": {
+      "type": "array"
+    },
+    "project_work": {
+      "type": "array"
+    },
+    "labs": {
+      "type": "array"
+    },
+    "assessments": {
+      "type": "array"
+    },
+    "level": {
+      "type": "string"
+    },
+    "delivery_modes": {
+      "type": "array"
+    },
+    "self_paced": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "last_verified_at": {
+      "type": "string"
+    },
+    "freshness_state": {
+      "enum": [
+        "CURRENT",
+        "REVERIFY",
+        "REMOVED",
+        "REPLACED",
+        "UNKNOWN"
+      ]
+    },
+    "source_refs": {
+      "type": "array"
+    },
+    "affiliate_relationship": {
+      "type": "boolean"
+    },
+    "subscription_plans": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "duration_hours": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    }
+  },
+  "additionalProperties": false
+}

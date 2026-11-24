@@ -1,0 +1,5 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema","$id":"urn:careeros:schema:learning-step:v1","title":"LearningStepV1","type":"object",
+  "required":["schema","schema_version","learning_step_id","sequence","step_type","objective_ids","title","completion_condition","prerequisites","estimated_time","estimated_cost","status"],
+  "properties":{"schema":{"const":"careeros.learning-step.v1"},"schema_version":{"const":"1.0.0"},"learning_step_id":{"type":"string"},"sequence":{"type":"integer","minimum":1},"step_type":{"enum":["COURSE","MODULE","LAB","PROJECT","PORTFOLIO_ARTIFACT","CERTIFICATION_PREP","CERTIFICATION_ATTEMPT","PRACTICE","REVIEW"]},"objective_ids":{"type":"array"},"course_candidate_id":{"type":["string","null"]},"title":{"type":"string"},"completion_condition":{"type":"string"},"prerequisites":{"type":"array"},"estimated_time":{"type":"string"},"estimated_cost":{"type":"string"},"status":{"type":"string"}},"additionalProperties":false
+}

@@ -1,0 +1,5 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema","$id":"urn:careeros:schema:learning-path-impact:v1","title":"LearningPathImpactV1","type":"object",
+  "required":["schema","schema_version","learning_path_id","lane_impacts","qualification_impacts","canonical_mutation","requires_evidence_review"],
+  "properties":{"schema":{"const":"careeros.learning-path-impact.v1"},"schema_version":{"const":"1.0.0"},"learning_path_id":{"type":"string"},"lane_impacts":{"type":"object"},"qualification_impacts":{"type":"array"},"canonical_mutation":{"const":false},"requires_evidence_review":{"const":true}},"additionalProperties":false
+}

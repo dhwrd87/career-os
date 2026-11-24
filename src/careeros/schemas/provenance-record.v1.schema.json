@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:careeros:schema:provenance-record:v1",
+  "title": "ProvenanceRecordV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["source_id", "source_type", "source_reference"],
+  "properties": {
+    "source_id": {"type": "string", "minLength": 1},
+    "source_type": {"enum": ["SELF_REPORT", "DOCUMENT", "SYSTEM_RECORD", "PUBLIC_SOURCE", "PRIVATE_REFERENCE", "DERIVED"]},
+    "source_reference": {"type": "string", "minLength": 1},
+    "source_record_id": {"type": ["string", "null"]},
+    "field": {"type": ["string", "null"]},
+    "source_hash": {"type": ["string", "null"]},
+    "captured_at": {"type": ["string", "null"], "format": "date-time"}
+  }
+}
+

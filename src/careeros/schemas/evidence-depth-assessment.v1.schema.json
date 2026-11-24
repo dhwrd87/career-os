@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:careeros:schema:evidence-depth-assessment:v1",
+  "title": "EvidenceDepthAssessmentV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "schema_version", "assessment_id", "evidence_id", "dimensions", "overall_depth", "missing_dimensions", "assessed_at"],
+  "properties": {
+    "schema": {"const": "careeros.evidence-depth-assessment.v1"},
+    "schema_version": {"const": "1.0.0"},
+    "assessment_id": {"type": "string"},
+    "evidence_id": {"type": "string"},
+    "dimensions": {
+      "type": "object", "additionalProperties": false,
+      "required": ["ACTION_DEPTH", "CONTEXT_DEPTH", "TOOL_DEPTH", "SCOPE_DEPTH", "OUTCOME_DEPTH", "METRIC_DEPTH", "OWNERSHIP_DEPTH", "STAKEHOLDER_DEPTH", "ARTIFACT_DEPTH", "VERIFICATION_DEPTH"],
+      "properties": {
+        "ACTION_DEPTH": {"enum": ["RICH", "USABLE", "THIN", "VERY_THIN", "UNKNOWN"]}, "CONTEXT_DEPTH": {"enum": ["RICH", "USABLE", "THIN", "VERY_THIN", "UNKNOWN"]},
+        "TOOL_DEPTH": {"enum": ["RICH", "USABLE", "THIN", "VERY_THIN", "UNKNOWN"]}, "SCOPE_DEPTH": {"enum": ["RICH", "USABLE", "THIN", "VERY_THIN", "UNKNOWN"]},
+        "OUTCOME_DEPTH": {"enum": ["RICH", "USABLE", "THIN", "VERY_THIN", "UNKNOWN"]}, "METRIC_DEPTH": {"enum": ["RICH", "USABLE", "THIN", "VERY_THIN", "UNKNOWN"]},
+        "OWNERSHIP_DEPTH": {"enum": ["RICH", "USABLE", "THIN", "VERY_THIN", "UNKNOWN"]}, "STAKEHOLDER_DEPTH": {"enum": ["RICH", "USABLE", "THIN", "VERY_THIN", "UNKNOWN"]},
+        "ARTIFACT_DEPTH": {"enum": ["RICH", "USABLE", "THIN", "VERY_THIN", "UNKNOWN"]}, "VERIFICATION_DEPTH": {"enum": ["RICH", "USABLE", "THIN", "VERY_THIN", "UNKNOWN"]}
+      }
+    },
+    "overall_depth": {"enum": ["RICH", "USABLE", "THIN", "VERY_THIN", "UNKNOWN"]},
+    "missing_dimensions": {"type": "array", "items": {"type": "string"}},
+    "assessed_at": {"type": "string", "format": "date-time"}
+  }
+}

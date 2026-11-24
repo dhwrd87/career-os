@@ -1,0 +1,6 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema","$id":"urn:careeros:schema:production-family-promotion:v1",
+  "title":"ProductionFamilyPromotionV1","type":"object","additionalProperties":false,
+  "required":["schema","schema_version","promotion_id","family_id","family_version","from_status","to_status","gate_results","unresolved_regressions","actor","promoted_at","human_confirmed","promotion_hash"],
+  "properties":{"schema":{"const":"careeros.production-family-promotion.v1"},"schema_version":{"const":"1.0.0"},"promotion_id":{"type":"string"},"family_id":{"type":"string"},"family_version":{"type":"string"},"from_status":{"enum":["DRAFT","SHADOW","VALIDATED","PRODUCTION","RETIRED"]},"to_status":{"enum":["DRAFT","SHADOW","VALIDATED","PRODUCTION","RETIRED"]},"gate_results":{"type":"object","additionalProperties":{"type":"boolean"}},"unresolved_regressions":{"type":"array","items":{"type":"string"}},"actor":{"type":"string","minLength":1},"promoted_at":{"type":"string","format":"date-time"},"human_confirmed":{"const":true},"promotion_hash":{"type":"string","pattern":"^[a-f0-9]{64}$"}}
+}

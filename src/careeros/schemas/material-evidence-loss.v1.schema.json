@@ -1,0 +1,11 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema","$id":"urn:careeros:schema:material-evidence-loss:v1",
+  "title":"MaterialEvidenceLossV1","type":"object","additionalProperties":false,
+  "required":["schema","schema_version","assessment_id","profile_id","losses","counts","material_loss_threshold","role_fact_preservation","document_budget_policy","top_third_coverage_pass","strongest_evidence_omission_pass","status","acceptance_allowed","assessment_hash"],
+  "properties":{
+    "schema":{"const":"careeros.material-evidence-loss.v1"},"schema_version":{"const":"1.0.0"},"assessment_id":{"type":"string"},"profile_id":{"type":"string"},
+    "losses":{"type":"array","items":{"type":"object","additionalProperties":false,"required":["evidence_id","dimension","classification","reason","detail","role_record_id","need_id"],"properties":{"evidence_id":{"type":"string"},"dimension":{"type":"string"},"classification":{"enum":["NON_MATERIAL","ACCEPTABLE_COMPRESSION","MATERIAL_LOSS","CRITICAL_LOSS"]},"reason":{"type":["string","null"]},"detail":{"type":"string"},"role_record_id":{"type":["string","null"]},"need_id":{"type":["string","null"]}}}},
+    "counts":{"type":"object","additionalProperties":false,"required":["NON_MATERIAL","ACCEPTABLE_COMPRESSION","MATERIAL_LOSS","CRITICAL_LOSS"],"properties":{"NON_MATERIAL":{"type":"integer"},"ACCEPTABLE_COMPRESSION":{"type":"integer"},"MATERIAL_LOSS":{"type":"integer"},"CRITICAL_LOSS":{"type":"integer"}}},
+    "material_loss_threshold":{"type":"integer","minimum":0},"role_fact_preservation":{"type":"object"},"document_budget_policy":{"type":"array","items":{"type":"string"}},"top_third_coverage_pass":{"type":"boolean"},"strongest_evidence_omission_pass":{"type":"boolean"},"status":{"enum":["PASS","REVIEW","FAIL"]},"acceptance_allowed":{"type":"boolean"},"assessment_hash":{"type":"string","pattern":"^[a-f0-9]{64}$"}
+  }
+}

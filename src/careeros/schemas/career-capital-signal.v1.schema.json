@@ -1,0 +1,6 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema","$id":"urn:careeros:schema:career-capital-signal:v1",
+  "title":"CareerCapitalSignalV1","type":"object","additionalProperties":false,
+  "required":["signal_id","cohort_id","category","qualified_job_count","interview_count","offer_count","interpretation","signal_hash"],
+  "properties":{"signal_id":{"type":"string"},"cohort_id":{"type":"string"},"category":{"enum":["TECHNICAL","OPERATIONS","LEADERSHIP","CUSTOMER","DOMAIN","CREDENTIAL","PORTFOLIO","TOOL","PROCESS","COMMUNICATION"]},"qualified_job_count":{"type":"integer","minimum":0},"interview_count":{"type":"integer","minimum":0},"offer_count":{"type":"integer","minimum":0},"interpretation":{"type":"string"},"signal_hash":{"type":"string","pattern":"^[a-f0-9]{64}$"}}
+}

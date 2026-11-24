@@ -1,0 +1,12 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"urn:careeros:schema:resume-artifact:v1",
+  "title":"ResumeArtifactV1","type":"object","additionalProperties":false,
+  "required":["schema","schema_version","artifact_id","build_id","media_type","path","sha256","page_count","metadata","status","accepted_at","supersedes"],
+  "properties":{
+    "schema":{"const":"careeros.resume-artifact.v1"},"schema_version":{"const":"1.0.0"},"artifact_id":{"type":"string"},"build_id":{"type":"string"},
+    "media_type":{"const":"application/pdf"},"path":{"type":"string"},"sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+    "page_count":{"type":"integer"},"metadata":{"type":"object"},"status":{"enum":["CANDIDATE","ACCEPTED","REJECTED"]},
+    "accepted_at":{"type":["string","null"],"format":"date-time"},"supersedes":{"type":["string","null"]}
+  }
+}

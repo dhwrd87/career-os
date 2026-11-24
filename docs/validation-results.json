@@ -1,0 +1,117 @@
+{
+  "existing_visual_goldens_unchanged": 3,
+  "external_writes": 0,
+  "full_suite": {
+    "scope": "Entire suite against installed wheel from history-free source copy outside the private vault",
+    "seconds": 140.68,
+    "status": "PASS",
+    "tests": 302
+  },
+  "hosted_ci_status": "NOT_RUN",
+  "installed_environment": {
+    "distributions": {
+      "Pillow": "12.3.0",
+      "career-os": "0.4.1",
+      "pdfplumber": "0.11.10",
+      "pypdf": "6.21.4",
+      "python-docx": "1.2.0",
+      "reportlab": "4.5.1"
+    },
+    "import_is_installed_distribution_outside_private_tree": true,
+    "python": "3.12.14 (main, Aug 25 2026, 13:50:33) [Clang 22.1.3 ]"
+  },
+  "learning_path_intelligence": {
+    "all_pages_visually_reviewed": true,
+    "core_contract_cases": 19,
+    "example": {
+      "learning_completions": 1,
+      "learning_steps": 3,
+      "pending_canonical_proposal": true,
+      "queue": "PASS",
+      "status": "VALID"
+    },
+    "live_read": {
+      "affiliate_influence": 0,
+      "candidate_data_transmitted": false,
+      "failures": [],
+      "network_requests": 2,
+      "resources": 1,
+      "status": "PASS",
+      "titles": [
+        "Introduction to Computer Science and Programming in Python | Electrical Engineering and Computer Science | MIT OpenCourseWare"
+      ]
+    },
+    "professional_experience_remains_unsatisfied": true,
+    "rendered_pdf_pages": 4,
+    "saved_plan_calendar_expiry_tested": true,
+    "skill_routes_tested": true,
+    "workflow": "gaps \u2192 personalized constrained roadmap \u2192 original artifact review \u2192 verified completion \u2192 proposed changeset \u2192 approval \u2192 canonical commit \u2192 role eligibility reassessment",
+    "workspace_and_reader_cases": 8,
+    "zero_affiliate_ranking_influence": true
+  },
+  "license": "MIT",
+  "live_read_only_job_provider": {
+    "external_writes": 0,
+    "fetched_at": "2026-11-24T01:33:41Z",
+    "network_requests": 1,
+    "provider": "GREENHOUSE",
+    "provider_posts": 770,
+    "requirement_review_status": "PENDING",
+    "selected_posts": 2,
+    "status": "PASS"
+  },
+  "microsoft_word_status": "UNVERIFIED",
+  "onboarding_personas": {
+    "lane_bases": 8,
+    "manual_interventions": 0,
+    "names": [
+      "complete-resume",
+      "very-weak-resume",
+      "career-changer",
+      "student",
+      "experienced-professional",
+      "project-heavy-technical",
+      "credential-heavy",
+      "overlapping-employment"
+    ],
+    "passed": 8,
+    "status": "PASS",
+    "targeted_application": {
+      "canonical_fact_source": "candidate profile before job intelligence",
+      "lane_base_id": "lane-base:9ae78e56-7f8b-5e44-90d6-eb815af1d95f",
+      "packet": "REVIEW_REQUIRED",
+      "qualification": "QUALIFIED",
+      "resume_qa": "PASS"
+    }
+  },
+  "pdf_ua_certification": false,
+  "privacy": {
+    "document_metadata_inspected": 15,
+    "history_findings": 0,
+    "private_history_in_archives": false,
+    "private_source_files_unchanged": 168,
+    "reachable_staging_commits_scanned": 6,
+    "source_findings": 0
+  },
+  "published": false,
+  "tested_wheel_sha256": "a40ab4e28d2e2b1f95a4575e0773bd30f0cb82fcfb3f06e955b0e2bcafdd2b7c",
+  "upgrade": {
+    "doctor": "READY",
+    "existing_workspace_package": "0.4.0",
+    "explicit_legacy_migration_and_transaction_recovery_in_full_suite": true,
+    "missing_disposable_cache_recovery": "PASS",
+    "target_package": "0.4.1"
+  },
+  "verdict": "READY WITH DISCLOSED LIMITATIONS",
+  "version": "0.4.1",
+  "visual_review": {
+    "all_images_synthetic": true,
+    "browser_errors": 0,
+    "learning_pdf_pages": 4,
+    "page_horizontal_overflow": false,
+    "resume_renderer_unchanged": "0.3.7",
+    "retained_docx_exports": 3,
+    "retained_resume_reference_personas": 3
+  },
+  "windows_status": "UNVERIFIED"
+}

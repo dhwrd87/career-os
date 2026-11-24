@@ -1,0 +1,14 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"urn:careeros:schema:job-description-snapshot:v1",
+  "title":"JobDescriptionSnapshotV1","type":"object","additionalProperties":false,
+  "required":["schema","schema_version","snapshot_id","opportunity_id","source_type","captured_at","content_hash","text","supersedes","retention_class","rights_class"],
+  "properties":{
+    "schema":{"const":"careeros.job-description-snapshot.v1"},"schema_version":{"const":"1.0.0"},
+    "snapshot_id":{"type":"string","minLength":3},"opportunity_id":{"type":"string","minLength":3},
+    "source_type":{"enum":["SYNTHETIC","USER_SUPPLIED"]},"captured_at":{"type":"string","format":"date-time"},
+    "content_hash":{"type":"string","pattern":"^[a-f0-9]{64}$"},"text":{"type":"string","minLength":1},
+    "supersedes":{"type":["string","null"]},"retention_class":{"type":"string","minLength":1},
+    "rights_class":{"enum":["SYNTHETIC_ORIGINAL","USER_SUPPLIED_READ_ONLY"]}
+  }
+}

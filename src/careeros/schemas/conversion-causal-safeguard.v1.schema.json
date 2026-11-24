@@ -1,0 +1,6 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema","$id":"urn:careeros:schema:conversion-causal-safeguard:v1",
+  "title":"ConversionCausalSafeguardV1","type":"object","additionalProperties":false,
+  "required":["schema","schema_version","safeguard_id","cohort_id","comparison_name","classification","observed_association","approved_language","prohibited_language","confounders","sample_maturity","comparable","strong_recommendation_allowed","policy_mutation_allowed","safeguard_hash"],
+  "properties":{"schema":{"const":"careeros.conversion-causal-safeguard.v1"},"schema_version":{"const":"1.0.0"},"safeguard_id":{"type":"string"},"cohort_id":{"type":"string"},"comparison_name":{"type":"string"},"classification":{"enum":["OBSERVED_ASSOCIATION","PLAUSIBLE_PATTERN","SUPPORTED_RECOMMENDATION","CAUSAL_CLAIM_NOT_SUPPORTED"]},"observed_association":{"type":"string"},"approved_language":{"type":"string"},"prohibited_language":{"type":"string"},"confounders":{"type":"array","items":{"type":"string"}},"sample_maturity":{"enum":["INSUFFICIENT","EARLY","DEVELOPING","MATURE","STALE"]},"comparable":{"type":"boolean"},"strong_recommendation_allowed":{"type":"boolean"},"policy_mutation_allowed":{"const":false},"safeguard_hash":{"type":"string","pattern":"^[a-f0-9]{64}$"}}
+}

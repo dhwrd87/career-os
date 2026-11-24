@@ -1,0 +1,14 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"urn:careeros:schema:application-state-reconciliation:v1",
+  "title":"ApplicationStateReconciliationV1","type":"object","additionalProperties":false,
+  "required":["schema","schema_version","application_id","status","sources","conflicts","missing_artifact_hashes","event_log_authoritative","human_review_required"],
+  "properties":{
+    "schema":{"const":"careeros.application-state-reconciliation.v1"},"schema_version":{"const":"1.0.0"},
+    "application_id":{"type":"string","minLength":3},
+    "status":{"enum":["CONSISTENT","RECONCILIATION_REQUIRED","LEGACY_ONLY","EVENT_LOG_AUTHORITATIVE"]},
+    "sources":{"type":"object"},"conflicts":{"type":"array","items":{"type":"string"}},
+    "missing_artifact_hashes":{"type":"array","items":{"type":"string"}},
+    "event_log_authoritative":{"type":"boolean"},"human_review_required":{"type":"boolean"}
+  }
+}

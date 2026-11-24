@@ -1,0 +1,18 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"urn:careeros:schema:canonical-evidence-freshness:v1",
+  "title":"CanonicalEvidenceFreshnessV1","type":"object","additionalProperties":false,
+  "required":["schema","schema_version","candidate_profile_id","canonical_revision","canonical_profile_hash","evidence_bundle_hash","skill_registry_hash","credential_registry_hash","role_family_version","storyline_version","jd_snapshot_hash","compiler_version","editorial_policy_version","build_timestamp"],
+  "properties":{
+    "schema":{"const":"careeros.canonical-evidence-freshness.v1"},"schema_version":{"const":"1.0.0"},
+    "candidate_profile_id":{"type":"string"},"canonical_revision":{"type":"integer"},
+    "canonical_profile_hash":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+    "evidence_bundle_hash":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+    "skill_registry_hash":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+    "credential_registry_hash":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+    "role_family_version":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+    "storyline_version":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+    "jd_snapshot_hash":{"type":["string","null"]},"compiler_version":{"type":"string"},
+    "editorial_policy_version":{"type":"string"},"build_timestamp":{"type":"string","format":"date-time"}
+  }
+}

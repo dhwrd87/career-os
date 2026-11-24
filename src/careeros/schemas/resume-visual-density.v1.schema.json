@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:careeros:schema:resume-visual-density:v1",
+  "title": "ResumeVisualDensityV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "schema_version", "status", "measurements", "target_range"],
+  "properties": {
+    "schema": {"const": "careeros.resume-visual-density.v1"},
+    "schema_version": {"const": "1.0.0"},
+    "status": {"enum": ["PASS", "FAIL"]},
+    "measurements": {"type": "object"},
+    "target_range": {
+      "type": "object",
+      "required": ["minimum", "maximum"],
+      "properties": {
+        "minimum": {"type": "number"},
+        "maximum": {"type": "number"}
+      }
+    }
+  }
+}

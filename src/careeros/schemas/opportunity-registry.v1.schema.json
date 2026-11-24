@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:careeros:schema:opportunity-registry:v1",
+  "title": "OpportunityRegistryV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "schema_version", "registry_id", "policy_version", "built_at", "opportunity_count", "entries", "registry_hash"],
+  "properties": {
+    "schema": {"const": "careeros.opportunity-registry.v1"},
+    "schema_version": {"const": "1.0.0"},
+    "registry_id": {"type": "string", "minLength": 3},
+    "policy_version": {"const": "cross-run-opportunity-dedupe-v1"},
+    "built_at": {"type": "string", "format": "date-time"},
+    "opportunity_count": {"type": "integer", "minimum": 0},
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "opportunity_id", "employer", "title", "location", "canonical_url",
+          "provider_job_id", "source", "source_namespace", "jd_hash", "jd_text",
+          "first_seen_at", "last_seen_at", "freshness_state", "qualification_state",
+          "application_state", "packet_state", "supersedes", "repost_group_id", "explicit_repost",
+          "disposition", "source_record_paths"
+        ],
+        "properties": {
+          "opportunity_id": {"type": "string", "minLength": 3},
+          "employer": {"type": "string"},
+          "title": {"type": "string"},
+          "location": {"type": ["string", "null"]},
+          "canonical_url": {"type": ["string", "null"]},
+          "provider_job_id": {"type": ["string", "null"]},
+          "source": {"type": "string"},
+          "source_namespace": {"type": "string"},
+          "jd_hash": {"type": ["string", "null"]},
+          "jd_text": {"type": "string"},
+          "first_seen_at": {"type": ["string", "null"]},
+          "last_seen_at": {"type": ["string", "null"]},
+          "freshness_state": {"type": "string"},
+          "qualification_state": {"type": "string"},
+          "application_state": {"type": "string"},
+          "packet_state": {"enum": ["NONE", "APPLICATION_PENDING"]},
+          "supersedes": {"type": ["string", "null"]},
+          "repost_group_id": {"type": ["string", "null"]},
+          "explicit_repost": {"type": "boolean"},
+          "disposition": {"type": "string"},
+          "source_record_paths": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+        }
+      }
+    },
+    "registry_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}

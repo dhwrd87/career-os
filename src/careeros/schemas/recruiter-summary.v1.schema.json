@@ -1,0 +1,14 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"urn:careeros:schema:recruiter-summary:v1",
+  "title":"RecruiterSummaryV1","type":"object","additionalProperties":false,
+  "required":["schema","schema_version","candidate_identity","target_role_family","text","word_count","summary_type","clauses","career_transition_boundary","job_specific_emphasis"],
+  "properties":{
+    "schema":{"const":"careeros.recruiter-summary.v1"},"schema_version":{"const":"1.0.0"},
+    "candidate_identity":{"type":["string","null"]},"target_role_family":{"type":["string","null"]},
+    "text":{"type":"string","minLength":1},"word_count":{"type":"integer"},
+    "summary_type":{"enum":["MASTER","LANE","TARGETED"]},
+    "career_transition_boundary":{"type":"boolean"},"job_specific_emphasis":{"type":["string","null"]},
+    "clauses":{"type":"array","minItems":1,"items":{"type":"object","required":["summary_clause","source_evidence_ids","approved_config_source","verification","public_use","job_relevance"],"properties":{"summary_clause":{"type":"string","minLength":1},"source_evidence_ids":{"type":"array","items":{"type":"string"}},"approved_config_source":{"type":["string","null"]},"verification":{"type":"string"},"public_use":{"type":"boolean"},"job_relevance":{"type":"string"}}}}
+  }
+}

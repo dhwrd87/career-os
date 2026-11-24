@@ -1,0 +1,28 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"urn:careeros:schema:resume-completeness:v1",
+  "title":"ResumeCompletenessV1",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["schema","schema_version","completeness_id","professional_history_coverage","career_continuity","anchor_evidence_count","supporting_evidence_count","technical_project_coverage","transferable_evidence_coverage","education_coverage","credential_coverage","language_coverage","skills_coverage","storyline_continuity","target_role_coverage","page_utilization","unused_supported_evidence","status"],
+  "properties":{
+    "schema":{"const":"careeros.resume-completeness.v1"},
+    "schema_version":{"const":"1.0.0"},
+    "completeness_id":{"type":"string"},
+    "professional_history_coverage":{"type":"object","required":["available","included","expected","ratio","status","display_modes"],"properties":{"available":{"type":"integer"},"included":{"type":"integer"},"expected":{"type":"integer"},"ratio":{"type":"number"},"status":{"enum":["PASS","REVIEW","NOT_APPLICABLE"]},"display_modes":{"type":"object"}}},
+    "career_continuity":{"type":"object","required":["status","omitted_material_records"],"properties":{"status":{"enum":["PASS","REVIEW","FAIL"]},"omitted_material_records":{"type":"array","items":{"type":"string"}}}},
+    "anchor_evidence_count":{"type":"object","required":["available","included"],"properties":{"available":{"type":"integer"},"included":{"type":"integer"}}},
+    "supporting_evidence_count":{"type":"object","required":["available","included"],"properties":{"available":{"type":"integer"},"included":{"type":"integer"}}},
+    "technical_project_coverage":{"type":"object","required":["available","included","expected","ratio","status"],"properties":{"available":{"type":"integer"},"included":{"type":"integer"},"expected":{"type":"integer"},"ratio":{"type":"number"},"status":{"enum":["PASS","REVIEW","NOT_APPLICABLE"]}}},
+    "transferable_evidence_coverage":{"type":"object","required":["available","included","expected","ratio","status"],"properties":{"available":{"type":"integer"},"included":{"type":"integer"},"expected":{"type":"integer"},"ratio":{"type":"number"},"status":{"enum":["PASS","REVIEW","NOT_APPLICABLE"]}}},
+    "education_coverage":{"type":"object","required":["available","included","expected","ratio","status"],"properties":{"available":{"type":"integer"},"included":{"type":"integer"},"expected":{"type":"integer"},"ratio":{"type":"number"},"status":{"enum":["PASS","REVIEW","NOT_APPLICABLE"]}}},
+    "credential_coverage":{"type":"object","required":["available","included","expected","ratio","status"],"properties":{"available":{"type":"integer"},"included":{"type":"integer"},"expected":{"type":"integer"},"ratio":{"type":"number"},"status":{"enum":["PASS","REVIEW","NOT_APPLICABLE"]}}},
+    "language_coverage":{"type":"object","required":["available","included","expected","ratio","status"],"properties":{"available":{"type":"integer"},"included":{"type":"integer"},"expected":{"type":"integer"},"ratio":{"type":"number"},"status":{"enum":["PASS","REVIEW","NOT_APPLICABLE"]}}},
+    "skills_coverage":{"type":"object","required":["available","included","expected","ratio","status"],"properties":{"available":{"type":"integer"},"included":{"type":"integer"},"expected":{"type":"integer"},"ratio":{"type":"number"},"status":{"enum":["PASS","REVIEW","NOT_APPLICABLE"]}}},
+    "storyline_continuity":{"type":"object","required":["professional_foundation","technical_preparation","target_role_direction","status"],"properties":{"professional_foundation":{"type":"boolean"},"technical_preparation":{"type":"boolean"},"target_role_direction":{"type":"boolean"},"status":{"enum":["PASS","FAIL"]}}},
+    "target_role_coverage":{"type":"object","required":["status","target_role"],"properties":{"status":{"enum":["PASS","FAIL"]},"target_role":{"type":["string","null"]}}},
+    "page_utilization":{"type":"object","required":["estimated_content_units","actual_utilization","unused_relevant_count","underfilled","overfilled","status"],"properties":{"estimated_content_units":{"type":"integer"},"actual_utilization":{"type":["number","null"],"minimum":0,"maximum":1},"unused_relevant_count":{"type":"integer"},"underfilled":{"type":"boolean"},"overfilled":{"type":"boolean"},"status":{"enum":["PASS","UNDERFILLED","OVERFILLED"]}}},
+    "unused_supported_evidence":{"type":"array","items":{"type":"object","required":["evidence_id","evidence_tier","exclusion_reason"],"properties":{"evidence_id":{"type":"string"},"evidence_tier":{"enum":["ANCHOR","SUPPORTING","TRANSFERABLE_PROFESSIONAL","FOUNDATIONAL"]},"exclusion_reason":{"enum":["SPACE","REDUNDANT","WEAK_EVIDENCE","PRIVACY","LOW_PRIORITY","QUALIFICATION_BOUNDARY","OTHER"]}}}},
+    "status":{"enum":["PASS","REVIEW","FAIL"]}
+  }
+}

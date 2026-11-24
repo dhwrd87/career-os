@@ -1,0 +1,13 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"urn:careeros:schema:interview:v1",
+  "title":"InterviewV1","type":"object","additionalProperties":false,
+  "required":["schema","schema_version","application_id","stage","scheduled_at","format","participants","prep_artifact","result","next_action"],
+  "properties":{
+    "schema":{"const":"careeros.interview.v1"},"schema_version":{"const":"1.0.0"},
+    "application_id":{"type":"string","minLength":3},"stage":{"type":"string","minLength":1},
+    "scheduled_at":{"type":["string","null"],"format":"date-time"},"format":{"type":["string","null"]},
+    "participants":{"type":"array","items":{"type":"string"}},"prep_artifact":{"type":["string","null"]},
+    "result":{"type":"string","minLength":1},"next_action":{"type":"string","minLength":1}
+  }
+}

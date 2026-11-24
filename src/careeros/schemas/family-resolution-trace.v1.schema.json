@@ -1,0 +1,6 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema","$id":"urn:careeros:schema:family-resolution-trace:v1",
+  "title":"FamilyResolutionTraceV1","type":"object","additionalProperties":false,
+  "required":["schema","schema_version","trace_id","family_id","family_version","parent_family_id","resolution_path","inherited_policies","local_overrides","job_specific_adaptations","fallbacks_invoked","setting_sources","effective_configuration","freshness","created_at","internal_only","trace_hash"],
+  "properties":{"schema":{"const":"careeros.family-resolution-trace.v1"},"schema_version":{"const":"1.0.0"},"trace_id":{"type":"string"},"family_id":{"type":"string"},"family_version":{"type":"string"},"parent_family_id":{"type":["string","null"]},"resolution_path":{"type":"array","minItems":2,"items":{"type":"string"}},"inherited_policies":{"type":"array","items":{"type":"object"}},"local_overrides":{"type":"array","items":{"type":"object"}},"job_specific_adaptations":{"type":"array","items":{"type":"object"}},"fallbacks_invoked":{"type":"array","items":{"type":"string"}},"setting_sources":{"type":"object"},"effective_configuration":{"type":"object"},"freshness":{"type":"object"},"created_at":{"type":"string","format":"date-time"},"internal_only":{"const":true},"trace_hash":{"type":"string","pattern":"^[a-f0-9]{64}$"}}
+}

@@ -1,0 +1,45 @@
+{
+  "schema": "careeros.codex-skill-manifest.v1",
+  "skill_name": "career-os",
+  "skill_version": "0.4.1",
+  "career_os_package": {
+    "minimum": "0.4.1",
+    "maximum_exclusive": "0.5.0"
+  },
+  "required_capabilities": [
+    "filesystem_read",
+    "filesystem_write_workspace_only",
+    "shell_or_careeros_cli_execution",
+    "generated_file_inspection",
+    "user_input_request",
+    "local_artifact_surfacing"
+  ],
+  "optional_capabilities": {
+    "web_read": "consented_read_only_linked_source_and_public_learning_discovery"
+  },
+  "not_required": [
+    "email_mutation",
+    "calendar_mutation",
+    "browser_mutation",
+    "public_profile_mutation"
+  ],
+  "approval_model": {
+    "LOCAL_READ": "ALLOWED",
+    "LOCAL_DRAFT": "ALLOWED",
+    "LOCAL_GENERATE": "ALLOWED",
+    "CANONICAL_MUTATION": "EXPLICIT_APPROVAL_REQUIRED",
+    "EXTERNAL_READ": "READ_ONLY_WITH_PARTICIPANT_CONSENT",
+    "EXTERNAL_WRITE": "SPECIFIC_APPROVAL_REQUIRED_AND_NOT_IMPLEMENTED",
+    "PUBLIC_MUTATION": "SPECIFIC_APPROVAL_REQUIRED_AND_NOT_IMPLEMENTED",
+    "COMMITMENT": "SPECIFIC_APPROVAL_REQUIRED_AND_NOT_IMPLEMENTED"
+  },
+  "external_adapters_enabled": false,
+  "phase_endpoint": "REVIEW_REQUIRED_OR_CANONICAL_UPDATE_COMMITTED",
+  "read_only_discovery": {
+    "enabled_by_default": false,
+    "available_with_consent": [
+      "greenhouse_public_board",
+      "public_learning_sitemaps_and_pages"
+    ]
+  }
+}

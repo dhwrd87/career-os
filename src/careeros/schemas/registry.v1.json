@@ -1,0 +1,933 @@
+{
+  "schema": "careeros.schema-registry.v1",
+  "schema_bundle_version": "1.24.0",
+  "entries": [
+    {
+      "schema_id": "careeros.config.v1",
+      "urn": "urn:careeros:schema:config:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.0,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/workspace.md"
+    },
+    {
+      "schema_id": "careeros.workspace-manifest.v1",
+      "urn": "urn:careeros:schema:workspace-manifest:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.0,<0.5.0",
+      "migration_available": true,
+      "documentation": "docs/versioning-and-migrations.md"
+    },
+    {
+      "schema_id": "careeros.candidate-profile.v1",
+      "urn": "urn:careeros:schema:candidate-profile:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.2.0,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/contracts.md"
+    },
+    {
+      "schema_id": "careeros.employment-record.v1",
+      "urn": "urn:careeros:schema:employment-record:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.2.0,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/contracts.md"
+    },
+    {
+      "schema_id": "careeros.education-record.v1",
+      "urn": "urn:careeros:schema:education-record:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.2.0,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/contracts.md"
+    },
+    {
+      "schema_id": "careeros.skill-record.v1",
+      "urn": "urn:careeros:schema:skill-record:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.2.0,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/contracts.md"
+    },
+    {
+      "schema_id": "careeros.credential-record.v1",
+      "urn": "urn:careeros:schema:credential-record:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.2.0,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/contracts.md"
+    },
+    {
+      "schema_id": "careeros.evidence-record.v1",
+      "urn": "urn:careeros:schema:evidence-record:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.2.0,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/contracts.md"
+    },
+    {
+      "schema_id": "careeros.project-evidence-record.v1",
+      "urn": "urn:careeros:schema:project-evidence-record:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.2.0,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/contracts.md"
+    },
+    {
+      "schema_id": "careeros.career-preference.v1",
+      "urn": "urn:careeros:schema:career-preference:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.2.0,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/contracts.md"
+    },
+    {
+      "schema_id": "careeros.role-family.v1",
+      "urn": "urn:careeros:schema:role-family:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.2.0,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/contracts.md"
+    },
+    {
+      "schema_id": "careeros.career-profile.v1",
+      "urn": "urn:careeros:schema:career-profile:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.2.0,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/contracts.md"
+    },
+    {
+      "schema_id": "careeros.artifact-reference.v1",
+      "urn": "urn:careeros:schema:artifact-reference:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.2.0,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/contracts.md"
+    },
+    {
+      "schema_id": "careeros.provenance-record.v1",
+      "urn": "urn:careeros:schema:provenance-record:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.2.0,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/contracts.md"
+    },
+    {
+      "schema_id": "careeros.compiler-input.v1",
+      "urn": "urn:careeros:schema:compiler-input:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.2.0,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/contracts.md"
+    },
+    {
+      "schema_id": "careeros.config-adapter.v1",
+      "urn": "urn:careeros:schema:config-adapter:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.2.0,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/contracts.md"
+    },
+    {
+      "schema_id": "careeros.opportunity.v1",
+      "urn": "urn:careeros:schema:opportunity:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.2.0,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/contracts.md"
+    },
+    {
+      "schema_id": "careeros.job-description-snapshot.v1",
+      "urn": "urn:careeros:schema:job-description-snapshot:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.2.0,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/contracts.md"
+    },
+    {
+      "schema_id": "careeros.qualification-decision.v1",
+      "urn": "urn:careeros:schema:qualification-decision:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.2.0,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/contracts.md"
+    },
+    {
+      "schema_id": "careeros.resume-build.v1",
+      "urn": "urn:careeros:schema:resume-build:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.2.0,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/contracts.md"
+    },
+    {
+      "schema_id": "careeros.resume-artifact.v1",
+      "urn": "urn:careeros:schema:resume-artifact:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.2.0,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/contracts.md"
+    },
+    {
+      "schema_id": "careeros.artifact-manifest.v1",
+      "urn": "urn:careeros:schema:artifact-manifest:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.2.0,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/contracts.md"
+    },
+    {
+      "schema_id": "careeros.application-packet.v1",
+      "urn": "urn:careeros:schema:application-packet:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.2.0,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/contracts.md"
+    },
+    {
+      "schema_id": "careeros.onboarding-session.v1",
+      "urn": "urn:careeros:schema:onboarding-session:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.0,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/contracts.md"
+    },
+    {
+      "schema_id": "careeros.proposed-record-bundle.v1",
+      "urn": "urn:careeros:schema:proposed-record-bundle:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.0,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/contracts.md"
+    },
+    {
+      "schema_id": "careeros.clarification-queue.v1",
+      "urn": "urn:careeros:schema:clarification-queue:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.0,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/contracts.md"
+    },
+    {
+      "schema_id": "careeros.profile-build-manifest.v1",
+      "urn": "urn:careeros:schema:profile-build-manifest:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.0,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/contracts.md"
+    },
+    {
+      "schema_id": "careeros.resume-content.v1",
+      "urn": "urn:careeros:schema:resume-content:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.0,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/contracts.md"
+    },
+    {
+      "schema_id": "careeros.resume-validation.v1",
+      "urn": "urn:careeros:schema:resume-validation:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.0,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/contracts.md"
+    },
+    {
+      "schema_id": "careeros.audit-event.v1",
+      "urn": "urn:careeros:schema:audit-event:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.0,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/contracts.md"
+    },
+    {
+      "schema_id": "careeros.canonical-changeset.v1",
+      "urn": "urn:careeros:schema:canonical-changeset:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.2,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/canonical-updates.md"
+    },
+    {
+      "schema_id": "careeros.alpha-feedback.v1",
+      "urn": "urn:careeros:schema:alpha-feedback:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.1,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/private-alpha.md"
+    },
+    {
+      "schema_id": "careeros.resume-storyline.v1",
+      "urn": "urn:careeros:schema:resume-storyline:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.4,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/resume-editorial-intelligence.md"
+    },
+    {
+      "schema_id": "careeros.resume-bullet-candidate.v1",
+      "urn": "urn:careeros:schema:resume-bullet-candidate:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.4,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/resume-editorial-intelligence.md"
+    },
+    {
+      "schema_id": "careeros.public-display-policy.v1",
+      "urn": "urn:careeros:schema:public-display-policy:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.4,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/resume-editorial-intelligence.md"
+    },
+    {
+      "schema_id": "careeros.resume-editorial-quality.v1",
+      "urn": "urn:careeros:schema:resume-editorial-quality:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.4,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/resume-editorial-intelligence.md"
+    },
+    {
+      "schema_id": "careeros.job-description-intelligence.v1",
+      "urn": "urn:careeros:schema:job-description-intelligence:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.5,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/job-description-intelligence.md"
+    },
+    {
+      "schema_id": "careeros.job-evidence-matrix.v1",
+      "urn": "urn:careeros:schema:job-evidence-matrix:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.5,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/job-description-intelligence.md"
+    },
+    {
+      "schema_id": "careeros.job-tailoring-trace.v1",
+      "urn": "urn:careeros:schema:job-tailoring-trace:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.5,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/job-description-intelligence.md"
+    },
+    {
+      "schema_id": "careeros.resume-completeness.v1",
+      "urn": "urn:careeros:schema:resume-completeness:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.6,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/resume-completeness.md"
+    },
+    {
+      "schema_id": "careeros.evidence-block.v1",
+      "urn": "urn:careeros:schema:evidence-block:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.7,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/evidence-expansion.md"
+    },
+    {
+      "schema_id": "careeros.evidence-depth-assessment.v1",
+      "urn": "urn:careeros:schema:evidence-depth-assessment:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.7,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/evidence-expansion.md"
+    },
+    {
+      "schema_id": "careeros.evidence-expansion-session.v1",
+      "urn": "urn:careeros:schema:evidence-expansion-session:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.7,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/evidence-expansion.md"
+    },
+    {
+      "schema_id": "careeros.profile-evidence-readiness.v1",
+      "urn": "urn:careeros:schema:profile-evidence-readiness:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.7,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/evidence-expansion.md"
+    },
+    {
+      "schema_id": "careeros.question-value.v1",
+      "urn": "urn:careeros:schema:question-value:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.8,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/onboarding-workflows.md"
+    },
+    {
+      "schema_id": "careeros.career-intake.v1",
+      "urn": "urn:careeros:schema:career-intake:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.8,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/onboarding-workflows.md"
+    },
+    {
+      "schema_id": "careeros.source-enrichment-manifest.v1",
+      "urn": "urn:careeros:schema:source-enrichment-manifest:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.9,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/onboarding-workflows.md"
+    },
+    {
+      "schema_id": "careeros.lane-base-resume.v1",
+      "urn": "urn:careeros:schema:lane-base-resume:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.10,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/lane-base-resumes.md"
+    },
+    {
+      "schema_id": "careeros.lane-base-build-manifest.v1",
+      "urn": "urn:careeros:schema:lane-base-build-manifest:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.10,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/lane-base-resumes.md"
+    },
+    {
+      "schema_id": "careeros.canonical-evidence-freshness.v1",
+      "urn": "urn:careeros:schema:canonical-evidence-freshness:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.11,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/resume-freshness-public-quality-governance.md"
+    },
+    {
+      "schema_id": "careeros.new-evidence-utilization.v1",
+      "urn": "urn:careeros:schema:new-evidence-utilization:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.11,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/resume-freshness-public-quality-governance.md"
+    },
+    {
+      "schema_id": "careeros.evidence-utility.v1",
+      "urn": "urn:careeros:schema:evidence-utility:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.11,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/resume-freshness-public-quality-governance.md"
+    },
+    {
+      "schema_id": "careeros.professional-history-sufficiency.v1",
+      "urn": "urn:careeros:schema:professional-history-sufficiency:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.11,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/resume-freshness-public-quality-governance.md"
+    },
+    {
+      "schema_id": "careeros.targeted-resume-delta.v1",
+      "urn": "urn:careeros:schema:targeted-resume-delta:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.11,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/resume-freshness-public-quality-governance.md"
+    },
+    {
+      "schema_id": "careeros.recruiter-copy-specificity.v1",
+      "urn": "urn:careeros:schema:recruiter-copy-specificity:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.11,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/resume-freshness-public-quality-governance.md"
+    },
+    {
+      "schema_id": "careeros.resume-header.v1",
+      "urn": "urn:careeros:schema:resume-header:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.12,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/career-os-header-summary-ats-production-standard-v1-2026-10-10.md"
+    },
+    {
+      "schema_id": "careeros.recruiter-summary.v1",
+      "urn": "urn:careeros:schema:recruiter-summary:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.12,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/career-os-header-summary-ats-production-standard-v1-2026-10-10.md"
+    },
+    {
+      "schema_id": "careeros.ats-resume-round-trip.v1",
+      "urn": "urn:careeros:schema:ats-resume-round-trip:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.12,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/career-os-header-summary-ats-production-standard-v1-2026-10-10.md"
+    },
+    {
+      "schema_id": "careeros.resume-visual-density.v1",
+      "urn": "urn:careeros:schema:resume-visual-density:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.13,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/career-os-premium-resume-presentation-v1-2026-10-11.md"
+    },
+    {
+      "schema_id": "careeros.premium-resume-quality.v1",
+      "urn": "urn:careeros:schema:premium-resume-quality:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.13,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/career-os-premium-resume-presentation-v1-2026-10-11.md"
+    },
+    {
+      "schema_id": "careeros.employer-need-trace.v1",
+      "urn": "urn:careeros:schema:employer-need-trace:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.14,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/career-conversion-parity-phase-1.md"
+    },
+    {
+      "schema_id": "careeros.strongest-evidence-omission.v1",
+      "urn": "urn:careeros:schema:strongest-evidence-omission:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.14,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/career-conversion-parity-phase-1.md"
+    },
+    {
+      "schema_id": "careeros.role-fact-set.v1",
+      "urn": "urn:careeros:schema:role-fact-set:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.14,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/career-conversion-parity-phase-1.md"
+    },
+    {
+      "schema_id": "careeros.material-evidence-loss.v1",
+      "urn": "urn:careeros:schema:material-evidence-loss:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.14,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/career-conversion-parity-phase-1.md"
+    },
+    {
+      "schema_id": "careeros.career-conversion-trace.v1",
+      "urn": "urn:careeros:schema:career-conversion-trace:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.14,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/career-conversion-parity-phase-1.md"
+    },
+    {
+      "schema_id": "careeros.opportunity-freshness.v1",
+      "urn": "urn:careeros:schema:opportunity-freshness:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.15,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/opportunity-application-state-parity.md"
+    },
+    {
+      "schema_id": "careeros.application-state.v1",
+      "urn": "urn:careeros:schema:application-state:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.15,<0.5.0",
+      "migration_available": true,
+      "documentation": "docs/opportunity-application-state-parity.md"
+    },
+    {
+      "schema_id": "careeros.application-event.v1",
+      "urn": "urn:careeros:schema:application-event:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.15,<0.5.0",
+      "migration_available": true,
+      "documentation": "docs/opportunity-application-state-parity.md"
+    },
+    {
+      "schema_id": "careeros.application-state-reconciliation.v1",
+      "urn": "urn:careeros:schema:application-state-reconciliation:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.15,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/opportunity-application-state-parity.md"
+    },
+    {
+      "schema_id": "careeros.follow-up.v1",
+      "urn": "urn:careeros:schema:follow-up:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.15,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/opportunity-application-state-parity.md"
+    },
+    {
+      "schema_id": "careeros.interview.v1",
+      "urn": "urn:careeros:schema:interview:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.15,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/opportunity-application-state-parity.md"
+    },
+    {
+      "schema_id": "careeros.story-bank.v1",
+      "urn": "urn:careeros:schema:story-bank:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.16,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/interview-evidence-pack-parity.md"
+    },
+    {
+      "schema_id": "careeros.interview-answer-boundary.v1",
+      "urn": "urn:careeros:schema:interview-answer-boundary:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.16,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/interview-evidence-pack-parity.md"
+    },
+    {
+      "schema_id": "careeros.interview-evidence-pack.v1",
+      "urn": "urn:careeros:schema:interview-evidence-pack:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.16,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/interview-evidence-pack-parity.md"
+    },
+    {
+      "schema_id": "careeros.career-conversion-cohort.v1",
+      "urn": "urn:careeros:schema:career-conversion-cohort:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.17,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/career-conversion-learning.md"
+    },
+    {
+      "schema_id": "careeros.conversion-causal-safeguard.v1",
+      "urn": "urn:careeros:schema:conversion-causal-safeguard:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.17,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/career-conversion-learning.md"
+    },
+    {
+      "schema_id": "careeros.career-capital-signal.v1",
+      "urn": "urn:careeros:schema:career-capital-signal:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.17,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/career-conversion-learning.md"
+    },
+    {
+      "schema_id": "careeros.development-opportunity.v1",
+      "urn": "urn:careeros:schema:development-opportunity:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.17,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/career-conversion-learning.md"
+    },
+    {
+      "schema_id": "careeros.learning-promotion-proposal.v1",
+      "urn": "urn:careeros:schema:learning-promotion-proposal:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.17,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/career-conversion-learning.md"
+    },
+    {
+      "schema_id": "careeros.production-family.v1",
+      "urn": "urn:careeros:schema:production-family:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.18,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/production-family-inheritance.md"
+    },
+    {
+      "schema_id": "careeros.family-resolution-trace.v1",
+      "urn": "urn:careeros:schema:family-resolution-trace:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.18,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/production-family-inheritance.md"
+    },
+    {
+      "schema_id": "careeros.fallback-routing.v1",
+      "urn": "urn:careeros:schema:fallback-routing:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.18,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/production-family-inheritance.md"
+    },
+    {
+      "schema_id": "careeros.production-family-promotion.v1",
+      "urn": "urn:careeros:schema:production-family-promotion:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.18,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/production-family-inheritance.md"
+    },
+    {
+      "schema_id": "careeros.production-family-delta.v1",
+      "urn": "urn:careeros:schema:production-family-delta:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.18,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/production-family-inheritance.md"
+    },
+    {
+      "schema_id": "careeros.production-family-registry.v1",
+      "urn": "urn:careeros:schema:production-family-registry:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.18,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/production-family-inheritance.md"
+    },
+    {
+      "schema_id": "careeros.masthead-geometry.v1",
+      "urn": "urn:careeros:schema:masthead-geometry:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.19,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/career-os-premium-centered-header-v1-2026-10-11.md"
+    },
+    {
+      "schema_id": "careeros.career-gap-priority.v1",
+      "urn": "urn:careeros:schema:career-gap-priority:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.20,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/learning-path-intelligence.md"
+    },
+    {
+      "schema_id": "careeros.learning-objective.v1",
+      "urn": "urn:careeros:schema:learning-objective:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.20,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/learning-path-intelligence.md"
+    },
+    {
+      "schema_id": "careeros.course-candidate.v1",
+      "urn": "urn:careeros:schema:course-candidate:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.20,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/learning-path-intelligence.md"
+    },
+    {
+      "schema_id": "careeros.course-evaluation.v1",
+      "urn": "urn:careeros:schema:course-evaluation:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.20,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/learning-path-intelligence.md"
+    },
+    {
+      "schema_id": "careeros.learning-redundancy.v1",
+      "urn": "urn:careeros:schema:learning-redundancy:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.20,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/learning-path-intelligence.md"
+    },
+    {
+      "schema_id": "careeros.learning-step.v1",
+      "urn": "urn:careeros:schema:learning-step:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.20,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/learning-path-intelligence.md"
+    },
+    {
+      "schema_id": "careeros.learning-path.v1",
+      "urn": "urn:careeros:schema:learning-path:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.20,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/learning-path-intelligence.md"
+    },
+    {
+      "schema_id": "careeros.evidence-creation-plan.v1",
+      "urn": "urn:careeros:schema:evidence-creation-plan:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.20,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/learning-path-intelligence.md"
+    },
+    {
+      "schema_id": "careeros.learning-roi.v1",
+      "urn": "urn:careeros:schema:learning-roi:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.20,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/learning-path-intelligence.md"
+    },
+    {
+      "schema_id": "careeros.learning-path-impact.v1",
+      "urn": "urn:careeros:schema:learning-path-impact:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.20,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/learning-path-intelligence.md"
+    },
+    {
+      "schema_id": "careeros.course-freshness.v1",
+      "urn": "urn:careeros:schema:course-freshness:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.20,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/learning-path-intelligence.md"
+    },
+    {
+      "schema_id": "careeros.provider-adapter.v1",
+      "urn": "urn:careeros:schema:provider-adapter:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.20,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/learning-path-intelligence.md"
+    },
+    {
+      "schema_id": "careeros.recruiter-conversion-strategy.v2",
+      "urn": "urn:careeros:schema:recruiter-conversion-strategy:v2",
+      "schema_version": "2.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.21,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/recruiter-conversion-copy-engine-v2.md"
+    },
+    {
+      "schema_id": "careeros.public-copy-boundary.v1",
+      "urn": "urn:careeros:schema:public-copy-boundary:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.21,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/recruiter-conversion-copy-engine-v2.md"
+    },
+    {
+      "schema_id": "careeros.targeted-editorial-regression.v1",
+      "urn": "urn:careeros:schema:targeted-editorial-regression:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.21,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/recruiter-conversion-copy-engine-v2.md"
+    },
+    {
+      "schema_id": "careeros.recruiter-copy-quality.v2",
+      "urn": "urn:careeros:schema:recruiter-copy-quality:v2",
+      "schema_version": "2.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.21,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/recruiter-conversion-copy-engine-v2.md"
+    },
+    {
+      "schema_id": "careeros.opportunity-registry.v1",
+      "urn": "urn:careeros:schema:opportunity-registry:v1",
+      "schema_version": "1.0.0",
+      "status": "CURRENT",
+      "package_support_range": ">=0.3.22,<0.5.0",
+      "migration_available": false,
+      "documentation": "docs/cross-run-opportunity-deduplication.md"
+    }
+  ]
+}

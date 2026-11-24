@@ -1,0 +1,13 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"urn:careeros:schema:resume-editorial-quality:v1",
+  "title":"ResumeEditorialQualityV1",
+  "type":"object",
+  "required":["schema","schema_version","score","threshold","status","components","system_artifact_leaks","semantic_duplicate_count","unsupported_metric_count","human_read_test"],
+  "properties":{
+    "schema":{"const":"careeros.resume-editorial-quality.v1"},"schema_version":{"const":"1.0.0"},"score":{"type":"number"},
+    "threshold":{"type":"number"},"status":{"enum":["PASS","FAIL"]},"components":{"type":"object"},
+    "system_artifact_leaks":{"type":"array","items":{"type":"string"}},"semantic_duplicate_count":{"type":"integer"},
+    "unsupported_metric_count":{"type":"integer"},"human_read_test":{"type":"object"}
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema","$id":"urn:careeros:schema:learning-promotion-proposal:v1",
+  "title":"LearningPromotionProposalV1","type":"object","additionalProperties":false,
+  "required":["schema","schema_version","proposal_id","source_cohorts","observation","recommendation","sample_maturity","confidence","affected_policy","expected_effect","risk","human_review_state","approved_at","created_at","proposal_hash"],
+  "properties":{"schema":{"const":"careeros.learning-promotion-proposal.v1"},"schema_version":{"const":"1.0.0"},"proposal_id":{"type":"string"},"source_cohorts":{"type":"array","minItems":1,"items":{"type":"string"}},"observation":{"type":"string"},"recommendation":{"type":"string"},"sample_maturity":{"enum":["INSUFFICIENT","EARLY","DEVELOPING","MATURE","STALE"]},"confidence":{"enum":["LOW","MEDIUM","HIGH"]},"affected_policy":{"type":"string"},"expected_effect":{"type":"string"},"risk":{"type":"string"},"human_review_state":{"enum":["PENDING","APPROVED","REJECTED"]},"approved_at":{"type":["string","null"],"format":"date-time"},"created_at":{"type":"string","format":"date-time"},"proposal_hash":{"type":"string","pattern":"^[a-f0-9]{64}$"}}
+}

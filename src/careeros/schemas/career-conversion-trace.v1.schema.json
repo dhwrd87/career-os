@@ -1,0 +1,12 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema","$id":"urn:careeros:schema:career-conversion-trace:v1",
+  "title":"CareerConversionTraceV1","type":"object","additionalProperties":false,
+  "required":["schema","schema_version","trace_id","profile_id","build_scope","employer_need_trace","strongest_evidence_omission","role_fact_set","material_evidence_loss","top_employer_needs","selected_evidence_ids","omitted_strong_evidence_ids","role_facts_preserved","material_losses","critical_losses","document_budget_decisions","gates","status","trace_hash"],
+  "properties":{
+    "schema":{"const":"careeros.career-conversion-trace.v1"},"schema_version":{"const":"1.0.0"},"trace_id":{"type":"string"},"profile_id":{"type":"string"},"build_scope":{"enum":["MASTER","LANE","TARGETED"]},
+    "employer_need_trace":{"type":["object","null"]},"strongest_evidence_omission":{"type":["object","null"]},"role_fact_set":{"type":"object"},"material_evidence_loss":{"type":"object"},
+    "top_employer_needs":{"type":"array","items":{"type":"object"}},"selected_evidence_ids":{"type":"array","items":{"type":"string"}},"omitted_strong_evidence_ids":{"type":"array","items":{"type":"string"}},"role_facts_preserved":{"type":"integer"},"material_losses":{"type":"integer"},"critical_losses":{"type":"integer"},"document_budget_decisions":{"type":"array","items":{"type":"string"}},
+    "gates":{"type":"object","additionalProperties":false,"required":["EMPLOYER_NEED_TRACE","TOP_THIRD_COVERAGE","STRONGEST_EVIDENCE_OMISSION","ROLE_FACT_PRESERVATION","MATERIAL_EVIDENCE_LOSS","CRITICAL_EVIDENCE_LOSS"],"properties":{"EMPLOYER_NEED_TRACE":{"type":"boolean"},"TOP_THIRD_COVERAGE":{"type":"boolean"},"STRONGEST_EVIDENCE_OMISSION":{"type":"boolean"},"ROLE_FACT_PRESERVATION":{"type":"boolean"},"MATERIAL_EVIDENCE_LOSS":{"type":"boolean"},"CRITICAL_EVIDENCE_LOSS":{"type":"boolean"}}},
+    "status":{"enum":["PASS","REVIEW","FAIL"]},"trace_hash":{"type":"string","pattern":"^[a-f0-9]{64}$"}
+  }
+}

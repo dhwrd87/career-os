@@ -1,0 +1,2 @@
+SYNTHETIC EXAMPLE ONLY
+Python exercise: read three fictional CSV rows, handled missing values, asserted row counts. This example records a learning project, not professional employment.

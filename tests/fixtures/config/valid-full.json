@@ -1,0 +1,68 @@
+{
+  "schema": "careeros.config.v1",
+  "config_version": "1.0.0",
+  "workspace": {
+    "package_root": "../../../src/careeros",
+    "user_data_root": "../../../full-workspace/private-data",
+    "state_root": "../../../full-workspace/workflow-state",
+    "output_root": "../../../full-workspace/final-outputs",
+    "cache_root": "../../../full-workspace/disposable-cache",
+    "locale": "en-CA",
+    "timezone": "America/Toronto"
+  },
+  "candidate": {
+    "profile_id": "candidate_full_example",
+    "profile_path": "candidate/career-profile.json",
+    "public_identity_policy_path": "candidate/public-identity-policy.json"
+  },
+  "privacy": {
+    "default_visibility": "INTERNAL",
+    "source_document_retention": "UNTIL_USER_DELETES",
+    "generated_artifact_retention_days": 180,
+    "allow_network_enrichment": true,
+    "allow_sensitive_data_in_logs": false,
+    "require_human_approval_for_external_actions": true
+  },
+  "career": {
+    "preferences_path": "candidate/preferences.json",
+    "role_families_path": "candidate/role-families.json",
+    "market_map_path": "derived/career-market-map.json"
+  },
+  "discovery": {
+    "enabled": true,
+    "adapters": ["official-career-pages"],
+    "freshness_policy": "policies/freshness-v1.json",
+    "dedupe_policy": "policies/dedupe-v1.json"
+  },
+  "qualification": {
+    "policy": "conservative-evidence-v1",
+    "compensation_is_hard_gate": true
+  },
+  "resume": {
+    "template": "single-column-v1",
+    "page_target": 2,
+    "renderer": "reportlab-v1",
+    "font_profile": "redistributable-sans-v1",
+    "compact_fallback": true,
+    "output_naming": "{public_name} - {target_role} - {target_organization} - {date}.{ext}",
+    "gates": ["truth", "chronology", "provenance", "ats", "autofill", "visual", "filename"]
+  },
+  "applications": {
+    "approval_policy": "human_before_external_action",
+    "submitted_artifacts_immutable": true,
+    "follow_up_policy": "policies/follow-up-v1.json",
+    "interview_workflow": "policies/interview-v1.json"
+  },
+  "adapters": {
+    "email": {"enabled": false, "external_actions": true, "require_human_approval": true, "credential_reference": "ENV"},
+    "calendar": {"enabled": false, "external_actions": true, "require_human_approval": true, "credential_reference": "KEYRING"},
+    "crm": {"enabled": false, "external_actions": true, "require_human_approval": true, "credential_reference": null}
+  },
+  "runtime": {
+    "poppler_bin": "auto",
+    "office_converter": "auto",
+    "network_timeout_seconds": 30,
+    "log_level": "warning"
+  }
+}
+

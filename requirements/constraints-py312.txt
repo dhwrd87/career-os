@@ -1,0 +1,7 @@
+# Resolved and tested on the primary Python 3.12 environment.
+reportlab==4.4.9
+pypdf==6.10.0
+pdfplumber==0.11.9
+Pillow==12.3.0
+pdfminer.six==20250506
+charset-normalizer==3.4.4

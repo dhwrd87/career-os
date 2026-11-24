@@ -1,0 +1,5 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema","$id":"urn:careeros:schema:learning-redundancy:v1","title":"LearningRedundancyV1","type":"object",
+  "required":["schema","schema_version","course_candidate_id","classification","overlap_ratio","overlapping_topics","new_topics","credential_independent_value"],
+  "properties":{"schema":{"const":"careeros.learning-redundancy.v1"},"schema_version":{"const":"1.0.0"},"course_candidate_id":{"type":"string"},"classification":{"enum":["HIGHLY_REDUNDANT","PARTIALLY_REDUNDANT","MOSTLY_NEW","NOVEL_HIGH_VALUE"]},"overlap_ratio":{"type":"number"},"overlapping_topics":{"type":"array"},"new_topics":{"type":"array"},"credential_independent_value":{"type":"boolean"}},"additionalProperties":false
+}

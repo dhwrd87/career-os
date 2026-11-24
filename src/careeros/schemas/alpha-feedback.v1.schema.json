@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:careeros:schema:alpha-feedback:v1",
+  "title": "AlphaFeedbackV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "schema_version", "feedback_id", "session", "workflow_reference", "artifact_reference", "category", "severity", "user_comment", "operator_observation", "requires_product_change", "requires_data_correction", "resolution", "status", "created_at"],
+  "properties": {
+    "schema": {"const": "careeros.alpha-feedback.v1"},
+    "schema_version": {"const": "1.0.0"},
+    "feedback_id": {"type": "string", "minLength": 1},
+    "session": {"type": "string", "minLength": 1},
+    "workflow_reference": {"type": ["string", "null"]},
+    "artifact_reference": {"type": ["string", "null"]},
+    "category": {"enum": ["CONFUSING", "TOO_LONG", "MISSING", "INCORRECT", "UNHELPFUL", "PRIVACY_CONCERN", "GOOD", "WORKFLOW_FRICTION", "PRESENTATION", "QUALIFICATION", "RESUME_QUALITY", "OTHER"]},
+    "severity": {"enum": ["LOW", "MEDIUM", "HIGH", "BLOCKER"]},
+    "user_comment": {"type": ["string", "null"]},
+    "operator_observation": {"type": ["string", "null"]},
+    "requires_product_change": {"type": "boolean"},
+    "requires_data_correction": {"type": "boolean"},
+    "resolution": {"type": ["string", "null"]},
+    "status": {"enum": ["OPEN", "TRIAGED", "RESOLVED", "BACKLOG", "USER_DATA_ONLY"]},
+    "created_at": {"type": "string", "format": "date-time"}
+  }
+}

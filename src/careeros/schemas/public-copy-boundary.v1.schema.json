@@ -1,0 +1,11 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema","$id":"urn:careeros:schema:public-copy-boundary:v1",
+  "title":"PublicCopyBoundaryV1","type":"object","additionalProperties":false,
+  "required":["schema","schema_version","status","checked_surfaces","findings","finding_count"],
+  "properties":{
+    "schema":{"const":"careeros.public-copy-boundary.v1"},"schema_version":{"const":"1.0.0"},
+    "status":{"enum":["PASS","FAIL"]},"checked_surfaces":{"type":"array","items":{"type":"string"}},
+    "findings":{"type":"array","items":{"type":"object","required":["code","term","surface"],"properties":{"code":{"enum":["SYSTEM_LANGUAGE","INTERNAL_STATE","WEAK_FUTURE_TENSE","AI_SLOP"]},"term":{"type":"string"},"surface":{"type":"string"}}}},
+    "finding_count":{"type":"integer","minimum":0}
+  }
+}

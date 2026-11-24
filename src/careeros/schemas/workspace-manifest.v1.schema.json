@@ -1,0 +1,281 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:careeros:schema:workspace-manifest:v1",
+  "title": "WorkspaceManifestV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "schema_version",
+    "workspace_id",
+    "workspace_format_version",
+    "created_at",
+    "created_by_package_version",
+    "last_migrated_at",
+    "last_migrated_by_package_version",
+    "config_schema_version",
+    "schema_bundle_version",
+    "active_policy_versions",
+    "compiler_version_at_last_build",
+    "renderer_version_at_last_build",
+    "migration_history",
+    "integrity",
+    "fixture_mode",
+    "external_adapters_enabled"
+  ],
+  "properties": {
+    "schema": {
+      "const": "careeros.workspace-manifest.v1"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "workspace_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "workspace_format_version": {
+      "const": "1.1.0"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "created_by_package_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "last_migrated_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "last_migrated_by_package_version": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "config_schema_version": {
+      "const": "1.0.0"
+    },
+    "schema_bundle_version": {
+      "enum": [
+        "1.2.0",
+        "1.3.0",
+        "1.4.0",
+        "1.5.0",
+        "1.6.0",
+        "1.7.0",
+        "1.8.0",
+        "1.9.0",
+        "1.10.0",
+        "1.11.0",
+        "1.12.0",
+        "1.13.0",
+        "1.14.0",
+        "1.15.0",
+        "1.16.0",
+        "1.17.0",
+        "1.18.0",
+        "1.19.0",
+        "1.20.0",
+        "1.21.0",
+        "1.22.0",
+        "1.23.0",
+        "1.24.0"
+      ]
+    },
+    "active_policy_versions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "qualification",
+        "truth",
+        "privacy"
+      ],
+      "properties": {
+        "qualification": {
+          "type": "string",
+          "minLength": 1
+        },
+        "truth": {
+          "type": "string",
+          "minLength": 1
+        },
+        "privacy": {
+          "type": "string",
+          "minLength": 1
+        },
+        "opportunity_freshness": {
+          "type": "string",
+          "minLength": 1
+        },
+        "application_state": {
+          "type": "string",
+          "minLength": 1
+        },
+        "interview_prep": {
+          "type": "string",
+          "minLength": 1
+        },
+        "conversion_learning": {
+          "type": "string",
+          "minLength": 1
+        },
+        "production_family": {
+          "type": "string",
+          "minLength": 1
+        },
+        "learning_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "recruiter_conversion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "opportunity_registry": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "compiler_version_at_last_build": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "renderer_version_at_last_build": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "migration_history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "migration_id",
+          "from_version",
+          "to_version",
+          "applied_at",
+          "applied_by_package_version",
+          "before_sha256",
+          "after_sha256",
+          "affected_files",
+          "backup_path",
+          "status"
+        ],
+        "properties": {
+          "migration_id": {
+            "type": "string"
+          },
+          "from_version": {
+            "type": "string"
+          },
+          "to_version": {
+            "type": "string"
+          },
+          "applied_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "applied_by_package_version": {
+            "type": "string"
+          },
+          "before_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "after_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "affected_files": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "backup_path": {
+            "type": "string"
+          },
+          "status": {
+            "const": "APPLIED"
+          }
+        }
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "config_sha256",
+        "manifest_core_sha256",
+        "last_verified_at"
+      ],
+      "properties": {
+        "algorithm": {
+          "const": "sha256"
+        },
+        "config_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "manifest_core_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "last_verified_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "fixture_mode": {
+      "type": "boolean"
+    },
+    "external_adapters_enabled": {
+      "const": false
+    },
+    "canonical_head": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "revision",
+        "canonical_sha256",
+        "last_event_id",
+        "updated_at"
+      ],
+      "properties": {
+        "revision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "canonical_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "last_event_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "updated_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

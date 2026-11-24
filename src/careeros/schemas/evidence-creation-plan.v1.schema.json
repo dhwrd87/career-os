@@ -1,0 +1,5 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema","$id":"urn:careeros:schema:evidence-creation-plan:v1","title":"EvidenceCreationPlanV1","type":"object",
+  "required":["schema","schema_version","plan_id","learning_step_id","target_evidence","project_type","objective","required_tools","expected_actions","expected_artifacts","verification_method","public_portfolio_state","canonical_promotion_state","resume_impact","interview_impact"],
+  "properties":{"schema":{"const":"careeros.evidence-creation-plan.v1"},"schema_version":{"const":"1.0.0"},"plan_id":{"type":"string"},"learning_step_id":{"type":"string"},"target_evidence":{"type":"string"},"project_type":{"type":"string"},"objective":{"type":"string"},"required_tools":{"type":"array"},"expected_actions":{"type":"array"},"expected_artifacts":{"type":"array"},"verification_method":{"type":"array"},"public_portfolio_state":{"type":"string"},"canonical_promotion_state":{"const":"PROPOSED_EVIDENCE_REVIEW_REQUIRED"},"resume_impact":{"type":"array"},"interview_impact":{"type":"array"}},"additionalProperties":false
+}

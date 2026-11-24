@@ -1,0 +1,15 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema","$id":"urn:careeros:schema:production-family:v1",
+  "title":"ProductionFamilyV1","type":"object","additionalProperties":false,
+  "required":["schema","schema_version","family_id","family_type","display_name","parent_family_id","role_family_id","candidate_profile_id","status","version","created_at","updated_at","policy_version","content_policy","section_policy","evidence_policy","summary_policy","skills_policy","project_policy","experience_policy","document_policy","ats_policy","public_naming_policy","fallback_policy","override_records","validation_baseline","family_hash"],
+  "properties":{
+    "schema":{"const":"careeros.production-family.v1"},"schema_version":{"const":"1.0.0"},
+    "family_id":{"type":"string","minLength":3},"family_type":{"enum":["MASTER","LANE","ROLE_FAMILY","TARGETED","SPECIALIZED"]},"display_name":{"type":"string","minLength":1},
+    "parent_family_id":{"type":["string","null"]},"role_family_id":{"type":["string","null"]},"candidate_profile_id":{"type":["string","null"]},
+    "status":{"enum":["DRAFT","SHADOW","VALIDATED","PRODUCTION","RETIRED"]},"version":{"type":"string","pattern":"^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "created_at":{"type":"string","format":"date-time"},"updated_at":{"type":"string","format":"date-time"},"policy_version":{"const":"production-family-inheritance-v1"},
+    "content_policy":{"type":"object"},"section_policy":{"type":"object"},"evidence_policy":{"type":"object"},"summary_policy":{"type":"object"},"skills_policy":{"type":"object"},"project_policy":{"type":"object"},"experience_policy":{"type":"object"},"document_policy":{"type":"object"},"ats_policy":{"type":"object"},"public_naming_policy":{"type":"object"},"fallback_policy":{"type":"object"},
+    "override_records":{"type":"array","items":{"type":"object","additionalProperties":false,"required":["override_id","classification","policy","setting","rationale"],"properties":{"override_id":{"type":"string"},"classification":{"enum":["CONTENT_PRIORITY","SECTION_ORDER","SUMMARY","SKILLS","PROJECTS","PROFESSIONAL_HISTORY","DOCUMENT_DENSITY","TARGET_JOB"]},"policy":{"enum":["content_policy","section_policy","evidence_policy","summary_policy","skills_policy","project_policy","experience_policy","document_policy","ats_policy","public_naming_policy","fallback_policy"]},"setting":{"type":"string"},"rationale":{"type":"string","minLength":1}}}},
+    "validation_baseline":{"type":"object","additionalProperties":{"type":"string"}},"family_hash":{"type":"string","pattern":"^[a-f0-9]{64}$"}
+  }
+}

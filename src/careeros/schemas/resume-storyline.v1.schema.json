@@ -1,0 +1,24 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"urn:careeros:schema:resume-storyline:v1",
+  "title":"ResumeStorylineV1",
+  "type":"object",
+  "required":["schema","schema_version","resume_family","target_role_family","candidate_positioning","professional_foundation","transition_narrative","anchor_evidence","supporting_evidence","context_evidence","evidence_to_minimize","evidence_to_exclude","recruiter_takeaway","summary_strategy","section_priority","project_priority","risk_flags"],
+  "properties":{
+    "schema":{"const":"careeros.resume-storyline.v1"},"schema_version":{"const":"1.0.0"},
+    "resume_family":{"type":"string"},"target_role_family":{"type":"string"},"candidate_positioning":{"type":"string"},
+    "professional_foundation":{"type":"string"},"transition_narrative":{"type":"string"},
+    "anchor_evidence":{"type":"array","items":{"type":"string"}},"supporting_evidence":{"type":"array","items":{"type":"string"}},
+    "context_evidence":{"type":"array","items":{"type":"string"}},"evidence_to_minimize":{"type":"array","items":{"type":"string"}},
+    "evidence_to_exclude":{"type":"array","items":{"type":"string"}},"recruiter_takeaway":{"type":"string"},
+    "summary_strategy":{"type":"string"},"section_priority":{"type":"array","items":{"type":"string"}},
+    "project_priority":{"type":"array","items":{"type":"string"}},"risk_flags":{"type":"array","items":{"type":"string"}},
+    "job_id":{"type":"string"},"job_story_signals":{"type":"array"},"job_specific_recruiter_takeaway":{"type":"string"},
+    "job_anchor_evidence":{"type":"array","items":{"type":"string"}},"job_supporting_evidence":{"type":"array","items":{"type":"string"}},
+    "job_deemphasized_evidence":{"type":"array","items":{"type":"string"}},"job_specific_summary_strategy":{"type":"string"},
+    "section_order_adjustments":{"type":"array","items":{"type":"string"}},
+    "transferable_professional_evidence":{"type":"array","items":{"type":"string"}},
+    "foundational_evidence":{"type":"array","items":{"type":"string"}},
+    "evidence_rankings":{"type":"array"}
+  }
+}

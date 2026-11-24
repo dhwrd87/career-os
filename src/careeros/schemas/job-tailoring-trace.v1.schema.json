@@ -1,0 +1,18 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"urn:careeros:schema:job-tailoring-trace:v1",
+  "title":"JobTailoringTraceV1","type":"object","additionalProperties":false,
+  "required":["schema","schema_version","trace_id","opportunity_id","job_intelligence_id","matrix_id","job_story_signals","requirements_selected","evidence_matched","evidence_omitted","bullets_selected","bullet_variants_selected","summary_strategy","skills_selected","projects_ordered","gaps_not_bridgeable","coverage_before","coverage_after","duplicate_suppression","unused_relevant_evidence","resume_completeness_status","truth_gate_result"],
+  "properties":{
+    "schema":{"const":"careeros.job-tailoring-trace.v1"},"schema_version":{"const":"1.0.0"},"trace_id":{"type":"string"},
+    "opportunity_id":{"type":"string"},"job_intelligence_id":{"type":"string"},"matrix_id":{"type":"string"},
+    "job_story_signals":{"type":"array"},"requirements_selected":{"type":"array","items":{"type":"string"}},
+    "evidence_matched":{"type":"array","items":{"type":"string"}},"evidence_omitted":{"type":"array","items":{"type":"string"}},
+    "bullets_selected":{"type":"array","items":{"type":"string"}},"bullet_variants_selected":{"type":"array"},
+    "summary_strategy":{"type":["string","null"]},"skills_selected":{"type":"array","items":{"type":"string"}},
+    "projects_ordered":{"type":"array","items":{"type":"string"}},"gaps_not_bridgeable":{"type":"array","items":{"type":"string"}},
+    "coverage_before":{"type":"integer"},"coverage_after":{"type":"integer"},"duplicate_suppression":{"type":"array"},
+    "unused_relevant_evidence":{"type":"array"},"resume_completeness_status":{"enum":["PASS","REVIEW","FAIL"]},
+    "truth_gate_result":{"enum":["PASS","BLOCKED_HARD_GAP"]}
+  }
+}

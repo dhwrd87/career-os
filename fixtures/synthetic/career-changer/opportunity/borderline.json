@@ -1,0 +1,5 @@
+{
+  "schema":"careeros.synthetic-opportunity-input.v1","source_type":"SYNTHETIC","opportunity_id":"opp-changer-borderline","employer_name":"Northwind Practice Cloud","role_title":"Software Implementation Specialist","location":"Remote US",
+  "requirements":[{"capability":"Process Mapping","level":"CORE","requirement_class":"REQUIRED","requirement_subtype":"SKILL"},{"capability":"Implementation Delivery","level":"PREFERRED","requirement_class":"PREFERRED","requirement_subtype":"EXPERIENCE","direct_experience":true}],
+  "job_description":"Northwind Practice Cloud seeks a Software Implementation Specialist. Process mapping is essential. Two years of direct software implementation delivery is preferred; project adjacency does not count as employment equivalence."
+}

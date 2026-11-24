@@ -1,0 +1,13 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema","$id":"urn:careeros:schema:recruiter-copy-quality:v2",
+  "title":"RecruiterCopyQualityV2","type":"object","additionalProperties":false,
+  "required":["schema","schema_version","status","score","threshold","dimensions","findings","recruiter_takeaway_test","public_copy_boundary_status","natural_language_variation"],
+  "properties":{
+    "schema":{"const":"careeros.recruiter-copy-quality.v2"},"schema_version":{"const":"2.0.0"},
+    "status":{"enum":["PASS","FAIL"]},"score":{"type":"number","minimum":0,"maximum":10},"threshold":{"type":"number"},
+    "dimensions":{"type":"object","additionalProperties":false,"required":["POSITIONING","SPECIFICITY","PROFESSIONAL_CONFIDENCE","EMPLOYER_RELEVANCE","CAREER_STORY","HUMAN_VOICE","CONCISION","EVIDENCE_DENSITY","DIFFERENTIATION","READABILITY","PERSUASIVENESS","SYSTEM_LANGUAGE_ABSENCE"],"properties":{"POSITIONING":{"type":"number"},"SPECIFICITY":{"type":"number"},"PROFESSIONAL_CONFIDENCE":{"type":"number"},"EMPLOYER_RELEVANCE":{"type":"number"},"CAREER_STORY":{"type":"number"},"HUMAN_VOICE":{"type":"number"},"CONCISION":{"type":"number"},"EVIDENCE_DENSITY":{"type":"number"},"DIFFERENTIATION":{"type":"number"},"READABILITY":{"type":"number"},"PERSUASIVENESS":{"type":"number"},"SYSTEM_LANGUAGE_ABSENCE":{"type":"number"}}},
+    "findings":{"type":"array","items":{"type":"object"}},
+    "recruiter_takeaway_test":{"type":"object","additionalProperties":{"type":"boolean"}},
+    "public_copy_boundary_status":{"enum":["PASS","FAIL"]},"natural_language_variation":{"type":"object"}
+  }
+}

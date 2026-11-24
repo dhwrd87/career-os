@@ -1,0 +1,10 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema","$id":"urn:careeros:schema:targeted-editorial-regression:v1",
+  "title":"TargetedEditorialRegressionV1","type":"object","additionalProperties":false,
+  "required":["schema","schema_version","status","parent_score","targeted_score","score_delta","regressions","valid_reasons"],
+  "properties":{
+    "schema":{"const":"careeros.targeted-editorial-regression.v1"},"schema_version":{"const":"1.0.0"},
+    "status":{"enum":["PASS","FAIL"]},"parent_score":{"type":"number"},"targeted_score":{"type":"number"},"score_delta":{"type":"number"},
+    "regressions":{"type":"array","items":{"type":"string"}},"valid_reasons":{"type":"array","items":{"type":"string"}}
+  }
+}

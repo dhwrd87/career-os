@@ -1,0 +1,18 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"urn:careeros:schema:opportunity-freshness:v1",
+  "title":"OpportunityFreshnessV1","type":"object","additionalProperties":false,
+  "required":["schema","schema_version","opportunity_id","source_url","source_type","captured_at","last_verified_at","source_status","freshness_state","freshness_reason","job_posting_hash","jd_snapshot_id","supersedes","repost_group_id","expiration_signal","closure_signal","verification_method","verification_confidence","policy_version"],
+  "properties":{
+    "schema":{"const":"careeros.opportunity-freshness.v1"},"schema_version":{"const":"1.0.0"},
+    "opportunity_id":{"type":"string","minLength":3},"source_url":{"type":["string","null"]},
+    "source_type":{"type":"string","minLength":1},"captured_at":{"type":"string","format":"date-time"},
+    "last_verified_at":{"type":["string","null"],"format":"date-time"},"source_status":{"type":"string","minLength":1},
+    "freshness_state":{"enum":["FRESH","STALE_REVERIFY","CLOSED","EXPIRED","REPOSTED","SUPERSEDED","SOURCE_UNAVAILABLE","UNKNOWN"]},
+    "freshness_reason":{"type":"string","minLength":1},"job_posting_hash":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+    "jd_snapshot_id":{"type":"string","minLength":3},"supersedes":{"type":["string","null"]},
+    "repost_group_id":{"type":["string","null"]},"expiration_signal":{"type":["string","null"]},
+    "closure_signal":{"type":["string","null"]},"verification_method":{"type":"string","minLength":1},
+    "verification_confidence":{"enum":["LOW","MEDIUM","HIGH"]},"policy_version":{"const":"opportunity-freshness-v1"}
+  }
+}

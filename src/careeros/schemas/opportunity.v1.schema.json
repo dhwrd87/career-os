@@ -1,0 +1,34 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"urn:careeros:schema:opportunity:v1",
+  "title":"OpportunityV1","type":"object","additionalProperties":false,
+  "required":["schema","schema_version","opportunity_id","employer_name","role_title","source_type","status","requirements","created_at"],
+  "properties":{
+    "schema":{"const":"careeros.opportunity.v1"},"schema_version":{"const":"1.0.0"},
+    "opportunity_id":{"type":"string","minLength":3},"employer_name":{"type":"string","minLength":1},
+    "role_title":{"type":"string","minLength":1},"location":{"type":["string","null"]},
+    "source_type":{"enum":["SYNTHETIC","USER_SUPPLIED"]},"status":{"enum":["INTAKE","QUALIFIED","BORDERLINE","NOT_QUALIFIED"]},
+    "source_url":{"type":["string","null"]},"canonical_url":{"type":["string","null"]},
+    "provider_job_id":{"type":["string","null"]},"source_status":{"type":["string","null"]},
+    "last_verified_at":{"type":["string","null"],"format":"date-time"},
+    "expiration_signal":{"type":["string","null"]},"closure_signal":{"type":["string","null"]},
+    "supersedes":{"type":["string","null"]},"repost_group_id":{"type":["string","null"]},
+    "requirements":{
+      "type":"array",
+      "items":{
+        "type":"object",
+        "required":["capability"],
+        "properties":{
+          "capability":{"type":"string","minLength":1},
+          "level":{"enum":["HARD","CORE","PREFERRED"]},
+          "requirement_class":{"enum":["REQUIRED","PREFERRED","OPTIONAL"]},
+          "requirement_subtype":{"enum":["EXPERIENCE","EDUCATION","CREDENTIAL","SKILL","TOOL","LOGISTICS","WORK_AUTHORIZATION","SCHEDULE","TRAVEL","LOCATION"]},
+          "direct_experience":{"type":"boolean"},
+          "minimum_duration":{"type":"string"},
+          "examples":{"type":"array","items":{"type":"string"}},
+          "sub_capabilities":{"type":"array","items":{"type":"string"}}
+        }
+      }
+    },"created_at":{"type":"string","format":"date-time"}
+  }
+}

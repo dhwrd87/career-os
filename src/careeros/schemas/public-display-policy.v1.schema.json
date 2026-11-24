@@ -1,0 +1,14 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"urn:careeros:schema:public-display-policy:v1",
+  "title":"PublicDisplayPolicyV1",
+  "type":"object",
+  "required":["schema","schema_version","policy_id","credential_display","project_date_display","skill_display","verification_sensitive_claims","allowed_visibility","private_restricted_evidence","approximate_metrics"],
+  "properties":{
+    "schema":{"const":"careeros.public-display-policy.v1"},"schema_version":{"const":"1.0.0"},"policy_id":{"type":"string"},
+    "credential_display":{"type":"object"},"project_date_display":{"enum":["OMIT_WHEN_UNKNOWN","SHOW_ONLY_WHEN_KNOWN"]},
+    "skill_display":{"enum":["EVIDENCE_BACKED_ONLY"]},"verification_sensitive_claims":{"type":"string"},
+    "allowed_visibility":{"type":"array","items":{"type":"string"}},"private_restricted_evidence":{"enum":["EXCLUDE"]},
+    "approximate_metrics":{"type":"string"}
+  }
+}

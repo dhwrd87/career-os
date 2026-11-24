@@ -1,0 +1,6 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema","$id":"urn:careeros:schema:production-family-delta:v1",
+  "title":"ProductionFamilyDeltaV1","type":"object","additionalProperties":false,
+  "required":["schema","schema_version","delta_id","relation","parent_family_id","child_family_id","policy_differences","content_differences","findings","status","delta_hash"],
+  "properties":{"schema":{"const":"careeros.production-family-delta.v1"},"schema_version":{"const":"1.0.0"},"delta_id":{"type":"string"},"relation":{"enum":["MASTER_TO_LANE","LANE_TO_TARGETED"]},"parent_family_id":{"type":"string"},"child_family_id":{"type":"string"},"policy_differences":{"type":"array","items":{"type":"string"}},"content_differences":{"type":"object"},"findings":{"type":"array","items":{"enum":["NO_MEANINGFUL_DELTA","EXCESSIVE_DELTA","MATERIAL_EVIDENCE_LOSS","ROLE_IDENTITY_DRIFT","COPY_ONLY_VARIATION","STALE_INHERITANCE"]}},"status":{"enum":["PASS","FAIL"]},"delta_hash":{"type":"string","pattern":"^[a-f0-9]{64}$"}}
+}

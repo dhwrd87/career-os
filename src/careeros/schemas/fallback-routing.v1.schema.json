@@ -1,0 +1,6 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema","$id":"urn:careeros:schema:fallback-routing:v1",
+  "title":"FallbackRoutingV1","type":"object","additionalProperties":false,
+  "required":["schema","schema_version","fallback_id","source_family_id","failure_reason","fallback_family_id","route_path","artifact_impact","qa_status","human_review_required","authorized","safety_preserved","created_at","fallback_hash"],
+  "properties":{"schema":{"const":"careeros.fallback-routing.v1"},"schema_version":{"const":"1.0.0"},"fallback_id":{"type":"string"},"source_family_id":{"type":"string"},"failure_reason":{"enum":["FAMILY_CONFIG_MISSING","FAMILY_RENDER_FAILURE","DOCUMENT_STANDARD_INCOMPATIBILITY","ATS_FAILURE","PAGE_FIT_FAILURE","UNSUPPORTED_SPECIALIZED_TEMPLATE","MISSING_JOB_ADAPTATION"]},"fallback_family_id":{"type":"string"},"route_path":{"type":"array","minItems":2,"items":{"type":"string"}},"artifact_impact":{"type":"string"},"qa_status":{"enum":["PASS","FAIL","REVIEW"]},"human_review_required":{"const":true},"authorized":{"type":"boolean"},"safety_preserved":{"const":true},"created_at":{"type":"string","format":"date-time"},"approved_by":{"type":"string"},"approved_at":{"type":"string","format":"date-time"},"fallback_hash":{"type":"string","pattern":"^[a-f0-9]{64}$"}}
+}

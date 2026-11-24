@@ -1,0 +1,53 @@
+{
+  "schema": "careeros.synthetic-evidence-expansion-cases.v1",
+  "cases": [
+    {
+      "case_id": "shallow-one-page-resume",
+      "candidate_type": "old one-page resume",
+      "source_bullets": ["Handled customer issues using a case tracker."],
+      "expected_missing": ["OUTCOME_DEPTH", "SCOPE_DEPTH"]
+    },
+    {
+      "case_id": "career-changer",
+      "candidate_type": "career changer",
+      "source_bullets": ["Coordinated time-sensitive service handoffs for community partners."],
+      "expected_missing": ["TOOL_DEPTH", "METRIC_DEPTH"]
+    },
+    {
+      "case_id": "experienced-professional",
+      "candidate_type": "20-year experienced professional",
+      "source_bullets": ["Led regional operations and reviewed quality reports."],
+      "expected_missing": ["SCOPE_DEPTH", "STAKEHOLDER_DEPTH"]
+    },
+    {
+      "case_id": "early-career-student",
+      "candidate_type": "student or early-career candidate",
+      "source_bullets": ["Built a service-status dashboard in a classroom lab."],
+      "expected_missing": ["OUTCOME_DEPTH", "ARTIFACT_DEPTH"]
+    },
+    {
+      "case_id": "contractor",
+      "candidate_type": "contractor",
+      "source_bullets": ["Delivered data-cleanup support for multiple short-term clients."],
+      "expected_missing": ["SCOPE_DEPTH", "VERIFICATION_DEPTH"]
+    },
+    {
+      "case_id": "project-heavy-technical",
+      "candidate_type": "project-heavy technical candidate",
+      "source_bullets": ["Analyzed simulated network events with Zeek and documented findings."],
+      "expected_missing": ["METRIC_DEPTH", "STAKEHOLDER_DEPTH"]
+    },
+    {
+      "case_id": "metric-poor",
+      "candidate_type": "metric-poor candidate",
+      "source_bullets": ["Reviewed support requests and escalated complex cases."],
+      "expected_missing": ["METRIC_DEPTH", "SCOPE_DEPTH"]
+    },
+    {
+      "case_id": "metric-rich",
+      "candidate_type": "metric-rich candidate",
+      "source_bullets": ["Resolved 30+ service cases daily using a ticketing platform for branch staff."],
+      "expected_present": ["ACTION", "TOOL", "METRIC", "STAKEHOLDER"]
+    }
+  ]
+}

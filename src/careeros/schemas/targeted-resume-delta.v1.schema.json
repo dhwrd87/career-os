@@ -1,0 +1,5 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema","$id":"urn:careeros:schema:targeted-resume-delta:v1",
+  "title":"TargetedResumeDeltaV1","type":"object","required":["schema","status","acceptance_allowed","changed_dimensions","dimensions"],
+  "properties":{"schema":{"const":"careeros.targeted-resume-delta.v1"},"status":{"enum":["MATERIAL_DELTA","SUFFICIENT_DELTA","MINIMAL_DELTA","NO_MEANINGFUL_DELTA"]},"acceptance_allowed":{"type":"boolean"},"changed_dimensions":{"type":"array","items":{"type":"string"}},"dimensions":{"type":"object"},"reference":{"type":"string"}}
+}

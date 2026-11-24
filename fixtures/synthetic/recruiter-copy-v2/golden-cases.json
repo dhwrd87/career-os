@@ -1,0 +1,40 @@
+{
+  "schema": "careeros.synthetic-recruiter-copy-goldens.v1",
+  "cases": [
+    {
+      "id": "career-changer-security-monitoring",
+      "target_role": "Security Monitoring Analyst",
+      "summary": "Operations professional transitioning into security monitoring with hands-on Splunk, SPL, and network-analysis work. Investigated simulated authentication anomalies, documented indicators, and produced an escalation-ready findings report. Client-service experience adds careful documentation, confidentiality-sensitive communication, and dependable handoffs across time-sensitive work.",
+      "proof_tools": ["Splunk", "SPL"],
+      "differentiator": "confidentiality-sensitive operations"
+    },
+    {
+      "id": "experienced-worker-network-operations",
+      "target_role": "Network Operations Technician",
+      "summary": "Experienced support professional bringing Wireshark packet analysis, DNS troubleshooting, and structured escalation work to network operations. Analyzed a simulated service interruption, isolated the likely failure domain, and prepared a clear technical handoff. Prior customer operations work adds calm communication and precise documentation during time-sensitive issues.",
+      "proof_tools": ["Wireshark", "DNS"],
+      "differentiator": "customer operations maturity"
+    },
+    {
+      "id": "technical-support-bridge",
+      "target_role": "Technical Support Specialist",
+      "summary": "Bilingual support professional with hands-on Python debugging, log review, and network troubleshooting work. Diagnosed simulated connectivity issues, documented findings, and prepared clear escalation notes. High-volume customer communication experience adds patience, accuracy, and dependable follow-through for first-line technical support.",
+      "proof_tools": ["Python"],
+      "differentiator": "bilingual customer communication"
+    },
+    {
+      "id": "vulnerability-operations",
+      "target_role": "Vulnerability Operations Analyst",
+      "summary": "Security-focused professional with hands-on Nessus scanning, remediation, and validation work. Investigated affected software, applied updates in a lab environment, and re-scanned systems to confirm the findings were resolved. Documentation experience adds clear reporting and organized follow-through across remediation tasks.",
+      "proof_tools": ["Nessus"],
+      "differentiator": "remediation validation"
+    },
+    {
+      "id": "project-heavy-early-career",
+      "target_role": "Junior Cybersecurity Analyst",
+      "summary": "Cybersecurity-focused professional with hands-on Splunk, Nessus, Python, and network-security projects. Investigated simulated threats, validated vulnerability fixes, and published inspectable technical artifacts. Professional communication experience adds disciplined documentation and concise stakeholder updates across analytical work.",
+      "proof_tools": ["Splunk", "Nessus", "Python"],
+      "differentiator": "inspectable portfolio evidence"
+    }
+  ]
+}

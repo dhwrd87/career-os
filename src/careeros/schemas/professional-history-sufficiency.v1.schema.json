@@ -1,0 +1,6 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema","$id":"urn:careeros:schema:professional-history-sufficiency:v1",
+  "title":"ProfessionalHistorySufficiencyV1","type":"object","additionalProperties":false,
+  "required":["schema","decisions","failures","status"],
+  "properties":{"schema":{"const":"careeros.professional-history-sufficiency.v1"},"decisions":{"type":"array","items":{"type":"object"}},"failures":{"type":"array","items":{"type":"object"}},"status":{"enum":["PASS","FAIL"]}}
+}

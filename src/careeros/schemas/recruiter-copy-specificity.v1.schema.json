@@ -1,0 +1,6 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema","$id":"urn:careeros:schema:recruiter-copy-specificity:v1",
+  "title":"RecruiterCopySpecificityV1","type":"object","additionalProperties":false,
+  "required":["schema","status","abstract_phrases","concrete_evidence_available"],
+  "properties":{"schema":{"const":"careeros.recruiter-copy-specificity.v1"},"status":{"enum":["PASS","FAIL"]},"abstract_phrases":{"type":"array","items":{"type":"string"}},"concrete_evidence_available":{"type":"boolean"}}
+}

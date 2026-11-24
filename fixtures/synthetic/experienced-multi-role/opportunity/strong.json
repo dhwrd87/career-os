@@ -1,0 +1,5 @@
+{
+  "schema":"careeros.synthetic-opportunity-input.v1","source_type":"SYNTHETIC","opportunity_id":"opp-experienced-strong","employer_name":"Summit Vale Field Services","role_title":"Regional Operations Manager","location":"Sacramento, CA",
+  "requirements":[{"capability":"Team Leadership","level":"CORE","requirement_class":"REQUIRED","requirement_subtype":"SKILL"},{"capability":"Vendor Management","level":"CORE","requirement_class":"REQUIRED","requirement_subtype":"SKILL"},{"capability":"Operations Planning","level":"CORE","requirement_class":"REQUIRED","requirement_subtype":"SKILL"}],
+  "job_description":"Summit Vale Field Services seeks a Regional Operations Manager to coach site managers, manage vendor performance, and maintain evidence-based capacity plans."
+}

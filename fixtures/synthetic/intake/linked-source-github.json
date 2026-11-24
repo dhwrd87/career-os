@@ -1,0 +1,25 @@
+{
+  "@type": "Person",
+  "login": "river-chen-example",
+  "repositories": [
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "Access Review Tool",
+      "description": "Implemented a role-based access review workflow and generated a review report using Python.",
+      "programmingLanguage": ["Python", "SQL"],
+      "dateModified": "2025-06-15T12:00:00Z",
+      "has_tests": true,
+      "has_documentation": true,
+      "codeRepository": "https://github.com/river-chen-example/access-review-tool"
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "Queue Metrics Notebook",
+      "description": "Analyzed a fictional support queue dataset and documented reproducible findings.",
+      "programmingLanguage": ["Python"],
+      "dateModified": "2025-05-10T12:00:00Z",
+      "has_tests": false,
+      "has_documentation": true
+    }
+  ]
+}

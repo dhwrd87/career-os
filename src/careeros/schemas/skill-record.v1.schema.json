@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:careeros:schema:skill-record:v1",
+  "title": "SkillRecordV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "schema_version", "record_id", "created_at", "updated_at", "provenance", "verification_state", "confidence", "visibility", "status", "name", "category", "proficiency", "evidence_ids", "claim_boundaries"],
+  "properties": {
+    "schema": {"const": "careeros.skill-record.v1"},
+    "schema_version": {"const": "1.0.0"},
+    "record_id": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{2,127}$"},
+    "created_at": {"type": "string", "format": "date-time"},
+    "updated_at": {"type": "string", "format": "date-time"},
+    "provenance": {"type": "array", "minItems": 1, "items": {"$ref": "urn:careeros:schema:provenance-record:v1"}},
+    "verification_state": {"enum": ["UNVERIFIED", "NEEDS_VERIFICATION", "VERIFIED", "DISPUTED"]},
+    "confidence": {"enum": ["LOW", "MEDIUM", "HIGH"]},
+    "visibility": {"enum": ["PRIVATE", "INTERNAL", "PUBLIC", "EMPLOYER_SAFE", "RESTRICTED"]},
+    "status": {"enum": ["ACTIVE", "SUPERSEDED", "REJECTED"]},
+    "supersedes_record_id": {"type": ["string", "null"]},
+    "name": {"type": "string", "minLength": 1},
+    "category": {"type": "string", "minLength": 1},
+    "aliases": {"type": "array", "items": {"type": "string"}},
+    "proficiency": {"type": "string", "minLength": 1},
+    "most_recent_use": {"type": ["string", "integer", "null"]},
+    "contexts": {"type": "array", "items": {"type": "string"}},
+    "evidence_ids": {"type": "array", "items": {"type": "string"}},
+    "claim_boundaries": {"type": "array", "items": {"type": "string"}}
+  }
+}

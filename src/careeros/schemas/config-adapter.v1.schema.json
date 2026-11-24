@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:careeros:schema:config-adapter:v1",
+  "title": "CareerOSAdapterConfigV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["enabled", "external_actions", "require_human_approval"],
+  "properties": {
+    "enabled": {"type": "boolean"},
+    "external_actions": {"type": "boolean"},
+    "require_human_approval": {"const": true},
+    "credential_reference": {"type": ["string", "null"]}
+  }
+}
+

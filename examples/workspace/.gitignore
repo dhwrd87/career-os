@@ -1,0 +1,6 @@
+.cache/
+.careeros-backups/
+outputs/.tmp/
+state/failed-builds/
+**/*.tmp
+**/__pycache__/

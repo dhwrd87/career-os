@@ -1,0 +1,14 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"urn:careeros:schema:follow-up:v1",
+  "title":"FollowUpV1","type":"object","additionalProperties":false,
+  "required":["schema","schema_version","application_id","due_at","channel","draft_artifact","approval_state","sent_at","external_ref","disposition"],
+  "properties":{
+    "schema":{"const":"careeros.follow-up.v1"},"schema_version":{"const":"1.0.0"},
+    "application_id":{"type":"string","minLength":3},"due_at":{"type":"string","format":"date-time"},
+    "channel":{"type":"string","minLength":1},"draft_artifact":{"type":["string","null"]},
+    "approval_state":{"enum":["DRAFT","REVIEW_REQUIRED","APPROVED","SENT","CANCELLED"]},
+    "sent_at":{"type":["string","null"],"format":"date-time"},"external_ref":{"type":["string","null"]},
+    "disposition":{"type":"string","minLength":1}
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema","$id":"urn:careeros:schema:evidence-utility:v1",
+  "title":"EvidenceUtilityV1","type":"object","additionalProperties":false,
+  "required":["schema","evidence_id","components","utility","routing_tier","candidate_score"],
+  "properties":{"schema":{"const":"careeros.evidence-utility.v1"},"evidence_id":{"type":"string"},"components":{"type":"object"},"utility":{"type":"number"},"routing_tier":{"enum":["HIGH","MEDIUM","LOW"]},"candidate_score":{"const":false}}
+}

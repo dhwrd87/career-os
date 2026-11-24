@@ -1,0 +1,25 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"urn:careeros:schema:job-evidence-matrix:v1",
+  "title":"JobEvidenceMatrixV1","type":"object","additionalProperties":false,
+  "required":["schema","schema_version","matrix_id","opportunity_id","job_intelligence_id","profile_hash","qualification_id","requirements","matrix_hash"],
+  "properties":{
+    "schema":{"const":"careeros.job-evidence-matrix.v1"},"schema_version":{"const":"1.0.0"},
+    "matrix_id":{"type":"string"},"opportunity_id":{"type":"string"},"job_intelligence_id":{"type":"string"},
+    "profile_hash":{"type":"string"},"qualification_id":{"type":["string","null"]},"matrix_hash":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+    "requirements":{"type":"array","items":{"type":"object","additionalProperties":false,
+      "required":["requirement_id","requirement_text","requirement_class","requirement_subtype","importance","source_reference","candidate_evidence_ids","coverage_class","evidence_strength","evidence_context","allowed_public_claims","prohibited_equivalence","resume_priority","gap_action"],
+      "properties":{
+        "requirement_id":{"type":"string"},"requirement_text":{"type":"string"},
+        "requirement_class":{"enum":["REQUIRED","PREFERRED","OPTIONAL","RESPONSIBILITY","OPERATING_CONDITION","UNKNOWN"]},
+        "requirement_subtype":{"enum":["EXPERIENCE","EDUCATION","CREDENTIAL","SKILL","TOOL","LOGISTICS","WORK_AUTHORIZATION","SCHEDULE","TRAVEL","LOCATION"]},
+        "importance":{"enum":["CRITICAL","HIGH","MEDIUM","LOW"]},"source_reference":{"type":"object"},
+        "candidate_evidence_ids":{"type":"array","items":{"type":"string"}},
+        "coverage_class":{"enum":["STRONG_SUPPORTED_MATCH","SUPPORTED_MATCH","TRANSFERABLE_MATCH","PARTIALLY_SUPPORTED","EVIDENCE_MISSING","BRIDGEABLE_GAP","HARD_GAP","UNKNOWN"]},
+        "evidence_strength":{"type":"string"},"evidence_context":{"type":"array","items":{"type":"string"}},
+        "allowed_public_claims":{"type":"array","items":{"type":"string"}},"prohibited_equivalence":{"type":"array","items":{"type":"string"}},
+        "resume_priority":{"type":"number"},"gap_action":{"type":"string"}
+      }
+    }}
+  }
+}

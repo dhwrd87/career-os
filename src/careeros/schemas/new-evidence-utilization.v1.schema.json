@@ -1,0 +1,6 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema","$id":"urn:careeros:schema:new-evidence-utilization:v1",
+  "title":"NewEvidenceUtilizationV1","type":"object","additionalProperties":false,
+  "required":["schema","items","high_value_silent_omissions","status"],
+  "properties":{"schema":{"const":"careeros.new-evidence-utilization.v1"},"items":{"type":"array","items":{"type":"object"}},"high_value_silent_omissions":{"type":"array","items":{"type":"string"}},"status":{"enum":["PASS","FAIL"]}}
+}

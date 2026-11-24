@@ -1,0 +1,24 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+build/
+dist/
+.venv/
+venv/
+state/
+outputs/
+.cache/
+data/
+sources/
+*.pdf
+*.png
+*.jpg
+*.jpeg
+
+# Reviewed synthetic documentation assets are distributable.
+!docs/images/*.png
+!examples/workspace/**

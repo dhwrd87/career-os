@@ -1,0 +1,32 @@
+{
+  "schema": "careeros.questionnaire.v1",
+  "schema_version": "1.0.0",
+  "questionnaire_id": "generic-onboarding-v1",
+  "sections": [
+    {"id": "workspace_privacy", "label": "Workspace and privacy consent"},
+    {"id": "identity", "label": "Identity, contact, and public identity"},
+    {"id": "employment", "label": "Employment"},
+    {"id": "education", "label": "Education"},
+    {"id": "credentials", "label": "Credentials"},
+    {"id": "skills", "label": "Skills"},
+    {"id": "projects", "label": "Projects"},
+    {"id": "evidence", "label": "Evidence and achievements"},
+    {"id": "preferences", "label": "Career preferences"},
+    {"id": "target_roles", "label": "Target roles"},
+    {"id": "review", "label": "Review"}
+  ],
+  "questions": [
+    {"question_id":"privacy.consent","schema_version":"1.0.0","section":"workspace_privacy","conditional_rule":null,"required":true,"answer_type":"boolean","target_contract":"OnboardingInputV1","target_field":"privacy_consent","source_type":"SELF_REPORT","confidence":"HIGH","visibility":"PRIVATE","evidence_refs":[]},
+    {"question_id":"identity.public_name","schema_version":"1.0.0","section":"identity","conditional_rule":null,"required":true,"answer_type":"string","target_contract":"CandidateProfileV1","target_field":"public_name","source_type":"SELF_REPORT","confidence":"HIGH","visibility":"PUBLIC","evidence_refs":[]},
+    {"question_id":"identity.contact","schema_version":"1.0.0","section":"identity","conditional_rule":null,"required":true,"answer_type":"object","target_contract":"CandidateProfileV1","target_field":"contact","source_type":"SELF_REPORT","confidence":"HIGH","visibility":"PRIVATE","evidence_refs":[]},
+    {"question_id":"employment.records","schema_version":"1.0.0","section":"employment","conditional_rule":null,"required":false,"answer_type":"repeating_object","target_contract":"EmploymentRecordV1","target_field":"employment","source_type":"SELF_REPORT","confidence":"MEDIUM","visibility":"INTERNAL","evidence_refs":[]},
+    {"question_id":"education.records","schema_version":"1.0.0","section":"education","conditional_rule":null,"required":false,"answer_type":"repeating_object","target_contract":"EducationRecordV1","target_field":"education","source_type":"SELF_REPORT","confidence":"MEDIUM","visibility":"INTERNAL","evidence_refs":[]},
+    {"question_id":"credentials.records","schema_version":"1.0.0","section":"credentials","conditional_rule":null,"required":false,"answer_type":"repeating_object","target_contract":"CredentialRecordV1","target_field":"credentials","source_type":"SELF_REPORT","confidence":"MEDIUM","visibility":"INTERNAL","evidence_refs":[]},
+    {"question_id":"skills.records","schema_version":"1.0.0","section":"skills","conditional_rule":null,"required":true,"answer_type":"repeating_object","target_contract":"SkillRecordV1","target_field":"skills","source_type":"SELF_REPORT","confidence":"MEDIUM","visibility":"INTERNAL","evidence_refs":[]},
+    {"question_id":"projects.records","schema_version":"1.0.0","section":"projects","conditional_rule":null,"required":false,"answer_type":"repeating_object","target_contract":"ProjectEvidenceRecordV1","target_field":"projects","source_type":"SELF_REPORT","confidence":"MEDIUM","visibility":"INTERNAL","evidence_refs":[]},
+    {"question_id":"evidence.records","schema_version":"1.0.0","section":"evidence","conditional_rule":null,"required":true,"answer_type":"repeating_object","target_contract":"EvidenceRecordV1","target_field":"evidence","source_type":"SELF_REPORT","confidence":"MEDIUM","visibility":"INTERNAL","evidence_refs":[]},
+    {"question_id":"preferences.record","schema_version":"1.0.0","section":"preferences","conditional_rule":null,"required":true,"answer_type":"object","target_contract":"CareerPreferenceV1","target_field":"preferences","source_type":"SELF_REPORT","confidence":"HIGH","visibility":"PRIVATE","evidence_refs":[]},
+    {"question_id":"target_roles.intents","schema_version":"1.0.0","section":"target_roles","conditional_rule":null,"required":true,"answer_type":"repeating_object","target_contract":"CareerPreferenceV1","target_field":"target_role_intents","source_type":"SELF_REPORT","confidence":"HIGH","visibility":"INTERNAL","evidence_refs":[]},
+    {"question_id":"review.confirm","schema_version":"1.0.0","section":"review","conditional_rule":"all_required_sections_complete","required":true,"answer_type":"boolean","target_contract":"OnboardingInputV1","target_field":"review_confirmed","source_type":"SELF_REPORT","confidence":"HIGH","visibility":"PRIVATE","evidence_refs":[]}
+  ]
+}
